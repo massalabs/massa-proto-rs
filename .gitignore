@@ -1,0 +1,7 @@
+.direnv
+.DS_Store
+.envrc
+.idea
+.vscode
+.fleet
+/gen
