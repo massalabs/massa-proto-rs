@@ -1,0 +1,39 @@
+name: ci
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: full
+  RUSTFLAGS: "--deny warnings"
+  RUST_TOOLCHAIN: nightly-2023-02-27
+  RUST_WORKING_DIRECTORY: ./rust
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rust-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: "recursive"
+      - uses: arduino/setup-protoc@v2
+        with:
+          version: "23.2"
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: "rust-build"
+          save-if: ${{ github.ref == 'refs/heads/main' }}
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - run: cargo build --release --all-features
+        working-directory: ${{ env.RUST_WORKING_DIRECTORY }}
