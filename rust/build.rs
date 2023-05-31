@@ -13,16 +13,17 @@ mod tonic {
         path::{Path, PathBuf},
     };
 
-    /// This function is responsible for building the Massa protobuf API and generating documentation
+    /// This function is responsible for building the Massa protobuf
     pub fn build() -> Result<(), Box<dyn std::error::Error>> {
         let current_dir = env::current_dir()?;
         let parent_dir = current_dir.parent().ok_or("no parent directory found")?;
 
-        let protos_path = parent_dir.join("massa-proto/proto/apis");
+        let protos_path = parent_dir.join("massa-proto/proto");
 
         let protos = find_protos(protos_path)?;
         let proto_include_paths = [
-            parent_dir.join("massa-proto/proto/apis/massa"),
+            parent_dir.join("massa-proto/proto/abis"),
+            parent_dir.join("massa-proto/proto/apis"),
             parent_dir.join("massa-proto/proto/commons"),
             parent_dir.join("massa-proto/proto/third_party"),
         ];
@@ -49,7 +50,9 @@ mod tonic {
 
     fn find_protos(dir_path: impl AsRef<Path>) -> Result<Vec<PathBuf>, Box<dyn std::error::Error>> {
         let glob_pattern = format!("{}/**/*.proto", dir_path.as_ref().display());
-        let paths: Vec<_> = glob(&glob_pattern)?.filter_map(Result::ok).collect();
+        let paths: Vec<_> = glob(&glob_pattern)?
+        .filter_map(Result::ok)
+        .collect();
 
         if paths.is_empty() {
             return Err(format!(
