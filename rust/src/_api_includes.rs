@@ -7,11 +7,6 @@ pub mod google {
     }
 }
 pub mod massa {
-    pub mod abi {
-        pub mod v1 {
-            include!("massa.abi.v1.rs");
-        }
-    }
     pub mod api {
         pub mod v1 {
             include!("massa.api.v1.rs");
