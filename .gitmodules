@@ -1,0 +1,3 @@
+[submodule "massa-proto"]
+	path = massa-proto
+	url = https://github.com/massalabs/massa-proto.git
