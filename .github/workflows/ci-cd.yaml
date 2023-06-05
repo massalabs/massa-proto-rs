@@ -22,12 +22,13 @@ concurrency:
 jobs:
   rust-build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: "recursive"
-          ref: ${{ github.event.client_payload.ref }}
-      - run: echo ${{ github.event.client_payload.sha }}
+          ref: ${{ github.head_ref }}
       - uses: arduino/setup-protoc@v2
         with:
           version: "23.2"
@@ -41,3 +42,9 @@ jobs:
           toolchain: stable
       - run: cargo build --release --all-features
         working-directory: ${{ env.RUST_WORKING_DIRECTORY }}
+        if: ${{ github.ref == 'refs/heads/main' }}   
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_user_name: massabot
+          commit_user_email: info@massa.net
+          commit_author: massabot
