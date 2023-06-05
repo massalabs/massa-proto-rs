@@ -1,6 +1,6 @@
-# MASSA PROTO BINDINGS
+# MASSA PROTO RS
 
-Generated source code from protobuf files for Massa blockchain.
+Generated Rust source code from protobuf files for Massa blockchain.
 
 Requirements
 ------------
@@ -16,12 +16,7 @@ Project build
 
 You can generate source code from protobuf files by running: 
 ```bash
-./build.sh
-```
-
-For Windows users run:
-```powershell
-./build.bat
+cargo build
 ```
 
 Postman integration

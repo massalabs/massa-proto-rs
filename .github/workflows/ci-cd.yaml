@@ -13,14 +13,13 @@ env:
   RUST_BACKTRACE: full
   RUSTFLAGS: "--deny warnings"
   RUST_TOOLCHAIN: nightly-2023-02-27
-  RUST_WORKING_DIRECTORY: ./rust
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  rust-build:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -35,13 +34,12 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: Swatinem/rust-cache@v2
         with:
-          shared-key: "rust-build"
+          shared-key: "build"
           save-if: ${{ github.ref == 'refs/heads/main' }}
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
       - run: cargo build --release --all-features
-        working-directory: ${{ env.RUST_WORKING_DIRECTORY }}
         if: ${{ github.ref == 'refs/heads/main' }}   
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
