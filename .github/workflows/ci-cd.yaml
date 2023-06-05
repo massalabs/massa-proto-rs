@@ -47,4 +47,4 @@ jobs:
         with:
           commit_user_name: massabot
           commit_user_email: info@massa.net
-          commit_author: massabot
+          commit_author: massabot <info@massa.net>
