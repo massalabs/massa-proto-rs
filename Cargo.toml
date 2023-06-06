@@ -1,16 +1,16 @@
 # Copyright (c) 2023 MASSA LABS <info@massa.net>
 
 [package]
-name = "massa_proto_bindings"
+name = "massa_proto_rs"
 version = "0.1.0"
 edition = "2021"
 description = "Protobuf rust bindings for the Massa blockchain"
-repository = "https://github.com/massalabs/massa-proto-bindings/"
+repository = "https://github.com/massalabs/massa-proto-rs/"
 homepage = "https://massa.net"
 documentation = "https://docs.massa.net/"
 
 [lib]
-name = "massa_proto_bindings"
+name = "massa_proto_rs"
 
 [dependencies]
 prost = "=0.11.9"

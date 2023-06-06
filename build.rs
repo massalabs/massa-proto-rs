@@ -15,8 +15,7 @@ mod tonic {
 
     /// This function is responsible for building the Massa protobuf
     pub fn build() -> Result<(), Box<dyn std::error::Error>> {
-        let current_dir = env::current_dir()?;
-        let parent_dir = current_dir.parent().ok_or("no parent directory found")?;
+        let parent_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
 
         // Generate ABI bindings
         let protos_path = parent_dir.join("massa-proto/proto/abis");

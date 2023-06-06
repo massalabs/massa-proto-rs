@@ -1,27 +1,37 @@
-# MASSA PROTO BINDINGS
+# MASSA PROTO RS
 
-Generated source code from protobuf files for Massa blockchain.
+Generated Rust source code from protobuf files for Massa blockchain.
 
 Requirements
 ------------
 
 Make sure you have the following latest versions of the required tools:
 
-- [protoc](https://grpc.io/docs/protoc-installation/): `3.21.12+`. 
+- [protoc](https://grpc.io/docs/protoc-installation/): `3.21.12+`.
 
 Please ensure that you have the required versions or newer to guarantee compatibility and access to the latest features.
+
+Development
+-----------
+In you want to build locally, you first need to get the `massa-proto` submodule that contains `.proto`.
+
+Either clone `massa-proto-rs` this way
+```bash
+git clone --recurse-submodules https://github.com/massalabs/massa-proto-rs.git
+```
+Or if you change your mind and have already cloned `massa-proto-rs`, you can get the submodule by running:
+```bash
+git submodule init
+git submodule update
+```
+After the submodule is initialized one can `cd` into the module dir and change branch etc.
 
 Project build
 -------------
 
-You can generate source code from protobuf files by running: 
+You can generate source code from protobuf files by running:
 ```bash
-./build.sh
-```
-
-For Windows users run:
-```powershell
-./build.bat
+cargo build
 ```
 
 Postman integration
