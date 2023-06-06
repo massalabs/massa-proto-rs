@@ -26,7 +26,7 @@ pub struct CreateScRequest {
     #[prost(bytes = "vec", tag = "1")]
     pub bytecode: ::prost::alloc::vec::Vec<u8>,
 }
-/// CreateSCResponse
+///   CreateSCResponse
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateScResponse {
