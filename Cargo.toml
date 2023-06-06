@@ -5,7 +5,7 @@ name = "massa_proto_rs"
 version = "0.1.0"
 edition = "2021"
 description = "Protobuf rust bindings for the Massa blockchain"
-repository = "https://github.com/massalabs/massa-proto/"
+repository = "https://github.com/massalabs/massa-proto-rs/"
 homepage = "https://massa.net"
 documentation = "https://docs.massa.net/"
 
