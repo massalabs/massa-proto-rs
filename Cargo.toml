@@ -9,6 +9,8 @@ repository = "https://github.com/massalabs/massa-proto-rs/"
 homepage = "https://massa.net"
 documentation = "https://docs.massa.net/"
 
+include = ["api.bin"]
+
 [lib]
 name = "massa_proto_rs"
 
