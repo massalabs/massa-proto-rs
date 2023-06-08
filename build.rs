@@ -1,6 +1,7 @@
 // Copyright (c) 2023 MASSA LABS <info@massa.net>
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    #[cfg(feature = "tonic-build")]
     tonic::build()?;
 
     Ok(())
