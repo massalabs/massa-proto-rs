@@ -28,6 +28,9 @@ jobs:
         with:
           submodules: "recursive"
           ref: ${{ github.head_ref }}
+      - name: Update Submodule
+        run: |
+          git submodule update --init --force --recursive --remote
       - uses: arduino/setup-protoc@v2
         with:
           version: "23.2"
