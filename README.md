@@ -21,8 +21,7 @@ git clone --recurse-submodules https://github.com/massalabs/massa-proto-rs.git
 ```
 Or if you change your mind and have already cloned `massa-proto-rs`, you can get the submodule by running:
 ```bash
-git submodule init
-git submodule update
+git submodule update --init --force --recursive --remote
 ```
 After the submodule is initialized one can `cd` into the module dir and change branch etc.
 
