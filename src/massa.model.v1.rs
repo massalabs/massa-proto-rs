@@ -104,21 +104,30 @@ pub struct Operation {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationType {
-    /// Transfer coins from sender to recipient
-    #[prost(message, optional, tag = "1")]
-    pub transaction: ::core::option::Option<Transaction>,
-    /// The sender buys `roll_count` rolls. Roll price is defined in configuration
-    #[prost(message, optional, tag = "2")]
-    pub roll_buy: ::core::option::Option<RollBuy>,
-    /// The sender sells `roll_count` rolls. Roll price is defined in configuration
-    #[prost(message, optional, tag = "3")]
-    pub roll_sell: ::core::option::Option<RollSell>,
-    /// Execute a smart contract
-    #[prost(message, optional, tag = "4")]
-    pub execut_sc: ::core::option::Option<ExecuteSc>,
-    /// Calls an exported function from a stored smart contract
-    #[prost(message, optional, tag = "5")]
-    pub call_sc: ::core::option::Option<CallSc>,
+    #[prost(oneof = "operation_type::Type", tags = "1, 2, 3, 4, 5")]
+    pub r#type: ::core::option::Option<operation_type::Type>,
+}
+/// Nested message and enum types in `OperationType`.
+pub mod operation_type {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Type {
+        /// Transfer coins from sender to recipient
+        #[prost(message, tag = "1")]
+        Transaction(super::Transaction),
+        /// The sender buys `roll_count` rolls. Roll price is defined in configuration
+        #[prost(message, tag = "2")]
+        RollBuy(super::RollBuy),
+        /// The sender sells `roll_count` rolls. Roll price is defined in configuration
+        #[prost(message, tag = "3")]
+        RollSell(super::RollSell),
+        /// Execute a smart contract
+        #[prost(message, tag = "4")]
+        ExecutSc(super::ExecuteSc),
+        /// Calls an exported function from a stored smart contract
+        #[prost(message, tag = "5")]
+        CallSc(super::CallSc),
+    }
 }
 /// Transfer coins from sender to recipient
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1008,7 +1017,7 @@ impl OperationExecutionStatus {
 pub enum AsyncPoolChangeType {
     /// Default enum value
     Unspecified = 0,
-    /// Add type
+    /// Set type
     Set = 1,
     /// Activate only type
     Update = 2,
