@@ -20,7 +20,10 @@
 
 // mod _abi_includes;
 // mod _api_includes;
+#![cfg_attr(not(feature = "tonic"), no_std)]
+use prost_types as _;
 
+#[cfg(feature = "tonic")]
 /// Google protos Module
 pub mod google {
     /// Google API Module
@@ -42,6 +45,7 @@ pub mod massa {
             include!("massa.abi.v1.rs");
         }
     }
+    #[cfg(feature = "tonic")]
     /// Massa API Module
     pub mod api {
         /// Version 1 of the Massa API protos

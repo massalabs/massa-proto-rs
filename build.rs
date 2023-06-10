@@ -7,6 +7,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
+#[cfg(feature = "tonic-build")]
 mod tonic {
     use glob::glob;
     use std::{
