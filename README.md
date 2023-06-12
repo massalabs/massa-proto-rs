@@ -30,8 +30,10 @@ Project build
 
 You can generate source code from protobuf files by running:
 ```bash
-cargo build
+cargo build --features=tonic-build,tonic
 ```
+
+If there is a change in `_abi_includes.rs` or `_api_includes.rs` files, you need to update `lib.rs`.
 
 Postman integration
 -------------------
