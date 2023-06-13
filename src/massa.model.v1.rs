@@ -1,3 +1,62 @@
+/// Massa NativeAddress
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NativeAddress {
+    /// Address category
+    #[prost(enumeration = "AddressCategory", tag = "1")]
+    pub category: i32,
+    /// Address version
+    #[prost(fixed64, tag = "2")]
+    pub version: u64,
+    /// Address content
+    #[prost(bytes = "vec", tag = "3")]
+    pub content: ::prost::alloc::vec::Vec<u8>,
+}
+/// Address category discriminant
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum AddressCategory {
+    /// Unspecified address category
+    Unspecified = 0,
+    /// User address
+    UserAddress = 1,
+    /// Smart contract address
+    ScAddress = 2,
+}
+impl AddressCategory {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            AddressCategory::Unspecified => "ADDRESS_CATEGORY_UNSPECIFIED",
+            AddressCategory::UserAddress => "ADDRESS_CATEGORY_USER_ADDRESS",
+            AddressCategory::ScAddress => "ADDRESS_CATEGORY_SC_ADDRESS",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "ADDRESS_CATEGORY_UNSPECIFIED" => Some(Self::Unspecified),
+            "ADDRESS_CATEGORY_USER_ADDRESS" => Some(Self::UserAddress),
+            "ADDRESS_CATEGORY_SC_ADDRESS" => Some(Self::ScAddress),
+            _ => None,
+        }
+    }
+}
+/// NativeAmount is represented as a fraction so precision can be adjusted in
+/// the future. value = mantissa / (10^scale)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NativeAmount {
+    /// Mantissa
+    #[prost(fixed64, tag = "1")]
+    pub mantissa: u64,
+    /// Scale
+    #[prost(fixed32, tag = "2")]
+    pub scale: u32,
+}
 /// When an address is drawn to create an endorsement it is selected for a specific index
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1150,6 +1209,14 @@ impl SetOrDeleteType {
             _ => None,
         }
     }
+}
+/// NativeTime represents a native duration or unix timestamp
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NativeTime {
+    /// Milliseconds
+    #[prost(fixed64, tag = "1")]
+    pub milliseconds: u64,
 }
 /// Entry for GetMipStatusResponse
 #[allow(clippy::derive_partial_eq_without_eq)]
