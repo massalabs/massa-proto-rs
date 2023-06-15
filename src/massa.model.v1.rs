@@ -113,6 +113,9 @@ pub struct SignedEndorsement {
     /// A secure hash of the data. See also \[massa_hash::Hash\]
     #[prost(string, tag = "5")]
     pub id: ::prost::alloc::string::String,
+    /// The size of the serialized endorsement
+    #[prost(fixed64, tag = "6")]
+    pub serialized_size: u64,
 }
 /// BytesMapFieldEntry
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -271,6 +274,9 @@ pub struct SignedOperation {
     /// A secure hash of the data. See also \[massa_hash::Hash\]
     #[prost(string, tag = "5")]
     pub id: ::prost::alloc::string::String,
+    /// The size of the serialized operation
+    #[prost(fixed64, tag = "6")]
+    pub serialized_size: u64,
 }
 /// A wrapper around an operation with its metadata
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -406,6 +412,9 @@ pub struct SignedBlock {
     /// A secure hash of the data. See also \[massa_hash::Hash\]
     #[prost(string, tag = "5")]
     pub id: ::prost::alloc::string::String,
+    /// The size of the serialized block
+    #[prost(fixed64, tag = "6")]
+    pub serialized_size: u64,
 }
 /// Signed block header
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -426,6 +435,9 @@ pub struct SignedBlockHeader {
     /// A secure hash of the data. See also \[massa_hash::Hash\]
     #[prost(string, tag = "5")]
     pub id: ::prost::alloc::string::String,
+    /// The size of the serialized block header
+    #[prost(fixed64, tag = "6")]
+    pub serialized_size: u64,
 }
 /// A wrapper around a block with its metadata
 #[allow(clippy::derive_partial_eq_without_eq)]
