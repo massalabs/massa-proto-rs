@@ -8,7 +8,7 @@
 //! ## **Structure**
 //!
 //! * `build.rs`: This file contains build instructions for generating Rust code from the Protobuf definitions using the `tonic-build` tool.
-//! * `massa-proto/`: This directory contains the Protobuf message definitions for the Massa blockchain API
+//! * `massa-proto`: This git submodule contains the Protobuf message definitions for the Massa blockchain API
 //! * `src/`: This directory contains the generated Rust code for the Protobuf message definitions.
 //! It also includes a `_XXX_includes.rs` files for importing the generated Rust modules and an `api.bin` file for gRPC server reflection protocol.
 //!
@@ -18,8 +18,7 @@
 //!
 #![warn(unused_crate_dependencies)]
 
-// mod _abi_includes;
-// mod _api_includes;
+
 #![cfg_attr(not(feature = "tonic"), no_std)]
 use prost_types as _;
 
