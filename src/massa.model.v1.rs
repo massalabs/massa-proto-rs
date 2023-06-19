@@ -1222,6 +1222,39 @@ impl SetOrDeleteType {
         }
     }
 }
+/// NativeHash.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NativeHash {
+    /// Version of the hash.
+    #[prost(fixed64, tag = "1")]
+    pub version: u64,
+    /// Content of the hash.
+    #[prost(bytes = "vec", tag = "2")]
+    pub content: ::prost::alloc::vec::Vec<u8>,
+}
+/// Native Signature
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NativeSig {
+    /// Version of the signature
+    #[prost(fixed64, tag = "1")]
+    pub version: u64,
+    /// Content of the signature
+    #[prost(bytes = "vec", tag = "2")]
+    pub content: ::prost::alloc::vec::Vec<u8>,
+}
+/// Native Public Key
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NativePubKey {
+    /// Version of the public key
+    #[prost(fixed64, tag = "1")]
+    pub version: u64,
+    /// Content of the public key
+    #[prost(bytes = "vec", tag = "2")]
+    pub content: ::prost::alloc::vec::Vec<u8>,
+}
 /// NativeTime represents a native duration or unix timestamp
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
