@@ -6,7 +6,7 @@ pub struct NativeAddress {
     #[prost(enumeration = "AddressCategory", tag = "1")]
     pub category: i32,
     /// Address version
-    #[prost(fixed64, tag = "2")]
+    #[prost(uint64, tag = "2")]
     pub version: u64,
     /// Address content
     #[prost(bytes = "vec", tag = "3")]
@@ -51,10 +51,10 @@ impl AddressCategory {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NativeAmount {
     /// Mantissa
-    #[prost(fixed64, tag = "1")]
+    #[prost(uint64, tag = "1")]
     pub mantissa: u64,
     /// Scale
-    #[prost(fixed32, tag = "2")]
+    #[prost(uint32, tag = "2")]
     pub scale: u32,
 }
 /// When an address is drawn to create an endorsement it is selected for a specific index
@@ -65,7 +65,7 @@ pub struct IndexedSlot {
     #[prost(message, optional, tag = "1")]
     pub slot: ::core::option::Option<Slot>,
     /// Endorsement index in the slot
-    #[prost(fixed64, tag = "2")]
+    #[prost(uint64, tag = "2")]
     pub index: u64,
 }
 /// A point in time where a block is expected
@@ -73,10 +73,10 @@ pub struct IndexedSlot {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Slot {
     /// Period
-    #[prost(fixed64, tag = "1")]
+    #[prost(uint64, tag = "1")]
     pub period: u64,
     /// Thread
-    #[prost(fixed32, tag = "2")]
+    #[prost(uint32, tag = "2")]
     pub thread: u32,
 }
 /// An endorsement, as sent in the network
@@ -87,7 +87,7 @@ pub struct Endorsement {
     #[prost(message, optional, tag = "1")]
     pub slot: ::core::option::Option<Slot>,
     /// Endorsement index inside the including block
-    #[prost(fixed32, tag = "2")]
+    #[prost(uint32, tag = "2")]
     pub index: u32,
     /// Hash of endorsed block
     /// This is the parent in thread `self.slot.thread` of the block in which the endorsement is included
@@ -113,8 +113,8 @@ pub struct SignedEndorsement {
     /// A secure hash of the data. See also \[massa_hash::Hash\]
     #[prost(string, tag = "5")]
     pub id: ::prost::alloc::string::String,
-    /// The size of the serialized endorsement
-    #[prost(fixed64, tag = "6")]
+    /// The size of the serialized endorsement in bytes
+    #[prost(uint64, tag = "6")]
     pub serialized_size: u64,
 }
 /// BytesMapFieldEntry
@@ -127,6 +127,14 @@ pub struct BytesMapFieldEntry {
     /// bytes key
     #[prost(bytes = "vec", tag = "2")]
     pub value: ::prost::alloc::vec::Vec<u8>,
+}
+/// Array of bytes wrapper
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ArrayOfBytesWrapper {
+    /// Repeated bytes
+    #[prost(bytes = "vec", repeated, tag = "1")]
+    pub items: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
 /// Packages a type such that it can be securely sent and received in a trust-free network
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -153,10 +161,10 @@ pub struct SecureShare {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Operation {
     /// The fee they have decided for this operation
-    #[prost(fixed64, tag = "1")]
+    #[prost(uint64, tag = "1")]
     pub fee: u64,
     /// After `expire_period` slot the operation won't be included in a block
-    #[prost(fixed64, tag = "2")]
+    #[prost(uint64, tag = "2")]
     pub expire_period: u64,
     /// The type specific operation part
     #[prost(message, optional, tag = "3")]
@@ -199,7 +207,7 @@ pub struct Transaction {
     #[prost(string, tag = "1")]
     pub recipient_address: ::prost::alloc::string::String,
     /// Amount
-    #[prost(fixed64, tag = "2")]
+    #[prost(uint64, tag = "2")]
     pub amount: u64,
 }
 /// The sender buys `roll_count` rolls. Roll price is defined in configuration
@@ -207,7 +215,7 @@ pub struct Transaction {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollBuy {
     /// Roll count
-    #[prost(fixed64, tag = "1")]
+    #[prost(uint64, tag = "1")]
     pub roll_count: u64,
 }
 /// The sender sells `roll_count` rolls. Roll price is defined in configuration
@@ -215,7 +223,7 @@ pub struct RollBuy {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollSell {
     /// Roll count
-    #[prost(fixed64, tag = "1")]
+    #[prost(uint64, tag = "1")]
     pub roll_count: u64,
 }
 /// Execute a smart contract
@@ -226,10 +234,10 @@ pub struct ExecuteSc {
     #[prost(bytes = "vec", tag = "1")]
     pub data: ::prost::alloc::vec::Vec<u8>,
     /// The maximum of coins that could be spent by the operation sender
-    #[prost(fixed64, tag = "2")]
+    #[prost(uint64, tag = "2")]
     pub max_coins: u64,
     /// The maximum amount of gas that the execution of the contract is allowed to cost
-    #[prost(fixed64, tag = "3")]
+    #[prost(uint64, tag = "3")]
     pub max_gas: u64,
     /// A key-value store associating a hash to arbitrary bytes
     #[prost(message, repeated, tag = "4")]
@@ -249,10 +257,10 @@ pub struct CallSc {
     #[prost(bytes = "vec", tag = "3")]
     pub param: ::prost::alloc::vec::Vec<u8>,
     /// The maximum amount of gas that the execution of the contract is allowed to cost
-    #[prost(fixed64, tag = "4")]
+    #[prost(uint64, tag = "4")]
     pub max_gas: u64,
     /// Extra coins that are spent from the caller's balance and transferred to the target
-    #[prost(fixed64, tag = "5")]
+    #[prost(uint64, tag = "5")]
     pub coins: u64,
 }
 /// Signed operation
@@ -274,8 +282,8 @@ pub struct SignedOperation {
     /// A secure hash of the data. See also \[massa_hash::Hash\]
     #[prost(string, tag = "5")]
     pub id: ::prost::alloc::string::String,
-    /// The size of the serialized operation
-    #[prost(fixed64, tag = "6")]
+    /// The size of the serialized operation in bytes
+    #[prost(uint64, tag = "6")]
     pub serialized_size: u64,
 }
 /// A wrapper around an operation with its metadata
@@ -289,7 +297,7 @@ pub struct OperationWrapper {
     #[prost(string, repeated, tag = "3")]
     pub block_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// The thread in which the operation can be included
-    #[prost(fixed32, tag = "5")]
+    #[prost(uint32, tag = "5")]
     pub thread: u32,
     /// The operation object itself
     #[prost(message, optional, tag = "6")]
@@ -412,8 +420,8 @@ pub struct SignedBlock {
     /// A secure hash of the data. See also \[massa_hash::Hash\]
     #[prost(string, tag = "5")]
     pub id: ::prost::alloc::string::String,
-    /// The size of the serialized block
-    #[prost(fixed64, tag = "6")]
+    /// The size of the serialized block in bytes
+    #[prost(uint64, tag = "6")]
     pub serialized_size: u64,
 }
 /// Signed block header
@@ -435,8 +443,8 @@ pub struct SignedBlockHeader {
     /// A secure hash of the data. See also \[massa_hash::Hash\]
     #[prost(string, tag = "5")]
     pub id: ::prost::alloc::string::String,
-    /// The size of the serialized block header
-    #[prost(fixed64, tag = "6")]
+    /// The size of the serialized block header in bytes
+    #[prost(uint64, tag = "6")]
     pub serialized_size: u64,
 }
 /// A wrapper around a block with its metadata
@@ -569,7 +577,7 @@ pub struct ScExecutionEventContext {
     #[prost(string, optional, tag = "3")]
     pub block_id: ::core::option::Option<::prost::alloc::string::String>,
     /// Index of the event in the slot
-    #[prost(fixed64, tag = "4")]
+    #[prost(uint64, tag = "4")]
     pub index_in_slot: u64,
     /// Call stack addresses. most recent at the end
     #[prost(string, repeated, tag = "5")]
@@ -602,7 +610,7 @@ pub struct StateChanges {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutedOpsChangeEntry {
-    /// OperationId
+    /// string
     #[prost(string, tag = "1")]
     pub operation_id: ::prost::alloc::string::String,
     /// ExecutedOpsChangeValue
@@ -665,7 +673,7 @@ pub struct AsyncMessage {
     pub emission_slot: ::core::option::Option<Slot>,
     /// Index of the emitted message within the `emission_slot`.
     /// This is used for disambiguate the emission of multiple messages at the same slot.
-    #[prost(fixed64, tag = "2")]
+    #[prost(uint64, tag = "2")]
     pub emission_index: u64,
     /// The address that sent the message
     #[prost(string, tag = "3")]
@@ -677,16 +685,16 @@ pub struct AsyncMessage {
     #[prost(string, tag = "5")]
     pub handler: ::prost::alloc::string::String,
     /// Maximum gas to use when processing the message
-    #[prost(fixed64, tag = "6")]
+    #[prost(uint64, tag = "6")]
     pub max_gas: u64,
     /// Fee paid by the sender when the message is processed.
-    #[prost(fixed64, tag = "7")]
+    #[prost(uint64, tag = "7")]
     pub fee: u64,
     /// Coins sent from the sender to the target address of the message.
     /// Those coins are spent by the sender address when the message is sent,
     /// and credited to the destination address when receiving the message.
     /// In case of failure or discard, those coins are reimbursed to the sender.
-    #[prost(fixed64, tag = "8")]
+    #[prost(uint64, tag = "8")]
     pub coins: u64,
     /// Slot at which the message starts being valid (bound included in the validity range)
     #[prost(message, optional, tag = "9")]
@@ -779,7 +787,7 @@ pub struct SetOrKeepFixed64 {
     #[prost(enumeration = "SetOrKeepType", tag = "1")]
     pub r#type: i32,
     /// The value of that entry (optional)
-    #[prost(fixed64, optional, tag = "2")]
+    #[prost(uint64, optional, tag = "2")]
     pub value: ::core::option::Option<u64>,
 }
 /// Set or Keep String
@@ -878,7 +886,7 @@ pub mod ledger_change_value {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LedgerEntry {
     /// The balance of that entry
-    #[prost(fixed64, tag = "1")]
+    #[prost(uint64, tag = "1")]
     pub balance: u64,
     /// Executable bytecode
     #[prost(bytes = "vec", tag = "2")]
@@ -897,7 +905,7 @@ pub struct LedgerEntryUpdate {
     /// Change the executable bytecode
     #[prost(message, optional, tag = "2")]
     pub bytecode: ::core::option::Option<SetOrKeepBytecode>,
-    /// / Change datastore entries
+    /// Change datastore entries
     #[prost(message, repeated, tag = "3")]
     pub datastore: ::prost::alloc::vec::Vec<SetOrDeleteDatastoreEntry>,
 }
@@ -909,7 +917,7 @@ pub struct SetOrKeepBalance {
     #[prost(enumeration = "SetOrKeepType", tag = "1")]
     pub r#type: i32,
     /// The balance of that entry (optional)
-    #[prost(fixed64, optional, tag = "2")]
+    #[prost(uint64, optional, tag = "2")]
     pub balance: ::core::option::Option<u64>,
 }
 /// Set or Keep Bytecode
@@ -972,8 +980,399 @@ pub struct DenunciationEndorsement {
     #[prost(message, optional, tag = "1")]
     pub slot: ::core::option::Option<Slot>,
     /// Denounciation index
-    #[prost(fixed32, tag = "2")]
+    #[prost(uint32, tag = "2")]
     pub index: u32,
+}
+/// Query state query item
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionQueryRequestItem {
+    #[prost(
+        oneof = "execution_query_request_item::RequestItem",
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20"
+    )]
+    pub request_item: ::core::option::Option<execution_query_request_item::RequestItem>,
+}
+/// Nested message and enum types in `ExecutionQueryRequestItem`.
+pub mod execution_query_request_item {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum RequestItem {
+        /// Checks if address exists (candidate)
+        #[prost(message, tag = "1")]
+        AddressExistsCandidate(super::AddressExistsCandidate),
+        /// Checks if address exists (final)
+        #[prost(message, tag = "2")]
+        AddressExistsFinal(super::AddressExistsFinal),
+        /// Gets the balance (candidate) of an address
+        #[prost(message, tag = "3")]
+        AddressBalanceCandidate(super::AddressBalanceCandidate),
+        /// Gets the balance (final) of an address
+        #[prost(message, tag = "4")]
+        AddressBalanceFinal(super::AddressBalanceFinal),
+        /// Gets the bytecode (candidate) of an address
+        #[prost(message, tag = "5")]
+        AddressBytecodeCandidate(super::AddressBytecodeCandidate),
+        /// Gets the bytecode (final) of an address
+        #[prost(message, tag = "6")]
+        AddressBytecodeFinal(super::AddressBytecodeFinal),
+        /// Gets the datastore keys (candidate) of an address
+        #[prost(message, tag = "7")]
+        AddressDatastoreKeysCandidate(super::AddressDatastoreKeysCandidate),
+        /// Gets the datastore keys (final) of an address
+        #[prost(message, tag = "8")]
+        AddressDatastoreKeysFinal(super::AddressDatastoreKeysFinal),
+        /// Gets a datastore value (candidate) for an address
+        #[prost(message, tag = "9")]
+        AddressDatastoreValueCandidate(super::AddressDatastoreValueCandidate),
+        /// Gets a datastore value (final) for an address
+        #[prost(message, tag = "10")]
+        AddressDatastoreValueFinal(super::AddressDatastoreValueFinal),
+        /// Gets the execution status (candidate) for an operation
+        #[prost(message, tag = "11")]
+        OpExecutionStatusCandidate(super::OpExecutionStatusCandidate),
+        /// Gets the execution status (final) for an operation
+        #[prost(message, tag = "12")]
+        OpExecutionStatusFinal(super::OpExecutionStatusFinal),
+        /// Gets the execution status (candidate) for a denunciation
+        #[prost(message, tag = "13")]
+        DenunciationExecutionStatusCandidate(
+            super::DenunciationExecutionStatusCandidate,
+        ),
+        /// Gets the execution status (final) for a denunciation
+        #[prost(message, tag = "14")]
+        DenunciationExecutionStatusFinal(super::DenunciationExecutionStatusFinal),
+        /// Gets the roll count (candidate) of an address
+        #[prost(message, tag = "15")]
+        AddressRollsCandidate(super::AddressRollsCandidate),
+        /// Gets the roll count (final) of an address
+        #[prost(message, tag = "16")]
+        AddressRollsFinal(super::AddressRollsFinal),
+        /// Gets the deferred credits (candidate) of an address
+        #[prost(message, tag = "17")]
+        AddressDeferredCreditsCandidate(super::AddressDeferredCreditsCandidate),
+        /// Gets the deferred credits (final) of an address
+        #[prost(message, tag = "18")]
+        AddressDeferredCreditsFinal(super::AddressDeferredCreditsFinal),
+        /// Gets all information for a given cycle
+        #[prost(message, tag = "19")]
+        CycleInfos(super::CycleInfos),
+        /// Gets filtered events
+        #[prost(message, tag = "20")]
+        Events(super::Events),
+    }
+}
+/// Execution state query response item
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionQueryResponseItem {
+    #[prost(
+        oneof = "execution_query_response_item::ResponseItem",
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9"
+    )]
+    pub response_item: ::core::option::Option<
+        execution_query_response_item::ResponseItem,
+    >,
+}
+/// Nested message and enum types in `ExecutionQueryResponseItem`.
+pub mod execution_query_response_item {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum ResponseItem {
+        /// Boolean value
+        #[prost(bool, tag = "1")]
+        Boolean(bool),
+        /// Roll counts value
+        #[prost(uint64, tag = "2")]
+        RollCount(u64),
+        /// Amount value
+        #[prost(uint64, tag = "3")]
+        Amount(u64),
+        /// Bytes value
+        #[prost(bytes, tag = "4")]
+        Bytes(::prost::alloc::vec::Vec<u8>),
+        /// Vector of bytes value
+        #[prost(message, tag = "5")]
+        VecBytes(super::ArrayOfBytesWrapper),
+        /// Deferred credits value
+        #[prost(uint64, tag = "6")]
+        DeferredCredits(u64),
+        /// Execution status value
+        #[prost(enumeration = "super::ExecutionQueryExecutionStatus", tag = "7")]
+        ExecutionStatus(i32),
+        /// Cycle infos value
+        #[prost(message, tag = "8")]
+        CycleInfos(super::ExecutionQueryCycleInfos),
+        /// Events
+        #[prost(message, tag = "9")]
+        Events(super::ScOutputEventsWrapper),
+    }
+}
+/// Cycle information for execution query
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionQueryCycleInfos {
+    /// Cycle number
+    #[prost(uint64, tag = "1")]
+    pub cycle: u64,
+    /// Whether the cycle is final
+    #[prost(bool, tag = "2")]
+    pub is_final: bool,
+    /// Infos for each PoS-participating address among the ones that were asked
+    #[prost(message, repeated, tag = "3")]
+    pub staker_infos: ::prost::alloc::vec::Vec<ExecutionQueryStakerInfoEntry>,
+}
+/// ExecutionQueryStakerInfo entry
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionQueryStakerInfoEntry {
+    /// Address of the staker
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// Staker info
+    #[prost(message, optional, tag = "2")]
+    pub info: ::core::option::Option<ExecutionQueryStakerInfo>,
+}
+/// Staker information for execution query
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionQueryStakerInfo {
+    /// Active roll count
+    #[prost(uint64, tag = "1")]
+    pub active_rolls: u64,
+    /// Production stats
+    #[prost(message, repeated, tag = "2")]
+    pub production_stats: ::prost::alloc::vec::Vec<
+        ExecutionQueryStakerInfoProductionStatsEntry,
+    >,
+}
+/// ExecutionQueryStakerInfoProductionStats entry
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionQueryStakerInfoProductionStatsEntry {
+    /// Address of the staker
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// Production failure
+    #[prost(message, optional, tag = "2")]
+    pub stats: ::core::option::Option<ExecutionQueryStakerInfoProductionStats>,
+}
+/// Production statistics for staker info in execution query
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionQueryStakerInfoProductionStats {
+    /// Production successes
+    #[prost(uint64, tag = "1")]
+    pub block_success_count: u64,
+    /// Production failures
+    #[prost(uint64, tag = "2")]
+    pub block_failure_count: u64,
+}
+/// Request to check if address exists (candidate)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressExistsCandidate {
+    /// Address to check
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to check if address exists (final)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressExistsFinal {
+    /// Address to check
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to get the balance (candidate) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressBalanceCandidate {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to get the balance (final) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressBalanceFinal {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to get the bytecode (candidate) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressBytecodeCandidate {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to get the bytecode (final) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressBytecodeFinal {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to get the datastore keys (candidate) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressDatastoreKeysCandidate {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// Prefix for the keys
+    #[prost(bytes = "vec", tag = "2")]
+    pub prefix: ::prost::alloc::vec::Vec<u8>,
+}
+/// Request to get the datastore keys (final) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressDatastoreKeysFinal {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// Prefix for the keys
+    #[prost(bytes = "vec", tag = "2")]
+    pub prefix: ::prost::alloc::vec::Vec<u8>,
+}
+/// Request to get a datastore value (candidate) for an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressDatastoreValueCandidate {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// Key for the value
+    #[prost(bytes = "vec", tag = "2")]
+    pub key: ::prost::alloc::vec::Vec<u8>,
+}
+/// Request to get a datastore value (final) for an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressDatastoreValueFinal {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// Key for the value
+    #[prost(bytes = "vec", tag = "2")]
+    pub key: ::prost::alloc::vec::Vec<u8>,
+}
+/// Request to get the execution status (candidate) for an operation
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct OpExecutionStatusCandidate {
+    /// Operation ID to query
+    #[prost(string, tag = "1")]
+    pub operation_id: ::prost::alloc::string::String,
+}
+/// Request to get the execution status (final) for an operation
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct OpExecutionStatusFinal {
+    /// Operation ID to query
+    #[prost(string, tag = "1")]
+    pub operation_id: ::prost::alloc::string::String,
+}
+/// Request to get the execution status (candidate) for a denunciation
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DenunciationExecutionStatusCandidate {
+    /// Denunciation index to query
+    #[prost(message, optional, tag = "1")]
+    pub denunciation_index: ::core::option::Option<DenunciationIndex>,
+}
+/// Request to get the execution status (final) for a denunciation
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DenunciationExecutionStatusFinal {
+    /// Denunciation index to query
+    #[prost(message, optional, tag = "1")]
+    pub denunciation_index: ::core::option::Option<DenunciationIndex>,
+}
+/// Request to get the roll count (candidate) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressRollsCandidate {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to get the roll count (final) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressRollsFinal {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to get the deferred credits (candidate) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressDeferredCreditsCandidate {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to get the deferred credits (final) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressDeferredCreditsFinal {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to get all information for a given cycle
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CycleInfos {
+    /// Cycle to query
+    #[prost(uint64, tag = "1")]
+    pub cycle: u64,
+    /// Addresses to restrict the query (if None, info for all addresses will be returned)
+    #[prost(string, repeated, tag = "2")]
+    pub restrict_to_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// Request to get filtered events
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Events {
+    /// Event filter to apply
+    #[prost(message, optional, tag = "1")]
+    pub filter: ::core::option::Option<ScExecutionEventsFilter>,
+}
+/// ScExecutionEvents Filter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ScExecutionEventsFilter {
+    /// Start slot (Optional)
+    #[prost(message, optional, tag = "1")]
+    pub start_slot: ::core::option::Option<Slot>,
+    /// End slot (Optional)
+    #[prost(message, optional, tag = "2")]
+    pub end_slot: ::core::option::Option<Slot>,
+    /// Caller address
+    #[prost(string, optional, tag = "3")]
+    pub caller_address: ::core::option::Option<::prost::alloc::string::String>,
+    /// Emitter address (Optional)
+    #[prost(string, optional, tag = "4")]
+    pub emitter_address: ::core::option::Option<::prost::alloc::string::String>,
+    /// Original operation id (Optional)
+    #[prost(string, optional, tag = "5")]
+    pub original_operation_id: ::core::option::Option<::prost::alloc::string::String>,
+    /// Status
+    #[prost(enumeration = "ScExecutionEventStatus", repeated, tag = "6")]
+    pub status: ::prost::alloc::vec::Vec<i32>,
+}
+/// SCOutputEvents wrapper
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ScOutputEventsWrapper {
+    /// Events
+    #[prost(message, repeated, tag = "1")]
+    pub event: ::prost::alloc::vec::Vec<ScExecutionEvent>,
 }
 /// ScExecutionEventStatus type enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -1222,6 +1621,57 @@ impl SetOrDeleteType {
         }
     }
 }
+/// Execution status of an operation or denunciation
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum ExecutionQueryExecutionStatus {
+    /// Default enum value
+    Unspecified = 0,
+    /// The operation or denunciation was executed recently with success
+    AlreadyExecutedWithSuccess = 1,
+    /// The operation or denunciation was executed recently with failure
+    AlreadyExecutedWithFailure = 2,
+    /// The operation or denunciation was not executed recently but can still be executed unless expired
+    ExecutableOrExpired = 3,
+}
+impl ExecutionQueryExecutionStatus {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ExecutionQueryExecutionStatus::Unspecified => {
+                "EXECUTION_QUERY_EXECUTION_STATUS_UNSPECIFIED"
+            }
+            ExecutionQueryExecutionStatus::AlreadyExecutedWithSuccess => {
+                "EXECUTION_QUERY_EXECUTION_STATUS_ALREADY_EXECUTED_WITH_SUCCESS"
+            }
+            ExecutionQueryExecutionStatus::AlreadyExecutedWithFailure => {
+                "EXECUTION_QUERY_EXECUTION_STATUS_ALREADY_EXECUTED_WITH_FAILURE"
+            }
+            ExecutionQueryExecutionStatus::ExecutableOrExpired => {
+                "EXECUTION_QUERY_EXECUTION_STATUS_EXECUTABLE_OR_EXPIRED"
+            }
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "EXECUTION_QUERY_EXECUTION_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
+            "EXECUTION_QUERY_EXECUTION_STATUS_ALREADY_EXECUTED_WITH_SUCCESS" => {
+                Some(Self::AlreadyExecutedWithSuccess)
+            }
+            "EXECUTION_QUERY_EXECUTION_STATUS_ALREADY_EXECUTED_WITH_FAILURE" => {
+                Some(Self::AlreadyExecutedWithFailure)
+            }
+            "EXECUTION_QUERY_EXECUTION_STATUS_EXECUTABLE_OR_EXPIRED" => {
+                Some(Self::ExecutableOrExpired)
+            }
+            _ => None,
+        }
+    }
+}
 /// NativeHash.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1232,6 +1682,241 @@ pub struct NativeHash {
     /// Content of the hash.
     #[prost(bytes = "vec", tag = "2")]
     pub content: ::prost::alloc::vec::Vec<u8>,
+}
+/// Consensus statistics
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ConsensusStats {
+    /// Start of the time span for stats
+    #[prost(uint64, tag = "1")]
+    pub start_timespan: u64,
+    /// End of the time span for stats
+    #[prost(uint64, tag = "2")]
+    pub end_timespan: u64,
+    /// Number of final blocks
+    #[prost(uint64, tag = "3")]
+    pub final_block_count: u64,
+    /// Number of stale blocks in memory
+    #[prost(uint64, tag = "4")]
+    pub stale_block_count: u64,
+    /// Number of actives cliques
+    #[prost(uint64, tag = "5")]
+    pub clique_count: u64,
+}
+/// Pool statistics
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PoolStats {
+    /// Endorsements
+    #[prost(uint64, tag = "1")]
+    pub endorsements_count: u64,
+    /// Operations
+    #[prost(uint64, tag = "2")]
+    pub operations_count: u64,
+}
+/// Network statistics
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NetworkStats {
+    /// In connections count
+    #[prost(uint64, tag = "1")]
+    pub in_connection_count: u64,
+    /// Out connections count
+    #[prost(uint64, tag = "2")]
+    pub out_connection_count: u64,
+    /// Total known peers count
+    #[prost(uint64, tag = "3")]
+    pub known_peer_count: u64,
+    /// Banned node count
+    #[prost(uint64, tag = "4")]
+    pub banned_peer_count: u64,
+    /// Active node count
+    #[prost(uint64, tag = "5")]
+    pub active_node_count: u64,
+}
+/// Execution statistics
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionStats {
+    /// Time window start
+    #[prost(uint64, tag = "1")]
+    pub time_window_start: u64,
+    /// Time window end
+    #[prost(uint64, tag = "2")]
+    pub time_window_end: u64,
+    /// Number of final blocks in the time window
+    #[prost(uint64, tag = "3")]
+    pub final_block_count: u64,
+    /// Number of final executed operations in the time window
+    #[prost(uint64, tag = "4")]
+    pub final_executed_operations_count: u64,
+    /// Active execution cursor slot
+    #[prost(message, optional, tag = "5")]
+    pub active_cursor: ::core::option::Option<Slot>,
+    /// Final execution cursor slot
+    #[prost(message, optional, tag = "6")]
+    pub final_cursor: ::core::option::Option<Slot>,
+}
+/// Node status
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NodeStatus {
+    /// Our node id
+    #[prost(string, tag = "1")]
+    pub node_id: ::prost::alloc::string::String,
+    /// Optional node ip
+    #[prost(string, tag = "2")]
+    pub node_ip: ::prost::alloc::string::String,
+    /// Node version
+    #[prost(string, tag = "3")]
+    pub version: ::prost::alloc::string::String,
+    /// Now
+    #[prost(uint64, tag = "4")]
+    pub current_time: u64,
+    /// Current cycle
+    #[prost(uint64, tag = "5")]
+    pub current_cycle: u64,
+    /// Current cycle starting timestamp
+    #[prost(uint64, tag = "6")]
+    pub current_cycle_time: u64,
+    /// Next cycle starting timestamp
+    #[prost(uint64, tag = "7")]
+    pub next_cycle_time: u64,
+    /// Connected nodes
+    #[prost(message, repeated, tag = "8")]
+    pub connected_nodes: ::prost::alloc::vec::Vec<ConnectedNode>,
+    /// Latest slot, none if now is before genesis timestamp
+    #[prost(message, optional, tag = "9")]
+    pub last_slot: ::core::option::Option<Slot>,
+    /// Next slot
+    #[prost(message, optional, tag = "10")]
+    pub next_slot: ::core::option::Option<Slot>,
+    /// Consensus stats
+    #[prost(message, optional, tag = "11")]
+    pub consensus_stats: ::core::option::Option<ConsensusStats>,
+    /// Pool stats (operation count and endorsement count)
+    #[prost(message, optional, tag = "12")]
+    pub pool_stats: ::core::option::Option<PoolStats>,
+    /// Network stats
+    #[prost(message, optional, tag = "13")]
+    pub network_stats: ::core::option::Option<NetworkStats>,
+    /// Execution stats
+    #[prost(message, optional, tag = "14")]
+    pub execution_stats: ::core::option::Option<ExecutionStats>,
+    /// Compact configuration
+    #[prost(message, optional, tag = "15")]
+    pub config: ::core::option::Option<CompactConfig>,
+}
+/// Connected node
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ConnectedNode {
+    /// Node id
+    #[prost(string, tag = "1")]
+    pub node_id: ::prost::alloc::string::String,
+    /// Node ip
+    #[prost(string, tag = "2")]
+    pub node_ip: ::prost::alloc::string::String,
+    /// Connection type
+    #[prost(enumeration = "ConnectionType", tag = "3")]
+    pub connection_type: i32,
+}
+/// Compact configuration
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CompactConfig {
+    /// Time in milliseconds when the blockclique started.
+    #[prost(uint64, tag = "1")]
+    pub genesis_timestamp: u64,
+    /// TESTNET: time when the blockclique is ended.
+    #[prost(uint64, tag = "2")]
+    pub end_timestamp: u64,
+    /// Number of threads
+    #[prost(uint32, tag = "3")]
+    pub thread_count: u32,
+    /// Time between the periods in the same thread.
+    #[prost(uint64, tag = "4")]
+    pub t0: u64,
+    /// Threshold for fitness.
+    #[prost(uint64, tag = "5")]
+    pub delta_f0: u64,
+    /// Maximum operation validity period count
+    #[prost(uint64, tag = "6")]
+    pub operation_validity_periods: u64,
+    /// cycle duration in periods
+    #[prost(uint64, tag = "7")]
+    pub periods_per_cycle: u64,
+    /// Reward amount for a block creation
+    #[prost(uint64, tag = "8")]
+    pub block_reward: u64,
+    /// Price of a roll on the network
+    #[prost(uint64, tag = "9")]
+    pub roll_price: u64,
+    /// Max total size of a block
+    #[prost(uint32, tag = "10")]
+    pub max_block_size: u32,
+}
+/// Public status
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PublicStatus {
+    /// Our node id
+    #[prost(string, tag = "1")]
+    pub node_id: ::prost::alloc::string::String,
+    /// Node version
+    #[prost(string, tag = "3")]
+    pub version: ::prost::alloc::string::String,
+    /// Now
+    #[prost(uint64, tag = "4")]
+    pub current_time: u64,
+    /// Current cycle
+    #[prost(uint64, tag = "5")]
+    pub current_cycle: u64,
+    /// Current cycle starting timestamp
+    #[prost(uint64, tag = "6")]
+    pub current_cycle_time: u64,
+    /// Next cycle starting timestamp
+    #[prost(uint64, tag = "7")]
+    pub next_cycle_time: u64,
+    /// Latest slot, none if now is before genesis timestamp
+    #[prost(message, optional, tag = "9")]
+    pub last_slot: ::core::option::Option<Slot>,
+    /// Next slot
+    #[prost(message, optional, tag = "10")]
+    pub next_slot: ::core::option::Option<Slot>,
+}
+/// ConnectionType enum
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum ConnectionType {
+    /// Default enum value
+    Unspecified = 0,
+    /// Incoming connection
+    Incoming = 1,
+    /// Outgoing connection
+    Outgoing = 2,
+}
+impl ConnectionType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ConnectionType::Unspecified => "CONNECTION_TYPE_UNSPECIFIED",
+            ConnectionType::Incoming => "CONNECTION_TYPE_INCOMING",
+            ConnectionType::Outgoing => "CONNECTION_TYPE_OUTGOING",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "CONNECTION_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "CONNECTION_TYPE_INCOMING" => Some(Self::Incoming),
+            "CONNECTION_TYPE_OUTGOING" => Some(Self::Outgoing),
+            _ => None,
+        }
+    }
 }
 /// Native Signature
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1260,7 +1945,7 @@ pub struct NativePubKey {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NativeTime {
     /// Milliseconds
-    #[prost(fixed64, tag = "1")]
+    #[prost(uint64, tag = "1")]
     pub milliseconds: u64,
 }
 /// Entry for GetMipStatusResponse
@@ -1282,16 +1967,16 @@ pub struct MipInfo {
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
     /// Network (or global) version (to be included in block header)
-    #[prost(fixed32, tag = "2")]
+    #[prost(uint32, tag = "2")]
     pub version: u32,
     /// A timestamp at which the version gains its meaning (e.g. announced in block header)
-    #[prost(fixed64, tag = "3")]
+    #[prost(uint64, tag = "3")]
     pub start: u64,
     /// A timestamp at the which the deployment is considered failed
-    #[prost(fixed64, tag = "4")]
+    #[prost(uint64, tag = "4")]
     pub timeout: u64,
     /// Once deployment has been locked, wait for this duration before deployment is considered active
-    #[prost(fixed64, tag = "5")]
+    #[prost(uint64, tag = "5")]
     pub activation_delay: u64,
     /// Components concerned by this versioning (e.g. a new Block version), and the associated component_version
     #[prost(message, repeated, tag = "6")]
@@ -1305,7 +1990,7 @@ pub struct MipComponentEntry {
     #[prost(enumeration = "MipComponent", tag = "1")]
     pub kind: i32,
     /// Version
-    #[prost(fixed32, tag = "2")]
+    #[prost(uint32, tag = "2")]
     pub version: u32,
 }
 /// State machine for a Versioning component that tracks the deployment state

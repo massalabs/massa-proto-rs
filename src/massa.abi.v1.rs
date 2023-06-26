@@ -11,7 +11,7 @@ pub struct Address {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Amount {
     /// Amount is a 64-bit unsigned integer
-    #[prost(fixed64, tag = "1")]
+    #[prost(uint64, tag = "1")]
     pub amount: u64,
 }
 /// Empty

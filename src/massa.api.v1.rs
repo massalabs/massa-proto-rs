@@ -1,3 +1,1709 @@
+/// AddToBootstrapBlacklistRequest holds the request for AddToBootstrapBlacklist
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddToBootstrapBlacklistRequest {
+    /// IP addresses to add to bootstrap blacklist
+    #[prost(string, repeated, tag = "1")]
+    pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// AddToBootstrapBlacklistResponse holds the response from AddToBootstrapBlacklist
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddToBootstrapBlacklistResponse {}
+/// AddToBootstrapWhitelistRequest holds the request for AddToBootstrapWhitelist
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddToBootstrapWhitelistRequest {
+    /// IP addresses to add to bootstrap whitelist
+    #[prost(string, repeated, tag = "1")]
+    pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// AddToBootstrapWhitelistResponse holds the response from AddToBootstrapWhitelist
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddToBootstrapWhitelistResponse {}
+/// AddToPeersWhitelistRequest holds the request for AddToPeersWhitelist
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddToPeersWhitelistRequest {
+    /// IP addresses to add to peers whitelist
+    #[prost(string, repeated, tag = "1")]
+    pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// AddToPeersWhitelistResponse holds the response from AddToPeersWhitelist
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddToPeersWhitelistResponse {}
+/// AddStakingSecretKeysRequest holds the request for AddStakingSecretKeys
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddStakingSecretKeysRequest {
+    /// Secret keys to add to wallet
+    #[prost(string, repeated, tag = "1")]
+    pub secret_keys: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// AddStakingSecretKeysResponse holds the response from AddStakingSecretKeys
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddStakingSecretKeysResponse {}
+/// GetBootstrapBlacklistRequest holds the request for GetBootstrapBlacklist
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetBootstrapBlacklistRequest {
+    /// Request id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+}
+/// GetBootstrapBlacklistResponse holds the response from GetBootstrapBlacklist
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetBootstrapBlacklistResponse {
+    /// Request id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// Bootstrap blacklisted IP addresses
+    #[prost(string, repeated, tag = "2")]
+    pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// GetBootstrapWhitelistRequest holds the request for GetBootstrapWhitelist
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetBootstrapWhitelistRequest {
+    /// Request id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+}
+/// GetBootstrapWhitelistResponse holds the response from GetBootstrapWhitelist
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetBootstrapWhitelistResponse {
+    /// Request id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// Bootstrap whitelisted IP addresses
+    #[prost(string, repeated, tag = "2")]
+    pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// AllowEveryoneToBootstrapRequest holds the request for AllowEveryoneToBootstrap
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AllowEveryoneToBootstrapRequest {}
+/// AllowEveryoneToBootstrapResponse holds the response from AllowEveryoneToBootstrap
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AllowEveryoneToBootstrapResponse {}
+/// GetNodeStatusRequest holds the request for GetNodeStatus
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetNodeStatusRequest {
+    /// Request id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+}
+/// GetNodeStatusResponse holds the response from GetNodeStatus
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetNodeStatusResponse {
+    /// Request id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// Node status
+    #[prost(message, optional, tag = "2")]
+    pub status: ::core::option::Option<super::super::model::v1::NodeStatus>,
+}
+/// GetPeersWhitelistRequest holds the request for GetPeersWhitelist
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetPeersWhitelistRequest {
+    /// Request id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+}
+/// GetPeersWhitelistResponse holds the response from GetPeersWhitelist
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetPeersWhitelistResponse {
+    /// Request id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// Whitelisted IP addresses
+    #[prost(string, repeated, tag = "2")]
+    pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// RemoveFromBootstrapBlacklistRequest holds the request for RemoveFromBootstrapBlacklist
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RemoveFromBootstrapBlacklistRequest {
+    /// IP addresses to remove from bootstrap blacklist
+    #[prost(string, repeated, tag = "1")]
+    pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// RemoveFromBootstrapBlacklistResponse holds the response from RemoveFromBootstrapBlacklist
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RemoveFromBootstrapBlacklistResponse {}
+/// RemoveFromBootstrapWhitelistRequest holds the request for RemoveFromBootstrapWhitelist
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RemoveFromBootstrapWhitelistRequest {
+    /// IP addresses to remove from bootstrap whitelist
+    #[prost(string, repeated, tag = "1")]
+    pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// RemoveFromBootstrapWhitelistResponse holds the response from RemoveFromBootstrapWhitelist
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RemoveFromBootstrapWhitelistResponse {}
+/// RemoveFromPeersWhitelistRequest holds the request for RemoveFromPeersWhitelist
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RemoveFromPeersWhitelistRequest {
+    /// IP addresses to remove from peers whitelist
+    #[prost(string, repeated, tag = "1")]
+    pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// RemoveFromPeersWhitelistResponse holds the response from RemoveFromPeersWhitelist
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RemoveFromPeersWhitelistResponse {}
+/// RemoveStakingAddressesRequest holds the request for RemoveStakingAddresses
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RemoveStakingAddressesRequest {
+    /// Addresses to remove from staking
+    #[prost(string, repeated, tag = "1")]
+    pub addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// RemoveStakingAddressesResponse holds the response from RemoveStakingAddresses
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct RemoveStakingAddressesResponse {}
+/// SignMessagesRequest holds the request for SignMessages
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SignMessagesRequest {
+    /// Request id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// Messages to sign in bytes
+    #[prost(bytes = "vec", repeated, tag = "2")]
+    pub messages: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
+}
+/// SignMessagesResponse holds the response from SignMessages
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SignMessagesResponse {
+    /// Request id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// Public key that signed the message
+    #[prost(string, tag = "2")]
+    pub public_key: ::prost::alloc::string::String,
+    /// Signatures
+    #[prost(string, repeated, tag = "3")]
+    pub signatures: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// ShutdownGracefullyRequest holds the request for ShutdownGracefully
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ShutdownGracefullyRequest {}
+/// ShutdownGracefullyResponse holds the response from ShutdownGracefully
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ShutdownGracefullyResponse {}
+/// Generated client implementations.
+pub mod private_service_client {
+    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    use tonic::codegen::*;
+    use tonic::codegen::http::Uri;
+    /// Massa private gRPC service
+    #[derive(Debug, Clone)]
+    pub struct PrivateServiceClient<T> {
+        inner: tonic::client::Grpc<T>,
+    }
+    impl PrivateServiceClient<tonic::transport::Channel> {
+        /// Attempt to create a new client by connecting to a given endpoint.
+        pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
+        where
+            D: TryInto<tonic::transport::Endpoint>,
+            D::Error: Into<StdError>,
+        {
+            let conn = tonic::transport::Endpoint::new(dst)?.connect().await?;
+            Ok(Self::new(conn))
+        }
+    }
+    impl<T> PrivateServiceClient<T>
+    where
+        T: tonic::client::GrpcService<tonic::body::BoxBody>,
+        T::Error: Into<StdError>,
+        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+    {
+        pub fn new(inner: T) -> Self {
+            let inner = tonic::client::Grpc::new(inner);
+            Self { inner }
+        }
+        pub fn with_origin(inner: T, origin: Uri) -> Self {
+            let inner = tonic::client::Grpc::with_origin(inner, origin);
+            Self { inner }
+        }
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> PrivateServiceClient<InterceptedService<T, F>>
+        where
+            F: tonic::service::Interceptor,
+            T::ResponseBody: Default,
+            T: tonic::codegen::Service<
+                http::Request<tonic::body::BoxBody>,
+                Response = http::Response<
+                    <T as tonic::client::GrpcService<tonic::body::BoxBody>>::ResponseBody,
+                >,
+            >,
+            <T as tonic::codegen::Service<
+                http::Request<tonic::body::BoxBody>,
+            >>::Error: Into<StdError> + Send + Sync,
+        {
+            PrivateServiceClient::new(InterceptedService::new(inner, interceptor))
+        }
+        /// Compress requests with the given encoding.
+        ///
+        /// This requires the server to support it otherwise it might respond with an
+        /// error.
+        #[must_use]
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.send_compressed(encoding);
+            self
+        }
+        /// Enable decompressing responses.
+        #[must_use]
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.inner = self.inner.accept_compressed(encoding);
+            self
+        }
+        /// Limits the maximum size of a decoded message.
+        ///
+        /// Default: `4MB`
+        #[must_use]
+        pub fn max_decoding_message_size(mut self, limit: usize) -> Self {
+            self.inner = self.inner.max_decoding_message_size(limit);
+            self
+        }
+        /// Limits the maximum size of an encoded message.
+        ///
+        /// Default: `usize::MAX`
+        #[must_use]
+        pub fn max_encoding_message_size(mut self, limit: usize) -> Self {
+            self.inner = self.inner.max_encoding_message_size(limit);
+            self
+        }
+        /// Add IP addresses to node bootstrap blacklist
+        pub async fn add_to_bootstrap_blacklist(
+            &mut self,
+            request: impl tonic::IntoRequest<super::AddToBootstrapBlacklistRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AddToBootstrapBlacklistResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PrivateService/AddToBootstrapBlacklist",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PrivateService",
+                        "AddToBootstrapBlacklist",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Add IP addresses to node bootstrap whitelist
+        pub async fn add_to_bootstrap_whitelist(
+            &mut self,
+            request: impl tonic::IntoRequest<super::AddToBootstrapWhitelistRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AddToBootstrapWhitelistResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PrivateService/AddToBootstrapWhitelist",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PrivateService",
+                        "AddToBootstrapWhitelist",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Add IP addresses to node peers whitelist. No confirmation to expect.
+        /// Note: If the ip was unknown it adds it to the known peers, otherwise it updates the peer type
+        pub async fn add_to_peers_whitelist(
+            &mut self,
+            request: impl tonic::IntoRequest<super::AddToPeersWhitelistRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AddToPeersWhitelistResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PrivateService/AddToPeersWhitelist",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("massa.api.v1.PrivateService", "AddToPeersWhitelist"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Add staking secret keys to wallet
+        pub async fn add_staking_secret_keys(
+            &mut self,
+            request: impl tonic::IntoRequest<super::AddStakingSecretKeysRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AddStakingSecretKeysResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PrivateService/AddStakingSecretKeys",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PrivateService",
+                        "AddStakingSecretKeys",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Get node bootstrap blacklist IP addresses
+        pub async fn get_bootstrap_blacklist(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetBootstrapBlacklistRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetBootstrapBlacklistResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PrivateService/GetBootstrapBlacklist",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PrivateService",
+                        "GetBootstrapBlacklist",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Get node bootstrap whitelist IP addresses
+        pub async fn get_bootstrap_whitelist(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetBootstrapWhitelistRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetBootstrapWhitelistResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PrivateService/GetBootstrapWhitelist",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PrivateService",
+                        "GetBootstrapWhitelist",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Allow everyone to bootstrap from the node by removing bootstrap whitelist configuration file
+        pub async fn allow_everyone_to_bootstrap(
+            &mut self,
+            request: impl tonic::IntoRequest<super::AllowEveryoneToBootstrapRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AllowEveryoneToBootstrapResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PrivateService/AllowEveryoneToBootstrap",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PrivateService",
+                        "AllowEveryoneToBootstrap",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Get node status
+        pub async fn get_node_status(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetNodeStatusRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetNodeStatusResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PrivateService/GetNodeStatus",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("massa.api.v1.PrivateService", "GetNodeStatus"));
+            self.inner.unary(req, path, codec).await
+        }
+        /// Get node peers whitelist IP addresses
+        pub async fn get_peers_whitelist(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetPeersWhitelistRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetPeersWhitelistResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PrivateService/GetPeersWhitelist",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("massa.api.v1.PrivateService", "GetPeersWhitelist"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Remove from bootstrap blacklist given IP addresses
+        pub async fn remove_from_bootstrap_blacklist(
+            &mut self,
+            request: impl tonic::IntoRequest<super::RemoveFromBootstrapBlacklistRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::RemoveFromBootstrapBlacklistResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PrivateService/RemoveFromBootstrapBlacklist",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PrivateService",
+                        "RemoveFromBootstrapBlacklist",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Remove from bootstrap whitelist given IP addresses
+        pub async fn remove_from_bootstrap_whitelist(
+            &mut self,
+            request: impl tonic::IntoRequest<super::RemoveFromBootstrapWhitelistRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::RemoveFromBootstrapWhitelistResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PrivateService/RemoveFromBootstrapWhitelist",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PrivateService",
+                        "RemoveFromBootstrapWhitelist",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Remove from peers whitelist given IP addresses
+        pub async fn remove_from_peers_whitelist(
+            &mut self,
+            request: impl tonic::IntoRequest<super::RemoveFromPeersWhitelistRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::RemoveFromPeersWhitelistResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PrivateService/RemoveFromPeersWhitelist",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PrivateService",
+                        "RemoveFromPeersWhitelist",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Remove addresses from staking
+        pub async fn remove_staking_addresses(
+            &mut self,
+            request: impl tonic::IntoRequest<super::RemoveStakingAddressesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::RemoveStakingAddressesResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PrivateService/RemoveStakingAddresses",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PrivateService",
+                        "RemoveStakingAddresses",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Sign messages with node's key
+        pub async fn sign_messages(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SignMessagesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SignMessagesResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PrivateService/SignMessages",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("massa.api.v1.PrivateService", "SignMessages"));
+            self.inner.unary(req, path, codec).await
+        }
+        /// Shutdown the node gracefully
+        pub async fn shutdown_gracefully(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ShutdownGracefullyRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ShutdownGracefullyResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PrivateService/ShutdownGracefully",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("massa.api.v1.PrivateService", "ShutdownGracefully"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+    }
+}
+/// Generated server implementations.
+pub mod private_service_server {
+    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    use tonic::codegen::*;
+    /// Generated trait containing gRPC methods that should be implemented for use with PrivateServiceServer.
+    #[async_trait]
+    pub trait PrivateService: Send + Sync + 'static {
+        /// Add IP addresses to node bootstrap blacklist
+        async fn add_to_bootstrap_blacklist(
+            &self,
+            request: tonic::Request<super::AddToBootstrapBlacklistRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AddToBootstrapBlacklistResponse>,
+            tonic::Status,
+        >;
+        /// Add IP addresses to node bootstrap whitelist
+        async fn add_to_bootstrap_whitelist(
+            &self,
+            request: tonic::Request<super::AddToBootstrapWhitelistRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AddToBootstrapWhitelistResponse>,
+            tonic::Status,
+        >;
+        /// Add IP addresses to node peers whitelist. No confirmation to expect.
+        /// Note: If the ip was unknown it adds it to the known peers, otherwise it updates the peer type
+        async fn add_to_peers_whitelist(
+            &self,
+            request: tonic::Request<super::AddToPeersWhitelistRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AddToPeersWhitelistResponse>,
+            tonic::Status,
+        >;
+        /// Add staking secret keys to wallet
+        async fn add_staking_secret_keys(
+            &self,
+            request: tonic::Request<super::AddStakingSecretKeysRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AddStakingSecretKeysResponse>,
+            tonic::Status,
+        >;
+        /// Get node bootstrap blacklist IP addresses
+        async fn get_bootstrap_blacklist(
+            &self,
+            request: tonic::Request<super::GetBootstrapBlacklistRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetBootstrapBlacklistResponse>,
+            tonic::Status,
+        >;
+        /// Get node bootstrap whitelist IP addresses
+        async fn get_bootstrap_whitelist(
+            &self,
+            request: tonic::Request<super::GetBootstrapWhitelistRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetBootstrapWhitelistResponse>,
+            tonic::Status,
+        >;
+        /// Allow everyone to bootstrap from the node by removing bootstrap whitelist configuration file
+        async fn allow_everyone_to_bootstrap(
+            &self,
+            request: tonic::Request<super::AllowEveryoneToBootstrapRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AllowEveryoneToBootstrapResponse>,
+            tonic::Status,
+        >;
+        /// Get node status
+        async fn get_node_status(
+            &self,
+            request: tonic::Request<super::GetNodeStatusRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetNodeStatusResponse>,
+            tonic::Status,
+        >;
+        /// Get node peers whitelist IP addresses
+        async fn get_peers_whitelist(
+            &self,
+            request: tonic::Request<super::GetPeersWhitelistRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetPeersWhitelistResponse>,
+            tonic::Status,
+        >;
+        /// Remove from bootstrap blacklist given IP addresses
+        async fn remove_from_bootstrap_blacklist(
+            &self,
+            request: tonic::Request<super::RemoveFromBootstrapBlacklistRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::RemoveFromBootstrapBlacklistResponse>,
+            tonic::Status,
+        >;
+        /// Remove from bootstrap whitelist given IP addresses
+        async fn remove_from_bootstrap_whitelist(
+            &self,
+            request: tonic::Request<super::RemoveFromBootstrapWhitelistRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::RemoveFromBootstrapWhitelistResponse>,
+            tonic::Status,
+        >;
+        /// Remove from peers whitelist given IP addresses
+        async fn remove_from_peers_whitelist(
+            &self,
+            request: tonic::Request<super::RemoveFromPeersWhitelistRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::RemoveFromPeersWhitelistResponse>,
+            tonic::Status,
+        >;
+        /// Remove addresses from staking
+        async fn remove_staking_addresses(
+            &self,
+            request: tonic::Request<super::RemoveStakingAddressesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::RemoveStakingAddressesResponse>,
+            tonic::Status,
+        >;
+        /// Sign messages with node's key
+        async fn sign_messages(
+            &self,
+            request: tonic::Request<super::SignMessagesRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SignMessagesResponse>,
+            tonic::Status,
+        >;
+        /// Shutdown the node gracefully
+        async fn shutdown_gracefully(
+            &self,
+            request: tonic::Request<super::ShutdownGracefullyRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ShutdownGracefullyResponse>,
+            tonic::Status,
+        >;
+    }
+    /// Massa private gRPC service
+    #[derive(Debug)]
+    pub struct PrivateServiceServer<T: PrivateService> {
+        inner: _Inner<T>,
+        accept_compression_encodings: EnabledCompressionEncodings,
+        send_compression_encodings: EnabledCompressionEncodings,
+        max_decoding_message_size: Option<usize>,
+        max_encoding_message_size: Option<usize>,
+    }
+    struct _Inner<T>(Arc<T>);
+    impl<T: PrivateService> PrivateServiceServer<T> {
+        pub fn new(inner: T) -> Self {
+            Self::from_arc(Arc::new(inner))
+        }
+        pub fn from_arc(inner: Arc<T>) -> Self {
+            let inner = _Inner(inner);
+            Self {
+                inner,
+                accept_compression_encodings: Default::default(),
+                send_compression_encodings: Default::default(),
+                max_decoding_message_size: None,
+                max_encoding_message_size: None,
+            }
+        }
+        pub fn with_interceptor<F>(
+            inner: T,
+            interceptor: F,
+        ) -> InterceptedService<Self, F>
+        where
+            F: tonic::service::Interceptor,
+        {
+            InterceptedService::new(Self::new(inner), interceptor)
+        }
+        /// Enable decompressing requests with the given encoding.
+        #[must_use]
+        pub fn accept_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.accept_compression_encodings.enable(encoding);
+            self
+        }
+        /// Compress responses with the given encoding, if the client supports it.
+        #[must_use]
+        pub fn send_compressed(mut self, encoding: CompressionEncoding) -> Self {
+            self.send_compression_encodings.enable(encoding);
+            self
+        }
+        /// Limits the maximum size of a decoded message.
+        ///
+        /// Default: `4MB`
+        #[must_use]
+        pub fn max_decoding_message_size(mut self, limit: usize) -> Self {
+            self.max_decoding_message_size = Some(limit);
+            self
+        }
+        /// Limits the maximum size of an encoded message.
+        ///
+        /// Default: `usize::MAX`
+        #[must_use]
+        pub fn max_encoding_message_size(mut self, limit: usize) -> Self {
+            self.max_encoding_message_size = Some(limit);
+            self
+        }
+    }
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for PrivateServiceServer<T>
+    where
+        T: PrivateService,
+        B: Body + Send + 'static,
+        B::Error: Into<StdError> + Send + 'static,
+    {
+        type Response = http::Response<tonic::body::BoxBody>;
+        type Error = std::convert::Infallible;
+        type Future = BoxFuture<Self::Response, Self::Error>;
+        fn poll_ready(
+            &mut self,
+            _cx: &mut Context<'_>,
+        ) -> Poll<std::result::Result<(), Self::Error>> {
+            Poll::Ready(Ok(()))
+        }
+        fn call(&mut self, req: http::Request<B>) -> Self::Future {
+            let inner = self.inner.clone();
+            match req.uri().path() {
+                "/massa.api.v1.PrivateService/AddToBootstrapBlacklist" => {
+                    #[allow(non_camel_case_types)]
+                    struct AddToBootstrapBlacklistSvc<T: PrivateService>(pub Arc<T>);
+                    impl<
+                        T: PrivateService,
+                    > tonic::server::UnaryService<super::AddToBootstrapBlacklistRequest>
+                    for AddToBootstrapBlacklistSvc<T> {
+                        type Response = super::AddToBootstrapBlacklistResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::AddToBootstrapBlacklistRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).add_to_bootstrap_blacklist(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = AddToBootstrapBlacklistSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PrivateService/AddToBootstrapWhitelist" => {
+                    #[allow(non_camel_case_types)]
+                    struct AddToBootstrapWhitelistSvc<T: PrivateService>(pub Arc<T>);
+                    impl<
+                        T: PrivateService,
+                    > tonic::server::UnaryService<super::AddToBootstrapWhitelistRequest>
+                    for AddToBootstrapWhitelistSvc<T> {
+                        type Response = super::AddToBootstrapWhitelistResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::AddToBootstrapWhitelistRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).add_to_bootstrap_whitelist(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = AddToBootstrapWhitelistSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PrivateService/AddToPeersWhitelist" => {
+                    #[allow(non_camel_case_types)]
+                    struct AddToPeersWhitelistSvc<T: PrivateService>(pub Arc<T>);
+                    impl<
+                        T: PrivateService,
+                    > tonic::server::UnaryService<super::AddToPeersWhitelistRequest>
+                    for AddToPeersWhitelistSvc<T> {
+                        type Response = super::AddToPeersWhitelistResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::AddToPeersWhitelistRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).add_to_peers_whitelist(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = AddToPeersWhitelistSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PrivateService/AddStakingSecretKeys" => {
+                    #[allow(non_camel_case_types)]
+                    struct AddStakingSecretKeysSvc<T: PrivateService>(pub Arc<T>);
+                    impl<
+                        T: PrivateService,
+                    > tonic::server::UnaryService<super::AddStakingSecretKeysRequest>
+                    for AddStakingSecretKeysSvc<T> {
+                        type Response = super::AddStakingSecretKeysResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::AddStakingSecretKeysRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).add_staking_secret_keys(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = AddStakingSecretKeysSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PrivateService/GetBootstrapBlacklist" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetBootstrapBlacklistSvc<T: PrivateService>(pub Arc<T>);
+                    impl<
+                        T: PrivateService,
+                    > tonic::server::UnaryService<super::GetBootstrapBlacklistRequest>
+                    for GetBootstrapBlacklistSvc<T> {
+                        type Response = super::GetBootstrapBlacklistResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetBootstrapBlacklistRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).get_bootstrap_blacklist(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetBootstrapBlacklistSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PrivateService/GetBootstrapWhitelist" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetBootstrapWhitelistSvc<T: PrivateService>(pub Arc<T>);
+                    impl<
+                        T: PrivateService,
+                    > tonic::server::UnaryService<super::GetBootstrapWhitelistRequest>
+                    for GetBootstrapWhitelistSvc<T> {
+                        type Response = super::GetBootstrapWhitelistResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetBootstrapWhitelistRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).get_bootstrap_whitelist(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetBootstrapWhitelistSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PrivateService/AllowEveryoneToBootstrap" => {
+                    #[allow(non_camel_case_types)]
+                    struct AllowEveryoneToBootstrapSvc<T: PrivateService>(pub Arc<T>);
+                    impl<
+                        T: PrivateService,
+                    > tonic::server::UnaryService<super::AllowEveryoneToBootstrapRequest>
+                    for AllowEveryoneToBootstrapSvc<T> {
+                        type Response = super::AllowEveryoneToBootstrapResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::AllowEveryoneToBootstrapRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).allow_everyone_to_bootstrap(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = AllowEveryoneToBootstrapSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PrivateService/GetNodeStatus" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetNodeStatusSvc<T: PrivateService>(pub Arc<T>);
+                    impl<
+                        T: PrivateService,
+                    > tonic::server::UnaryService<super::GetNodeStatusRequest>
+                    for GetNodeStatusSvc<T> {
+                        type Response = super::GetNodeStatusResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetNodeStatusRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).get_node_status(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetNodeStatusSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PrivateService/GetPeersWhitelist" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetPeersWhitelistSvc<T: PrivateService>(pub Arc<T>);
+                    impl<
+                        T: PrivateService,
+                    > tonic::server::UnaryService<super::GetPeersWhitelistRequest>
+                    for GetPeersWhitelistSvc<T> {
+                        type Response = super::GetPeersWhitelistResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetPeersWhitelistRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).get_peers_whitelist(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetPeersWhitelistSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PrivateService/RemoveFromBootstrapBlacklist" => {
+                    #[allow(non_camel_case_types)]
+                    struct RemoveFromBootstrapBlacklistSvc<T: PrivateService>(
+                        pub Arc<T>,
+                    );
+                    impl<
+                        T: PrivateService,
+                    > tonic::server::UnaryService<
+                        super::RemoveFromBootstrapBlacklistRequest,
+                    > for RemoveFromBootstrapBlacklistSvc<T> {
+                        type Response = super::RemoveFromBootstrapBlacklistResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::RemoveFromBootstrapBlacklistRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).remove_from_bootstrap_blacklist(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = RemoveFromBootstrapBlacklistSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PrivateService/RemoveFromBootstrapWhitelist" => {
+                    #[allow(non_camel_case_types)]
+                    struct RemoveFromBootstrapWhitelistSvc<T: PrivateService>(
+                        pub Arc<T>,
+                    );
+                    impl<
+                        T: PrivateService,
+                    > tonic::server::UnaryService<
+                        super::RemoveFromBootstrapWhitelistRequest,
+                    > for RemoveFromBootstrapWhitelistSvc<T> {
+                        type Response = super::RemoveFromBootstrapWhitelistResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::RemoveFromBootstrapWhitelistRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).remove_from_bootstrap_whitelist(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = RemoveFromBootstrapWhitelistSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PrivateService/RemoveFromPeersWhitelist" => {
+                    #[allow(non_camel_case_types)]
+                    struct RemoveFromPeersWhitelistSvc<T: PrivateService>(pub Arc<T>);
+                    impl<
+                        T: PrivateService,
+                    > tonic::server::UnaryService<super::RemoveFromPeersWhitelistRequest>
+                    for RemoveFromPeersWhitelistSvc<T> {
+                        type Response = super::RemoveFromPeersWhitelistResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::RemoveFromPeersWhitelistRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).remove_from_peers_whitelist(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = RemoveFromPeersWhitelistSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PrivateService/RemoveStakingAddresses" => {
+                    #[allow(non_camel_case_types)]
+                    struct RemoveStakingAddressesSvc<T: PrivateService>(pub Arc<T>);
+                    impl<
+                        T: PrivateService,
+                    > tonic::server::UnaryService<super::RemoveStakingAddressesRequest>
+                    for RemoveStakingAddressesSvc<T> {
+                        type Response = super::RemoveStakingAddressesResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::RemoveStakingAddressesRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).remove_staking_addresses(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = RemoveStakingAddressesSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PrivateService/SignMessages" => {
+                    #[allow(non_camel_case_types)]
+                    struct SignMessagesSvc<T: PrivateService>(pub Arc<T>);
+                    impl<
+                        T: PrivateService,
+                    > tonic::server::UnaryService<super::SignMessagesRequest>
+                    for SignMessagesSvc<T> {
+                        type Response = super::SignMessagesResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SignMessagesRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).sign_messages(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SignMessagesSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PrivateService/ShutdownGracefully" => {
+                    #[allow(non_camel_case_types)]
+                    struct ShutdownGracefullySvc<T: PrivateService>(pub Arc<T>);
+                    impl<
+                        T: PrivateService,
+                    > tonic::server::UnaryService<super::ShutdownGracefullyRequest>
+                    for ShutdownGracefullySvc<T> {
+                        type Response = super::ShutdownGracefullyResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ShutdownGracefullyRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).shutdown_gracefully(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = ShutdownGracefullySvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                _ => {
+                    Box::pin(async move {
+                        Ok(
+                            http::Response::builder()
+                                .status(200)
+                                .header("grpc-status", "12")
+                                .header("content-type", "application/grpc")
+                                .body(empty_body())
+                                .unwrap(),
+                        )
+                    })
+                }
+            }
+        }
+    }
+    impl<T: PrivateService> Clone for PrivateServiceServer<T> {
+        fn clone(&self) -> Self {
+            let inner = self.inner.clone();
+            Self {
+                inner,
+                accept_compression_encodings: self.accept_compression_encodings,
+                send_compression_encodings: self.send_compression_encodings,
+                max_decoding_message_size: self.max_decoding_message_size,
+                max_encoding_message_size: self.max_encoding_message_size,
+            }
+        }
+    }
+    impl<T: PrivateService> Clone for _Inner<T> {
+        fn clone(&self) -> Self {
+            Self(Arc::clone(&self.0))
+        }
+    }
+    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            write!(f, "{:?}", self.0)
+        }
+    }
+    impl<T: PrivateService> tonic::server::NamedService for PrivateServiceServer<T> {
+        const NAME: &'static str = "massa.api.v1.PrivateService";
+    }
+}
 /// GetBlocksRequest holds request for GetBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -120,10 +1826,10 @@ pub struct DatastoreEntry {
     #[prost(bytes = "vec", tag = "2")]
     pub candidate_value: ::prost::alloc::vec::Vec<u8>,
 }
-/// GetLargestStakersRequest holds request from GetLargestStakers
+/// GetStakersRequest holds request from GetStakers
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetLargestStakersRequest {
+pub struct GetStakersRequest {
     /// Request id
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
@@ -136,10 +1842,10 @@ pub struct GetLargestStakersRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LargestStakersQuery {
     /// Starting offset for the list of stakers. Defaults to 1
-    #[prost(fixed64, tag = "1")]
+    #[prost(uint64, tag = "1")]
     pub offset: u64,
     /// Limits the number of stakers to return. Defaults to 50
-    #[prost(fixed64, tag = "2")]
+    #[prost(uint64, tag = "2")]
     pub limit: u64,
     /// Filter
     #[prost(message, optional, tag = "3")]
@@ -150,16 +1856,16 @@ pub struct LargestStakersQuery {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LargestStakersFilter {
     /// Minimum rolls (Optional)
-    #[prost(fixed64, optional, tag = "1")]
+    #[prost(uint64, optional, tag = "1")]
     pub min_rolls: ::core::option::Option<u64>,
     /// Maximum rolls (Optional)
-    #[prost(fixed64, optional, tag = "2")]
+    #[prost(uint64, optional, tag = "2")]
     pub max_rolls: ::core::option::Option<u64>,
 }
-/// GetLargestStakersResponse holds response from GetLargestStakers
+/// GetStakersResponse holds response from GetStakers
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetLargestStakersResponse {
+pub struct GetStakersResponse {
     /// Request id
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
@@ -186,7 +1892,7 @@ pub struct LargestStakerEntry {
     #[prost(string, tag = "1")]
     pub address: ::prost::alloc::string::String,
     /// Rolls
-    #[prost(fixed64, tag = "2")]
+    #[prost(uint64, tag = "2")]
     pub rolls: u64,
 }
 /// GetMipStatusRequest holds request for GetMipStatus
@@ -235,7 +1941,7 @@ pub struct BlockParent {
     #[prost(string, tag = "1")]
     pub block_id: ::prost::alloc::string::String,
     /// Period
-    #[prost(fixed64, tag = "2")]
+    #[prost(uint64, tag = "2")]
     pub period: u64,
 }
 /// GetOperationsRequest holds request for GetOperations
@@ -304,34 +2010,7 @@ pub struct GetScExecutionEventsRequest {
 pub struct GetScExecutionEventsQuery {
     /// Filter
     #[prost(message, optional, tag = "1")]
-    pub filter: ::core::option::Option<GetScExecutionEventsFilter>,
-}
-/// GetScExecutionEvents Filter
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetScExecutionEventsFilter {
-    /// Start slot (Optional)
-    #[prost(message, optional, tag = "1")]
-    pub start_slot: ::core::option::Option<super::super::model::v1::Slot>,
-    /// End slot (Optional)
-    #[prost(message, optional, tag = "2")]
-    pub end_slot: ::core::option::Option<super::super::model::v1::Slot>,
-    /// Caller address
-    #[prost(string, optional, tag = "3")]
-    pub caller_address: ::core::option::Option<::prost::alloc::string::String>,
-    /// Emitter address (Optional)
-    #[prost(string, optional, tag = "4")]
-    pub emitter_address: ::core::option::Option<::prost::alloc::string::String>,
-    /// Original operation id (Optional)
-    #[prost(string, optional, tag = "5")]
-    pub original_operation_id: ::core::option::Option<::prost::alloc::string::String>,
-    /// Status
-    #[prost(
-        enumeration = "super::super::model::v1::ScExecutionEventStatus",
-        repeated,
-        tag = "6"
-    )]
-    pub status: ::prost::alloc::vec::Vec<i32>,
+    pub filter: ::core::option::Option<super::super::model::v1::ScExecutionEventsFilter>,
 }
 /// GetScExecutionEventsResponse holds response from GetScExecutionEvents
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -354,6 +2033,25 @@ pub struct GetScExecutionEventsContext {
     /// Slot
     #[prost(message, optional, tag = "1")]
     pub slot: ::core::option::Option<super::super::model::v1::Slot>,
+}
+/// GetStatusRequest holds request from GetStatus
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetStatusRequest {
+    /// Request id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+}
+/// GetStatusResponse holds request from GetStatus
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetStatusResponse {
+    /// Request id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// Status
+    #[prost(message, optional, tag = "2")]
+    pub status: ::core::option::Option<super::super::model::v1::PublicStatus>,
 }
 /// GetSelectorDrawsRequest holds request from GetSelectorDraws
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -409,7 +2107,7 @@ pub struct GetTransactionsThroughputResponse {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
     /// Transactions throughput
-    #[prost(fixed32, tag = "2")]
+    #[prost(uint32, tag = "2")]
     pub throughput: u32,
 }
 /// GetVersionRequest holds request from GetVersion
@@ -430,6 +2128,55 @@ pub struct GetVersionResponse {
     /// Version
     #[prost(string, tag = "2")]
     pub version: ::prost::alloc::string::String,
+}
+/// Request to atomically execute a batch of execution state queries
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct QueryStateRequest {
+    /// Request id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// List of execution query request items
+    #[prost(message, repeated, tag = "2")]
+    pub requests: ::prost::alloc::vec::Vec<
+        super::super::model::v1::ExecutionQueryRequestItem,
+    >,
+}
+/// Response to atomically execute a batch of execution state queries
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct QueryStateResponse {
+    /// Final cursor position
+    #[prost(message, optional, tag = "1")]
+    pub final_cursor: ::core::option::Option<super::super::model::v1::Slot>,
+    /// Candidate cursor position
+    #[prost(message, optional, tag = "2")]
+    pub candidate_cursor: ::core::option::Option<super::super::model::v1::Slot>,
+    /// List of execution query response items
+    #[prost(message, repeated, tag = "3")]
+    pub responses: ::prost::alloc::vec::Vec<ExecutionQueryResponse>,
+}
+/// Execution state query response
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionQueryResponse {
+    /// Result or error
+    #[prost(oneof = "execution_query_response::Response", tags = "2, 3")]
+    pub response: ::core::option::Option<execution_query_response::Response>,
+}
+/// Nested message and enum types in `ExecutionQueryResponse`.
+pub mod execution_query_response {
+    /// Result or error
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Response {
+        /// Execution query response item
+        #[prost(message, tag = "2")]
+        Result(super::super::super::model::v1::ExecutionQueryResponseItem),
+        /// gRPC error(status)
+        #[prost(message, tag = "3")]
+        Error(super::super::super::super::google::rpc::Status),
+    }
 }
 /// NewBlocksRequest holds request for NewBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -727,7 +2474,7 @@ pub struct TransactionsThroughputRequest {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
     /// Timer interval in seconds (Optional). Defaults to 10s
-    #[prost(fixed64, optional, tag = "2")]
+    #[prost(uint64, optional, tag = "2")]
     pub interval: ::core::option::Option<u64>,
 }
 /// TransactionsThroughputResponse holds response from TransactionsThroughput
@@ -738,7 +2485,7 @@ pub struct TransactionsThroughputResponse {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
     /// Transactions throughput
-    #[prost(fixed32, tag = "2")]
+    #[prost(uint32, tag = "2")]
     pub throughput: u32,
 }
 /// Operation type enum
@@ -787,16 +2534,16 @@ impl OpType {
     }
 }
 /// Generated client implementations.
-pub mod massa_service_client {
+pub mod public_service_client {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
-    /// Massa gRPC service
+    /// Massa public gRPC service
     #[derive(Debug, Clone)]
-    pub struct MassaServiceClient<T> {
+    pub struct PublicServiceClient<T> {
         inner: tonic::client::Grpc<T>,
     }
-    impl MassaServiceClient<tonic::transport::Channel> {
+    impl PublicServiceClient<tonic::transport::Channel> {
         /// Attempt to create a new client by connecting to a given endpoint.
         pub async fn connect<D>(dst: D) -> Result<Self, tonic::transport::Error>
         where
@@ -807,7 +2554,7 @@ pub mod massa_service_client {
             Ok(Self::new(conn))
         }
     }
-    impl<T> MassaServiceClient<T>
+    impl<T> PublicServiceClient<T>
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
@@ -825,7 +2572,7 @@ pub mod massa_service_client {
         pub fn with_interceptor<F>(
             inner: T,
             interceptor: F,
-        ) -> MassaServiceClient<InterceptedService<T, F>>
+        ) -> PublicServiceClient<InterceptedService<T, F>>
         where
             F: tonic::service::Interceptor,
             T::ResponseBody: Default,
@@ -839,7 +2586,7 @@ pub mod massa_service_client {
                 http::Request<tonic::body::BoxBody>,
             >>::Error: Into<StdError> + Send + Sync,
         {
-            MassaServiceClient::new(InterceptedService::new(inner, interceptor))
+            PublicServiceClient::new(InterceptedService::new(inner, interceptor))
         }
         /// Compress requests with the given encoding.
         ///
@@ -891,11 +2638,11 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/GetBlocks",
+                "/massa.api.v1.PublicService/GetBlocks",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("massa.api.v1.MassaService", "GetBlocks"));
+                .insert(GrpcMethod::new("massa.api.v1.PublicService", "GetBlocks"));
             self.inner.unary(req, path, codec).await
         }
         /// Get blocks by slots
@@ -917,12 +2664,12 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/GetBlocksBySlots",
+                "/massa.api.v1.PublicService/GetBlocksBySlots",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
-                    GrpcMethod::new("massa.api.v1.MassaService", "GetBlocksBySlots"),
+                    GrpcMethod::new("massa.api.v1.PublicService", "GetBlocksBySlots"),
                 );
             self.inner.unary(req, path, codec).await
         }
@@ -945,21 +2692,21 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/GetDatastoreEntries",
+                "/massa.api.v1.PublicService/GetDatastoreEntries",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
-                    GrpcMethod::new("massa.api.v1.MassaService", "GetDatastoreEntries"),
+                    GrpcMethod::new("massa.api.v1.PublicService", "GetDatastoreEntries"),
                 );
             self.inner.unary(req, path, codec).await
         }
-        /// Get largest stakers
-        pub async fn get_largest_stakers(
+        /// Get stakers
+        pub async fn get_stakers(
             &mut self,
-            request: impl tonic::IntoRequest<super::GetLargestStakersRequest>,
+            request: impl tonic::IntoRequest<super::GetStakersRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::GetLargestStakersResponse>,
+            tonic::Response<super::GetStakersResponse>,
             tonic::Status,
         > {
             self.inner
@@ -973,13 +2720,11 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/GetLargestStakers",
+                "/massa.api.v1.PublicService/GetStakers",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("massa.api.v1.MassaService", "GetLargestStakers"),
-                );
+                .insert(GrpcMethod::new("massa.api.v1.PublicService", "GetStakers"));
             self.inner.unary(req, path, codec).await
         }
         /// Get Mip status
@@ -1001,11 +2746,11 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/GetMipStatus",
+                "/massa.api.v1.PublicService/GetMipStatus",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("massa.api.v1.MassaService", "GetMipStatus"));
+                .insert(GrpcMethod::new("massa.api.v1.PublicService", "GetMipStatus"));
             self.inner.unary(req, path, codec).await
         }
         /// Get next block best parents
@@ -1027,13 +2772,13 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/GetNextBlockBestParents",
+                "/massa.api.v1.PublicService/GetNextBlockBestParents",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "massa.api.v1.MassaService",
+                        "massa.api.v1.PublicService",
                         "GetNextBlockBestParents",
                     ),
                 );
@@ -1058,11 +2803,11 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/GetOperations",
+                "/massa.api.v1.PublicService/GetOperations",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("massa.api.v1.MassaService", "GetOperations"));
+                .insert(GrpcMethod::new("massa.api.v1.PublicService", "GetOperations"));
             self.inner.unary(req, path, codec).await
         }
         /// Get smart contracts execution events
@@ -1084,12 +2829,12 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/GetScExecutionEvents",
+                "/massa.api.v1.PublicService/GetScExecutionEvents",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
-                    GrpcMethod::new("massa.api.v1.MassaService", "GetScExecutionEvents"),
+                    GrpcMethod::new("massa.api.v1.PublicService", "GetScExecutionEvents"),
                 );
             self.inner.unary(req, path, codec).await
         }
@@ -1112,13 +2857,39 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/GetSelectorDraws",
+                "/massa.api.v1.PublicService/GetSelectorDraws",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
-                    GrpcMethod::new("massa.api.v1.MassaService", "GetSelectorDraws"),
+                    GrpcMethod::new("massa.api.v1.PublicService", "GetSelectorDraws"),
                 );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Get status
+        pub async fn get_status(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetStatusRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetStatusResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/GetStatus",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("massa.api.v1.PublicService", "GetStatus"));
             self.inner.unary(req, path, codec).await
         }
         /// Get transactions throughput
@@ -1140,13 +2911,13 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/GetTransactionsThroughput",
+                "/massa.api.v1.PublicService/GetTransactionsThroughput",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "massa.api.v1.MassaService",
+                        "massa.api.v1.PublicService",
                         "GetTransactionsThroughput",
                     ),
                 );
@@ -1171,11 +2942,37 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/GetVersion",
+                "/massa.api.v1.PublicService/GetVersion",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("massa.api.v1.MassaService", "GetVersion"));
+                .insert(GrpcMethod::new("massa.api.v1.PublicService", "GetVersion"));
+            self.inner.unary(req, path, codec).await
+        }
+        /// Query state
+        pub async fn query_state(
+            &mut self,
+            request: impl tonic::IntoRequest<super::QueryStateRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::QueryStateResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/QueryState",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("massa.api.v1.PublicService", "QueryState"));
             self.inner.unary(req, path, codec).await
         }
         /// New received and produced blocks
@@ -1197,11 +2994,11 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/NewBlocks",
+                "/massa.api.v1.PublicService/NewBlocks",
             );
             let mut req = request.into_streaming_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("massa.api.v1.MassaService", "NewBlocks"));
+                .insert(GrpcMethod::new("massa.api.v1.PublicService", "NewBlocks"));
             self.inner.streaming(req, path, codec).await
         }
         /// New received and produced blocks headers
@@ -1225,12 +3022,12 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/NewBlocksHeaders",
+                "/massa.api.v1.PublicService/NewBlocksHeaders",
             );
             let mut req = request.into_streaming_request();
             req.extensions_mut()
                 .insert(
-                    GrpcMethod::new("massa.api.v1.MassaService", "NewBlocksHeaders"),
+                    GrpcMethod::new("massa.api.v1.PublicService", "NewBlocksHeaders"),
                 );
             self.inner.streaming(req, path, codec).await
         }
@@ -1255,11 +3052,13 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/NewEndorsements",
+                "/massa.api.v1.PublicService/NewEndorsements",
             );
             let mut req = request.into_streaming_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("massa.api.v1.MassaService", "NewEndorsements"));
+                .insert(
+                    GrpcMethod::new("massa.api.v1.PublicService", "NewEndorsements"),
+                );
             self.inner.streaming(req, path, codec).await
         }
         /// New received and produced blocks with operations
@@ -1283,11 +3082,13 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/NewFilledBlocks",
+                "/massa.api.v1.PublicService/NewFilledBlocks",
             );
             let mut req = request.into_streaming_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("massa.api.v1.MassaService", "NewFilledBlocks"));
+                .insert(
+                    GrpcMethod::new("massa.api.v1.PublicService", "NewFilledBlocks"),
+                );
             self.inner.streaming(req, path, codec).await
         }
         /// New received and produced operations
@@ -1311,11 +3112,11 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/NewOperations",
+                "/massa.api.v1.PublicService/NewOperations",
             );
             let mut req = request.into_streaming_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("massa.api.v1.MassaService", "NewOperations"));
+                .insert(GrpcMethod::new("massa.api.v1.PublicService", "NewOperations"));
             self.inner.streaming(req, path, codec).await
         }
         /// New received and slot execution events
@@ -1341,13 +3142,13 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/NewSlotExecutionOutputs",
+                "/massa.api.v1.PublicService/NewSlotExecutionOutputs",
             );
             let mut req = request.into_streaming_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "massa.api.v1.MassaService",
+                        "massa.api.v1.PublicService",
                         "NewSlotExecutionOutputs",
                     ),
                 );
@@ -1372,11 +3173,11 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/SendBlocks",
+                "/massa.api.v1.PublicService/SendBlocks",
             );
             let mut req = request.into_streaming_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("massa.api.v1.MassaService", "SendBlocks"));
+                .insert(GrpcMethod::new("massa.api.v1.PublicService", "SendBlocks"));
             self.inner.streaming(req, path, codec).await
         }
         /// Send endorsements
@@ -1400,12 +3201,12 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/SendEndorsements",
+                "/massa.api.v1.PublicService/SendEndorsements",
             );
             let mut req = request.into_streaming_request();
             req.extensions_mut()
                 .insert(
-                    GrpcMethod::new("massa.api.v1.MassaService", "SendEndorsements"),
+                    GrpcMethod::new("massa.api.v1.PublicService", "SendEndorsements"),
                 );
             self.inner.streaming(req, path, codec).await
         }
@@ -1430,11 +3231,11 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/SendOperations",
+                "/massa.api.v1.PublicService/SendOperations",
             );
             let mut req = request.into_streaming_request();
             req.extensions_mut()
-                .insert(GrpcMethod::new("massa.api.v1.MassaService", "SendOperations"));
+                .insert(GrpcMethod::new("massa.api.v1.PublicService", "SendOperations"));
             self.inner.streaming(req, path, codec).await
         }
         /// Transactions throughput
@@ -1460,13 +3261,13 @@ pub mod massa_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.MassaService/TransactionsThroughput",
+                "/massa.api.v1.PublicService/TransactionsThroughput",
             );
             let mut req = request.into_streaming_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
-                        "massa.api.v1.MassaService",
+                        "massa.api.v1.PublicService",
                         "TransactionsThroughput",
                     ),
                 );
@@ -1475,12 +3276,12 @@ pub mod massa_service_client {
     }
 }
 /// Generated server implementations.
-pub mod massa_service_server {
+pub mod public_service_server {
     #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
     use tonic::codegen::*;
-    /// Generated trait containing gRPC methods that should be implemented for use with MassaServiceServer.
+    /// Generated trait containing gRPC methods that should be implemented for use with PublicServiceServer.
     #[async_trait]
-    pub trait MassaService: Send + Sync + 'static {
+    pub trait PublicService: Send + Sync + 'static {
         /// Get blocks by ids
         async fn get_blocks(
             &self,
@@ -1505,12 +3306,12 @@ pub mod massa_service_server {
             tonic::Response<super::GetDatastoreEntriesResponse>,
             tonic::Status,
         >;
-        /// Get largest stakers
-        async fn get_largest_stakers(
+        /// Get stakers
+        async fn get_stakers(
             &self,
-            request: tonic::Request<super::GetLargestStakersRequest>,
+            request: tonic::Request<super::GetStakersRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::GetLargestStakersResponse>,
+            tonic::Response<super::GetStakersResponse>,
             tonic::Status,
         >;
         /// Get Mip status
@@ -1553,6 +3354,14 @@ pub mod massa_service_server {
             tonic::Response<super::GetSelectorDrawsResponse>,
             tonic::Status,
         >;
+        /// Get status
+        async fn get_status(
+            &self,
+            request: tonic::Request<super::GetStatusRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetStatusResponse>,
+            tonic::Status,
+        >;
         /// Get transactions throughput
         async fn get_transactions_throughput(
             &self,
@@ -1567,6 +3376,14 @@ pub mod massa_service_server {
             request: tonic::Request<super::GetVersionRequest>,
         ) -> std::result::Result<
             tonic::Response<super::GetVersionResponse>,
+            tonic::Status,
+        >;
+        /// Query state
+        async fn query_state(
+            &self,
+            request: tonic::Request<super::QueryStateRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::QueryStateResponse>,
             tonic::Status,
         >;
         /// Server streaming response type for the NewBlocks method.
@@ -1720,9 +3537,9 @@ pub mod massa_service_server {
             tonic::Status,
         >;
     }
-    /// Massa gRPC service
+    /// Massa public gRPC service
     #[derive(Debug)]
-    pub struct MassaServiceServer<T: MassaService> {
+    pub struct PublicServiceServer<T: PublicService> {
         inner: _Inner<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
@@ -1730,7 +3547,7 @@ pub mod massa_service_server {
         max_encoding_message_size: Option<usize>,
     }
     struct _Inner<T>(Arc<T>);
-    impl<T: MassaService> MassaServiceServer<T> {
+    impl<T: PublicService> PublicServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
@@ -1782,9 +3599,9 @@ pub mod massa_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for MassaServiceServer<T>
+    impl<T, B> tonic::codegen::Service<http::Request<B>> for PublicServiceServer<T>
     where
-        T: MassaService,
+        T: PublicService,
         B: Body + Send + 'static,
         B::Error: Into<StdError> + Send + 'static,
     {
@@ -1800,11 +3617,11 @@ pub mod massa_service_server {
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
             let inner = self.inner.clone();
             match req.uri().path() {
-                "/massa.api.v1.MassaService/GetBlocks" => {
+                "/massa.api.v1.PublicService/GetBlocks" => {
                     #[allow(non_camel_case_types)]
-                    struct GetBlocksSvc<T: MassaService>(pub Arc<T>);
+                    struct GetBlocksSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
                     > tonic::server::UnaryService<super::GetBlocksRequest>
                     for GetBlocksSvc<T> {
                         type Response = super::GetBlocksResponse;
@@ -1844,11 +3661,11 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/GetBlocksBySlots" => {
+                "/massa.api.v1.PublicService/GetBlocksBySlots" => {
                     #[allow(non_camel_case_types)]
-                    struct GetBlocksBySlotsSvc<T: MassaService>(pub Arc<T>);
+                    struct GetBlocksBySlotsSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
                     > tonic::server::UnaryService<super::GetBlocksBySlotsRequest>
                     for GetBlocksBySlotsSvc<T> {
                         type Response = super::GetBlocksBySlotsResponse;
@@ -1890,11 +3707,11 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/GetDatastoreEntries" => {
+                "/massa.api.v1.PublicService/GetDatastoreEntries" => {
                     #[allow(non_camel_case_types)]
-                    struct GetDatastoreEntriesSvc<T: MassaService>(pub Arc<T>);
+                    struct GetDatastoreEntriesSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
                     > tonic::server::UnaryService<super::GetDatastoreEntriesRequest>
                     for GetDatastoreEntriesSvc<T> {
                         type Response = super::GetDatastoreEntriesResponse;
@@ -1936,26 +3753,24 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/GetLargestStakers" => {
+                "/massa.api.v1.PublicService/GetStakers" => {
                     #[allow(non_camel_case_types)]
-                    struct GetLargestStakersSvc<T: MassaService>(pub Arc<T>);
+                    struct GetStakersSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
-                    > tonic::server::UnaryService<super::GetLargestStakersRequest>
-                    for GetLargestStakersSvc<T> {
-                        type Response = super::GetLargestStakersResponse;
+                        T: PublicService,
+                    > tonic::server::UnaryService<super::GetStakersRequest>
+                    for GetStakersSvc<T> {
+                        type Response = super::GetStakersResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::GetLargestStakersRequest>,
+                            request: tonic::Request<super::GetStakersRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).get_largest_stakers(request).await
-                            };
+                            let fut = async move { (*inner).get_stakers(request).await };
                             Box::pin(fut)
                         }
                     }
@@ -1966,7 +3781,7 @@ pub mod massa_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = GetLargestStakersSvc(inner);
+                        let method = GetStakersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -1982,11 +3797,11 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/GetMipStatus" => {
+                "/massa.api.v1.PublicService/GetMipStatus" => {
                     #[allow(non_camel_case_types)]
-                    struct GetMipStatusSvc<T: MassaService>(pub Arc<T>);
+                    struct GetMipStatusSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
                     > tonic::server::UnaryService<super::GetMipStatusRequest>
                     for GetMipStatusSvc<T> {
                         type Response = super::GetMipStatusResponse;
@@ -2028,11 +3843,11 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/GetNextBlockBestParents" => {
+                "/massa.api.v1.PublicService/GetNextBlockBestParents" => {
                     #[allow(non_camel_case_types)]
-                    struct GetNextBlockBestParentsSvc<T: MassaService>(pub Arc<T>);
+                    struct GetNextBlockBestParentsSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
                     > tonic::server::UnaryService<super::GetNextBlockBestParentsRequest>
                     for GetNextBlockBestParentsSvc<T> {
                         type Response = super::GetNextBlockBestParentsResponse;
@@ -2076,11 +3891,11 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/GetOperations" => {
+                "/massa.api.v1.PublicService/GetOperations" => {
                     #[allow(non_camel_case_types)]
-                    struct GetOperationsSvc<T: MassaService>(pub Arc<T>);
+                    struct GetOperationsSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
                     > tonic::server::UnaryService<super::GetOperationsRequest>
                     for GetOperationsSvc<T> {
                         type Response = super::GetOperationsResponse;
@@ -2122,11 +3937,11 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/GetScExecutionEvents" => {
+                "/massa.api.v1.PublicService/GetScExecutionEvents" => {
                     #[allow(non_camel_case_types)]
-                    struct GetScExecutionEventsSvc<T: MassaService>(pub Arc<T>);
+                    struct GetScExecutionEventsSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
                     > tonic::server::UnaryService<super::GetScExecutionEventsRequest>
                     for GetScExecutionEventsSvc<T> {
                         type Response = super::GetScExecutionEventsResponse;
@@ -2168,11 +3983,11 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/GetSelectorDraws" => {
+                "/massa.api.v1.PublicService/GetSelectorDraws" => {
                     #[allow(non_camel_case_types)]
-                    struct GetSelectorDrawsSvc<T: MassaService>(pub Arc<T>);
+                    struct GetSelectorDrawsSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
                     > tonic::server::UnaryService<super::GetSelectorDrawsRequest>
                     for GetSelectorDrawsSvc<T> {
                         type Response = super::GetSelectorDrawsResponse;
@@ -2214,11 +4029,55 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/GetTransactionsThroughput" => {
+                "/massa.api.v1.PublicService/GetStatus" => {
                     #[allow(non_camel_case_types)]
-                    struct GetTransactionsThroughputSvc<T: MassaService>(pub Arc<T>);
+                    struct GetStatusSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
+                    > tonic::server::UnaryService<super::GetStatusRequest>
+                    for GetStatusSvc<T> {
+                        type Response = super::GetStatusResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetStatusRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move { (*inner).get_status(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetStatusSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/GetTransactionsThroughput" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetTransactionsThroughputSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
                     > tonic::server::UnaryService<
                         super::GetTransactionsThroughputRequest,
                     > for GetTransactionsThroughputSvc<T> {
@@ -2263,11 +4122,11 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/GetVersion" => {
+                "/massa.api.v1.PublicService/GetVersion" => {
                     #[allow(non_camel_case_types)]
-                    struct GetVersionSvc<T: MassaService>(pub Arc<T>);
+                    struct GetVersionSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
                     > tonic::server::UnaryService<super::GetVersionRequest>
                     for GetVersionSvc<T> {
                         type Response = super::GetVersionResponse;
@@ -2307,11 +4166,55 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/NewBlocks" => {
+                "/massa.api.v1.PublicService/QueryState" => {
                     #[allow(non_camel_case_types)]
-                    struct NewBlocksSvc<T: MassaService>(pub Arc<T>);
+                    struct QueryStateSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
+                    > tonic::server::UnaryService<super::QueryStateRequest>
+                    for QueryStateSvc<T> {
+                        type Response = super::QueryStateResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::QueryStateRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move { (*inner).query_state(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = QueryStateSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/NewBlocks" => {
+                    #[allow(non_camel_case_types)]
+                    struct NewBlocksSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
                     > tonic::server::StreamingService<super::NewBlocksRequest>
                     for NewBlocksSvc<T> {
                         type Response = super::NewBlocksResponse;
@@ -2354,11 +4257,11 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/NewBlocksHeaders" => {
+                "/massa.api.v1.PublicService/NewBlocksHeaders" => {
                     #[allow(non_camel_case_types)]
-                    struct NewBlocksHeadersSvc<T: MassaService>(pub Arc<T>);
+                    struct NewBlocksHeadersSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
                     > tonic::server::StreamingService<super::NewBlocksHeadersRequest>
                     for NewBlocksHeadersSvc<T> {
                         type Response = super::NewBlocksHeadersResponse;
@@ -2403,11 +4306,11 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/NewEndorsements" => {
+                "/massa.api.v1.PublicService/NewEndorsements" => {
                     #[allow(non_camel_case_types)]
-                    struct NewEndorsementsSvc<T: MassaService>(pub Arc<T>);
+                    struct NewEndorsementsSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
                     > tonic::server::StreamingService<super::NewEndorsementsRequest>
                     for NewEndorsementsSvc<T> {
                         type Response = super::NewEndorsementsResponse;
@@ -2452,11 +4355,11 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/NewFilledBlocks" => {
+                "/massa.api.v1.PublicService/NewFilledBlocks" => {
                     #[allow(non_camel_case_types)]
-                    struct NewFilledBlocksSvc<T: MassaService>(pub Arc<T>);
+                    struct NewFilledBlocksSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
                     > tonic::server::StreamingService<super::NewFilledBlocksRequest>
                     for NewFilledBlocksSvc<T> {
                         type Response = super::NewFilledBlocksResponse;
@@ -2501,11 +4404,11 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/NewOperations" => {
+                "/massa.api.v1.PublicService/NewOperations" => {
                     #[allow(non_camel_case_types)]
-                    struct NewOperationsSvc<T: MassaService>(pub Arc<T>);
+                    struct NewOperationsSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
                     > tonic::server::StreamingService<super::NewOperationsRequest>
                     for NewOperationsSvc<T> {
                         type Response = super::NewOperationsResponse;
@@ -2550,11 +4453,11 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/NewSlotExecutionOutputs" => {
+                "/massa.api.v1.PublicService/NewSlotExecutionOutputs" => {
                     #[allow(non_camel_case_types)]
-                    struct NewSlotExecutionOutputsSvc<T: MassaService>(pub Arc<T>);
+                    struct NewSlotExecutionOutputsSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
                     > tonic::server::StreamingService<
                         super::NewSlotExecutionOutputsRequest,
                     > for NewSlotExecutionOutputsSvc<T> {
@@ -2600,11 +4503,11 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/SendBlocks" => {
+                "/massa.api.v1.PublicService/SendBlocks" => {
                     #[allow(non_camel_case_types)]
-                    struct SendBlocksSvc<T: MassaService>(pub Arc<T>);
+                    struct SendBlocksSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
                     > tonic::server::StreamingService<super::SendBlocksRequest>
                     for SendBlocksSvc<T> {
                         type Response = super::SendBlocksResponse;
@@ -2647,11 +4550,11 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/SendEndorsements" => {
+                "/massa.api.v1.PublicService/SendEndorsements" => {
                     #[allow(non_camel_case_types)]
-                    struct SendEndorsementsSvc<T: MassaService>(pub Arc<T>);
+                    struct SendEndorsementsSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
                     > tonic::server::StreamingService<super::SendEndorsementsRequest>
                     for SendEndorsementsSvc<T> {
                         type Response = super::SendEndorsementsResponse;
@@ -2696,11 +4599,11 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/SendOperations" => {
+                "/massa.api.v1.PublicService/SendOperations" => {
                     #[allow(non_camel_case_types)]
-                    struct SendOperationsSvc<T: MassaService>(pub Arc<T>);
+                    struct SendOperationsSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
                     > tonic::server::StreamingService<super::SendOperationsRequest>
                     for SendOperationsSvc<T> {
                         type Response = super::SendOperationsResponse;
@@ -2745,11 +4648,11 @@ pub mod massa_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.MassaService/TransactionsThroughput" => {
+                "/massa.api.v1.PublicService/TransactionsThroughput" => {
                     #[allow(non_camel_case_types)]
-                    struct TransactionsThroughputSvc<T: MassaService>(pub Arc<T>);
+                    struct TransactionsThroughputSvc<T: PublicService>(pub Arc<T>);
                     impl<
-                        T: MassaService,
+                        T: PublicService,
                     > tonic::server::StreamingService<
                         super::TransactionsThroughputRequest,
                     > for TransactionsThroughputSvc<T> {
@@ -2810,7 +4713,7 @@ pub mod massa_service_server {
             }
         }
     }
-    impl<T: MassaService> Clone for MassaServiceServer<T> {
+    impl<T: PublicService> Clone for PublicServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -2822,7 +4725,7 @@ pub mod massa_service_server {
             }
         }
     }
-    impl<T: MassaService> Clone for _Inner<T> {
+    impl<T: PublicService> Clone for _Inner<T> {
         fn clone(&self) -> Self {
             Self(Arc::clone(&self.0))
         }
@@ -2832,7 +4735,7 @@ pub mod massa_service_server {
             write!(f, "{:?}", self.0)
         }
     }
-    impl<T: MassaService> tonic::server::NamedService for MassaServiceServer<T> {
-        const NAME: &'static str = "massa.api.v1.MassaService";
+    impl<T: PublicService> tonic::server::NamedService for PublicServiceServer<T> {
+        const NAME: &'static str = "massa.api.v1.PublicService";
     }
 }
