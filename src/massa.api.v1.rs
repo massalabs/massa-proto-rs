@@ -177,6 +177,9 @@ pub struct LargestStakersContext {
     /// Slot
     #[prost(message, optional, tag = "1")]
     pub slot: ::core::option::Option<super::super::model::v1::Slot>,
+    /// If the chain is in downtime, we will return the last snapshot before the downtime
+    #[prost(bool, tag = "2")]
+    pub in_downtime: bool,
 }
 /// LargestStakerEntry
 #[allow(clippy::derive_partial_eq_without_eq)]
