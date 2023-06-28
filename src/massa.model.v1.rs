@@ -1,3 +1,17 @@
+/// Massa NativeAddress
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NativeAddress {
+    /// Address category
+    #[prost(enumeration = "AddressCategory", tag = "1")]
+    pub category: i32,
+    /// Address version
+    #[prost(fixed64, tag = "2")]
+    pub version: u64,
+    /// Address content
+    #[prost(bytes = "vec", tag = "3")]
+    pub content: ::prost::alloc::vec::Vec<u8>,
+}
 /// Address category discriminant
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -1207,6 +1221,39 @@ impl SetOrDeleteType {
             _ => None,
         }
     }
+}
+/// NativeHash.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NativeHash {
+    /// Version of the hash.
+    #[prost(fixed64, tag = "1")]
+    pub version: u64,
+    /// Content of the hash.
+    #[prost(bytes = "vec", tag = "2")]
+    pub content: ::prost::alloc::vec::Vec<u8>,
+}
+/// Native Signature
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NativeSig {
+    /// Version of the signature
+    #[prost(fixed64, tag = "1")]
+    pub version: u64,
+    /// Content of the signature
+    #[prost(bytes = "vec", tag = "2")]
+    pub content: ::prost::alloc::vec::Vec<u8>,
+}
+/// Native Public Key
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NativePubKey {
+    /// Version of the public key
+    #[prost(fixed64, tag = "1")]
+    pub version: u64,
+    /// Content of the public key
+    #[prost(bytes = "vec", tag = "2")]
+    pub content: ::prost::alloc::vec::Vec<u8>,
 }
 /// NativeTime represents a native duration or unix timestamp
 #[allow(clippy::derive_partial_eq_without_eq)]
