@@ -19,18 +19,16 @@ pub struct CreateScRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CreateScResult {
     /// Address of the just created smart contract
-    #[prost(message, optional, tag = "1")]
-    pub sc_address: ::core::option::Option<super::super::model::v1::NativeAddress>,
+    #[prost(string, tag = "1")]
+    pub sc_address: ::prost::alloc::string::String,
 }
 /// Call SC request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CallRequest {
     /// Address of the smart contract to call
-    #[prost(message, optional, tag = "1")]
-    pub target_sc_address: ::core::option::Option<
-        super::super::model::v1::NativeAddress,
-    >,
+    #[prost(string, tag = "1")]
+    pub target_sc_address: ::prost::alloc::string::String,
     /// Function to call in the targeted smart contract
     #[prost(string, tag = "2")]
     pub target_function_name: ::prost::alloc::string::String,
@@ -76,8 +74,8 @@ pub struct LocalExecutionResponse {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GenerateEventRequest {
     /// Event
-    #[prost(string, tag = "1")]
-    pub event: ::prost::alloc::string::String,
+    #[prost(bytes = "vec", tag = "1")]
+    pub event: ::prost::alloc::vec::Vec<u8>,
 }
 /// Generate event resulst
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -87,17 +85,17 @@ pub struct GenerateEventResult {}
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransferCoinsRequest {
-    /// The address of the sender, if none, use current address
-    #[prost(message, optional, tag = "1")]
-    pub sender_address: ::core::option::Option<super::super::model::v1::NativeAddress>,
     /// The address of the recipient
-    #[prost(message, optional, tag = "2")]
-    pub target_address: ::core::option::Option<super::super::model::v1::NativeAddress>,
+    #[prost(string, tag = "1")]
+    pub target_address: ::prost::alloc::string::String,
     /// The amount of coins to transfer
-    #[prost(message, optional, tag = "3")]
+    #[prost(message, optional, tag = "2")]
     pub amount_to_transfer: ::core::option::Option<
         super::super::model::v1::NativeAmount,
     >,
+    /// The address of the sender, if none, use current address
+    #[prost(message, optional, tag = "3")]
+    pub optional_sender_address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Transfer coin result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -108,10 +106,8 @@ pub struct TransferCoinsResult {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FunctionExistsRequest {
     /// Address of the smart contract to call
-    #[prost(message, optional, tag = "1")]
-    pub target_sc_address: ::core::option::Option<
-        super::super::model::v1::NativeAddress,
-    >,
+    #[prost(string, tag = "1")]
+    pub target_sc_address: ::prost::alloc::string::String,
     /// The name of the function to check the existance of
     #[prost(string, tag = "2")]
     pub function_name: ::prost::alloc::string::String,
@@ -133,7 +129,7 @@ pub struct FunctionExistsResult {
 pub struct RespResult {
     #[prost(
         oneof = "resp_result::Res",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63"
     )]
     pub res: ::core::option::Option<resp_result::Res>,
 }
@@ -143,135 +139,131 @@ pub mod resp_result {
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Res {
         #[prost(message, tag = "1")]
-        NativeAddressToStringResult(super::NativeAddressToStringResult),
-        #[prost(message, tag = "2")]
-        NativePubKeyToStringResult(super::NativePubKeyToStringResult),
-        #[prost(message, tag = "3")]
-        NativeSigToStringResult(super::NativeSigToStringResult),
-        #[prost(message, tag = "4")]
-        NativeHashToStringResult(super::NativeHashToStringResult),
-        #[prost(message, tag = "5")]
-        NativeAmountToStringResult(super::NativeAmountToStringResult),
-        #[prost(message, tag = "6")]
-        NativeAddressFromStringResult(super::NativeAddressFromStringResult),
-        #[prost(message, tag = "7")]
-        NativePubKeyFromStringResult(super::NativePubKeyFromStringResult),
-        #[prost(message, tag = "8")]
-        NativeSigFromStringResult(super::NativeSigFromStringResult),
-        #[prost(message, tag = "9")]
-        NativeHashFromStringResult(super::NativeHashFromStringResult),
-        #[prost(message, tag = "10")]
-        NativeAmountFromStringResult(super::NativeAmountFromStringResult),
-        #[prost(message, tag = "11")]
-        CheckNativeAddressResult(super::CheckNativeAddressResult),
-        #[prost(message, tag = "12")]
-        CheckNativePubKeyResult(super::CheckNativePubKeyResult),
-        #[prost(message, tag = "13")]
-        CheckNativeSigResult(super::CheckNativeSigResult),
-        #[prost(message, tag = "14")]
-        CheckNativeHashResult(super::CheckNativeHashResult),
-        #[prost(message, tag = "15")]
-        CheckNativeAmountResult(super::CheckNativeAmountResult),
-        #[prost(message, tag = "16")]
         AddNativeAmountsResult(super::AddNativeAmountsResult),
-        #[prost(message, tag = "17")]
-        SubNativeAmountsResult(super::SubNativeAmountsResult),
-        #[prost(message, tag = "18")]
-        MulNativeAmountResult(super::MulNativeAmountResult),
-        #[prost(message, tag = "19")]
-        ScalarDivRemNativeAmountResult(super::ScalarDivRemNativeAmountResult),
-        #[prost(message, tag = "20")]
-        DivRemNativeAmountResult(super::DivRemNativeAmountResult),
-        #[prost(message, tag = "21")]
-        CheckedAddNativeTimeResult(super::CheckedAddNativeTimeResult),
-        #[prost(message, tag = "22")]
-        CheckedSubNativeTimeResult(super::CheckedSubNativeTimeResult),
-        #[prost(message, tag = "23")]
-        CheckedMulNativeTimeResult(super::CheckedMulNativeTimeResult),
-        #[prost(message, tag = "24")]
-        CheckedScalarDivRemNativeTimeResult(super::CheckedScalarDivRemNativeTimeResult),
-        #[prost(message, tag = "25")]
-        CheckedDivRemNativeTimeResult(super::CheckedDivRemNativeTimeResult),
-        #[prost(message, tag = "26")]
-        CompareNativeTimeResult(super::CompareNativeTimeResult),
-        #[prost(message, tag = "27")]
-        CompareNativeAddressResult(super::CompareNativeAddressResult),
-        #[prost(message, tag = "28")]
-        CompareNativePubKeyResult(super::CompareNativePubKeyResult),
-        #[prost(message, tag = "29")]
-        CompareNativeSigResult(super::CompareNativeSigResult),
-        #[prost(message, tag = "30")]
-        VerifyNativeSigResult(super::VerifyNativeSigResult),
-        #[prost(message, tag = "31")]
-        CompareNativeAmountResult(super::CompareNativeAmountResult),
-        #[prost(message, tag = "32")]
-        Keccak256Result(super::Keccak256Result),
-        #[prost(message, tag = "33")]
-        VerifyEvmSigResult(super::VerifyEvmSigResult),
-        #[prost(message, tag = "34")]
-        VerifyBlsSingleSigResult(super::VerifyBlsSingleSigResult),
-        #[prost(message, tag = "35")]
-        VerifyBlsMultiSigResult(super::VerifyBlsMultiSigResult),
-        #[prost(message, tag = "36")]
-        TransferCoinsResult(super::TransferCoinsResult),
-        #[prost(message, tag = "37")]
-        GenerateEventResult(super::GenerateEventResult),
-        #[prost(message, tag = "38")]
-        CreateScResult(super::CreateScResult),
-        #[prost(message, tag = "39")]
-        FunctionExistsResult(super::FunctionExistsResult),
-        #[prost(message, tag = "40")]
-        NativeHashResult(super::NativeHashResult),
-        #[prost(message, tag = "41")]
-        GetKeysResult(super::GetKeysResult),
-        #[prost(message, tag = "42")]
-        SetDataResult(super::SetDataResult),
-        #[prost(message, tag = "43")]
+        #[prost(message, tag = "2")]
+        AddressFromPubKeyResult(super::AddressFromPubKeyResult),
+        #[prost(message, tag = "3")]
         AppendDataResult(super::AppendDataResult),
-        #[prost(message, tag = "44")]
-        GetDataResult(super::GetDataResult),
-        #[prost(message, tag = "45")]
-        HasDataResult(super::HasDataResult),
-        #[prost(message, tag = "46")]
-        DeleteDataResult(super::DeleteDataResult),
-        #[prost(message, tag = "47")]
-        GetOwnedAddressesResult(super::GetOwnedAddressesResult),
-        #[prost(message, tag = "48")]
-        GetCallStackResult(super::GetCallStackResult),
-        #[prost(message, tag = "49")]
-        NativeAddressFromNativePubKeyResult(super::NativeAddressFromNativePubKeyResult),
-        #[prost(message, tag = "50")]
-        UnsafeRandomRequestResult(super::UnsafeRandomResult),
-        #[prost(message, tag = "51")]
-        GetNativeTimeResult(super::GetNativeTimeResult),
-        #[prost(message, tag = "52")]
-        GetCurrentSlotResult(super::GetCurrentSlotResult),
-        #[prost(message, tag = "53")]
-        SetBytecodeRequestResult(super::SetBytecodeRequest),
-        #[prost(message, tag = "54")]
-        GetBytecodeResult(super::GetBytecodeResult),
-        #[prost(message, tag = "55")]
+        #[prost(message, tag = "4")]
+        Base58CheckToBytesResult(super::Base58CheckToBytesResult),
+        #[prost(message, tag = "5")]
+        Blake3HashResult(super::Blake3HashResult),
+        #[prost(message, tag = "6")]
+        BytesToBase58CheckResult(super::BytesToBase58CheckResult),
+        #[prost(message, tag = "7")]
         CallerHasWriteAccessResult(super::CallerHasWriteAccessResult),
-        #[prost(message, tag = "56")]
-        SeedResult(super::SeedResult),
-        #[prost(message, tag = "57")]
+        #[prost(message, tag = "8")]
+        CheckAddressResult(super::CheckAddressResult),
+        #[prost(message, tag = "9")]
+        CheckBlake3HashResult(super::CheckBlake3HashResult),
+        #[prost(message, tag = "10")]
+        CheckNativeAmountResult(super::CheckNativeAmountResult),
+        #[prost(message, tag = "11")]
+        CheckPubKeyResult(super::CheckPubKeyResult),
+        #[prost(message, tag = "12")]
+        CheckSigResult(super::CheckSigResult),
+        #[prost(message, tag = "13")]
+        CheckedAddNativeTimeResult(super::CheckedAddNativeTimeResult),
+        #[prost(message, tag = "14")]
+        CheckedDivRemNativeTimeResult(super::CheckedDivRemNativeTimeResult),
+        #[prost(message, tag = "15")]
+        CheckedMulNativeTimeResult(super::CheckedMulNativeTimeResult),
+        #[prost(message, tag = "16")]
+        CheckedScalarDivRemNativeTimeResult(super::CheckedScalarDivRemNativeTimeResult),
+        #[prost(message, tag = "17")]
+        CheckedSubNativeTimeResult(super::CheckedSubNativeTimeResult),
+        #[prost(message, tag = "18")]
+        CompareAddressResult(super::CompareAddressResult),
+        #[prost(message, tag = "19")]
+        CompareNativeAmountResult(super::CompareNativeAmountResult),
+        #[prost(message, tag = "20")]
+        CompareNativeTimeResult(super::CompareNativeTimeResult),
+        #[prost(message, tag = "21")]
+        ComparePubKeyResult(super::ComparePubKeyResult),
+        #[prost(message, tag = "22")]
+        CompareSigResult(super::CompareSigResult),
+        #[prost(message, tag = "23")]
+        CreateScResult(super::CreateScResult),
+        #[prost(message, tag = "24")]
         DateNowResult(super::DateNowResult),
-        #[prost(message, tag = "58")]
-        ProcessExitResult(super::ProcessExitResult),
-        #[prost(message, tag = "59")]
-        HashSha256Result(super::HashSha256Result),
-        #[prost(message, tag = "60")]
-        GetOpDataResult(super::GetOpDataResult),
-        #[prost(message, tag = "61")]
-        HasOpKeyResult(super::HasOpKeyResult),
-        #[prost(message, tag = "62")]
-        GetOpKeysResult(super::GetOpKeysResult),
-        #[prost(message, tag = "63")]
-        GetRemainingGasResult(super::GetRemainingGasResult),
-        #[prost(message, tag = "64")]
+        #[prost(message, tag = "25")]
+        DeleteDataResult(super::DeleteDataResult),
+        #[prost(message, tag = "26")]
+        DivRemNativeAmountResult(super::DivRemNativeAmountResult),
+        #[prost(message, tag = "27")]
+        FunctionExistsResult(super::FunctionExistsResult),
+        #[prost(message, tag = "28")]
+        GenerateEventResult(super::GenerateEventResult),
+        #[prost(message, tag = "29")]
+        GetAddressCategoryResult(super::GetAddressCategoryResult),
+        #[prost(message, tag = "30")]
+        GetAddressVersionResult(super::GetAddressVersionResult),
+        #[prost(message, tag = "31")]
         GetBalanceResult(super::GetBalanceResult),
-        #[prost(message, tag = "65")]
+        #[prost(message, tag = "32")]
+        GetBytecodeResult(super::GetBytecodeResult),
+        #[prost(message, tag = "33")]
         GetCallCoinsResult(super::GetCallCoinsResult),
+        #[prost(message, tag = "34")]
+        GetCallStackResult(super::GetCallStackResult),
+        #[prost(message, tag = "35")]
+        GetCurrentSlotResult(super::GetCurrentSlotResult),
+        #[prost(message, tag = "36")]
+        GetDataResult(super::GetDataResult),
+        #[prost(message, tag = "37")]
+        GetKeysResult(super::GetKeysResult),
+        #[prost(message, tag = "38")]
+        GetNativeTimeResult(super::GetNativeTimeResult),
+        #[prost(message, tag = "39")]
+        GetOpDataResult(super::GetOpDataResult),
+        #[prost(message, tag = "40")]
+        GetOpKeysResult(super::GetOpKeysResult),
+        #[prost(message, tag = "41")]
+        GetOwnedAddressesResult(super::GetOwnedAddressesResult),
+        #[prost(message, tag = "42")]
+        GetPubKeyVersionResult(super::GetPubKeyVersionResult),
+        #[prost(message, tag = "43")]
+        GetRemainingGasResult(super::GetRemainingGasResult),
+        #[prost(message, tag = "44")]
+        GetSignatureVersionResult(super::GetSignatureVersionResult),
+        #[prost(message, tag = "45")]
+        HashSha256Result(super::HashSha256Result),
+        #[prost(message, tag = "46")]
+        HasDataResult(super::HasDataResult),
+        #[prost(message, tag = "47")]
+        HasOpKeyResult(super::HasOpKeyResult),
+        #[prost(message, tag = "48")]
+        Keccak256Result(super::Keccak256Result),
+        #[prost(message, tag = "49")]
+        MulNativeAmountResult(super::MulNativeAmountResult),
+        #[prost(message, tag = "50")]
+        NativeAmountFromStringResult(super::NativeAmountFromStringResult),
+        #[prost(message, tag = "51")]
+        NativeAmountToStringResult(super::NativeAmountToStringResult),
+        #[prost(message, tag = "52")]
+        ProcessExitResult(super::ProcessExitResult),
+        #[prost(message, tag = "53")]
+        ScalarDivRemNativeAmountResult(super::ScalarDivRemNativeAmountResult),
+        #[prost(message, tag = "54")]
+        SeedResult(super::SeedResult),
+        #[prost(message, tag = "55")]
+        SetBytecodeResult(super::SetBytecodeResult),
+        #[prost(message, tag = "56")]
+        SetDataResult(super::SetDataResult),
+        #[prost(message, tag = "57")]
+        SubNativeAmountsResult(super::SubNativeAmountsResult),
+        #[prost(message, tag = "58")]
+        TransferCoinsResult(super::TransferCoinsResult),
+        #[prost(message, tag = "59")]
+        UnsafeRandomResult(super::UnsafeRandomResult),
+        #[prost(message, tag = "60")]
+        VerifyBlsMultiSigResult(super::VerifyBlsMultiSigResult),
+        #[prost(message, tag = "61")]
+        VerifyBlsSingleSigResult(super::VerifyBlsSingleSigResult),
+        #[prost(message, tag = "62")]
+        VerifyEvmSigResult(super::VerifyEvmSigResult),
+        #[prost(message, tag = "63")]
+        VerifySigResult(super::VerifySigResult),
     }
 }
 /// Generic message that encapsulate response from ABI calls.
@@ -294,69 +286,6 @@ pub mod abi_response {
         Error(super::Error),
     }
 }
-/// Address to string request
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativeAddressToStringRequest {
-    /// Address to convert to string
-    #[prost(message, optional, tag = "1")]
-    pub to_convert: ::core::option::Option<super::super::model::v1::NativeAddress>,
-}
-/// Address to string result
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativeAddressToStringResult {
-    /// Converted address
-    #[prost(string, tag = "1")]
-    pub converted_address: ::prost::alloc::string::String,
-}
-/// PubKey to string request
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativePubKeyToStringRequest {
-    /// PubKey to convert to string
-    #[prost(message, optional, tag = "1")]
-    pub to_convert: ::core::option::Option<super::super::model::v1::NativePubKey>,
-}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativePubKeyToStringResult {
-    /// Converted PubKey
-    #[prost(string, tag = "1")]
-    pub converted_pubkey: ::prost::alloc::string::String,
-}
-/// Sig to string request
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativeSigToStringRequest {
-    /// Sig to convert to string
-    #[prost(message, optional, tag = "1")]
-    pub to_convert: ::core::option::Option<super::super::model::v1::NativeSig>,
-}
-/// Sig to string result
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativeSigToStringResult {
-    /// Converted Sig
-    #[prost(string, tag = "1")]
-    pub converted_sig: ::prost::alloc::string::String,
-}
-/// Hash to string request
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativeHashToStringRequest {
-    /// Hash to convert to string
-    #[prost(message, optional, tag = "1")]
-    pub to_convert: ::core::option::Option<super::super::model::v1::NativeHash>,
-}
-/// Hash to string result
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativeHashToStringResult {
-    /// Converted Hash
-    #[prost(string, tag = "1")]
-    pub converted_hash: ::prost::alloc::string::String,
-}
 /// Amount to string request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -372,72 +301,6 @@ pub struct NativeAmountToStringResult {
     /// Converted Amount
     #[prost(string, tag = "1")]
     pub converted_amount: ::prost::alloc::string::String,
-}
-/// Address from string request
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativeAddressFromStringRequest {
-    /// String to convert to address
-    #[prost(string, tag = "1")]
-    pub to_convert: ::prost::alloc::string::String,
-}
-/// Address from string result
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativeAddressFromStringResult {
-    /// Converted address
-    #[prost(message, optional, tag = "1")]
-    pub converted_address: ::core::option::Option<
-        super::super::model::v1::NativeAddress,
-    >,
-}
-/// PubKey from string request
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativePubKeyFromStringRequest {
-    /// String to convert to PubKey
-    #[prost(string, tag = "1")]
-    pub to_convert: ::prost::alloc::string::String,
-}
-/// PubKey from string result
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativePubKeyFromStringResult {
-    /// Converted PubKey
-    #[prost(message, optional, tag = "1")]
-    pub converted_pubkey: ::core::option::Option<super::super::model::v1::NativePubKey>,
-}
-/// Sig from string request
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativeSigFromStringRequest {
-    /// String to convert to Sig
-    #[prost(string, tag = "1")]
-    pub to_convert: ::prost::alloc::string::String,
-}
-/// Sig from string result
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativeSigFromStringResult {
-    /// Converted Sig
-    #[prost(message, optional, tag = "1")]
-    pub converted_sig: ::core::option::Option<super::super::model::v1::NativeSig>,
-}
-/// Hash from string request
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativeHashFromStringRequest {
-    /// String to convert to Hash
-    #[prost(string, tag = "1")]
-    pub to_convert: ::prost::alloc::string::String,
-}
-/// Hash from string result
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativeHashFromStringResult {
-    /// Converted Hash
-    #[prost(message, optional, tag = "1")]
-    pub converted_hash: ::core::option::Option<super::super::model::v1::NativeHash>,
 }
 /// Amount from string request
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -458,15 +321,15 @@ pub struct NativeAmountFromStringResult {
 /// Check address request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CheckNativeAddressRequest {
+pub struct CheckAddressRequest {
     /// Address to check
-    #[prost(message, optional, tag = "1")]
-    pub to_check: ::core::option::Option<super::super::model::v1::NativeAddress>,
+    #[prost(string, tag = "1")]
+    pub to_check: ::prost::alloc::string::String,
 }
 /// Check address result
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CheckNativeAddressResult {
+pub struct CheckAddressResult {
     /// Is address valid
     #[prost(bool, tag = "1")]
     pub is_valid: bool,
@@ -474,15 +337,15 @@ pub struct CheckNativeAddressResult {
 /// Check PubKey request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CheckNativePubKeyRequest {
+pub struct CheckPubKeyRequest {
     /// PubKey to check
-    #[prost(message, optional, tag = "1")]
-    pub to_check: ::core::option::Option<super::super::model::v1::NativePubKey>,
+    #[prost(string, tag = "1")]
+    pub to_check: ::prost::alloc::string::String,
 }
 /// Check PubKey result
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CheckNativePubKeyResult {
+pub struct CheckPubKeyResult {
     /// Is PubKey valid
     #[prost(bool, tag = "1")]
     pub is_valid: bool,
@@ -490,15 +353,15 @@ pub struct CheckNativePubKeyResult {
 /// Check Sig request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CheckNativeSigRequest {
+pub struct CheckSigRequest {
     /// Sig to check
-    #[prost(message, optional, tag = "1")]
-    pub to_check: ::core::option::Option<super::super::model::v1::NativeSig>,
+    #[prost(string, tag = "1")]
+    pub to_check: ::prost::alloc::string::String,
 }
 /// Check Sig result
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CheckNativeSigResult {
+pub struct CheckSigResult {
     /// Is Sig valid
     #[prost(bool, tag = "1")]
     pub is_valid: bool,
@@ -506,15 +369,15 @@ pub struct CheckNativeSigResult {
 /// Check Hash request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CheckNativeHashRequest {
+pub struct CheckBlake3HashRequest {
     /// Hash to check
-    #[prost(message, optional, tag = "1")]
-    pub to_check: ::core::option::Option<super::super::model::v1::NativeHash>,
+    #[prost(bytes = "vec", tag = "1")]
+    pub to_check: ::prost::alloc::vec::Vec<u8>,
 }
 /// Check Hash result
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CheckNativeHashResult {
+pub struct CheckBlake3HashResult {
     /// Is Hash valid
     #[prost(bool, tag = "1")]
     pub is_valid: bool,
@@ -796,81 +659,81 @@ pub struct CompareNativeTimeResult {
     #[prost(message, optional, tag = "1")]
     pub result: ::core::option::Option<ComparisonResult>,
 }
-/// Compare NativeAddress request
+/// Compare Address request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CompareNativeAddressRequest {
+pub struct CompareAddressRequest {
     /// First address to compare
-    #[prost(message, optional, tag = "1")]
-    pub left: ::core::option::Option<super::super::model::v1::NativeAddress>,
+    #[prost(string, tag = "1")]
+    pub left: ::prost::alloc::string::String,
     /// Second address to compare
-    #[prost(message, optional, tag = "2")]
-    pub right: ::core::option::Option<super::super::model::v1::NativeAddress>,
+    #[prost(string, tag = "2")]
+    pub right: ::prost::alloc::string::String,
 }
-/// Compare NativeAddress result
+/// Compare Address result
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CompareNativeAddressResult {
+pub struct CompareAddressResult {
     /// Comparison result
     #[prost(message, optional, tag = "1")]
     pub result: ::core::option::Option<ComparisonResult>,
 }
-/// Compare NativePubKey request
+/// Compare PubKey request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CompareNativePubKeyRequest {
+pub struct ComparePubKeyRequest {
     /// First public key to compare
-    #[prost(message, optional, tag = "1")]
-    pub left: ::core::option::Option<super::super::model::v1::NativePubKey>,
+    #[prost(string, tag = "1")]
+    pub left: ::prost::alloc::string::String,
     /// Second public key to compare
-    #[prost(message, optional, tag = "2")]
-    pub right: ::core::option::Option<super::super::model::v1::NativePubKey>,
+    #[prost(string, tag = "2")]
+    pub right: ::prost::alloc::string::String,
 }
-/// Compare NativePubKey result
+/// Compare PubKey result
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CompareNativePubKeyResult {
+pub struct ComparePubKeyResult {
     /// Comparison result
     #[prost(message, optional, tag = "1")]
     pub result: ::core::option::Option<ComparisonResult>,
 }
-/// Compare NativeSig request
+/// Compare Sig request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CompareNativeSigRequest {
+pub struct CompareSigRequest {
     /// First signature to compare
-    #[prost(message, optional, tag = "1")]
-    pub left: ::core::option::Option<super::super::model::v1::NativeSig>,
+    #[prost(string, tag = "1")]
+    pub left: ::prost::alloc::string::String,
     /// Second signature to compare
-    #[prost(message, optional, tag = "2")]
-    pub right: ::core::option::Option<super::super::model::v1::NativeSig>,
+    #[prost(string, tag = "2")]
+    pub right: ::prost::alloc::string::String,
 }
-/// Compare NativeSig result
+/// Compare Sig result
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CompareNativeSigResult {
+pub struct CompareSigResult {
     /// Comparison result
     #[prost(message, optional, tag = "1")]
     pub result: ::core::option::Option<ComparisonResult>,
 }
-/// Verify NativeSig request
+/// Verify Sig request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct VerifyNativeSigRequest {
+pub struct VerifySigRequest {
     /// Signature to verify
-    #[prost(message, optional, tag = "1")]
-    pub sig: ::core::option::Option<super::super::model::v1::NativeSig>,
+    #[prost(string, tag = "1")]
+    pub sig: ::prost::alloc::string::String,
     /// Message to verify
     #[prost(bytes = "vec", tag = "2")]
     pub message: ::prost::alloc::vec::Vec<u8>,
     /// Public key to verify with
-    #[prost(message, optional, tag = "3")]
-    pub pub_key: ::core::option::Option<super::super::model::v1::NativePubKey>,
+    #[prost(string, tag = "3")]
+    pub pub_key: ::prost::alloc::string::String,
 }
-/// Verify NativeSig result
+/// Verify Sig result
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct VerifyNativeSigResult {
+pub struct VerifySigResult {
     /// Verification result
     #[prost(bool, tag = "1")]
     pub is_verified: bool,
@@ -976,32 +839,32 @@ pub struct VerifyBlsMultiSigResult {
     #[prost(bool, tag = "1")]
     pub is_verified: bool,
 }
-/// Native hash request
+/// Blake3 hash request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativeHashRequest {
+pub struct Blake3HashRequest {
     /// Data to hash
     #[prost(bytes = "vec", tag = "1")]
     pub data: ::prost::alloc::vec::Vec<u8>,
 }
-/// Native hash result
+/// Blake3 hash result
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativeHashResult {
+pub struct Blake3HashResult {
     /// Hash of data
-    #[prost(message, optional, tag = "1")]
-    pub hash: ::core::option::Option<super::super::model::v1::NativeHash>,
+    #[prost(bytes = "vec", tag = "1")]
+    pub hash: ::prost::alloc::vec::Vec<u8>,
 }
 /// Get keys request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetKeysRequest {
-    /// NativeAddress to get keys for
-    #[prost(message, optional, tag = "1")]
-    pub address: ::core::option::Option<super::super::model::v1::NativeAddress>,
     /// keys prefix
-    #[prost(bytes = "vec", tag = "2")]
+    #[prost(bytes = "vec", tag = "1")]
     pub prefix: ::prost::alloc::vec::Vec<u8>,
+    /// Address to get keys for
+    #[prost(message, optional, tag = "2")]
+    pub optional_address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Get keys result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1015,15 +878,15 @@ pub struct GetKeysResult {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetDataRequest {
-    /// NativeAddress to set data for, if none, use current address
-    #[prost(message, optional, tag = "1")]
-    pub address: ::core::option::Option<super::super::model::v1::NativeAddress>,
     /// key
-    #[prost(bytes = "vec", tag = "2")]
+    #[prost(bytes = "vec", tag = "1")]
     pub key: ::prost::alloc::vec::Vec<u8>,
     /// value
-    #[prost(bytes = "vec", tag = "3")]
+    #[prost(bytes = "vec", tag = "2")]
     pub value: ::prost::alloc::vec::Vec<u8>,
+    /// Address to set data for, if none, use current address
+    #[prost(message, optional, tag = "3")]
+    pub optional_address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Set data result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1033,15 +896,15 @@ pub struct SetDataResult {}
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AppendDataRequest {
-    /// NativeAddress to append data for, if none, use current address
-    #[prost(message, optional, tag = "1")]
-    pub address: ::core::option::Option<super::super::model::v1::NativeAddress>,
     /// key
-    #[prost(bytes = "vec", tag = "2")]
+    #[prost(bytes = "vec", tag = "1")]
     pub key: ::prost::alloc::vec::Vec<u8>,
     /// value
-    #[prost(bytes = "vec", tag = "3")]
+    #[prost(bytes = "vec", tag = "2")]
     pub value: ::prost::alloc::vec::Vec<u8>,
+    /// Address to append data for, if none, use current address
+    #[prost(message, optional, tag = "3")]
+    pub optional_address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Append data result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1051,12 +914,12 @@ pub struct AppendDataResult {}
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDataRequest {
-    /// NativeAddress to get data for, if none, use current address
-    #[prost(message, optional, tag = "1")]
-    pub address: ::core::option::Option<super::super::model::v1::NativeAddress>,
     /// key
-    #[prost(bytes = "vec", tag = "2")]
+    #[prost(bytes = "vec", tag = "1")]
     pub key: ::prost::alloc::vec::Vec<u8>,
+    /// Address to get data for, if none, use current address
+    #[prost(message, optional, tag = "2")]
+    pub optional_address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Get data result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1070,12 +933,12 @@ pub struct GetDataResult {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeleteDataRequest {
-    /// NativeAddress to delete data for, if none, use current address
-    #[prost(message, optional, tag = "1")]
-    pub address: ::core::option::Option<super::super::model::v1::NativeAddress>,
     /// key
-    #[prost(bytes = "vec", tag = "2")]
+    #[prost(bytes = "vec", tag = "1")]
     pub key: ::prost::alloc::vec::Vec<u8>,
+    /// Address to delete data for, if none, use current address
+    #[prost(message, optional, tag = "2")]
+    pub optional_address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Delete data result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1085,12 +948,12 @@ pub struct DeleteDataResult {}
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct HasDataRequest {
-    /// NativeAddress to check data for, if none, use current address
-    #[prost(message, optional, tag = "1")]
-    pub address: ::core::option::Option<super::super::model::v1::NativeAddress>,
     /// key
-    #[prost(bytes = "vec", tag = "2")]
+    #[prost(bytes = "vec", tag = "1")]
     pub key: ::prost::alloc::vec::Vec<u8>,
+    /// Address to check data for, if none, use current address
+    #[prost(message, optional, tag = "2")]
+    pub optional_address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Has data result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1109,8 +972,8 @@ pub struct GetOwnedAddressesRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOwnedAddressesResult {
     /// owned addresses
-    #[prost(message, repeated, tag = "1")]
-    pub addresses: ::prost::alloc::vec::Vec<super::super::model::v1::NativeAddress>,
+    #[prost(string, repeated, tag = "1")]
+    pub addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Get call stack request
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1124,21 +987,21 @@ pub struct GetCallStackResult {
     #[prost(string, repeated, tag = "1")]
     pub calls: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-/// Native address from native public key request
+/// Address from public key request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativeAddressFromNativePubKeyRequest {
+pub struct AddressFromPubKeyRequest {
     /// Native public key
-    #[prost(message, optional, tag = "1")]
-    pub pub_key: ::core::option::Option<super::super::model::v1::NativePubKey>,
+    #[prost(string, tag = "1")]
+    pub pub_key: ::prost::alloc::string::String,
 }
-/// Native address from native public key result
+/// Address from public key result
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativeAddressFromNativePubKeyResult {
-    /// Native address
-    #[prost(message, optional, tag = "1")]
-    pub address: ::core::option::Option<super::super::model::v1::NativeAddress>,
+pub struct AddressFromPubKeyResult {
+    /// Address
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
 }
 /// Unsafe random request
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1181,12 +1044,12 @@ pub struct GetCurrentSlotResult {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetBytecodeRequest {
-    /// NativeAddress to set bytecode for, if none, use current address
-    #[prost(message, optional, tag = "1")]
-    pub address: ::core::option::Option<super::super::model::v1::NativeAddress>,
     /// Bytecode
-    #[prost(bytes = "vec", tag = "2")]
+    #[prost(bytes = "vec", tag = "1")]
     pub bytecode: ::prost::alloc::vec::Vec<u8>,
+    /// Address to set bytecode for, if none, use current address
+    #[prost(message, optional, tag = "2")]
+    pub optional_address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Set bytecode result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1195,14 +1058,10 @@ pub struct SetBytecodeResult {}
 /// Get bytecode request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetBytecodeRequest {}
-/// Get bytecode request
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetBytecodeequest {
-    /// NativeAddress to get bytecode for, if none, use current address
+pub struct GetBytecodeRequest {
+    /// Address to get bytecode for, if none, use current address
     #[prost(message, optional, tag = "1")]
-    pub address: ::core::option::Option<super::super::model::v1::NativeAddress>,
+    pub optional_address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Get bytecode result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1339,9 +1198,9 @@ pub struct GetRemainingGasResult {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBalanceRequest {
-    /// NativeAddress to get balance for, if none, use current address
+    /// Address to get balance for, if none, use current address
     #[prost(message, optional, tag = "1")]
-    pub address: ::core::option::Option<super::super::model::v1::NativeAddress>,
+    pub optional_address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Get balance result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1362,4 +1221,88 @@ pub struct GetCallCoinsResult {
     /// coins
     #[prost(message, optional, tag = "1")]
     pub coins: ::core::option::Option<super::super::model::v1::NativeAmount>,
+}
+/// Get the version of the address request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetAddressVersionRequest {
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Get the version of the address result
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetAddressVersionResult {
+    #[prost(int64, tag = "1")]
+    pub version: i64,
+}
+/// Get the category of the address request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetAddressCategoryRequest {
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Get the category of the address result
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetAddressCategoryResult {
+    #[prost(enumeration = "super::super::model::v1::AddressCategory", tag = "1")]
+    pub category: i32,
+}
+/// Get the version of the public key request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetPubKeyVersionRequest {
+    #[prost(string, tag = "1")]
+    pub pub_key: ::prost::alloc::string::String,
+}
+/// Get the version of the public key result
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetPubKeyVersionResult {
+    #[prost(int64, tag = "1")]
+    pub version: i64,
+}
+/// Get the version of the signature request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetSignatureVersionRequest {
+    #[prost(string, tag = "1")]
+    pub signature: ::prost::alloc::string::String,
+}
+/// Get the version of the signature result
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetSignatureVersionResult {
+    #[prost(int64, tag = "1")]
+    pub version: i64,
+}
+/// bytes to base58 request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BytesToBase58CheckRequest {
+    #[prost(bytes = "vec", tag = "1")]
+    pub bytes: ::prost::alloc::vec::Vec<u8>,
+}
+/// bytes to base58 result
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BytesToBase58CheckResult {
+    #[prost(string, tag = "1")]
+    pub base58_check: ::prost::alloc::string::String,
+}
+/// base58 to bytes request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Base58CheckToBytesRequest {
+    #[prost(string, tag = "1")]
+    pub base58_check: ::prost::alloc::string::String,
+}
+/// base58 to bytes result
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Base58CheckToBytesResult {
+    #[prost(bytes = "vec", tag = "1")]
+    pub bytes: ::prost::alloc::vec::Vec<u8>,
 }
