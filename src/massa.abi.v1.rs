@@ -1173,7 +1173,11 @@ pub struct HasOpKeyResult {
 /// Get op keys request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetOpKeysRequest {}
+pub struct GetOpKeysRequest {
+    /// keys prefix
+    #[prost(bytes = "vec", tag = "1")]
+    pub prefix: ::prost::alloc::vec::Vec<u8>,
+}
 /// Get op keys result
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
