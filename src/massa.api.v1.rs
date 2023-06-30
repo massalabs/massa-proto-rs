@@ -2563,14 +2563,6 @@ pub mod send_endorsements_response {
         Error(super::super::super::model::v1::Error),
     }
 }
-/// Holds Endorsement response
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EndorsementResult {
-    /// Endorsements ids
-    #[prost(string, repeated, tag = "1")]
-    pub endorsements_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-}
 /// SendOperationsRequest holds parameters to SendOperations
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
