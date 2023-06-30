@@ -372,28 +372,6 @@ pub struct OpTypes {
     #[prost(enumeration = "OpType", repeated, tag = "1")]
     pub op_types: ::prost::alloc::vec::Vec<i32>,
 }
-/// GetOperations Filter
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetOperationsFilter {
-    /// Filter
-    #[prost(oneof = "get_operations_filter::Filter", tags = "1, 2")]
-    pub filter: ::core::option::Option<get_operations_filter::Filter>,
-}
-/// Nested message and enum types in `GetOperationsFilter`.
-pub mod get_operations_filter {
-    /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Filter {
-        /// One of the operation ids
-        #[prost(message, tag = "1")]
-        OperationIds(super::OperationIds),
-        /// One of the operation types
-        #[prost(message, tag = "2")]
-        OperationTypes(super::OpTypes),
-    }
-}
 /// Possible statuses for an operation
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -1556,20 +1534,23 @@ pub struct NodeStatus {
     /// Last executed speculative slot
     #[prost(message, optional, tag = "10")]
     pub last_executed_speculative_slot: ::core::option::Option<Slot>,
+    /// The hash of the XOF final state hash
+    #[prost(string, tag = "11")]
+    pub final_state_fingerprint: ::prost::alloc::string::String,
     /// Consensus stats
-    #[prost(message, optional, tag = "11")]
+    #[prost(message, optional, tag = "12")]
     pub consensus_stats: ::core::option::Option<ConsensusStats>,
     /// Pool stats (operation count and endorsement count)
-    #[prost(message, optional, tag = "12")]
+    #[prost(message, optional, tag = "13")]
     pub pool_stats: ::core::option::Option<PoolStats>,
     /// Network stats
-    #[prost(message, optional, tag = "13")]
+    #[prost(message, optional, tag = "14")]
     pub network_stats: ::core::option::Option<NetworkStats>,
     /// Execution stats
-    #[prost(message, optional, tag = "14")]
+    #[prost(message, optional, tag = "15")]
     pub execution_stats: ::core::option::Option<ExecutionStats>,
     /// Compact configuration
-    #[prost(message, optional, tag = "15")]
+    #[prost(message, optional, tag = "16")]
     pub config: ::core::option::Option<CompactConfig>,
 }
 /// Connected node
@@ -1644,13 +1625,16 @@ pub struct PublicStatus {
     #[prost(message, optional, tag = "7")]
     pub next_cycle_time: ::core::option::Option<NativeTime>,
     /// Last executed final slot
-    #[prost(message, optional, tag = "11")]
+    #[prost(message, optional, tag = "8")]
     pub last_executed_final_slot: ::core::option::Option<Slot>,
     /// Last executed speculative slot
-    #[prost(message, optional, tag = "12")]
+    #[prost(message, optional, tag = "9")]
     pub last_executed_speculative_slot: ::core::option::Option<Slot>,
+    /// The hash of the XOF final state hash
+    #[prost(string, tag = "10")]
+    pub final_state_fingerprint: ::prost::alloc::string::String,
     /// Compact configuration
-    #[prost(message, optional, tag = "13")]
+    #[prost(message, optional, tag = "11")]
     pub config: ::core::option::Option<CompactConfig>,
 }
 /// ConnectionType enum
