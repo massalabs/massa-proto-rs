@@ -129,7 +129,7 @@ pub struct FunctionExistsResult {
 pub struct RespResult {
     #[prost(
         oneof = "resp_result::Res",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65"
     )]
     pub res: ::core::option::Option<resp_result::Res>,
 }
@@ -264,6 +264,10 @@ pub mod resp_result {
         VerifyEvmSigResult(super::VerifyEvmSigResult),
         #[prost(message, tag = "63")]
         VerifySigResult(super::VerifySigResult),
+        #[prost(message, tag = "64")]
+        SendAsyncMessageResult(super::SendAsyncMessageResult),
+        #[prost(message, tag = "65")]
+        LocalExecutionResponse(super::LocalExecutionResponse),
     }
 }
 /// Generic message that encapsulate response from ABI calls.
@@ -1007,15 +1011,65 @@ pub struct AddressFromPubKeyResult {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UnsafeRandomRequest {
+    /// Number of bytes to generate
     #[prost(int32, tag = "1")]
-    pub memory_addr: i32,
-    #[prost(int32, tag = "2")]
     pub num_bytes: i32,
 }
 /// Unsafe random result
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct UnsafeRandomResult {}
+pub struct UnsafeRandomResult {
+    /// Random bytes generated
+    #[prost(bytes = "vec", tag = "1")]
+    pub random_bytes: ::prost::alloc::vec::Vec<u8>,
+}
+/// Send async message request filter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SendAsyncMessageFilter {
+    /// Target address
+    #[prost(string, tag = "1")]
+    pub target_address: ::prost::alloc::string::String,
+    /// Target key
+    #[prost(message, optional, tag = "2")]
+    pub target_key: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
+}
+/// Send async message request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SendAsyncMessageRequest {
+    /// Target address
+    #[prost(string, tag = "1")]
+    pub target_address: ::prost::alloc::string::String,
+    /// Target handler (function name)
+    #[prost(string, tag = "2")]
+    pub target_handler: ::prost::alloc::string::String,
+    /// Start slot for the message execution
+    #[prost(message, optional, tag = "3")]
+    pub validity_start: ::core::option::Option<super::super::model::v1::Slot>,
+    /// End slot for the message execution
+    #[prost(message, optional, tag = "4")]
+    pub validity_end: ::core::option::Option<super::super::model::v1::Slot>,
+    /// Gas given for the execution
+    #[prost(uint64, tag = "5")]
+    pub execution_gas: u64,
+    /// Message fee
+    #[prost(uint64, tag = "6")]
+    pub raw_fee: u64,
+    /// Coins sent to the execution context
+    #[prost(uint64, tag = "7")]
+    pub raw_coins: u64,
+    /// Message data
+    #[prost(bytes = "vec", tag = "8")]
+    pub data: ::prost::alloc::vec::Vec<u8>,
+    /// Filter for the message
+    #[prost(message, optional, tag = "9")]
+    pub filter: ::core::option::Option<SendAsyncMessageFilter>,
+}
+/// Send async message result
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SendAsyncMessageResult {}
 /// Get native time request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
