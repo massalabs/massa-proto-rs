@@ -37,11 +37,11 @@ impl AddressCategory {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NativeAmount {
     /// Mantissa
-    #[prost(fixed64, tag = "1")]
-    pub mantissa: u64,
+    #[prost(message, optional, tag = "1")]
+    pub mandatory_mantissa: ::core::option::Option<u64>,
     /// Scale
-    #[prost(fixed32, tag = "2")]
-    pub scale: u32,
+    #[prost(message, optional, tag = "2")]
+    pub mandatory_scale: ::core::option::Option<u32>,
 }
 /// When an address is drawn to create an endorsement it is selected for a specific index
 #[allow(clippy::derive_partial_eq_without_eq)]

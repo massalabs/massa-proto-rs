@@ -189,7 +189,7 @@ pub mod resp_result {
         #[prost(message, tag = "25")]
         DeleteDataResult(super::DeleteDataResult),
         #[prost(message, tag = "26")]
-        DivRemNativeAmountResult(super::DivRemNativeAmountResult),
+        DivRemNativeAmountsResult(super::DivRemNativeAmountsResult),
         #[prost(message, tag = "27")]
         FunctionExistsResult(super::FunctionExistsResult),
         #[prost(message, tag = "28")]
@@ -451,8 +451,8 @@ pub struct MulNativeAmountRequest {
     #[prost(message, optional, tag = "1")]
     pub amount: ::core::option::Option<super::super::model::v1::NativeAmount>,
     /// Coefficient to multiply by
-    #[prost(int64, tag = "2")]
-    pub coefficient: i64,
+    #[prost(message, optional, tag = "2")]
+    pub mandatory_coefficient: ::core::option::Option<u64>,
 }
 /// Amount multiplication result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -473,8 +473,8 @@ pub struct ScalarDivRemNativeAmountRequest {
     #[prost(message, optional, tag = "1")]
     pub dividend: ::core::option::Option<super::super::model::v1::NativeAmount>,
     /// Divisor to divide by
-    #[prost(int64, tag = "2")]
-    pub divisor: i64,
+    #[prost(message, optional, tag = "2")]
+    pub mandatory_divisor: ::core::option::Option<u64>,
 }
 /// Amount division by scalar result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -490,7 +490,7 @@ pub struct ScalarDivRemNativeAmountResult {
 /// Amount division request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DivRemNativeAmountRequest {
+pub struct DivRemNativeAmountsRequest {
     /// Amount to divide
     #[prost(message, optional, tag = "1")]
     pub dividend: ::core::option::Option<super::super::model::v1::NativeAmount>,
@@ -501,10 +501,10 @@ pub struct DivRemNativeAmountRequest {
 /// Amount division result
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DivRemNativeAmountResult {
+pub struct DivRemNativeAmountsResult {
     /// Quotient of amount and divisor
-    #[prost(int64, tag = "1")]
-    pub quotient: i64,
+    #[prost(message, optional, tag = "1")]
+    pub mandatory_quotient: ::core::option::Option<u64>,
     /// Remainder of amount and divisor
     #[prost(message, optional, tag = "2")]
     pub remainder: ::core::option::Option<super::super::model::v1::NativeAmount>,
@@ -589,8 +589,8 @@ pub struct CheckedMulNativeTimeRequest {
     #[prost(message, optional, tag = "1")]
     pub time: ::core::option::Option<super::super::model::v1::NativeTime>,
     /// Coefficient to multiply by
-    #[prost(int64, tag = "2")]
-    pub coefficient: i64,
+    #[prost(message, optional, tag = "2")]
+    pub mandatory_coefficient: ::core::option::Option<u64>,
 }
 /// Time scalar mult checked result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -608,8 +608,8 @@ pub struct CheckedScalarDivRemNativeTimeRequest {
     #[prost(message, optional, tag = "1")]
     pub dividend: ::core::option::Option<super::super::model::v1::NativeTime>,
     /// Divisor to divide by
-    #[prost(int64, tag = "2")]
-    pub divisor: i64,
+    #[prost(message, optional, tag = "2")]
+    pub mandatory_divisor: ::core::option::Option<u64>,
 }
 /// Time scalar divrem checked result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -638,8 +638,8 @@ pub struct CheckedDivRemNativeTimeRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CheckedDivRemNativeTimeResult {
     /// Quotient of time and divisor
-    #[prost(int64, tag = "1")]
-    pub quotient: i64,
+    #[prost(message, optional, tag = "1")]
+    pub mandatory_quotient: ::core::option::Option<u64>,
     /// Remainder of time and divisor
     #[prost(message, optional, tag = "2")]
     pub remainder: ::core::option::Option<super::super::model::v1::NativeTime>,
@@ -1011,9 +1011,8 @@ pub struct AddressFromPubKeyResult {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UnsafeRandomRequest {
-    /// Number of bytes to generate
-    #[prost(int32, tag = "1")]
-    pub num_bytes: i32,
+    #[prost(message, optional, tag = "2")]
+    pub mandatory_num_bytes: ::core::option::Option<u32>,
 }
 /// Unsafe random result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1169,8 +1168,8 @@ pub struct DateNowResult {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProcessExitRequest {
     /// exit code
-    #[prost(int32, tag = "1")]
-    pub code: i32,
+    #[prost(message, optional, tag = "1")]
+    pub mandatory_code: ::core::option::Option<u32>,
 }
 /// Process exit result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1227,7 +1226,11 @@ pub struct HasOpKeyResult {
 /// Get op keys request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetOpKeysRequest {}
+pub struct GetOpKeysRequest {
+    /// keys prefix
+    #[prost(bytes = "vec", tag = "1")]
+    pub prefix: ::prost::alloc::vec::Vec<u8>,
+}
 /// Get op keys result
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1245,8 +1248,8 @@ pub struct GetRemainingGasRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetRemainingGasResult {
     /// remaining gas
-    #[prost(int64, tag = "1")]
-    pub remaining_gas: i64,
+    #[prost(message, optional, tag = "1")]
+    pub mandatory_remaining_gas: ::core::option::Option<u64>,
 }
 /// Get balance request
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1287,8 +1290,8 @@ pub struct GetAddressVersionRequest {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAddressVersionResult {
-    #[prost(int64, tag = "1")]
-    pub version: i64,
+    #[prost(message, optional, tag = "1")]
+    pub mandatory_version: ::core::option::Option<u64>,
 }
 /// Get the category of the address request
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1315,8 +1318,8 @@ pub struct GetPubKeyVersionRequest {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPubKeyVersionResult {
-    #[prost(int64, tag = "1")]
-    pub version: i64,
+    #[prost(message, optional, tag = "1")]
+    pub mandatory_version: ::core::option::Option<u64>,
 }
 /// Get the version of the signature request
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1329,8 +1332,8 @@ pub struct GetSignatureVersionRequest {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSignatureVersionResult {
-    #[prost(int64, tag = "1")]
-    pub version: i64,
+    #[prost(message, optional, tag = "1")]
+    pub mandatory_version: ::core::option::Option<u64>,
 }
 /// bytes to base58 request
 #[allow(clippy::derive_partial_eq_without_eq)]
