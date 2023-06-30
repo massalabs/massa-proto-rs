@@ -49,39 +49,25 @@ pub struct AddStakingSecretKeysResponse {}
 /// GetBootstrapBlacklistRequest holds the request for GetBootstrapBlacklist
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetBootstrapBlacklistRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-}
+pub struct GetBootstrapBlacklistRequest {}
 /// GetBootstrapBlacklistResponse holds the response from GetBootstrapBlacklist
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBootstrapBlacklistResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Bootstrap blacklisted IP addresses
-    #[prost(string, repeated, tag = "2")]
+    #[prost(string, repeated, tag = "1")]
     pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// GetBootstrapWhitelistRequest holds the request for GetBootstrapWhitelist
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetBootstrapWhitelistRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-}
+pub struct GetBootstrapWhitelistRequest {}
 /// GetBootstrapWhitelistResponse holds the response from GetBootstrapWhitelist
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBootstrapWhitelistResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Bootstrap whitelisted IP addresses
-    #[prost(string, repeated, tag = "2")]
+    #[prost(string, repeated, tag = "1")]
     pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// AllowEveryoneToBootstrapRequest holds the request for AllowEveryoneToBootstrap
@@ -95,39 +81,25 @@ pub struct AllowEveryoneToBootstrapResponse {}
 /// GetNodeStatusRequest holds the request for GetNodeStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetNodeStatusRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-}
+pub struct GetNodeStatusRequest {}
 /// GetNodeStatusResponse holds the response from GetNodeStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetNodeStatusResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Node status
-    #[prost(message, optional, tag = "2")]
+    #[prost(message, optional, tag = "1")]
     pub status: ::core::option::Option<super::super::model::v1::NodeStatus>,
 }
 /// GetPeersWhitelistRequest holds the request for GetPeersWhitelist
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetPeersWhitelistRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-}
+pub struct GetPeersWhitelistRequest {}
 /// GetPeersWhitelistResponse holds the response from GetPeersWhitelist
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPeersWhitelistResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Whitelisted IP addresses
-    #[prost(string, repeated, tag = "2")]
+    #[prost(string, repeated, tag = "1")]
     pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// RemoveFromBootstrapBlacklistRequest holds the request for RemoveFromBootstrapBlacklist
@@ -182,22 +154,16 @@ pub struct RemoveStakingAddressesResponse {}
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SignMessagesRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Messages to sign in bytes
-    #[prost(bytes = "vec", repeated, tag = "2")]
+    #[prost(bytes = "vec", repeated, tag = "1")]
     pub messages: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
 /// SignMessagesResponse holds the response from SignMessages
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SignMessagesResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Public key that signed the message
-    #[prost(string, tag = "2")]
+    #[prost(string, tag = "1")]
     pub public_key: ::prost::alloc::string::String,
     /// Signatures
     #[prost(string, repeated, tag = "3")]
@@ -1708,439 +1674,554 @@ pub mod private_service_server {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBlocksRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// Queries
-    #[prost(message, repeated, tag = "2")]
-    pub queries: ::prost::alloc::vec::Vec<GetBlocksQuery>,
-}
-/// GetBlocks Query
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetBlocksQuery {
-    /// Filter
-    #[prost(message, optional, tag = "1")]
-    pub filter: ::core::option::Option<GetBlocksFilter>,
+    /// Returns all the blocks that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<GetBlocksFilter>,
 }
 /// GetBlocks Filter
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBlocksFilter {
-    /// Block id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
+    /// Filter
+    #[prost(oneof = "get_blocks_filter::Filter", tags = "1, 2, 3")]
+    pub filter: ::core::option::Option<get_blocks_filter::Filter>,
+}
+/// Nested message and enum types in `GetBlocksFilter`.
+pub mod get_blocks_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// One of this creator addresses
+        #[prost(message, tag = "1")]
+        Addresses(super::super::super::model::v1::Addresses),
+        /// One of this block ids
+        #[prost(message, tag = "2")]
+        BlockIds(super::super::super::model::v1::BlockIds),
+        /// One of this slot ranges (inclusive)
+        #[prost(message, tag = "3")]
+        SlotRange(super::super::super::model::v1::SlotRange),
+    }
 }
 /// GetBlocksResponse holds response from GetBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBlocksResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// Context
-    #[prost(message, optional, tag = "2")]
-    pub context: ::core::option::Option<BlocksContext>,
-    /// Blocks wrappers
-    #[prost(message, repeated, tag = "3")]
-    pub blocks: ::prost::alloc::vec::Vec<super::super::model::v1::BlockWrapper>,
-}
-/// Blocks context
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct BlocksContext {
-    /// Slot
-    #[prost(message, optional, tag = "1")]
-    pub slot: ::core::option::Option<super::super::model::v1::Slot>,
-}
-/// GetBlocksBySlotsRequest holds request for GetBlocksBySlots
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetBlocksBySlotsRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// Slots
-    #[prost(message, repeated, tag = "2")]
-    pub slots: ::prost::alloc::vec::Vec<super::super::model::v1::Slot>,
-}
-/// GetBlocksBySlotsResponse holds response from GetBlocksBySlots
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetBlocksBySlotsResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// Blocks
-    #[prost(message, repeated, tag = "2")]
-    pub blocks: ::prost::alloc::vec::Vec<super::super::model::v1::Block>,
+    /// Wrapped blocks
+    #[prost(message, repeated, tag = "1")]
+    pub wrapped_blocks: ::prost::alloc::vec::Vec<super::super::model::v1::BlockWrapper>,
 }
 /// GetDatastoreEntriesRequest holds request from GetDatastoreEntries
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDatastoreEntriesRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// Queries
-    #[prost(message, repeated, tag = "2")]
-    pub queries: ::prost::alloc::vec::Vec<DatastoreEntriesQuery>,
+    /// Returns all the datastore entries that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<GetDatastoreEntryFilter>,
 }
-/// DatastoreEntries Query
+/// DatastoreEntryFilter
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DatastoreEntriesQuery {
+pub struct GetDatastoreEntryFilter {
     /// Filter
-    #[prost(message, optional, tag = "1")]
-    pub filter: ::core::option::Option<DatastoreEntryFilter>,
+    #[prost(oneof = "get_datastore_entry_filter::Filter", tags = "1")]
+    pub filter: ::core::option::Option<get_datastore_entry_filter::Filter>,
 }
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DatastoreEntryFilter {
-    /// / Associated address of the entry
-    #[prost(string, tag = "1")]
-    pub address: ::prost::alloc::string::String,
-    /// Datastore key
-    #[prost(bytes = "vec", tag = "2")]
-    pub key: ::prost::alloc::vec::Vec<u8>,
+/// Nested message and enum types in `GetDatastoreEntryFilter`.
+pub mod get_datastore_entry_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// One of this (address-key) pairs
+        #[prost(message, tag = "1")]
+        AddressKey(super::super::super::model::v1::AddressKeyEntry),
+    }
 }
 /// GetDatastoreEntriesResponse holds response from GetDatastoreEntries
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDatastoreEntriesResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Datastore entries
-    #[prost(message, repeated, tag = "2")]
-    pub entries: ::prost::alloc::vec::Vec<DatastoreEntry>,
-}
-/// DatastoreEntry
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DatastoreEntry {
-    /// final datastore entry value
-    #[prost(bytes = "vec", tag = "1")]
-    pub final_value: ::prost::alloc::vec::Vec<u8>,
-    /// candidate_value datastore entry value
-    #[prost(bytes = "vec", tag = "2")]
-    pub candidate_value: ::prost::alloc::vec::Vec<u8>,
-}
-/// GetStakersRequest holds request from GetStakers
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetStakersRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// Query
-    #[prost(message, optional, tag = "2")]
-    pub query: ::core::option::Option<LargestStakersQuery>,
-}
-/// LargestStakers Query
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct LargestStakersQuery {
-    /// Starting offset for the list of stakers. Defaults to 1
-    #[prost(uint64, tag = "1")]
-    pub offset: u64,
-    /// Limits the number of stakers to return. Defaults to 50
-    #[prost(uint64, tag = "2")]
-    pub limit: u64,
-    /// Filter
-    #[prost(message, optional, tag = "3")]
-    pub filter: ::core::option::Option<LargestStakersFilter>,
-}
-/// LargestStakers Filter
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct LargestStakersFilter {
-    /// Minimum rolls (Optional)
-    #[prost(uint64, optional, tag = "1")]
-    pub min_rolls: ::core::option::Option<u64>,
-    /// Maximum rolls (Optional)
-    #[prost(uint64, optional, tag = "2")]
-    pub max_rolls: ::core::option::Option<u64>,
-}
-/// GetStakersResponse holds response from GetStakers
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetStakersResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// Context
-    #[prost(message, optional, tag = "2")]
-    pub context: ::core::option::Option<LargestStakersContext>,
-    /// Largest stakers
-    #[prost(message, repeated, tag = "3")]
-    pub stakers: ::prost::alloc::vec::Vec<LargestStakerEntry>,
-}
-/// LargestStakers context
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct LargestStakersContext {
-    /// Slot
-    #[prost(message, optional, tag = "1")]
-    pub slot: ::core::option::Option<super::super::model::v1::Slot>,
-}
-/// LargestStakerEntry
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct LargestStakerEntry {
-    /// Address
-    #[prost(string, tag = "1")]
-    pub address: ::prost::alloc::string::String,
-    /// Rolls
-    #[prost(uint64, tag = "2")]
-    pub rolls: u64,
+    #[prost(message, repeated, tag = "1")]
+    pub datastore_entries: ::prost::alloc::vec::Vec<
+        super::super::model::v1::DatastoreEntry,
+    >,
 }
 /// GetMipStatusRequest holds request for GetMipStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetMipStatusRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-}
+pub struct GetMipStatusRequest {}
 /// GetMipStatusResponse holds response from GetMipStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetMipStatusResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// MipInfo - status id entries
-    #[prost(message, repeated, tag = "2")]
-    pub entries: ::prost::alloc::vec::Vec<super::super::model::v1::MipStatusEntry>,
+    /// (MipInfo - status id) entries
+    #[prost(message, repeated, tag = "1")]
+    pub mipstatus_entries: ::prost::alloc::vec::Vec<
+        super::super::model::v1::MipStatusEntry,
+    >,
 }
 /// GetNextBlockBestParentsRequest holds request for GetNextBlockBestParents
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetNextBlockBestParentsRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-}
+pub struct GetNextBlockBestParentsRequest {}
 /// GetNextBlockBestParentsResponse holds response from GetNextBlockBestParents
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetNextBlockBestParentsResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// Best parents
-    #[prost(message, repeated, tag = "2")]
-    pub parents: ::prost::alloc::vec::Vec<BlockParent>,
-}
-/// Block parent tuple
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct BlockParent {
-    /// Block id
-    #[prost(string, tag = "1")]
-    pub block_id: ::prost::alloc::string::String,
-    /// Period
-    #[prost(uint64, tag = "2")]
-    pub period: u64,
+    /// Next block best parents
+    #[prost(message, repeated, tag = "1")]
+    pub block_parents: ::prost::alloc::vec::Vec<super::super::model::v1::BlockParent>,
 }
 /// GetOperationsRequest holds request for GetOperations
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOperationsRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// Queries
-    #[prost(message, repeated, tag = "2")]
-    pub queries: ::prost::alloc::vec::Vec<GetOperationsQuery>,
-}
-/// GetOperations Query
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetOperationsQuery {
-    /// Filter
-    #[prost(message, optional, tag = "1")]
-    pub filter: ::core::option::Option<GetOperationsFilter>,
+    /// Returns all the operations that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<GetOperationsFilter>,
 }
 /// GetOperations Filter
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOperationsFilter {
-    /// Operation id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
+    /// Filter
+    #[prost(oneof = "get_operations_filter::Filter", tags = "1, 2")]
+    pub filter: ::core::option::Option<get_operations_filter::Filter>,
+}
+/// Nested message and enum types in `GetOperationsFilter`.
+pub mod get_operations_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// One of the operation ids
+        #[prost(message, tag = "1")]
+        OperationIds(super::super::super::model::v1::OperationIds),
+        /// One of the operation types
+        #[prost(message, tag = "2")]
+        OperationTypes(super::super::super::model::v1::OpTypes),
+    }
 }
 /// GetOperationsResponse holds response from GetOperations
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOperationsResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// Context
-    #[prost(message, optional, tag = "2")]
-    pub context: ::core::option::Option<OperationsContext>,
-    /// Operations wrappers
-    #[prost(message, repeated, tag = "3")]
-    pub operations: ::prost::alloc::vec::Vec<super::super::model::v1::OperationWrapper>,
-}
-/// Operations context
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OperationsContext {
-    /// Slot
-    #[prost(message, optional, tag = "1")]
-    pub slot: ::core::option::Option<super::super::model::v1::Slot>,
+    /// Wrapped operations
+    #[prost(message, repeated, tag = "1")]
+    pub wrapped_operations: ::prost::alloc::vec::Vec<
+        super::super::model::v1::OperationWrapper,
+    >,
 }
 /// GetScExecutionEventsRequest holds request for GetScExecutionEvents
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetScExecutionEventsRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// Query
-    #[prost(message, optional, tag = "2")]
-    pub query: ::core::option::Option<GetScExecutionEventsQuery>,
+    /// Returns all the sc execution events that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<ScExecutionEventsFilter>,
 }
-/// GetScExecutionEvents Query
+/// ScExecutionEvents Filter
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetScExecutionEventsQuery {
-    /// Filter
+pub struct ScExecutionEventsFilter {
+    /// Slot range (Optional)
     #[prost(message, optional, tag = "1")]
-    pub filter: ::core::option::Option<super::super::model::v1::ScExecutionEventsFilter>,
+    pub slot_range: ::core::option::Option<super::super::model::v1::SlotRange>,
+    /// Caller address (Optional)
+    #[prost(message, optional, tag = "2")]
+    pub caller_address: ::core::option::Option<::prost::alloc::string::String>,
+    /// Emitter address (Optional)
+    #[prost(message, optional, tag = "3")]
+    pub emitter_address: ::core::option::Option<::prost::alloc::string::String>,
+    /// Original operation id (Optional)
+    #[prost(message, optional, tag = "4")]
+    pub original_operation_id: ::core::option::Option<::prost::alloc::string::String>,
+    /// Status (Optional)
+    #[prost(
+        enumeration = "super::super::model::v1::ScExecutionEventStatus",
+        repeated,
+        tag = "5"
+    )]
+    pub status: ::prost::alloc::vec::Vec<i32>,
 }
 /// GetScExecutionEventsResponse holds response from GetScExecutionEvents
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetScExecutionEventsResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// Context
-    #[prost(message, optional, tag = "2")]
-    pub context: ::core::option::Option<GetScExecutionEventsContext>,
     /// ScExecutionEvents
-    #[prost(message, repeated, tag = "3")]
+    #[prost(message, repeated, tag = "1")]
     pub events: ::prost::alloc::vec::Vec<super::super::model::v1::ScExecutionEvent>,
-}
-/// ScExecutionEvents context
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetScExecutionEventsContext {
-    /// Slot
-    #[prost(message, optional, tag = "1")]
-    pub slot: ::core::option::Option<super::super::model::v1::Slot>,
 }
 /// GetStatusRequest holds request from GetStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetStatusRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-}
+pub struct GetStatusRequest {}
 /// GetStatusResponse holds request from GetStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetStatusResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Status
-    #[prost(message, optional, tag = "2")]
+    #[prost(message, optional, tag = "1")]
     pub status: ::core::option::Option<super::super::model::v1::PublicStatus>,
 }
 /// GetSelectorDrawsRequest holds request from GetSelectorDraws
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSelectorDrawsRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// Queries
-    #[prost(message, repeated, tag = "2")]
-    pub queries: ::prost::alloc::vec::Vec<SelectorDrawsQuery>,
-}
-/// SelectorDraws Query
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SelectorDrawsQuery {
-    /// Filter
-    #[prost(message, optional, tag = "1")]
-    pub filter: ::core::option::Option<SelectorDrawsFilter>,
+    /// Returns all the selector draws that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<SelectorDrawsFilter>,
 }
 /// SelectorDraws Filter
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SelectorDrawsFilter {
-    /// Address
-    #[prost(string, tag = "1")]
-    pub address: ::prost::alloc::string::String,
+    /// Returns all the selector draws that verify all the filters
+    #[prost(oneof = "selector_draws_filter::Filter", tags = "1, 2")]
+    pub filter: ::core::option::Option<selector_draws_filter::Filter>,
+}
+/// Nested message and enum types in `SelectorDrawsFilter`.
+pub mod selector_draws_filter {
+    /// Returns all the selector draws that verify all the filters
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// One of the Addresses
+        #[prost(message, tag = "1")]
+        Addresses(super::super::super::model::v1::Addresses),
+        /// One of the Slot range
+        #[prost(message, tag = "2")]
+        SlotRange(super::super::super::model::v1::SlotRange),
+    }
 }
 /// GetSelectorDrawsResponse holds response from GetSelectorDraws
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSelectorDrawsResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Selector draws
-    #[prost(message, repeated, tag = "2")]
-    pub selector_draws: ::prost::alloc::vec::Vec<super::super::model::v1::SelectorDraws>,
+    #[prost(message, repeated, tag = "1")]
+    pub draws: ::prost::alloc::vec::Vec<super::super::model::v1::SlotDraw>,
+}
+/// GetStakersRequest holds request from GetStakers
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetStakersRequest {
+    /// Returns all the stakers that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<StakersFilter>,
+}
+/// Stakers Filter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StakersFilter {
+    /// Returns all the stakers that verify all the filters
+    #[prost(oneof = "stakers_filter::Filter", tags = "1, 2, 3")]
+    pub filter: ::core::option::Option<stakers_filter::Filter>,
+}
+/// Nested message and enum types in `StakersFilter`.
+pub mod stakers_filter {
+    /// Returns all the stakers that verify all the filters
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// Minimum rolls (Optional)
+        #[prost(message, tag = "1")]
+        MinRolls(u64),
+        /// Maximum rolls (Optional)
+        #[prost(message, tag = "2")]
+        MaxRolls(u64),
+        /// Limit (Optional)
+        #[prost(message, tag = "3")]
+        Limit(u64),
+    }
+}
+/// GetStakersResponse holds response from GetStakers
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetStakersResponse {
+    /// Stakers
+    #[prost(message, repeated, tag = "1")]
+    pub stakers: ::prost::alloc::vec::Vec<super::super::model::v1::StakerEntry>,
 }
 /// GetTransactionsThroughputRequest holds request for GetTransactionsThroughput
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetTransactionsThroughputRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-}
+pub struct GetTransactionsThroughputRequest {}
 /// GetTransactionsThroughputResponse holds response from GetTransactionsThroughput
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTransactionsThroughputResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Transactions throughput
-    #[prost(uint32, tag = "2")]
+    #[prost(uint32, tag = "1")]
     pub throughput: u32,
-}
-/// GetVersionRequest holds request from GetVersion
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetVersionRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-}
-/// GetVersionResponse holds response from GetVersion
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetVersionResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// Version
-    #[prost(string, tag = "2")]
-    pub version: ::prost::alloc::string::String,
 }
 /// Request to atomically execute a batch of execution state queries
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryStateRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// List of execution query request items
-    #[prost(message, repeated, tag = "2")]
-    pub requests: ::prost::alloc::vec::Vec<
-        super::super::model::v1::ExecutionQueryRequestItem,
+    #[prost(message, optional, tag = "1")]
+    pub requests: ::core::option::Option<ExecutionQueryRequestItem>,
+}
+/// Query state query item
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionQueryRequestItem {
+    #[prost(
+        oneof = "execution_query_request_item::RequestItem",
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20"
+    )]
+    pub request_item: ::core::option::Option<execution_query_request_item::RequestItem>,
+}
+/// Nested message and enum types in `ExecutionQueryRequestItem`.
+pub mod execution_query_request_item {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum RequestItem {
+        /// Checks if address exists (candidate)
+        #[prost(message, tag = "1")]
+        AddressExistsCandidate(super::AddressExistsCandidate),
+        /// Checks if address exists (final)
+        #[prost(message, tag = "2")]
+        AddressExistsFinal(super::AddressExistsFinal),
+        /// Gets the balance (candidate) of an address
+        #[prost(message, tag = "3")]
+        AddressBalanceCandidate(super::AddressBalanceCandidate),
+        /// Gets the balance (final) of an address
+        #[prost(message, tag = "4")]
+        AddressBalanceFinal(super::AddressBalanceFinal),
+        /// Gets the bytecode (candidate) of an address
+        #[prost(message, tag = "5")]
+        AddressBytecodeCandidate(super::AddressBytecodeCandidate),
+        /// Gets the bytecode (final) of an address
+        #[prost(message, tag = "6")]
+        AddressBytecodeFinal(super::AddressBytecodeFinal),
+        /// Gets the datastore keys (candidate) of an address
+        #[prost(message, tag = "7")]
+        AddressDatastoreKeysCandidate(super::AddressDatastoreKeysCandidate),
+        /// Gets the datastore keys (final) of an address
+        #[prost(message, tag = "8")]
+        AddressDatastoreKeysFinal(super::AddressDatastoreKeysFinal),
+        /// Gets a datastore value (candidate) for an address
+        #[prost(message, tag = "9")]
+        AddressDatastoreValueCandidate(super::AddressDatastoreValueCandidate),
+        /// Gets a datastore value (final) for an address
+        #[prost(message, tag = "10")]
+        AddressDatastoreValueFinal(super::AddressDatastoreValueFinal),
+        /// Gets the execution status (candidate) for an operation
+        #[prost(message, tag = "11")]
+        OpExecutionStatusCandidate(super::OpExecutionStatusCandidate),
+        /// Gets the execution status (final) for an operation
+        #[prost(message, tag = "12")]
+        OpExecutionStatusFinal(super::OpExecutionStatusFinal),
+        /// Gets the execution status (candidate) for a denunciation
+        #[prost(message, tag = "13")]
+        DenunciationExecutionStatusCandidate(
+            super::DenunciationExecutionStatusCandidate,
+        ),
+        /// Gets the execution status (final) for a denunciation
+        #[prost(message, tag = "14")]
+        DenunciationExecutionStatusFinal(super::DenunciationExecutionStatusFinal),
+        /// Gets the roll count (candidate) of an address
+        #[prost(message, tag = "15")]
+        AddressRollsCandidate(super::AddressRollsCandidate),
+        /// Gets the roll count (final) of an address
+        #[prost(message, tag = "16")]
+        AddressRollsFinal(super::AddressRollsFinal),
+        /// Gets the deferred credits (candidate) of an address
+        #[prost(message, tag = "17")]
+        AddressDeferredCreditsCandidate(super::AddressDeferredCreditsCandidate),
+        /// Gets the deferred credits (final) of an address
+        #[prost(message, tag = "18")]
+        AddressDeferredCreditsFinal(super::AddressDeferredCreditsFinal),
+        /// Gets all information for a given cycle
+        #[prost(message, tag = "19")]
+        CycleInfos(super::CycleInfos),
+        /// Gets filtered events
+        #[prost(message, tag = "20")]
+        Events(super::Events),
+    }
+}
+/// Request to check if address exists (candidate)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressExistsCandidate {
+    /// Address to check
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to check if address exists (final)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressExistsFinal {
+    /// Address to check
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to get the balance (candidate) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressBalanceCandidate {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to get the balance (final) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressBalanceFinal {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to get the bytecode (candidate) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressBytecodeCandidate {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to get the bytecode (final) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressBytecodeFinal {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to get the datastore keys (candidate) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressDatastoreKeysCandidate {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// Prefix for the keys
+    #[prost(bytes = "vec", tag = "2")]
+    pub prefix: ::prost::alloc::vec::Vec<u8>,
+}
+/// Request to get the datastore keys (final) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressDatastoreKeysFinal {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// Prefix for the keys
+    #[prost(bytes = "vec", tag = "2")]
+    pub prefix: ::prost::alloc::vec::Vec<u8>,
+}
+/// Request to get a datastore value (candidate) for an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressDatastoreValueCandidate {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// Key for the value
+    #[prost(bytes = "vec", tag = "2")]
+    pub key: ::prost::alloc::vec::Vec<u8>,
+}
+/// Request to get a datastore value (final) for an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressDatastoreValueFinal {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// Key for the value
+    #[prost(bytes = "vec", tag = "2")]
+    pub key: ::prost::alloc::vec::Vec<u8>,
+}
+/// Request to get the execution status (candidate) for an operation
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct OpExecutionStatusCandidate {
+    /// Operation ID to query
+    #[prost(string, tag = "1")]
+    pub operation_id: ::prost::alloc::string::String,
+}
+/// Request to get the execution status (final) for an operation
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct OpExecutionStatusFinal {
+    /// Operation ID to query
+    #[prost(string, tag = "1")]
+    pub operation_id: ::prost::alloc::string::String,
+}
+/// Request to get the execution status (candidate) for a denunciation
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DenunciationExecutionStatusCandidate {
+    /// Denunciation index to query
+    #[prost(message, optional, tag = "1")]
+    pub denunciation_index: ::core::option::Option<
+        super::super::model::v1::DenunciationIndex,
     >,
+}
+/// Request to get the execution status (final) for a denunciation
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DenunciationExecutionStatusFinal {
+    /// Denunciation index to query
+    #[prost(message, optional, tag = "1")]
+    pub denunciation_index: ::core::option::Option<
+        super::super::model::v1::DenunciationIndex,
+    >,
+}
+/// Request to get the roll count (candidate) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressRollsCandidate {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to get the roll count (final) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressRollsFinal {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to get the deferred credits (candidate) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressDeferredCreditsCandidate {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to get the deferred credits (final) of an address
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressDeferredCreditsFinal {
+    /// Address to query
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+/// Request to get all information for a given cycle
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CycleInfos {
+    /// Cycle to query
+    #[prost(uint64, tag = "1")]
+    pub cycle: u64,
+    /// Addresses to restrict the query (if None, info for all addresses will be returned)
+    #[prost(string, repeated, tag = "2")]
+    pub restrict_to_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// Request to get filtered events
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Events {
+    /// Event filter to apply
+    #[prost(message, optional, tag = "1")]
+    pub filter: ::core::option::Option<ScExecutionEventsFilter>,
 }
 /// Response to atomically execute a batch of execution state queries
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -2161,7 +2242,7 @@ pub struct QueryStateResponse {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutionQueryResponse {
     /// Result or error
-    #[prost(oneof = "execution_query_response::Response", tags = "2, 3")]
+    #[prost(oneof = "execution_query_response::Response", tags = "1, 2")]
     pub response: ::core::option::Option<execution_query_response::Response>,
 }
 /// Nested message and enum types in `ExecutionQueryResponse`.
@@ -2171,247 +2252,315 @@ pub mod execution_query_response {
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Response {
         /// Execution query response item
+        #[prost(message, tag = "1")]
+        Result(super::ExecutionQueryResponseItem),
+        /// Massa error
         #[prost(message, tag = "2")]
-        Result(super::super::super::model::v1::ExecutionQueryResponseItem),
-        /// gRPC error(status)
-        #[prost(message, tag = "3")]
-        Error(super::super::super::super::google::rpc::Status),
+        Error(super::super::super::model::v1::Error),
     }
+}
+/// Execution state query response item
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionQueryResponseItem {
+    #[prost(
+        oneof = "execution_query_response_item::ResponseItem",
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9"
+    )]
+    pub response_item: ::core::option::Option<
+        execution_query_response_item::ResponseItem,
+    >,
+}
+/// Nested message and enum types in `ExecutionQueryResponseItem`.
+pub mod execution_query_response_item {
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum ResponseItem {
+        /// Boolean value
+        #[prost(bool, tag = "1")]
+        Boolean(bool),
+        /// Roll counts value
+        #[prost(uint64, tag = "2")]
+        RollCount(u64),
+        /// Amount value
+        #[prost(message, tag = "3")]
+        Amount(super::super::super::model::v1::NativeAmount),
+        /// Bytes value
+        #[prost(bytes, tag = "4")]
+        Bytes(::prost::alloc::vec::Vec<u8>),
+        /// Vector of bytes value
+        #[prost(message, tag = "5")]
+        VecBytes(super::super::super::model::v1::ArrayOfBytesWrapper),
+        /// Deferred credits value
+        #[prost(uint64, tag = "6")]
+        DeferredCredits(u64),
+        /// Execution status value
+        #[prost(enumeration = "super::ExecutionQueryExecutionStatus", tag = "7")]
+        ExecutionStatus(i32),
+        /// Cycle infos value
+        #[prost(message, tag = "8")]
+        CycleInfos(super::ExecutionQueryCycleInfos),
+        /// Events
+        #[prost(message, tag = "9")]
+        Events(super::ScOutputEventsWrapper),
+    }
+}
+/// Cycle information for execution query
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionQueryCycleInfos {
+    /// Cycle number
+    #[prost(uint64, tag = "1")]
+    pub cycle: u64,
+    /// Whether the cycle is final
+    #[prost(bool, tag = "2")]
+    pub is_final: bool,
+    /// Infos for each PoS-participating address among the ones that were asked
+    #[prost(message, repeated, tag = "3")]
+    pub staker_infos: ::prost::alloc::vec::Vec<ExecutionQueryStakerInfoEntry>,
+}
+/// Staker information for a given cycle
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionQueryStakerInfoEntry {
+    /// Address of the staker
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// Staker info
+    #[prost(message, optional, tag = "2")]
+    pub info: ::core::option::Option<ExecutionQueryStakerInfo>,
+}
+/// Staker information for execution query
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionQueryStakerInfo {
+    /// Active roll count
+    #[prost(uint64, tag = "1")]
+    pub active_rolls: u64,
+    /// Production stats
+    #[prost(message, repeated, tag = "2")]
+    pub production_stats: ::prost::alloc::vec::Vec<
+        ExecutionQueryStakerInfoProductionStatsEntry,
+    >,
+}
+/// ExecutionQueryStakerInfoProductionStats entry
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionQueryStakerInfoProductionStatsEntry {
+    /// Address of the staker
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// Production failure
+    #[prost(message, optional, tag = "2")]
+    pub stats: ::core::option::Option<ExecutionQueryStakerInfoProductionStats>,
+}
+/// Production statistics for staker info in execution query
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionQueryStakerInfoProductionStats {
+    /// Production successes
+    #[prost(uint64, tag = "1")]
+    pub block_success_count: u64,
+    /// Production failures
+    #[prost(uint64, tag = "2")]
+    pub block_failure_count: u64,
+}
+/// SCOutputEvents wrapper
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ScOutputEventsWrapper {
+    /// Events
+    #[prost(message, repeated, tag = "1")]
+    pub event: ::prost::alloc::vec::Vec<super::super::model::v1::ScExecutionEvent>,
 }
 /// NewBlocksRequest holds request for NewBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NewBlocksRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-}
+pub struct NewBlocksRequest {}
 /// NewBlocksResponse holds response from NewBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewBlocksResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Signed block
-    #[prost(message, optional, tag = "2")]
-    pub block: ::core::option::Option<super::super::model::v1::SignedBlock>,
+    #[prost(message, optional, tag = "1")]
+    pub signed_block: ::core::option::Option<super::super::model::v1::SignedBlock>,
 }
 /// NewBlocksHeadersRequest holds request for NewBlocksHeaders
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NewBlocksHeadersRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-}
+pub struct NewBlocksHeadersRequest {}
 /// NewBlocksHeadersResponse holds response from NewBlocksHeaders
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewBlocksHeadersResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Signed block header
-    #[prost(message, optional, tag = "2")]
-    pub block_header: ::core::option::Option<super::super::model::v1::SignedBlockHeader>,
+    #[prost(message, optional, tag = "1")]
+    pub signed_block_header: ::core::option::Option<
+        super::super::model::v1::SignedBlockHeader,
+    >,
 }
 /// NewEndorsementsRequest holds request for NewEndorsements
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NewEndorsementsRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-}
+pub struct NewEndorsementsRequest {}
 /// NewEndorsementsResponse holds response from NewEndorsements
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewEndorsementsResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Signed endorsement
-    #[prost(message, optional, tag = "2")]
-    pub endorsement: ::core::option::Option<super::super::model::v1::SignedEndorsement>,
+    #[prost(message, optional, tag = "1")]
+    pub signed_endorsement: ::core::option::Option<
+        super::super::model::v1::SignedEndorsement,
+    >,
 }
 /// NewFilledBlocksRequest holds request for NewFilledBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NewFilledBlocksRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-}
+pub struct NewFilledBlocksRequest {}
 /// NewFilledBlocksResponse holds response from NewFilledBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewFilledBlocksResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// Block with operations content
-    #[prost(message, optional, tag = "2")]
+    /// Block with operations content found in the node.
+    #[prost(message, optional, tag = "1")]
     pub filled_block: ::core::option::Option<super::super::model::v1::FilledBlock>,
 }
 /// NewOperationsRequest holds request for NewOperations
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewOperationsRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// Query
-    #[prost(message, optional, tag = "2")]
-    pub query: ::core::option::Option<NewOperationsQuery>,
-}
-/// NewOperations Query
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NewOperationsQuery {
-    /// Filter
-    #[prost(message, optional, tag = "1")]
-    pub filter: ::core::option::Option<NewOperationsFilter>,
+    /// Returns all the operations that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<NewOperationsFilter>,
 }
 /// NewOperations Filter
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewOperationsFilter {
-    /// Operation type enum
-    #[prost(enumeration = "OpType", repeated, tag = "1")]
-    pub types: ::prost::alloc::vec::Vec<i32>,
+    /// Filter
+    #[prost(oneof = "new_operations_filter::Filter", tags = "1, 2")]
+    pub filter: ::core::option::Option<new_operations_filter::Filter>,
+}
+/// Nested message and enum types in `NewOperationsFilter`.
+pub mod new_operations_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// One of the operation ids
+        #[prost(message, tag = "1")]
+        OperationIds(super::super::super::model::v1::OperationIds),
+        /// One of the operation types
+        #[prost(message, tag = "2")]
+        OperationTypes(super::super::super::model::v1::OpTypes),
+    }
 }
 /// NewOperationsResponse holds response from NewOperations
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewOperationsResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Signed operation
-    #[prost(message, optional, tag = "2")]
-    pub operation: ::core::option::Option<super::super::model::v1::SignedOperation>,
+    #[prost(message, optional, tag = "1")]
+    pub signed_operation: ::core::option::Option<
+        super::super::model::v1::SignedOperation,
+    >,
 }
 /// NewSlotExecutionOutputsRequest holds request for NewSlotExecutionOutputs
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotExecutionOutputsRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// Query
-    #[prost(message, optional, tag = "2")]
-    pub query: ::core::option::Option<NewSlotExecutionOutputsQuery>,
-}
-/// NewSlotExecutionOutputs Query
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NewSlotExecutionOutputsQuery {
-    /// Filter
-    #[prost(message, optional, tag = "1")]
-    pub filter: ::core::option::Option<NewSlotExecutionOutputsFilter>,
+    /// Returns all the slot execution outputs that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<NewSlotExecutionOutputsFilter>,
 }
 /// NewSlotExecutionOutputs Filter
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotExecutionOutputsFilter {
-    /// Execution output status enum
-    #[prost(
-        enumeration = "super::super::model::v1::ExecutionOutputStatus",
-        repeated,
-        tag = "1"
-    )]
-    pub status: ::prost::alloc::vec::Vec<i32>,
+    /// Filter
+    #[prost(oneof = "new_slot_execution_outputs_filter::Filter", tags = "1")]
+    pub filter: ::core::option::Option<new_slot_execution_outputs_filter::Filter>,
+}
+/// Nested message and enum types in `NewSlotExecutionOutputsFilter`.
+pub mod new_slot_execution_outputs_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// Execution output status
+        #[prost(
+            enumeration = "super::super::super::model::v1::ExecutionOutputStatus",
+            tag = "1"
+        )]
+        Status(i32),
+    }
 }
 /// NewSlotExecutionOutputsResponse holds response from NewSlotExecutionOutputs
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotExecutionOutputsResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Slot execution output
-    #[prost(message, optional, tag = "2")]
+    #[prost(message, optional, tag = "1")]
     pub output: ::core::option::Option<super::super::model::v1::SlotExecutionOutput>,
 }
 /// SendBlocksRequest holds parameters to SendBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendBlocksRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Secure shared block
-    #[prost(message, optional, tag = "2")]
+    #[prost(message, optional, tag = "1")]
     pub block: ::core::option::Option<super::super::model::v1::SecureShare>,
 }
 /// SendBlocksResponse holds response from SendBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendBlocksResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Block result or a gRPC status
-    #[prost(oneof = "send_blocks_response::Message", tags = "2, 3")]
-    pub message: ::core::option::Option<send_blocks_response::Message>,
+    #[prost(oneof = "send_blocks_response::Result", tags = "1, 2")]
+    pub result: ::core::option::Option<send_blocks_response::Result>,
 }
 /// Nested message and enum types in `SendBlocksResponse`.
 pub mod send_blocks_response {
     /// Block result or a gRPC status
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Message {
+    pub enum Result {
         /// Block result
+        #[prost(string, tag = "1")]
+        BlockId(::prost::alloc::string::String),
+        /// Massa error
         #[prost(message, tag = "2")]
-        Result(super::BlockResult),
-        /// gRPC error(status)
-        #[prost(message, tag = "3")]
-        Error(super::super::super::super::google::rpc::Status),
+        Error(super::super::super::model::v1::Error),
     }
-}
-/// Holds Block response
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct BlockResult {
-    /// Block id
-    #[prost(string, tag = "1")]
-    pub block_id: ::prost::alloc::string::String,
 }
 /// SendEndorsementsRequest holds parameters to SendEndorsements
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendEndorsementsRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Secure shared endorsements
-    #[prost(message, repeated, tag = "2")]
+    #[prost(message, repeated, tag = "1")]
     pub endorsements: ::prost::alloc::vec::Vec<super::super::model::v1::SecureShare>,
 }
 /// SendEndorsementsResponse holds response from SendEndorsements
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendEndorsementsResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Endorsement result or gRPC status
-    #[prost(oneof = "send_endorsements_response::Message", tags = "2, 3")]
-    pub message: ::core::option::Option<send_endorsements_response::Message>,
+    #[prost(oneof = "send_endorsements_response::Result", tags = "1, 2")]
+    pub result: ::core::option::Option<send_endorsements_response::Result>,
 }
 /// Nested message and enum types in `SendEndorsementsResponse`.
 pub mod send_endorsements_response {
     /// Endorsement result or gRPC status
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Message {
+    pub enum Result {
         /// Endorsement result
+        #[prost(message, tag = "1")]
+        EndorsementsIds(super::super::super::model::v1::EndorsementsIds),
+        /// Massa error
         #[prost(message, tag = "2")]
-        Result(super::EndorsementResult),
-        /// gRPC error(status)
-        #[prost(message, tag = "3")]
-        Error(super::super::super::super::google::rpc::Status),
+        Error(super::super::super::model::v1::Error),
     }
 }
 /// Holds Endorsement response
@@ -2426,109 +2575,95 @@ pub struct EndorsementResult {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendOperationsRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Secured shared operations
-    #[prost(message, repeated, tag = "2")]
+    #[prost(message, repeated, tag = "1")]
     pub operations: ::prost::alloc::vec::Vec<super::super::model::v1::SecureShare>,
 }
 /// SendOperationsResponse holds response from SendOperations
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendOperationsResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Operation result or gRPC status
-    #[prost(oneof = "send_operations_response::Message", tags = "2, 3")]
-    pub message: ::core::option::Option<send_operations_response::Message>,
+    #[prost(oneof = "send_operations_response::Result", tags = "1, 2")]
+    pub result: ::core::option::Option<send_operations_response::Result>,
 }
 /// Nested message and enum types in `SendOperationsResponse`.
 pub mod send_operations_response {
     /// Operation result or gRPC status
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Message {
+    pub enum Result {
         /// Operation result
+        #[prost(message, tag = "1")]
+        OperationsIds(super::super::super::model::v1::OperationIds),
+        /// Massa error
         #[prost(message, tag = "2")]
-        Result(super::OperationResult),
-        /// gRPC error(status)
-        #[prost(message, tag = "3")]
-        Error(super::super::super::super::google::rpc::Status),
+        Error(super::super::super::model::v1::Error),
     }
-}
-/// Holds Operation response
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct OperationResult {
-    /// Operations ids
-    #[prost(string, repeated, tag = "1")]
-    pub operations_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// TransactionsThroughputRequest holds request for TransactionsThroughput
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransactionsThroughputRequest {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Timer interval in seconds (Optional). Defaults to 10s
-    #[prost(uint64, optional, tag = "2")]
+    #[prost(message, optional, tag = "1")]
     pub interval: ::core::option::Option<u64>,
 }
 /// TransactionsThroughputResponse holds response from TransactionsThroughput
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransactionsThroughputResponse {
-    /// Request id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
-    /// Transactions throughput
-    #[prost(uint32, tag = "2")]
+    /// Transactions throughput per second
+    #[prost(uint32, tag = "1")]
     pub throughput: u32,
 }
-/// Operation type enum
+/// Execution status of an operation or denunciation
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
-pub enum OpType {
+pub enum ExecutionQueryExecutionStatus {
     /// Default enum value
     Unspecified = 0,
-    /// Transaction
-    Transaction = 1,
-    /// Roll buy
-    RollBuy = 2,
-    /// Roll sell
-    RollSell = 3,
-    /// Execute smart contract
-    ExecuteSc = 4,
-    /// Call smart contract
-    CallSc = 5,
+    /// The operation or denunciation was executed recently with success
+    AlreadyExecutedWithSuccess = 1,
+    /// The operation or denunciation was executed recently with failure
+    AlreadyExecutedWithFailure = 2,
+    /// The operation or denunciation was not executed recently but can still be executed unless expired
+    ExecutableOrExpired = 3,
 }
-impl OpType {
+impl ExecutionQueryExecutionStatus {
     /// String value of the enum field names used in the ProtoBuf definition.
     ///
     /// The values are not transformed in any way and thus are considered stable
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            OpType::Unspecified => "OP_TYPE_UNSPECIFIED",
-            OpType::Transaction => "OP_TYPE_TRANSACTION",
-            OpType::RollBuy => "OP_TYPE_ROLL_BUY",
-            OpType::RollSell => "OP_TYPE_ROLL_SELL",
-            OpType::ExecuteSc => "OP_TYPE_EXECUTE_SC",
-            OpType::CallSc => "OP_TYPE_CALL_SC",
+            ExecutionQueryExecutionStatus::Unspecified => {
+                "EXECUTION_QUERY_EXECUTION_STATUS_UNSPECIFIED"
+            }
+            ExecutionQueryExecutionStatus::AlreadyExecutedWithSuccess => {
+                "EXECUTION_QUERY_EXECUTION_STATUS_ALREADY_EXECUTED_WITH_SUCCESS"
+            }
+            ExecutionQueryExecutionStatus::AlreadyExecutedWithFailure => {
+                "EXECUTION_QUERY_EXECUTION_STATUS_ALREADY_EXECUTED_WITH_FAILURE"
+            }
+            ExecutionQueryExecutionStatus::ExecutableOrExpired => {
+                "EXECUTION_QUERY_EXECUTION_STATUS_EXECUTABLE_OR_EXPIRED"
+            }
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "OP_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
-            "OP_TYPE_TRANSACTION" => Some(Self::Transaction),
-            "OP_TYPE_ROLL_BUY" => Some(Self::RollBuy),
-            "OP_TYPE_ROLL_SELL" => Some(Self::RollSell),
-            "OP_TYPE_EXECUTE_SC" => Some(Self::ExecuteSc),
-            "OP_TYPE_CALL_SC" => Some(Self::CallSc),
+            "EXECUTION_QUERY_EXECUTION_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
+            "EXECUTION_QUERY_EXECUTION_STATUS_ALREADY_EXECUTED_WITH_SUCCESS" => {
+                Some(Self::AlreadyExecutedWithSuccess)
+            }
+            "EXECUTION_QUERY_EXECUTION_STATUS_ALREADY_EXECUTED_WITH_FAILURE" => {
+                Some(Self::AlreadyExecutedWithFailure)
+            }
+            "EXECUTION_QUERY_EXECUTION_STATUS_EXECUTABLE_OR_EXPIRED" => {
+                Some(Self::ExecutableOrExpired)
+            }
             _ => None,
         }
     }
@@ -2645,34 +2780,6 @@ pub mod public_service_client {
                 .insert(GrpcMethod::new("massa.api.v1.PublicService", "GetBlocks"));
             self.inner.unary(req, path, codec).await
         }
-        /// Get blocks by slots
-        pub async fn get_blocks_by_slots(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GetBlocksBySlotsRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GetBlocksBySlotsResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.PublicService/GetBlocksBySlots",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("massa.api.v1.PublicService", "GetBlocksBySlots"),
-                );
-            self.inner.unary(req, path, codec).await
-        }
         /// Get datastore entries
         pub async fn get_datastore_entries(
             &mut self,
@@ -2699,32 +2806,6 @@ pub mod public_service_client {
                 .insert(
                     GrpcMethod::new("massa.api.v1.PublicService", "GetDatastoreEntries"),
                 );
-            self.inner.unary(req, path, codec).await
-        }
-        /// Get stakers
-        pub async fn get_stakers(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GetStakersRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GetStakersResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.PublicService/GetStakers",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("massa.api.v1.PublicService", "GetStakers"));
             self.inner.unary(req, path, codec).await
         }
         /// Get Mip status
@@ -2866,6 +2947,32 @@ pub mod public_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        /// Get stakers
+        pub async fn get_stakers(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetStakersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetStakersResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/GetStakers",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("massa.api.v1.PublicService", "GetStakers"));
+            self.inner.unary(req, path, codec).await
+        }
         /// Get status
         pub async fn get_status(
             &mut self,
@@ -2923,32 +3030,6 @@ pub mod public_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /// Get node version
-        pub async fn get_version(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GetVersionRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GetVersionResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.PublicService/GetVersion",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("massa.api.v1.PublicService", "GetVersion"));
-            self.inner.unary(req, path, codec).await
-        }
         /// Query state
         pub async fn query_state(
             &mut self,
@@ -2999,36 +3080,6 @@ pub mod public_service_client {
             let mut req = request.into_streaming_request();
             req.extensions_mut()
                 .insert(GrpcMethod::new("massa.api.v1.PublicService", "NewBlocks"));
-            self.inner.streaming(req, path, codec).await
-        }
-        /// New received and produced blocks headers
-        pub async fn new_blocks_headers(
-            &mut self,
-            request: impl tonic::IntoStreamingRequest<
-                Message = super::NewBlocksHeadersRequest,
-            >,
-        ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::NewBlocksHeadersResponse>>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.PublicService/NewBlocksHeaders",
-            );
-            let mut req = request.into_streaming_request();
-            req.extensions_mut()
-                .insert(
-                    GrpcMethod::new("massa.api.v1.PublicService", "NewBlocksHeaders"),
-                );
             self.inner.streaming(req, path, codec).await
         }
         /// New received and produced endorsements
@@ -3290,28 +3341,12 @@ pub mod public_service_server {
             tonic::Response<super::GetBlocksResponse>,
             tonic::Status,
         >;
-        /// Get blocks by slots
-        async fn get_blocks_by_slots(
-            &self,
-            request: tonic::Request<super::GetBlocksBySlotsRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GetBlocksBySlotsResponse>,
-            tonic::Status,
-        >;
         /// Get datastore entries
         async fn get_datastore_entries(
             &self,
             request: tonic::Request<super::GetDatastoreEntriesRequest>,
         ) -> std::result::Result<
             tonic::Response<super::GetDatastoreEntriesResponse>,
-            tonic::Status,
-        >;
-        /// Get stakers
-        async fn get_stakers(
-            &self,
-            request: tonic::Request<super::GetStakersRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GetStakersResponse>,
             tonic::Status,
         >;
         /// Get Mip status
@@ -3354,6 +3389,14 @@ pub mod public_service_server {
             tonic::Response<super::GetSelectorDrawsResponse>,
             tonic::Status,
         >;
+        /// Get stakers
+        async fn get_stakers(
+            &self,
+            request: tonic::Request<super::GetStakersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetStakersResponse>,
+            tonic::Status,
+        >;
         /// Get status
         async fn get_status(
             &self,
@@ -3368,14 +3411,6 @@ pub mod public_service_server {
             request: tonic::Request<super::GetTransactionsThroughputRequest>,
         ) -> std::result::Result<
             tonic::Response<super::GetTransactionsThroughputResponse>,
-            tonic::Status,
-        >;
-        /// Get node version
-        async fn get_version(
-            &self,
-            request: tonic::Request<super::GetVersionRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GetVersionResponse>,
             tonic::Status,
         >;
         /// Query state
@@ -3397,23 +3432,6 @@ pub mod public_service_server {
             &self,
             request: tonic::Request<tonic::Streaming<super::NewBlocksRequest>>,
         ) -> std::result::Result<tonic::Response<Self::NewBlocksStream>, tonic::Status>;
-        /// Server streaming response type for the NewBlocksHeaders method.
-        type NewBlocksHeadersStream: futures_core::Stream<
-                Item = std::result::Result<
-                    super::NewBlocksHeadersResponse,
-                    tonic::Status,
-                >,
-            >
-            + Send
-            + 'static;
-        /// New received and produced blocks headers
-        async fn new_blocks_headers(
-            &self,
-            request: tonic::Request<tonic::Streaming<super::NewBlocksHeadersRequest>>,
-        ) -> std::result::Result<
-            tonic::Response<Self::NewBlocksHeadersStream>,
-            tonic::Status,
-        >;
         /// Server streaming response type for the NewEndorsements method.
         type NewEndorsementsStream: futures_core::Stream<
                 Item = std::result::Result<super::NewEndorsementsResponse, tonic::Status>,
@@ -3661,52 +3679,6 @@ pub mod public_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.PublicService/GetBlocksBySlots" => {
-                    #[allow(non_camel_case_types)]
-                    struct GetBlocksBySlotsSvc<T: PublicService>(pub Arc<T>);
-                    impl<
-                        T: PublicService,
-                    > tonic::server::UnaryService<super::GetBlocksBySlotsRequest>
-                    for GetBlocksBySlotsSvc<T> {
-                        type Response = super::GetBlocksBySlotsResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::GetBlocksBySlotsRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).get_blocks_by_slots(request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = GetBlocksBySlotsSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
                 "/massa.api.v1.PublicService/GetDatastoreEntries" => {
                     #[allow(non_camel_case_types)]
                     struct GetDatastoreEntriesSvc<T: PublicService>(pub Arc<T>);
@@ -3738,50 +3710,6 @@ pub mod public_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = GetDatastoreEntriesSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/massa.api.v1.PublicService/GetStakers" => {
-                    #[allow(non_camel_case_types)]
-                    struct GetStakersSvc<T: PublicService>(pub Arc<T>);
-                    impl<
-                        T: PublicService,
-                    > tonic::server::UnaryService<super::GetStakersRequest>
-                    for GetStakersSvc<T> {
-                        type Response = super::GetStakersResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::GetStakersRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).get_stakers(request).await };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = GetStakersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -4029,6 +3957,50 @@ pub mod public_service_server {
                     };
                     Box::pin(fut)
                 }
+                "/massa.api.v1.PublicService/GetStakers" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetStakersSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::UnaryService<super::GetStakersRequest>
+                    for GetStakersSvc<T> {
+                        type Response = super::GetStakersResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetStakersRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move { (*inner).get_stakers(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetStakersSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
                 "/massa.api.v1.PublicService/GetStatus" => {
                     #[allow(non_camel_case_types)]
                     struct GetStatusSvc<T: PublicService>(pub Arc<T>);
@@ -4122,50 +4094,6 @@ pub mod public_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.PublicService/GetVersion" => {
-                    #[allow(non_camel_case_types)]
-                    struct GetVersionSvc<T: PublicService>(pub Arc<T>);
-                    impl<
-                        T: PublicService,
-                    > tonic::server::UnaryService<super::GetVersionRequest>
-                    for GetVersionSvc<T> {
-                        type Response = super::GetVersionResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::GetVersionRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).get_version(request).await };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = GetVersionSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
                 "/massa.api.v1.PublicService/QueryState" => {
                     #[allow(non_camel_case_types)]
                     struct QueryStateSvc<T: PublicService>(pub Arc<T>);
@@ -4242,55 +4170,6 @@ pub mod public_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = NewBlocksSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.streaming(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/massa.api.v1.PublicService/NewBlocksHeaders" => {
-                    #[allow(non_camel_case_types)]
-                    struct NewBlocksHeadersSvc<T: PublicService>(pub Arc<T>);
-                    impl<
-                        T: PublicService,
-                    > tonic::server::StreamingService<super::NewBlocksHeadersRequest>
-                    for NewBlocksHeadersSvc<T> {
-                        type Response = super::NewBlocksHeadersResponse;
-                        type ResponseStream = T::NewBlocksHeadersStream;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::ResponseStream>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<
-                                tonic::Streaming<super::NewBlocksHeadersRequest>,
-                            >,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).new_blocks_headers(request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = NewBlocksHeadersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

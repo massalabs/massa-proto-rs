@@ -30,7 +30,7 @@ Project build
 
 You can generate source code from protobuf files by running:
 ```bash
-cargo build
+cargo build --release --all-features
 ```
 
 Postman integration
