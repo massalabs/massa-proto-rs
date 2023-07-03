@@ -1244,6 +1244,8 @@ pub enum ScExecutionEventStatus {
     ReadOnly = 2,
     /// Failure status
     Failure = 3,
+    /// Unknown status
+    Unknown = 4,
 }
 impl ScExecutionEventStatus {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -1258,6 +1260,7 @@ impl ScExecutionEventStatus {
             ScExecutionEventStatus::Final => "SC_EXECUTION_EVENT_STATUS_FINAL",
             ScExecutionEventStatus::ReadOnly => "SC_EXECUTION_EVENT_STATUS_READ_ONLY",
             ScExecutionEventStatus::Failure => "SC_EXECUTION_EVENT_STATUS_FAILURE",
+            ScExecutionEventStatus::Unknown => "SC_EXECUTION_EVENT_STATUS_UNKNOWN",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1267,6 +1270,7 @@ impl ScExecutionEventStatus {
             "SC_EXECUTION_EVENT_STATUS_FINAL" => Some(Self::Final),
             "SC_EXECUTION_EVENT_STATUS_READ_ONLY" => Some(Self::ReadOnly),
             "SC_EXECUTION_EVENT_STATUS_FAILURE" => Some(Self::Failure),
+            "SC_EXECUTION_EVENT_STATUS_UNKNOWN" => Some(Self::Unknown),
             _ => None,
         }
     }
