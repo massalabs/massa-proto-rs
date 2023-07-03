@@ -2233,8 +2233,11 @@ pub struct QueryStateResponse {
     /// Candidate cursor position
     #[prost(message, optional, tag = "2")]
     pub candidate_cursor: ::core::option::Option<super::super::model::v1::Slot>,
+    /// The hash of the XOF final state hash
+    #[prost(string, tag = "3")]
+    pub final_state_fingerprint: ::prost::alloc::string::String,
     /// List of execution query response items
-    #[prost(message, repeated, tag = "3")]
+    #[prost(message, repeated, tag = "4")]
     pub responses: ::prost::alloc::vec::Vec<ExecutionQueryResponse>,
 }
 /// Execution state query response
