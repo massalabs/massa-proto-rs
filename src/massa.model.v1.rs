@@ -1281,6 +1281,8 @@ pub enum ExecutionOutputStatus {
     Candidate = 1,
     /// Final status
     Final = 2,
+    /// Unknown status
+    Unknown = 3,
 }
 impl ExecutionOutputStatus {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -1292,6 +1294,7 @@ impl ExecutionOutputStatus {
             ExecutionOutputStatus::Unspecified => "EXECUTION_OUTPUT_STATUS_UNSPECIFIED",
             ExecutionOutputStatus::Candidate => "EXECUTION_OUTPUT_STATUS_CANDIDATE",
             ExecutionOutputStatus::Final => "EXECUTION_OUTPUT_STATUS_FINAL",
+            ExecutionOutputStatus::Unknown => "EXECUTION_OUTPUT_STATUS_UNKNOWN",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1300,6 +1303,7 @@ impl ExecutionOutputStatus {
             "EXECUTION_OUTPUT_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
             "EXECUTION_OUTPUT_STATUS_CANDIDATE" => Some(Self::Candidate),
             "EXECUTION_OUTPUT_STATUS_FINAL" => Some(Self::Final),
+            "EXECUTION_OUTPUT_STATUS_UNKNOWN" => Some(Self::Unknown),
             _ => None,
         }
     }
