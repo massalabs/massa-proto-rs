@@ -1232,6 +1232,110 @@ pub mod set_or_delete_datastore_entry {
         Delete(super::Empty),
     }
 }
+/// Read-only execution request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ReadOnlyExecutionRequest {
+    /// Maximum gas to spend in the execution.
+    #[prost(uint64, tag = "1")]
+    pub max_gas: u64,
+    /// Call stack to simulate, older caller first
+    #[prost(message, repeated, tag = "2")]
+    pub call_stack: ::prost::alloc::vec::Vec<ExecutionStackElement>,
+    /// Caller's address, (Optional)
+    #[prost(string, tag = "5")]
+    pub caller_address: ::prost::alloc::string::String,
+    /// execution start state
+    ///
+    /// Whether to start execution from final or active state
+    #[prost(bool, tag = "6")]
+    pub is_final: bool,
+    /// Target of the request
+    #[prost(oneof = "read_only_execution_request::Target", tags = "3, 4")]
+    pub target: ::core::option::Option<read_only_execution_request::Target>,
+}
+/// Nested message and enum types in `ReadOnlyExecutionRequest`.
+pub mod read_only_execution_request {
+    /// Target of the request
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Target {
+        /// Byte code
+        #[prost(message, tag = "3")]
+        BytecodeCall(super::BytecodeExecution),
+        /// Function call
+        #[prost(message, tag = "4")]
+        FunctionCall(super::FunctionCall),
+    }
+}
+/// / Execute a bytecode
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BytecodeExecution {
+    /// Byte code
+    #[prost(bytes = "vec", tag = "1")]
+    pub bytecode: ::prost::alloc::vec::Vec<u8>,
+    /// Datastore (key value store) for `ExecuteSC` Operation (Optional)
+    #[prost(message, repeated, tag = "2")]
+    pub operation_datastore: ::prost::alloc::vec::Vec<BytesMapFieldEntry>,
+}
+/// Execute a function call
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FunctionCall {
+    /// Target address
+    #[prost(string, tag = "1")]
+    pub target_addr: ::prost::alloc::string::String,
+    /// Target function
+    #[prost(string, tag = "2")]
+    pub target_func: ::prost::alloc::string::String,
+    /// Parameter to pass to the target function
+    #[prost(bytes = "vec", tag = "3")]
+    pub parameter: ::prost::alloc::vec::Vec<u8>,
+}
+/// Structure describing the output of a read only execution
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ReadOnlyExecutionOutput {
+    /// Output of a single execution
+    #[prost(message, optional, tag = "1")]
+    pub out: ::core::option::Option<ExecutionOutput>,
+    /// Gas cost for this execution
+    #[prost(uint64, tag = "2")]
+    pub max_gas: u64,
+    /// Returned value from the module call
+    #[prost(bytes = "vec", tag = "3")]
+    pub call_result: ::prost::alloc::vec::Vec<u8>,
+}
+/// Structure describing an element of the execution stack.
+/// Every time a function is called from bytecode,
+/// a new `ExecutionStackElement` is pushed at the top of the execution stack
+/// to represent the local execution context of the called function,
+/// instead of the caller's which should lie just below in the stack.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionStackElement {
+    /// Called address
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// Coins transferred to the target address during the call
+    #[prost(message, optional, tag = "2")]
+    pub coins: ::core::option::Option<NativeAmount>,
+    /// List of addresses owned by the current call, and on which the current call has write access.
+    /// This list should contain `ExecutionStackElement::address` in the sense that an address should have write access to itself.
+    /// This list should also contain all addresses created previously during the call
+    /// to allow write access on newly created addresses in order to set them up,
+    /// but only within the scope of the current stack element.
+    /// That way, only the current scope and neither its caller not the functions it calls gain this write access,
+    /// which is important for security.
+    /// Note that we use a vector instead of a pre-hashed set to ensure order determinism,
+    /// the performance hit of linear search remains minimal because `owned_addresses` will always contain very few elements.
+    #[prost(string, repeated, tag = "3")]
+    pub owned_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Datastore (key value store) for `ExecuteSC` Operation (Optional)
+    #[prost(message, repeated, tag = "4")]
+    pub operation_datastore: ::prost::alloc::vec::Vec<BytesMapFieldEntry>,
+}
 /// ScExecutionEventStatus type enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
