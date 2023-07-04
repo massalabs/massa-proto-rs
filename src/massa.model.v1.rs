@@ -344,17 +344,14 @@ pub struct OperationWrapper {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
     /// The IDs of the blocks in which the operation appears
-    #[prost(string, repeated, tag = "3")]
+    #[prost(string, repeated, tag = "2")]
     pub block_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// The thread in which the operation can be included
-    #[prost(uint32, tag = "5")]
+    #[prost(uint32, tag = "3")]
     pub thread: u32,
     /// The operation object itself
-    #[prost(message, optional, tag = "6")]
+    #[prost(message, optional, tag = "4")]
     pub operation: ::core::option::Option<SignedOperation>,
-    /// The execution statuses of the operation
-    #[prost(enumeration = "OperationStatus", repeated, tag = "7")]
-    pub status: ::prost::alloc::vec::Vec<i32>,
 }
 /// OperationIds
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -371,51 +368,6 @@ pub struct OpTypes {
     /// Operations types
     #[prost(enumeration = "OpType", repeated, tag = "1")]
     pub op_types: ::prost::alloc::vec::Vec<i32>,
-}
-/// Possible statuses for an operation
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum OperationStatus {
-    /// Default enum value
-    Unspecified = 0,
-    /// The operation is still pending
-    Pending = 1,
-    /// The operation is final
-    Final = 2,
-    /// The operation was executed successfully
-    Success = 3,
-    /// The operation failed to execute
-    Failure = 4,
-    /// The status of the operation is unknown
-    Unknown = 5,
-}
-impl OperationStatus {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            OperationStatus::Unspecified => "OPERATION_STATUS_UNSPECIFIED",
-            OperationStatus::Pending => "OPERATION_STATUS_PENDING",
-            OperationStatus::Final => "OPERATION_STATUS_FINAL",
-            OperationStatus::Success => "OPERATION_STATUS_SUCCESS",
-            OperationStatus::Failure => "OPERATION_STATUS_FAILURE",
-            OperationStatus::Unknown => "OPERATION_STATUS_UNKNOWN",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "OPERATION_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
-            "OPERATION_STATUS_PENDING" => Some(Self::Pending),
-            "OPERATION_STATUS_FINAL" => Some(Self::Final),
-            "OPERATION_STATUS_SUCCESS" => Some(Self::Success),
-            "OPERATION_STATUS_FAILURE" => Some(Self::Failure),
-            "OPERATION_STATUS_UNKNOWN" => Some(Self::Unknown),
-            _ => None,
-        }
-    }
 }
 /// Operation type enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -804,9 +756,20 @@ pub struct ScExecutionEventContext {
     /// Origin operation id (Optional)
     #[prost(message, optional, tag = "5")]
     pub origin_operation_id: ::core::option::Option<::prost::alloc::string::String>,
+    /// If a failure occurred
+    #[prost(bool, tag = "6")]
+    pub is_failure: bool,
     /// Status
-    #[prost(enumeration = "ScExecutionEventStatus", tag = "6")]
+    #[prost(enumeration = "ScExecutionEventStatus", tag = "7")]
     pub status: i32,
+}
+/// ScExecutionEventsStatus
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ScExecutionEventsStatus {
+    /// Status
+    #[prost(enumeration = "ScExecutionEventStatus", repeated, tag = "1")]
+    pub status: ::prost::alloc::vec::Vec<i32>,
 }
 /// StateChanges
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1232,10 +1195,10 @@ pub mod set_or_delete_datastore_entry {
         Delete(super::Empty),
     }
 }
-/// Read-only execution request
+/// Read-only execution call
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ReadOnlyExecutionRequest {
+pub struct ReadOnlyExecutionCall {
     /// Maximum gas to spend in the execution.
     #[prost(uint64, tag = "1")]
     pub max_gas: u64,
@@ -1250,13 +1213,13 @@ pub struct ReadOnlyExecutionRequest {
     /// Whether to start execution from final or active state
     #[prost(bool, tag = "6")]
     pub is_final: bool,
-    /// Target of the request
-    #[prost(oneof = "read_only_execution_request::Target", tags = "3, 4")]
-    pub target: ::core::option::Option<read_only_execution_request::Target>,
+    /// Target of the call
+    #[prost(oneof = "read_only_execution_call::Target", tags = "3, 4")]
+    pub target: ::core::option::Option<read_only_execution_call::Target>,
 }
-/// Nested message and enum types in `ReadOnlyExecutionRequest`.
-pub mod read_only_execution_request {
-    /// Target of the request
+/// Nested message and enum types in `ReadOnlyExecutionCall`.
+pub mod read_only_execution_call {
+    /// Target of the call
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Target {
@@ -1346,10 +1309,8 @@ pub enum ScExecutionEventStatus {
     Final = 1,
     /// Read only status
     ReadOnly = 2,
-    /// Failure status
-    Failure = 3,
-    /// Unknown status
-    Unknown = 4,
+    /// Candidate status
+    Candidate = 3,
 }
 impl ScExecutionEventStatus {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -1363,8 +1324,7 @@ impl ScExecutionEventStatus {
             }
             ScExecutionEventStatus::Final => "SC_EXECUTION_EVENT_STATUS_FINAL",
             ScExecutionEventStatus::ReadOnly => "SC_EXECUTION_EVENT_STATUS_READ_ONLY",
-            ScExecutionEventStatus::Failure => "SC_EXECUTION_EVENT_STATUS_FAILURE",
-            ScExecutionEventStatus::Unknown => "SC_EXECUTION_EVENT_STATUS_UNKNOWN",
+            ScExecutionEventStatus::Candidate => "SC_EXECUTION_EVENT_STATUS_CANDIDATE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1373,8 +1333,7 @@ impl ScExecutionEventStatus {
             "SC_EXECUTION_EVENT_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
             "SC_EXECUTION_EVENT_STATUS_FINAL" => Some(Self::Final),
             "SC_EXECUTION_EVENT_STATUS_READ_ONLY" => Some(Self::ReadOnly),
-            "SC_EXECUTION_EVENT_STATUS_FAILURE" => Some(Self::Failure),
-            "SC_EXECUTION_EVENT_STATUS_UNKNOWN" => Some(Self::Unknown),
+            "SC_EXECUTION_EVENT_STATUS_CANDIDATE" => Some(Self::Candidate),
             _ => None,
         }
     }

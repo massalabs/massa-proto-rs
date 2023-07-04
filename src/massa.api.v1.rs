@@ -2054,11 +2054,9 @@ pub struct GetBlocksRequest {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecuteReadOnlyCallRequest {
-    /// Execution request
-    #[prost(message, repeated, tag = "1")]
-    pub request: ::prost::alloc::vec::Vec<
-        super::super::model::v1::ReadOnlyExecutionRequest,
-    >,
+    /// Execution call
+    #[prost(message, optional, tag = "1")]
+    pub call: ::core::option::Option<super::super::model::v1::ReadOnlyExecutionCall>,
 }
 /// ExecuteReadOnlyCallResponse holds response from ExecuteReadOnlyCall
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -2218,25 +2216,35 @@ pub struct GetScExecutionEventsRequest {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScExecutionEventsFilter {
-    /// Slot range (Optional)
-    #[prost(message, optional, tag = "1")]
-    pub slot_range: ::core::option::Option<super::super::model::v1::SlotRange>,
-    /// Caller address (Optional)
-    #[prost(message, optional, tag = "2")]
-    pub caller_address: ::core::option::Option<::prost::alloc::string::String>,
-    /// Emitter address (Optional)
-    #[prost(message, optional, tag = "3")]
-    pub emitter_address: ::core::option::Option<::prost::alloc::string::String>,
-    /// Original operation id (Optional)
-    #[prost(message, optional, tag = "4")]
-    pub original_operation_id: ::core::option::Option<::prost::alloc::string::String>,
-    /// Status (Optional)
-    #[prost(
-        enumeration = "super::super::model::v1::ScExecutionEventStatus",
-        repeated,
-        tag = "5"
-    )]
-    pub status: ::prost::alloc::vec::Vec<i32>,
+    /// Filter
+    #[prost(oneof = "sc_execution_events_filter::Filter", tags = "1, 2, 3, 4, 5")]
+    pub filter: ::core::option::Option<sc_execution_events_filter::Filter>,
+}
+/// Nested message and enum types in `ScExecutionEventsFilter`.
+pub mod sc_execution_events_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// Slot range
+        #[prost(message, tag = "1")]
+        SlotRange(super::super::super::model::v1::SlotRange),
+        /// Caller address
+        #[prost(string, tag = "2")]
+        CallerAddress(::prost::alloc::string::String),
+        /// Emitter address
+        #[prost(string, tag = "3")]
+        EmitterAddress(::prost::alloc::string::String),
+        /// Original operation id
+        #[prost(string, tag = "4")]
+        OriginalOperationId(::prost::alloc::string::String),
+        /// Status
+        #[prost(
+            enumeration = "super::super::super::model::v1::ScExecutionEventStatus",
+            tag = "5"
+        )]
+        Status(i32),
+    }
 }
 /// GetScExecutionEventsResponse holds response from GetScExecutionEvents
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -2318,14 +2326,14 @@ pub mod stakers_filter {
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
-        /// Minimum rolls (Optional)
-        #[prost(message, tag = "1")]
+        /// Minimum rolls
+        #[prost(uint64, tag = "1")]
         MinRolls(u64),
-        /// Maximum rolls (Optional)
-        #[prost(message, tag = "2")]
+        /// Maximum rolls
+        #[prost(uint64, tag = "2")]
         MaxRolls(u64),
-        /// Limit (Optional)
-        #[prost(message, tag = "3")]
+        /// Limit
+        #[prost(uint64, tag = "3")]
         Limit(u64),
     }
 }
@@ -2353,9 +2361,9 @@ pub struct GetTransactionsThroughputResponse {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryStateRequest {
-    /// List of execution query request items
-    #[prost(message, optional, tag = "1")]
-    pub requests: ::core::option::Option<ExecutionQueryRequestItem>,
+    /// Execution queries
+    #[prost(message, repeated, tag = "1")]
+    pub queries: ::prost::alloc::vec::Vec<ExecutionQueryRequestItem>,
 }
 /// Query state query item
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -2611,9 +2619,9 @@ pub struct CycleInfos {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Events {
-    /// Event filter to apply
-    #[prost(message, optional, tag = "1")]
-    pub filter: ::core::option::Option<ScExecutionEventsFilter>,
+    /// Returns all the events that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<ScExecutionEventsFilter>,
 }
 /// Response to atomically execute a batch of execution state queries
 #[allow(clippy::derive_partial_eq_without_eq)]
