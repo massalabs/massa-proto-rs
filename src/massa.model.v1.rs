@@ -37,11 +37,11 @@ impl AddressCategory {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NativeAmount {
     /// Mantissa
-    #[prost(message, optional, tag = "1")]
-    pub mandatory_mantissa: ::core::option::Option<u64>,
+    #[prost(uint64, tag = "1")]
+    pub mantissa: u64,
     /// Scale
-    #[prost(message, optional, tag = "2")]
-    pub mandatory_scale: ::core::option::Option<u32>,
+    #[prost(uint32, tag = "2")]
+    pub scale: u32,
 }
 /// When an address is drawn to create an endorsement it is selected for a specific index
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -133,6 +133,42 @@ pub struct SecureShare {
     /// A secure hash of the data. See also \[massa_hash::Hash\]
     #[prost(string, tag = "5")]
     pub id: ::prost::alloc::string::String,
+}
+/// Comparison result
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum ComparisonResult {
+    Unspecified = 0,
+    /// left is lower
+    Lower = 1,
+    /// left and right are equal
+    Equal = 2,
+    /// left is greater
+    Greater = 3,
+}
+impl ComparisonResult {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ComparisonResult::Unspecified => "COMPARISON_RESULT_UNSPECIFIED",
+            ComparisonResult::Lower => "COMPARISON_RESULT_LOWER",
+            ComparisonResult::Equal => "COMPARISON_RESULT_EQUAL",
+            ComparisonResult::Greater => "COMPARISON_RESULT_GREATER",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "COMPARISON_RESULT_UNSPECIFIED" => Some(Self::Unspecified),
+            "COMPARISON_RESULT_LOWER" => Some(Self::Lower),
+            "COMPARISON_RESULT_EQUAL" => Some(Self::Equal),
+            "COMPARISON_RESULT_GREATER" => Some(Self::Greater),
+            _ => None,
+        }
+    }
 }
 /// The operation as sent in the network
 #[allow(clippy::derive_partial_eq_without_eq)]
