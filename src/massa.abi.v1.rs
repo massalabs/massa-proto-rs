@@ -95,7 +95,7 @@ pub struct TransferCoinsRequest {
     >,
     /// The address of the sender, if none, use current address
     #[prost(message, optional, tag = "3")]
-    pub optional_sender_address: ::core::option::Option<::prost::alloc::string::String>,
+    pub sender_address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Transfer coin result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -122,8 +122,8 @@ pub struct FunctionExistsResult {
 }
 /// Tips to check for completeness exec:
 /// `rg message | rg "\{" | rg "Result" | wc -l`
-/// the given count should be equal to the number of messages in RespResult + 2
-/// the +2 comes from ResResult itself which is counted above and from ComparisonResult which is not in the same category
+/// the given count should be equal to the number of messages in RespResult + 1
+/// the +1 comes from ResResult itself which is counted above
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RespResult {
@@ -451,8 +451,8 @@ pub struct MulNativeAmountRequest {
     #[prost(message, optional, tag = "1")]
     pub amount: ::core::option::Option<super::super::model::v1::NativeAmount>,
     /// Coefficient to multiply by
-    #[prost(message, optional, tag = "2")]
-    pub mandatory_coefficient: ::core::option::Option<u64>,
+    #[prost(uint64, tag = "2")]
+    pub coefficient: u64,
 }
 /// Amount multiplication result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -473,8 +473,8 @@ pub struct ScalarDivRemNativeAmountRequest {
     #[prost(message, optional, tag = "1")]
     pub dividend: ::core::option::Option<super::super::model::v1::NativeAmount>,
     /// Divisor to divide by
-    #[prost(message, optional, tag = "2")]
-    pub mandatory_divisor: ::core::option::Option<u64>,
+    #[prost(uint64, tag = "2")]
+    pub divisor: u64,
 }
 /// Amount division by scalar result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -503,45 +503,11 @@ pub struct DivRemNativeAmountsRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DivRemNativeAmountsResult {
     /// Quotient of amount and divisor
-    #[prost(message, optional, tag = "1")]
-    pub mandatory_quotient: ::core::option::Option<u64>,
+    #[prost(uint64, tag = "1")]
+    pub quotient: u64,
     /// Remainder of amount and divisor
     #[prost(message, optional, tag = "2")]
     pub remainder: ::core::option::Option<super::super::model::v1::NativeAmount>,
-}
-/// Comparison result
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ComparisonResult {
-    /// Status
-    #[prost(oneof = "comparison_result::Restult", tags = "1, 2, 3")]
-    pub restult: ::core::option::Option<comparison_result::Restult>,
-}
-/// Nested message and enum types in `ComparisonResult`.
-pub mod comparison_result {
-    /// Left is lower
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
-    pub struct LeftLower {}
-    /// Left is equal to right
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
-    pub struct Equal {}
-    /// Left is greater
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Message)]
-    pub struct LeftGreater {}
-    /// Status
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Restult {
-        #[prost(message, tag = "1")]
-        LeftLower(LeftLower),
-        #[prost(message, tag = "2")]
-        Equal(Equal),
-        #[prost(message, tag = "3")]
-        LeftGreater(LeftGreater),
-    }
 }
 /// Time addition checked request
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -589,8 +555,8 @@ pub struct CheckedMulNativeTimeRequest {
     #[prost(message, optional, tag = "1")]
     pub time: ::core::option::Option<super::super::model::v1::NativeTime>,
     /// Coefficient to multiply by
-    #[prost(message, optional, tag = "2")]
-    pub mandatory_coefficient: ::core::option::Option<u64>,
+    #[prost(uint64, tag = "2")]
+    pub coefficient: u64,
 }
 /// Time scalar mult checked result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -608,8 +574,8 @@ pub struct CheckedScalarDivRemNativeTimeRequest {
     #[prost(message, optional, tag = "1")]
     pub dividend: ::core::option::Option<super::super::model::v1::NativeTime>,
     /// Divisor to divide by
-    #[prost(message, optional, tag = "2")]
-    pub mandatory_divisor: ::core::option::Option<u64>,
+    #[prost(uint64, tag = "2")]
+    pub divisor: u64,
 }
 /// Time scalar divrem checked result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -638,8 +604,8 @@ pub struct CheckedDivRemNativeTimeRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CheckedDivRemNativeTimeResult {
     /// Quotient of time and divisor
-    #[prost(message, optional, tag = "1")]
-    pub mandatory_quotient: ::core::option::Option<u64>,
+    #[prost(uint64, tag = "1")]
+    pub quotient: u64,
     /// Remainder of time and divisor
     #[prost(message, optional, tag = "2")]
     pub remainder: ::core::option::Option<super::super::model::v1::NativeTime>,
@@ -661,7 +627,7 @@ pub struct CompareNativeTimeRequest {
 pub struct CompareNativeTimeResult {
     /// Comparison result
     #[prost(message, optional, tag = "1")]
-    pub result: ::core::option::Option<ComparisonResult>,
+    pub result: ::core::option::Option<super::super::model::v1::ComparisonResult>,
 }
 /// Compare Address request
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -680,7 +646,7 @@ pub struct CompareAddressRequest {
 pub struct CompareAddressResult {
     /// Comparison result
     #[prost(message, optional, tag = "1")]
-    pub result: ::core::option::Option<ComparisonResult>,
+    pub result: ::core::option::Option<super::super::model::v1::ComparisonResult>,
 }
 /// Compare PubKey request
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -699,7 +665,7 @@ pub struct ComparePubKeyRequest {
 pub struct ComparePubKeyResult {
     /// Comparison result
     #[prost(message, optional, tag = "1")]
-    pub result: ::core::option::Option<ComparisonResult>,
+    pub result: ::core::option::Option<super::super::model::v1::ComparisonResult>,
 }
 /// Compare Sig request
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -718,7 +684,7 @@ pub struct CompareSigRequest {
 pub struct CompareSigResult {
     /// Comparison result
     #[prost(message, optional, tag = "1")]
-    pub result: ::core::option::Option<ComparisonResult>,
+    pub result: ::core::option::Option<super::super::model::v1::ComparisonResult>,
 }
 /// Verify Sig request
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -759,7 +725,7 @@ pub struct CompareNativeAmountRequest {
 pub struct CompareNativeAmountResult {
     /// Comparison result
     #[prost(message, optional, tag = "1")]
-    pub result: ::core::option::Option<ComparisonResult>,
+    pub result: ::core::option::Option<super::super::model::v1::ComparisonResult>,
 }
 /// Keccak256 hash request
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -868,7 +834,7 @@ pub struct GetKeysRequest {
     pub prefix: ::prost::alloc::vec::Vec<u8>,
     /// Address to get keys for
     #[prost(message, optional, tag = "2")]
-    pub optional_address: ::core::option::Option<::prost::alloc::string::String>,
+    pub address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Get keys result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -890,7 +856,7 @@ pub struct SetDataRequest {
     pub value: ::prost::alloc::vec::Vec<u8>,
     /// Address to set data for, if none, use current address
     #[prost(message, optional, tag = "3")]
-    pub optional_address: ::core::option::Option<::prost::alloc::string::String>,
+    pub address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Set data result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -908,7 +874,7 @@ pub struct AppendDataRequest {
     pub value: ::prost::alloc::vec::Vec<u8>,
     /// Address to append data for, if none, use current address
     #[prost(message, optional, tag = "3")]
-    pub optional_address: ::core::option::Option<::prost::alloc::string::String>,
+    pub address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Append data result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -923,7 +889,7 @@ pub struct GetDataRequest {
     pub key: ::prost::alloc::vec::Vec<u8>,
     /// Address to get data for, if none, use current address
     #[prost(message, optional, tag = "2")]
-    pub optional_address: ::core::option::Option<::prost::alloc::string::String>,
+    pub address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Get data result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -942,7 +908,7 @@ pub struct DeleteDataRequest {
     pub key: ::prost::alloc::vec::Vec<u8>,
     /// Address to delete data for, if none, use current address
     #[prost(message, optional, tag = "2")]
-    pub optional_address: ::core::option::Option<::prost::alloc::string::String>,
+    pub address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Delete data result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -957,7 +923,7 @@ pub struct HasDataRequest {
     pub key: ::prost::alloc::vec::Vec<u8>,
     /// Address to check data for, if none, use current address
     #[prost(message, optional, tag = "2")]
-    pub optional_address: ::core::option::Option<::prost::alloc::string::String>,
+    pub address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Has data result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1011,8 +977,8 @@ pub struct AddressFromPubKeyResult {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UnsafeRandomRequest {
-    #[prost(message, optional, tag = "2")]
-    pub mandatory_num_bytes: ::core::option::Option<u32>,
+    #[prost(uint32, tag = "2")]
+    pub num_bytes: u32,
 }
 /// Unsafe random result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1102,7 +1068,7 @@ pub struct SetBytecodeRequest {
     pub bytecode: ::prost::alloc::vec::Vec<u8>,
     /// Address to set bytecode for, if none, use current address
     #[prost(message, optional, tag = "2")]
-    pub optional_address: ::core::option::Option<::prost::alloc::string::String>,
+    pub address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Set bytecode result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1114,7 +1080,7 @@ pub struct SetBytecodeResult {}
 pub struct GetBytecodeRequest {
     /// Address to get bytecode for, if none, use current address
     #[prost(message, optional, tag = "1")]
-    pub optional_address: ::core::option::Option<::prost::alloc::string::String>,
+    pub address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Get bytecode result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1168,8 +1134,8 @@ pub struct DateNowResult {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ProcessExitRequest {
     /// exit code
-    #[prost(message, optional, tag = "1")]
-    pub mandatory_code: ::core::option::Option<u32>,
+    #[prost(uint32, tag = "1")]
+    pub code: u32,
 }
 /// Process exit result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1248,8 +1214,8 @@ pub struct GetRemainingGasRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetRemainingGasResult {
     /// remaining gas
-    #[prost(message, optional, tag = "1")]
-    pub mandatory_remaining_gas: ::core::option::Option<u64>,
+    #[prost(uint64, tag = "1")]
+    pub remaining_gas: u64,
 }
 /// Get balance request
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1257,7 +1223,7 @@ pub struct GetRemainingGasResult {
 pub struct GetBalanceRequest {
     /// Address to get balance for, if none, use current address
     #[prost(message, optional, tag = "1")]
-    pub optional_address: ::core::option::Option<::prost::alloc::string::String>,
+    pub address: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Get balance result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1290,8 +1256,8 @@ pub struct GetAddressVersionRequest {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetAddressVersionResult {
-    #[prost(message, optional, tag = "1")]
-    pub mandatory_version: ::core::option::Option<u64>,
+    #[prost(uint64, tag = "1")]
+    pub version: u64,
 }
 /// Get the category of the address request
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1318,8 +1284,8 @@ pub struct GetPubKeyVersionRequest {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPubKeyVersionResult {
-    #[prost(message, optional, tag = "1")]
-    pub mandatory_version: ::core::option::Option<u64>,
+    #[prost(uint64, tag = "1")]
+    pub version: u64,
 }
 /// Get the version of the signature request
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1332,8 +1298,8 @@ pub struct GetSignatureVersionRequest {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSignatureVersionResult {
-    #[prost(message, optional, tag = "1")]
-    pub mandatory_version: ::core::option::Option<u64>,
+    #[prost(uint64, tag = "1")]
+    pub version: u64,
 }
 /// bytes to base58 request
 #[allow(clippy::derive_partial_eq_without_eq)]

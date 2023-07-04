@@ -37,11 +37,11 @@ impl AddressCategory {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NativeAmount {
     /// Mantissa
-    #[prost(message, optional, tag = "1")]
-    pub mandatory_mantissa: ::core::option::Option<u64>,
+    #[prost(uint64, tag = "1")]
+    pub mantissa: u64,
     /// Scale
-    #[prost(message, optional, tag = "2")]
-    pub mandatory_scale: ::core::option::Option<u32>,
+    #[prost(uint32, tag = "2")]
+    pub scale: u32,
 }
 /// When an address is drawn to create an endorsement it is selected for a specific index
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -133,6 +133,40 @@ pub struct SecureShare {
     /// A secure hash of the data. See also \[massa_hash::Hash\]
     #[prost(string, tag = "5")]
     pub id: ::prost::alloc::string::String,
+}
+/// Comparison result
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ComparisonResult {
+    /// Status
+    #[prost(oneof = "comparison_result::Restult", tags = "1, 2, 3")]
+    pub restult: ::core::option::Option<comparison_result::Restult>,
+}
+/// Nested message and enum types in `ComparisonResult`.
+pub mod comparison_result {
+    /// Left is lower
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct LeftLower {}
+    /// Left is equal to right
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Equal {}
+    /// Left is greater
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct LeftGreater {}
+    /// Status
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Restult {
+        #[prost(message, tag = "1")]
+        LeftLower(LeftLower),
+        #[prost(message, tag = "2")]
+        Equal(Equal),
+        #[prost(message, tag = "3")]
+        LeftGreater(LeftGreater),
+    }
 }
 /// The operation as sent in the network
 #[allow(clippy::derive_partial_eq_without_eq)]
