@@ -108,7 +108,7 @@ pub struct GetPeersWhitelistResponse {
 pub struct BanNodesByIdsRequest {
     /// Node ids to ban
     #[prost(string, repeated, tag = "1")]
-    pub ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub node_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// BanNodesByIdsResponse holds the response from BanNodesByIds
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -207,7 +207,7 @@ pub struct ShutdownGracefullyResponse {}
 pub struct UnbanNodesByIdsRequest {
     /// Node ids to unban
     #[prost(string, repeated, tag = "1")]
-    pub ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub node_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// UnbanNodesByIdsResponse holds the response from UnbanNodesByIds
 #[allow(clippy::derive_partial_eq_without_eq)]
