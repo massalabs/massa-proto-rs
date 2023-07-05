@@ -669,12 +669,12 @@ pub struct DenunciationEndorsement {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SlotDraw {
-    /// Block producer address
-    #[prost(string, tag = "1")]
-    pub block_producer: ::prost::alloc::string::String,
     /// Slot
-    #[prost(message, optional, tag = "2")]
+    #[prost(message, optional, tag = "1")]
     pub slot: ::core::option::Option<Slot>,
+    /// optional Block producer address
+    #[prost(message, optional, tag = "2")]
+    pub block_producer: ::core::option::Option<::prost::alloc::string::String>,
     /// Endorsement draws
     #[prost(message, repeated, tag = "3")]
     pub endorsement_draws: ::prost::alloc::vec::Vec<EndorsementDraw>,
