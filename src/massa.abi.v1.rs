@@ -129,7 +129,7 @@ pub struct FunctionExistsResult {
 pub struct RespResult {
     #[prost(
         oneof = "resp_result::Res",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65"
     )]
     pub res: ::core::option::Option<resp_result::Res>,
 }
@@ -264,6 +264,8 @@ pub mod resp_result {
         VerifySigResult(super::VerifySigResult),
         #[prost(message, tag = "64")]
         SendAsyncMessageResult(super::SendAsyncMessageResult),
+        #[prost(message, tag = "65")]
+        GetOriginOperationIdResult(super::GetOriginOperationIdResult),
     }
 }
 /// Generic message that encapsulate response from ABI calls.
@@ -996,6 +998,17 @@ pub struct SendAsyncMessageRequest {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendAsyncMessageResult {}
+/// Get origin operation id request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetOriginOperationIdRequest {}
+/// Get origin operation id result
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetOriginOperationIdResult {
+    #[prost(message, optional, tag = "1")]
+    pub operation_id: ::core::option::Option<::prost::alloc::string::String>,
+}
 /// Get native time request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
