@@ -1652,8 +1652,8 @@ pub struct CompactConfig {
     #[prost(uint32, tag = "3")]
     pub thread_count: u32,
     /// Time between the periods in the same thread.
-    #[prost(uint64, tag = "4")]
-    pub t0: u64,
+    #[prost(message, optional, tag = "4")]
+    pub t0: ::core::option::Option<NativeTime>,
     /// Threshold for fitness.
     #[prost(uint64, tag = "5")]
     pub delta_f0: u64,
@@ -1664,11 +1664,11 @@ pub struct CompactConfig {
     #[prost(uint64, tag = "7")]
     pub periods_per_cycle: u64,
     /// Reward amount for a block creation
-    #[prost(uint64, tag = "8")]
-    pub block_reward: u64,
+    #[prost(message, optional, tag = "8")]
+    pub block_reward: ::core::option::Option<NativeAmount>,
     /// Price of a roll on the network
-    #[prost(uint64, tag = "9")]
-    pub roll_price: u64,
+    #[prost(message, optional, tag = "9")]
+    pub roll_price: ::core::option::Option<NativeAmount>,
     /// Max total size of a block
     #[prost(uint32, tag = "10")]
     pub max_block_size: u32,
