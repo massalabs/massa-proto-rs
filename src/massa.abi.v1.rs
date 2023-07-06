@@ -129,7 +129,7 @@ pub struct FunctionExistsResult {
 pub struct RespResult {
     #[prost(
         oneof = "resp_result::Res",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64"
     )]
     pub res: ::core::option::Option<resp_result::Res>,
 }
@@ -178,8 +178,6 @@ pub mod resp_result {
         CompareNativeTimeResult(super::CompareNativeTimeResult),
         #[prost(message, tag = "20")]
         ComparePubKeyResult(super::ComparePubKeyResult),
-        #[prost(message, tag = "21")]
-        CompareSigResult(super::CompareSigResult),
         #[prost(message, tag = "22")]
         CreateScResult(super::CreateScResult),
         #[prost(message, tag = "23")]
@@ -645,25 +643,6 @@ pub struct ComparePubKeyRequest {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ComparePubKeyResult {
-    /// Comparison result
-    #[prost(enumeration = "super::super::model::v1::ComparisonResult", tag = "1")]
-    pub result: i32,
-}
-/// Compare Sig request
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CompareSigRequest {
-    /// First signature to compare
-    #[prost(string, tag = "1")]
-    pub left: ::prost::alloc::string::String,
-    /// Second signature to compare
-    #[prost(string, tag = "2")]
-    pub right: ::prost::alloc::string::String,
-}
-/// Compare Sig result
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct CompareSigResult {
     /// Comparison result
     #[prost(enumeration = "super::super::model::v1::ComparisonResult", tag = "1")]
     pub result: i32,
