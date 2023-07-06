@@ -129,7 +129,7 @@ pub struct FunctionExistsResult {
 pub struct RespResult {
     #[prost(
         oneof = "resp_result::Res",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63"
     )]
     pub res: ::core::option::Option<resp_result::Res>,
 }
@@ -178,44 +178,46 @@ pub mod resp_result {
         CompareNativeTimeResult(super::CompareNativeTimeResult),
         #[prost(message, tag = "20")]
         ComparePubKeyResult(super::ComparePubKeyResult),
-        #[prost(message, tag = "22")]
+        #[prost(message, tag = "21")]
         CreateScResult(super::CreateScResult),
-        #[prost(message, tag = "23")]
+        #[prost(message, tag = "22")]
         DateNowResult(super::DateNowResult),
-        #[prost(message, tag = "24")]
+        #[prost(message, tag = "23")]
         DeleteDataResult(super::DeleteDataResult),
-        #[prost(message, tag = "25")]
+        #[prost(message, tag = "24")]
         DivRemNativeAmountsResult(super::DivRemNativeAmountsResult),
-        #[prost(message, tag = "26")]
+        #[prost(message, tag = "25")]
         FunctionExistsResult(super::FunctionExistsResult),
-        #[prost(message, tag = "27")]
+        #[prost(message, tag = "26")]
         GenerateEventResult(super::GenerateEventResult),
-        #[prost(message, tag = "28")]
+        #[prost(message, tag = "27")]
         GetAddressCategoryResult(super::GetAddressCategoryResult),
-        #[prost(message, tag = "29")]
+        #[prost(message, tag = "28")]
         GetAddressVersionResult(super::GetAddressVersionResult),
-        #[prost(message, tag = "30")]
+        #[prost(message, tag = "29")]
         GetBalanceResult(super::GetBalanceResult),
-        #[prost(message, tag = "31")]
+        #[prost(message, tag = "30")]
         GetBytecodeResult(super::GetBytecodeResult),
-        #[prost(message, tag = "32")]
+        #[prost(message, tag = "31")]
         GetCallCoinsResult(super::GetCallCoinsResult),
-        #[prost(message, tag = "33")]
+        #[prost(message, tag = "32")]
         GetCallStackResult(super::GetCallStackResult),
-        #[prost(message, tag = "34")]
+        #[prost(message, tag = "33")]
         GetCurrentSlotResult(super::GetCurrentSlotResult),
-        #[prost(message, tag = "35")]
+        #[prost(message, tag = "34")]
         GetDataResult(super::GetDataResult),
-        #[prost(message, tag = "36")]
+        #[prost(message, tag = "35")]
         GetKeysResult(super::GetKeysResult),
-        #[prost(message, tag = "37")]
+        #[prost(message, tag = "36")]
         GetNativeTimeResult(super::GetNativeTimeResult),
-        #[prost(message, tag = "38")]
+        #[prost(message, tag = "37")]
         GetOpDataResult(super::GetOpDataResult),
-        #[prost(message, tag = "39")]
+        #[prost(message, tag = "38")]
         GetOpKeysResult(super::GetOpKeysResult),
-        #[prost(message, tag = "40")]
+        #[prost(message, tag = "39")]
         GetOwnedAddressesResult(super::GetOwnedAddressesResult),
+        #[prost(message, tag = "40")]
+        GetOriginOperationIdResult(super::GetOriginOperationIdResult),
         #[prost(message, tag = "41")]
         GetPubKeyVersionResult(super::GetPubKeyVersionResult),
         #[prost(message, tag = "42")]
@@ -239,33 +241,29 @@ pub mod resp_result {
         #[prost(message, tag = "51")]
         NativeAmountToStringResult(super::NativeAmountToStringResult),
         #[prost(message, tag = "52")]
-        ProcessExitResult(super::ProcessExitResult),
-        #[prost(message, tag = "53")]
         ScalarDivRemNativeAmountResult(super::ScalarDivRemNativeAmountResult),
-        #[prost(message, tag = "54")]
+        #[prost(message, tag = "53")]
         SeedResult(super::SeedResult),
-        #[prost(message, tag = "55")]
+        #[prost(message, tag = "54")]
         SetBytecodeResult(super::SetBytecodeResult),
-        #[prost(message, tag = "56")]
+        #[prost(message, tag = "55")]
         SetDataResult(super::SetDataResult),
-        #[prost(message, tag = "57")]
+        #[prost(message, tag = "56")]
         SubNativeAmountsResult(super::SubNativeAmountsResult),
-        #[prost(message, tag = "58")]
+        #[prost(message, tag = "57")]
         TransferCoinsResult(super::TransferCoinsResult),
-        #[prost(message, tag = "59")]
+        #[prost(message, tag = "58")]
         UnsafeRandomResult(super::UnsafeRandomResult),
-        #[prost(message, tag = "60")]
+        #[prost(message, tag = "59")]
         VerifyBlsMultiSigResult(super::VerifyBlsMultiSigResult),
-        #[prost(message, tag = "61")]
+        #[prost(message, tag = "60")]
         VerifyBlsSingleSigResult(super::VerifyBlsSingleSigResult),
-        #[prost(message, tag = "62")]
+        #[prost(message, tag = "61")]
         VerifyEvmSigResult(super::VerifyEvmSigResult),
-        #[prost(message, tag = "63")]
+        #[prost(message, tag = "62")]
         VerifySigResult(super::VerifySigResult),
-        #[prost(message, tag = "64")]
+        #[prost(message, tag = "63")]
         SendAsyncMessageResult(super::SendAsyncMessageResult),
-        #[prost(message, tag = "65")]
-        GetOriginOperationIdResult(super::GetOriginOperationIdResult),
     }
 }
 /// Generic message that encapsulate response from ABI calls.
@@ -1099,8 +1097,8 @@ pub struct DateNowRequest {}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DateNowResult {
     /// date now
-    #[prost(double, tag = "1")]
-    pub date_now: f64,
+    #[prost(uint64, tag = "1")]
+    pub date_now: u64,
 }
 /// AS builtin `process.exit()` function
 /// Process exit request
@@ -1111,10 +1109,6 @@ pub struct ProcessExitRequest {
     #[prost(uint32, tag = "1")]
     pub code: u32,
 }
-/// Process exit result
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ProcessExitResult {}
 /// Hash sha256 request
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
