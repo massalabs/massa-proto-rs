@@ -46,6 +46,26 @@ pub struct AddStakingSecretKeysRequest {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddStakingSecretKeysResponse {}
+/// AllowEveryoneToBootstrapRequest holds the request for AllowEveryoneToBootstrap
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AllowEveryoneToBootstrapRequest {}
+/// AllowEveryoneToBootstrapResponse holds the response from AllowEveryoneToBootstrap
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AllowEveryoneToBootstrapResponse {}
+/// CreateKeyPairRequest holds the request for CreateKeyPair
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CreateKeyPairRequest {}
+/// CreateKeyPairResponse holds the response from CreateKeyPair
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CreateKeyPairResponse {
+    /// KeyPair
+    #[prost(message, optional, tag = "1")]
+    pub key_pair: ::core::option::Option<super::super::model::v1::KeyPair>,
+}
 /// GetBootstrapBlacklistRequest holds the request for GetBootstrapBlacklist
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -70,14 +90,20 @@ pub struct GetBootstrapWhitelistResponse {
     #[prost(string, repeated, tag = "1")]
     pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
-/// AllowEveryoneToBootstrapRequest holds the request for AllowEveryoneToBootstrap
+/// GetMipStatusRequest holds request for GetMipStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct AllowEveryoneToBootstrapRequest {}
-/// AllowEveryoneToBootstrapResponse holds the response from AllowEveryoneToBootstrap
+pub struct GetMipStatusRequest {}
+/// GetMipStatusResponse holds response from GetMipStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct AllowEveryoneToBootstrapResponse {}
+pub struct GetMipStatusResponse {
+    /// (MipInfo - status id) entries
+    #[prost(message, repeated, tag = "1")]
+    pub mipstatus_entries: ::prost::alloc::vec::Vec<
+        super::super::model::v1::MipStatusEntry,
+    >,
+}
 /// GetNodeStatusRequest holds the request for GetNodeStatus
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -433,6 +459,63 @@ pub mod private_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        /// Allow everyone to bootstrap from the node by removing bootstrap whitelist configuration file
+        pub async fn allow_everyone_to_bootstrap(
+            &mut self,
+            request: impl tonic::IntoRequest<super::AllowEveryoneToBootstrapRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AllowEveryoneToBootstrapResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PrivateService/AllowEveryoneToBootstrap",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PrivateService",
+                        "AllowEveryoneToBootstrap",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Create a KeyPair
+        pub async fn create_key_pair(
+            &mut self,
+            request: impl tonic::IntoRequest<super::CreateKeyPairRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::CreateKeyPairResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PrivateService/CreateKeyPair",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("massa.api.v1.PrivateService", "CreateKeyPair"));
+            self.inner.unary(req, path, codec).await
+        }
         /// Get node bootstrap blacklist IP addresses
         pub async fn get_bootstrap_blacklist(
             &mut self,
@@ -495,12 +578,12 @@ pub mod private_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /// Allow everyone to bootstrap from the node by removing bootstrap whitelist configuration file
-        pub async fn allow_everyone_to_bootstrap(
+        /// Get Mip status
+        pub async fn get_mip_status(
             &mut self,
-            request: impl tonic::IntoRequest<super::AllowEveryoneToBootstrapRequest>,
+            request: impl tonic::IntoRequest<super::GetMipStatusRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::AllowEveryoneToBootstrapResponse>,
+            tonic::Response<super::GetMipStatusResponse>,
             tonic::Status,
         > {
             self.inner
@@ -514,16 +597,11 @@ pub mod private_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.PrivateService/AllowEveryoneToBootstrap",
+                "/massa.api.v1.PrivateService/GetMipStatus",
             );
             let mut req = request.into_request();
             req.extensions_mut()
-                .insert(
-                    GrpcMethod::new(
-                        "massa.api.v1.PrivateService",
-                        "AllowEveryoneToBootstrap",
-                    ),
-                );
+                .insert(GrpcMethod::new("massa.api.v1.PrivateService", "GetMipStatus"));
             self.inner.unary(req, path, codec).await
         }
         /// Get node status
@@ -908,6 +986,22 @@ pub mod private_service_server {
             tonic::Response<super::AddStakingSecretKeysResponse>,
             tonic::Status,
         >;
+        /// Allow everyone to bootstrap from the node by removing bootstrap whitelist configuration file
+        async fn allow_everyone_to_bootstrap(
+            &self,
+            request: tonic::Request<super::AllowEveryoneToBootstrapRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::AllowEveryoneToBootstrapResponse>,
+            tonic::Status,
+        >;
+        /// Create a KeyPair
+        async fn create_key_pair(
+            &self,
+            request: tonic::Request<super::CreateKeyPairRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::CreateKeyPairResponse>,
+            tonic::Status,
+        >;
         /// Get node bootstrap blacklist IP addresses
         async fn get_bootstrap_blacklist(
             &self,
@@ -924,12 +1018,12 @@ pub mod private_service_server {
             tonic::Response<super::GetBootstrapWhitelistResponse>,
             tonic::Status,
         >;
-        /// Allow everyone to bootstrap from the node by removing bootstrap whitelist configuration file
-        async fn allow_everyone_to_bootstrap(
+        /// Get Mip status
+        async fn get_mip_status(
             &self,
-            request: tonic::Request<super::AllowEveryoneToBootstrapRequest>,
+            request: tonic::Request<super::GetMipStatusRequest>,
         ) -> std::result::Result<
-            tonic::Response<super::AllowEveryoneToBootstrapResponse>,
+            tonic::Response<super::GetMipStatusResponse>,
             tonic::Status,
         >;
         /// Get node status
@@ -1297,6 +1391,100 @@ pub mod private_service_server {
                     };
                     Box::pin(fut)
                 }
+                "/massa.api.v1.PrivateService/AllowEveryoneToBootstrap" => {
+                    #[allow(non_camel_case_types)]
+                    struct AllowEveryoneToBootstrapSvc<T: PrivateService>(pub Arc<T>);
+                    impl<
+                        T: PrivateService,
+                    > tonic::server::UnaryService<super::AllowEveryoneToBootstrapRequest>
+                    for AllowEveryoneToBootstrapSvc<T> {
+                        type Response = super::AllowEveryoneToBootstrapResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::AllowEveryoneToBootstrapRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).allow_everyone_to_bootstrap(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = AllowEveryoneToBootstrapSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PrivateService/CreateKeyPair" => {
+                    #[allow(non_camel_case_types)]
+                    struct CreateKeyPairSvc<T: PrivateService>(pub Arc<T>);
+                    impl<
+                        T: PrivateService,
+                    > tonic::server::UnaryService<super::CreateKeyPairRequest>
+                    for CreateKeyPairSvc<T> {
+                        type Response = super::CreateKeyPairResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::CreateKeyPairRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).create_key_pair(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = CreateKeyPairSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
                 "/massa.api.v1.PrivateService/GetBootstrapBlacklist" => {
                     #[allow(non_camel_case_types)]
                     struct GetBootstrapBlacklistSvc<T: PrivateService>(pub Arc<T>);
@@ -1389,27 +1577,25 @@ pub mod private_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.PrivateService/AllowEveryoneToBootstrap" => {
+                "/massa.api.v1.PrivateService/GetMipStatus" => {
                     #[allow(non_camel_case_types)]
-                    struct AllowEveryoneToBootstrapSvc<T: PrivateService>(pub Arc<T>);
+                    struct GetMipStatusSvc<T: PrivateService>(pub Arc<T>);
                     impl<
                         T: PrivateService,
-                    > tonic::server::UnaryService<super::AllowEveryoneToBootstrapRequest>
-                    for AllowEveryoneToBootstrapSvc<T> {
-                        type Response = super::AllowEveryoneToBootstrapResponse;
+                    > tonic::server::UnaryService<super::GetMipStatusRequest>
+                    for GetMipStatusSvc<T> {
+                        type Response = super::GetMipStatusResponse;
                         type Future = BoxFuture<
                             tonic::Response<Self::Response>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<
-                                super::AllowEveryoneToBootstrapRequest,
-                            >,
+                            request: tonic::Request<super::GetMipStatusRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).allow_everyone_to_bootstrap(request).await
+                                (*inner).get_mip_status(request).await
                             };
                             Box::pin(fut)
                         }
@@ -1421,7 +1607,7 @@ pub mod private_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let inner = inner.0;
-                        let method = AllowEveryoneToBootstrapSvc(inner);
+                        let method = GetMipStatusSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -2136,20 +2322,6 @@ pub struct GetDatastoreEntriesResponse {
     #[prost(message, repeated, tag = "1")]
     pub datastore_entries: ::prost::alloc::vec::Vec<
         super::super::model::v1::DatastoreEntry,
-    >,
-}
-/// GetMipStatusRequest holds request for GetMipStatus
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetMipStatusRequest {}
-/// GetMipStatusResponse holds response from GetMipStatus
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetMipStatusResponse {
-    /// (MipInfo - status id) entries
-    #[prost(message, repeated, tag = "1")]
-    pub mipstatus_entries: ::prost::alloc::vec::Vec<
-        super::super::model::v1::MipStatusEntry,
     >,
 }
 /// GetNextBlockBestParentsRequest holds request for GetNextBlockBestParents
@@ -3231,32 +3403,6 @@ pub mod public_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /// Get Mip status
-        pub async fn get_mip_status(
-            &mut self,
-            request: impl tonic::IntoRequest<super::GetMipStatusRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GetMipStatusResponse>,
-            tonic::Status,
-        > {
-            self.inner
-                .ready()
-                .await
-                .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
-                        format!("Service was not ready: {}", e.into()),
-                    )
-                })?;
-            let codec = tonic::codec::ProstCodec::default();
-            let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.PublicService/GetMipStatus",
-            );
-            let mut req = request.into_request();
-            req.extensions_mut()
-                .insert(GrpcMethod::new("massa.api.v1.PublicService", "GetMipStatus"));
-            self.inner.unary(req, path, codec).await
-        }
         /// Get next block best parents
         pub async fn get_next_block_best_parents(
             &mut self,
@@ -3780,14 +3926,6 @@ pub mod public_service_server {
             tonic::Response<super::GetDatastoreEntriesResponse>,
             tonic::Status,
         >;
-        /// Get Mip status
-        async fn get_mip_status(
-            &self,
-            request: tonic::Request<super::GetMipStatusRequest>,
-        ) -> std::result::Result<
-            tonic::Response<super::GetMipStatusResponse>,
-            tonic::Status,
-        >;
         /// Get next block best parents
         async fn get_next_block_best_parents(
             &self,
@@ -4187,52 +4325,6 @@ pub mod public_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = GetDatastoreEntriesSvc(inner);
-                        let codec = tonic::codec::ProstCodec::default();
-                        let mut grpc = tonic::server::Grpc::new(codec)
-                            .apply_compression_config(
-                                accept_compression_encodings,
-                                send_compression_encodings,
-                            )
-                            .apply_max_message_size_config(
-                                max_decoding_message_size,
-                                max_encoding_message_size,
-                            );
-                        let res = grpc.unary(method, req).await;
-                        Ok(res)
-                    };
-                    Box::pin(fut)
-                }
-                "/massa.api.v1.PublicService/GetMipStatus" => {
-                    #[allow(non_camel_case_types)]
-                    struct GetMipStatusSvc<T: PublicService>(pub Arc<T>);
-                    impl<
-                        T: PublicService,
-                    > tonic::server::UnaryService<super::GetMipStatusRequest>
-                    for GetMipStatusSvc<T> {
-                        type Response = super::GetMipStatusResponse;
-                        type Future = BoxFuture<
-                            tonic::Response<Self::Response>,
-                            tonic::Status,
-                        >;
-                        fn call(
-                            &mut self,
-                            request: tonic::Request<super::GetMipStatusRequest>,
-                        ) -> Self::Future {
-                            let inner = Arc::clone(&self.0);
-                            let fut = async move {
-                                (*inner).get_mip_status(request).await
-                            };
-                            Box::pin(fut)
-                        }
-                    }
-                    let accept_compression_encodings = self.accept_compression_encodings;
-                    let send_compression_encodings = self.send_compression_encodings;
-                    let max_decoding_message_size = self.max_decoding_message_size;
-                    let max_encoding_message_size = self.max_encoding_message_size;
-                    let inner = self.inner.clone();
-                    let fut = async move {
-                        let inner = inner.0;
-                        let method = GetMipStatusSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
