@@ -206,17 +206,6 @@ pub struct SecureShare {
     #[prost(string, tag = "5")]
     pub secure_hash: ::prost::alloc::string::String,
 }
-/// KeyPair
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct KeyPair {
-    /// Public key
-    #[prost(string, tag = "1")]
-    pub public_key: ::prost::alloc::string::String,
-    /// Secret key
-    #[prost(string, tag = "2")]
-    pub secret_key: ::prost::alloc::string::String,
-}
 /// The operation as sent in the network
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
