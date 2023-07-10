@@ -2297,7 +2297,7 @@ pub struct GetScExecutionEventsRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScExecutionEventsFilter {
     /// Filter
-    #[prost(oneof = "sc_execution_events_filter::Filter", tags = "1, 2, 3, 4, 5")]
+    #[prost(oneof = "sc_execution_events_filter::Filter", tags = "1, 2, 3, 4, 5, 6")]
     pub filter: ::core::option::Option<sc_execution_events_filter::Filter>,
 }
 /// Nested message and enum types in `ScExecutionEventsFilter`.
@@ -2318,10 +2318,13 @@ pub mod sc_execution_events_filter {
         /// Original operation id
         #[prost(string, tag = "4")]
         OriginalOperationId(::prost::alloc::string::String),
+        /// Whether the event is a failure
+        #[prost(bool, tag = "5")]
+        IsFailure(bool),
         /// Status
         #[prost(
             enumeration = "super::super::super::model::v1::ScExecutionEventStatus",
-            tag = "5"
+            tag = "6"
         )]
         Status(i32),
     }
