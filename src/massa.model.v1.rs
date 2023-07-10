@@ -780,7 +780,7 @@ pub struct StateChanges {
     pub ledger_changes: ::prost::alloc::vec::Vec<LedgerChangeEntry>,
     /// Asynchronous pool changes
     #[prost(message, repeated, tag = "2")]
-    pub async_pool_changes: ::prost::alloc::vec::Vec<AsyncPoolChangeEntry>,
+    pub async_pool_changes: ::prost::alloc::vec::Vec<AsyncPoolChange>,
     /// Executed operations changes
     #[prost(message, repeated, tag = "4")]
     pub executed_ops_changes: ::prost::alloc::vec::Vec<ExecutedOpsChangeEntry>,
@@ -810,30 +810,19 @@ pub struct ExecutedOpsChangeValue {
     #[prost(message, optional, tag = "2")]
     pub slot: ::core::option::Option<Slot>,
 }
-/// AsyncPoolChange Entry
+/// AsyncPoolChange
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct AsyncPoolChangeEntry {
-    /// Async message id
-    #[prost(string, tag = "1")]
-    pub async_message_id: ::prost::alloc::string::String,
-    /// AsyncPool message
-    #[prost(message, optional, tag = "2")]
-    pub value: ::core::option::Option<AsyncPoolChangeValue>,
-}
-/// AsyncPoolChangeValue
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct AsyncPoolChangeValue {
+pub struct AsyncPoolChange {
     /// The type of the change
     #[prost(enumeration = "AsyncPoolChangeType", tag = "1")]
     pub r#type: i32,
     /// AsyncPool message
-    #[prost(oneof = "async_pool_change_value::Message", tags = "2, 3")]
-    pub message: ::core::option::Option<async_pool_change_value::Message>,
+    #[prost(oneof = "async_pool_change::Message", tags = "2, 3")]
+    pub message: ::core::option::Option<async_pool_change::Message>,
 }
-/// Nested message and enum types in `AsyncPoolChangeValue`.
-pub mod async_pool_change_value {
+/// Nested message and enum types in `AsyncPoolChange`.
+pub mod async_pool_change {
     /// AsyncPool message
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
