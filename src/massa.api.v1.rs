@@ -2924,22 +2924,8 @@ pub struct NewOperationsRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewOperationsFilter {
     /// Filter
-    #[prost(oneof = "new_operations_filter::Filter", tags = "1, 2")]
-    pub filter: ::core::option::Option<new_operations_filter::Filter>,
-}
-/// Nested message and enum types in `NewOperationsFilter`.
-pub mod new_operations_filter {
-    /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Filter {
-        /// One of the operation ids
-        #[prost(message, tag = "1")]
-        OperationIds(super::super::super::model::v1::OperationIds),
-        /// One of the operation types
-        #[prost(message, tag = "2")]
-        OperationTypes(super::super::super::model::v1::OpTypes),
-    }
+    #[prost(message, optional, tag = "2")]
+    pub operation_types: ::core::option::Option<super::super::model::v1::OpTypes>,
 }
 /// NewOperationsResponse holds response from NewOperations
 #[allow(clippy::derive_partial_eq_without_eq)]
