@@ -443,9 +443,9 @@ pub struct BlockHeader {
     /// Current network version
     #[prost(uint32, tag = "1")]
     pub current_version: u32,
-    /// Announced network version
-    #[prost(uint32, tag = "2")]
-    pub announced_version: u32,
+    /// Announced network version(Optional)
+    #[prost(message, optional, tag = "2")]
+    pub announced_version: ::core::option::Option<u32>,
     /// Slot
     #[prost(message, optional, tag = "3")]
     pub slot: ::core::option::Option<Slot>,
@@ -716,7 +716,7 @@ pub struct ExecutionOutput {
     /// Slot
     #[prost(message, optional, tag = "1")]
     pub slot: ::core::option::Option<Slot>,
-    /// Block id at that slot (optional)
+    /// Block id at that slot (Optional)
     #[prost(message, optional, tag = "2")]
     pub block_id: ::core::option::Option<::prost::alloc::string::String>,
     /// Events emitted by the execution step
@@ -958,7 +958,7 @@ pub mod set_or_keep_slot {
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Change {
-        /// The value of that entry (optional)
+        /// The value of that entry (Optional)
         #[prost(message, tag = "1")]
         Set(super::Slot),
         /// Keep the existing value
@@ -980,7 +980,7 @@ pub mod set_or_keep_uint64 {
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Change {
-        /// The value of that entry (optional)
+        /// The value of that entry (Optional)
         #[prost(message, tag = "1")]
         Set(u64),
         /// Keep the existing value
@@ -1002,7 +1002,7 @@ pub mod set_or_keep_string {
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Change {
-        /// The value of that entry (optional)
+        /// The value of that entry (Optional)
         #[prost(message, tag = "1")]
         Set(::prost::alloc::string::String),
         /// Keep the existing value
@@ -1024,7 +1024,7 @@ pub mod set_or_keep_bytes {
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Change {
-        /// The value of that entry (optional)
+        /// The value of that entry (Optional)
         #[prost(message, tag = "1")]
         Set(::prost::alloc::vec::Vec<u8>),
         /// Keep the existing value
@@ -1046,7 +1046,7 @@ pub mod set_or_keep_bool {
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Change {
-        /// The value of that entry (optional)
+        /// The value of that entry (Optional)
         #[prost(message, tag = "1")]
         Set(bool),
         /// Keep the existing value
@@ -1068,7 +1068,7 @@ pub mod set_or_keep_async_message_trigger {
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Change {
-        /// The value of that entry (optional)
+        /// The value of that entry (Optional)
         #[prost(message, tag = "1")]
         Set(super::AsyncMessageTrigger),
         /// Keep the existing value
@@ -1083,7 +1083,7 @@ pub struct AsyncMessageTrigger {
     /// Filter on the address
     #[prost(string, tag = "1")]
     pub address: ::prost::alloc::string::String,
-    /// Filter on the datastore key (optional)
+    /// Filter on the datastore key (Optional)
     #[prost(message, optional, tag = "2")]
     pub datastore_key: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
 }
@@ -1165,7 +1165,7 @@ pub mod set_or_keep_balance {
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Change {
-        /// The value of that entry (optional)
+        /// The value of that entry (Optional)
         #[prost(message, tag = "1")]
         Set(super::NativeAmount),
         /// Keep the existing value
@@ -1187,7 +1187,7 @@ pub mod set_or_delete_datastore_entry {
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Change {
-        /// Executable bytecode (optional)
+        /// Executable bytecode (Optional)
         #[prost(message, tag = "1")]
         Set(super::BytesMapFieldEntry),
         /// Delete the existing bytecode
