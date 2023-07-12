@@ -2778,8 +2778,8 @@ pub mod execution_query_response_item {
         #[prost(message, tag = "5")]
         VecBytes(super::super::super::model::v1::ArrayOfBytesWrapper),
         /// Deferred credits value
-        #[prost(uint64, tag = "6")]
-        DeferredCredits(u64),
+        #[prost(message, tag = "6")]
+        DeferredCredits(super::DeferredCreditsEntryWrapper),
         /// Execution status value
         #[prost(enumeration = "super::ExecutionQueryExecutionStatus", tag = "7")]
         ExecutionStatus(i32),
@@ -2790,6 +2790,25 @@ pub mod execution_query_response_item {
         #[prost(message, tag = "9")]
         Events(super::ScOutputEventsWrapper),
     }
+}
+/// Deferred credits entry wrapper
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCreditsEntryWrapper {
+    /// Deferred credits entry
+    #[prost(message, repeated, tag = "1")]
+    pub entries: ::prost::alloc::vec::Vec<DeferredCreditsEntry>,
+}
+/// Deferred credits entry
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCreditsEntry {
+    /// Slot
+    #[prost(message, optional, tag = "1")]
+    pub address: ::core::option::Option<super::super::model::v1::Slot>,
+    /// Amount
+    #[prost(message, optional, tag = "2")]
+    pub amount: ::core::option::Option<super::super::model::v1::NativeAmount>,
 }
 /// Cycle information for execution query
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -2824,8 +2843,8 @@ pub struct ExecutionQueryStakerInfo {
     #[prost(uint64, tag = "1")]
     pub active_rolls: u64,
     /// Production stats
-    #[prost(message, repeated, tag = "2")]
-    pub production_stats: ::prost::alloc::vec::Vec<
+    #[prost(message, optional, tag = "2")]
+    pub production_stats: ::core::option::Option<
         ExecutionQueryStakerInfoProductionStatsEntry,
     >,
 }
@@ -2851,13 +2870,13 @@ pub struct ExecutionQueryStakerInfoProductionStats {
     #[prost(uint64, tag = "2")]
     pub block_failure_count: u64,
 }
-/// SCOutputEvents wrapper
+/// ScOutputEvents wrapper
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScOutputEventsWrapper {
     /// Events
     #[prost(message, repeated, tag = "1")]
-    pub event: ::prost::alloc::vec::Vec<super::super::model::v1::ScExecutionEvent>,
+    pub events: ::prost::alloc::vec::Vec<super::super::model::v1::ScExecutionEvent>,
 }
 /// NewBlocksRequest holds request for NewBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
