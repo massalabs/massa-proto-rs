@@ -2805,7 +2805,7 @@ pub struct DeferredCreditsEntryWrapper {
 pub struct DeferredCreditsEntry {
     /// Slot
     #[prost(message, optional, tag = "1")]
-    pub address: ::core::option::Option<super::super::model::v1::Slot>,
+    pub slot: ::core::option::Option<super::super::model::v1::Slot>,
     /// Amount
     #[prost(message, optional, tag = "2")]
     pub amount: ::core::option::Option<super::super::model::v1::NativeAmount>,
