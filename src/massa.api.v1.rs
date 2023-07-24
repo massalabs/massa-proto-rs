@@ -2157,10 +2157,8 @@ pub struct ExecuteReadOnlyCallRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecuteReadOnlyCallResponse {
     /// Execution output
-    #[prost(message, repeated, tag = "1")]
-    pub output: ::prost::alloc::vec::Vec<
-        super::super::model::v1::ReadOnlyExecutionOutput,
-    >,
+    #[prost(message, optional, tag = "1")]
+    pub output: ::core::option::Option<super::super::model::v1::ReadOnlyExecutionOutput>,
 }
 /// GetBlocks Filter
 #[allow(clippy::derive_partial_eq_without_eq)]
