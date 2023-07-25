@@ -1796,8 +1796,8 @@ pub struct MipInfo {
     #[prost(uint32, tag = "2")]
     pub version: u32,
     /// A timestamp at which the version gains its meaning (e.g. announced in block header)
-    #[prost(uint64, tag = "3")]
-    pub start: u64,
+    #[prost(message, optional, tag = "3")]
+    pub start: ::core::option::Option<NativeTime>,
     /// A timestamp at the which the deployment is considered failed
     #[prost(message, optional, tag = "4")]
     pub timeout: ::core::option::Option<NativeTime>,
