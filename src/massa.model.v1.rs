@@ -1802,8 +1802,8 @@ pub struct MipInfo {
     #[prost(message, optional, tag = "4")]
     pub timeout: ::core::option::Option<NativeTime>,
     /// Once deployment has been locked, wait for this duration before deployment is considered active
-    #[prost(uint64, tag = "5")]
-    pub activation_delay: u64,
+    #[prost(message, optional, tag = "5")]
+    pub activation_delay: ::core::option::Option<NativeTime>,
     /// Components concerned by this versioning (e.g. a new Block version), and the associated component_version
     #[prost(message, repeated, tag = "6")]
     pub components: ::prost::alloc::vec::Vec<MipComponentEntry>,
