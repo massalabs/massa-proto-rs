@@ -672,7 +672,7 @@ pub struct SlotDraw {
     /// Slot
     #[prost(message, optional, tag = "1")]
     pub slot: ::core::option::Option<Slot>,
-    /// optional Block producer address
+    /// Block producer address (Optional)
     #[prost(message, optional, tag = "2")]
     pub block_producer: ::core::option::Option<::prost::alloc::string::String>,
     /// Endorsement draws
@@ -1205,9 +1205,9 @@ pub struct ReadOnlyExecutionCall {
     /// Call stack to simulate, older caller first
     #[prost(message, repeated, tag = "2")]
     pub call_stack: ::prost::alloc::vec::Vec<ExecutionStackElement>,
-    /// Caller's address, (Optional)
-    #[prost(string, tag = "5")]
-    pub caller_address: ::prost::alloc::string::String,
+    /// Caller's address, (Optional) if not set, an auto-generated address will be used
+    #[prost(message, optional, tag = "5")]
+    pub caller_address: ::core::option::Option<::prost::alloc::string::String>,
     /// execution start state
     ///
     /// Whether to start execution from final or active state
@@ -1295,9 +1295,9 @@ pub struct ExecutionStackElement {
     /// the performance hit of linear search remains minimal because `owned_addresses` will always contain very few elements.
     #[prost(string, repeated, tag = "3")]
     pub owned_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// Datastore (key value store) for `ExecuteSC` Operation (Optional)
-    #[prost(message, repeated, tag = "4")]
-    pub operation_datastore: ::prost::alloc::vec::Vec<BytesMapFieldEntry>,
+    /// Serialized datastore (key value store)  for `ExecuteSC` Operation (Optional)
+    #[prost(bytes = "vec", repeated, tag = "4")]
+    pub operation_datastore: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
 /// ScExecutionEventStatus type enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
