@@ -206,6 +206,53 @@ pub struct SecureShare {
     #[prost(string, tag = "5")]
     pub secure_hash: ::prost::alloc::string::String,
 }
+/// KeyPair
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct KeyPair {
+    /// Public key
+    #[prost(string, tag = "1")]
+    pub public_key: ::prost::alloc::string::String,
+    /// Secret key
+    #[prost(string, tag = "2")]
+    pub secret_key: ::prost::alloc::string::String,
+}
+/// Comparison result
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum ComparisonResult {
+    Unspecified = 0,
+    /// left is lower
+    Lower = 1,
+    /// left and right are equal
+    Equal = 2,
+    /// left is greater
+    Greater = 3,
+}
+impl ComparisonResult {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ComparisonResult::Unspecified => "COMPARISON_RESULT_UNSPECIFIED",
+            ComparisonResult::Lower => "COMPARISON_RESULT_LOWER",
+            ComparisonResult::Equal => "COMPARISON_RESULT_EQUAL",
+            ComparisonResult::Greater => "COMPARISON_RESULT_GREATER",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "COMPARISON_RESULT_UNSPECIFIED" => Some(Self::Unspecified),
+            "COMPARISON_RESULT_LOWER" => Some(Self::Lower),
+            "COMPARISON_RESULT_EQUAL" => Some(Self::Equal),
+            "COMPARISON_RESULT_GREATER" => Some(Self::Greater),
+            _ => None,
+        }
+    }
+}
 /// The operation as sent in the network
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1484,17 +1531,6 @@ impl LedgerChangeType {
         }
     }
 }
-/// NativeHash.
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativeHash {
-    /// Version of the hash.
-    #[prost(fixed64, tag = "1")]
-    pub version: u64,
-    /// Content of the hash.
-    #[prost(bytes = "vec", tag = "2")]
-    pub content: ::prost::alloc::vec::Vec<u8>,
-}
 /// NativeTime represents a native duration or unix timestamp
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -1740,28 +1776,6 @@ impl ConnectionType {
             _ => None,
         }
     }
-}
-/// Native Signature
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativeSig {
-    /// Version of the signature
-    #[prost(fixed64, tag = "1")]
-    pub version: u64,
-    /// Content of the signature
-    #[prost(bytes = "vec", tag = "2")]
-    pub content: ::prost::alloc::vec::Vec<u8>,
-}
-/// Native Public Key
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NativePubKey {
-    /// Version of the public key
-    #[prost(fixed64, tag = "1")]
-    pub version: u64,
-    /// Content of the public key
-    #[prost(bytes = "vec", tag = "2")]
-    pub content: ::prost::alloc::vec::Vec<u8>,
 }
 /// StakerEntry
 #[allow(clippy::derive_partial_eq_without_eq)]
