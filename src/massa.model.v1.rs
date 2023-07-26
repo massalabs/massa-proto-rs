@@ -1,3 +1,25 @@
+/// Massa NativeAddress
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NativeAddress {
+    /// Address category
+    #[prost(enumeration = "AddressCategory", tag = "1")]
+    pub category: i32,
+    /// Address version
+    #[prost(uint64, tag = "2")]
+    pub version: u64,
+    /// Address content
+    #[prost(bytes = "vec", tag = "3")]
+    pub content: ::prost::alloc::vec::Vec<u8>,
+}
+/// Addresses holds addresses
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Addresses {
+    /// Addresses
+    #[prost(string, repeated, tag = "1")]
+    pub addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
 /// Address category discriminant
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -51,7 +73,7 @@ pub struct IndexedSlot {
     #[prost(message, optional, tag = "1")]
     pub slot: ::core::option::Option<Slot>,
     /// Endorsement index in the slot
-    #[prost(fixed64, tag = "2")]
+    #[prost(uint64, tag = "2")]
     pub index: u64,
 }
 /// A point in time where a block is expected
@@ -59,11 +81,30 @@ pub struct IndexedSlot {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Slot {
     /// Period
-    #[prost(fixed64, tag = "1")]
+    #[prost(uint64, tag = "1")]
     pub period: u64,
     /// Thread
-    #[prost(fixed32, tag = "2")]
+    #[prost(uint32, tag = "2")]
     pub thread: u32,
+}
+/// Slots
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Slots {
+    /// Slots
+    #[prost(message, repeated, tag = "1")]
+    pub slots: ::prost::alloc::vec::Vec<Slot>,
+}
+/// SlotRange
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SlotRange {
+    /// Start lot (Optional)
+    #[prost(message, optional, tag = "1")]
+    pub start_slot: ::core::option::Option<Slot>,
+    /// End slot (Optional)
+    #[prost(message, optional, tag = "2")]
+    pub end_slot: ::core::option::Option<Slot>,
 }
 /// An endorsement, as sent in the network
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -73,7 +114,7 @@ pub struct Endorsement {
     #[prost(message, optional, tag = "1")]
     pub slot: ::core::option::Option<Slot>,
     /// Endorsement index inside the including block
-    #[prost(fixed32, tag = "2")]
+    #[prost(uint32, tag = "2")]
     pub index: u32,
     /// Hash of endorsed block
     /// This is the parent in thread `self.slot.thread` of the block in which the endorsement is included
@@ -96,13 +137,36 @@ pub struct SignedEndorsement {
     /// Derived from the same public key used to generate the signature
     #[prost(string, tag = "4")]
     pub content_creator_address: ::prost::alloc::string::String,
-    /// A secure hash of the data. See also \[massa_hash::Hash\]
+    /// A secure hash of the non-malleable contents of a deterministic binary representation of the block header
     #[prost(string, tag = "5")]
-    pub id: ::prost::alloc::string::String,
-    /// The size of the serialized endorsement
-    #[prost(fixed64, tag = "6")]
+    pub secure_hash: ::prost::alloc::string::String,
+    /// The size of the serialized endorsement in bytes
+    #[prost(uint64, tag = "6")]
     pub serialized_size: u64,
 }
+/// EndorsementIds holds endorsements ids
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EndorsementsIds {
+    /// Endorsements ids
+    #[prost(string, repeated, tag = "1")]
+    pub endorsements_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// Massa error
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Error {
+    /// The error code
+    #[prost(int32, tag = "1")]
+    pub code: i32,
+    /// A developer-facing error message, which should be in English
+    #[prost(string, tag = "2")]
+    pub message: ::prost::alloc::string::String,
+}
+/// Empty
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Empty {}
 /// BytesMapFieldEntry
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -113,6 +177,14 @@ pub struct BytesMapFieldEntry {
     /// bytes key
     #[prost(bytes = "vec", tag = "2")]
     pub value: ::prost::alloc::vec::Vec<u8>,
+}
+/// Array of bytes wrapper
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ArrayOfBytesWrapper {
+    /// Repeated bytes
+    #[prost(bytes = "vec", repeated, tag = "1")]
+    pub items: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
 /// Packages a type such that it can be securely sent and received in a trust-free network
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -130,9 +202,20 @@ pub struct SecureShare {
     /// Derived from the same public key used to generate the signature
     #[prost(string, tag = "4")]
     pub content_creator_address: ::prost::alloc::string::String,
-    /// A secure hash of the data. See also \[massa_hash::Hash\]
+    /// A secure hash of the non-malleable contents of a deterministic binary representation of the block header
     #[prost(string, tag = "5")]
-    pub id: ::prost::alloc::string::String,
+    pub secure_hash: ::prost::alloc::string::String,
+}
+/// KeyPair
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct KeyPair {
+    /// Public key
+    #[prost(string, tag = "1")]
+    pub public_key: ::prost::alloc::string::String,
+    /// Secret key
+    #[prost(string, tag = "2")]
+    pub secret_key: ::prost::alloc::string::String,
 }
 /// Comparison result
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -175,10 +258,10 @@ impl ComparisonResult {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Operation {
     /// The fee they have decided for this operation
-    #[prost(fixed64, tag = "1")]
-    pub fee: u64,
+    #[prost(message, optional, tag = "1")]
+    pub fee: ::core::option::Option<NativeAmount>,
     /// After `expire_period` slot the operation won't be included in a block
-    #[prost(fixed64, tag = "2")]
+    #[prost(uint64, tag = "2")]
     pub expire_period: u64,
     /// The type specific operation part
     #[prost(message, optional, tag = "3")]
@@ -221,15 +304,15 @@ pub struct Transaction {
     #[prost(string, tag = "1")]
     pub recipient_address: ::prost::alloc::string::String,
     /// Amount
-    #[prost(fixed64, tag = "2")]
-    pub amount: u64,
+    #[prost(message, optional, tag = "2")]
+    pub amount: ::core::option::Option<NativeAmount>,
 }
 /// The sender buys `roll_count` rolls. Roll price is defined in configuration
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollBuy {
     /// Roll count
-    #[prost(fixed64, tag = "1")]
+    #[prost(uint64, tag = "1")]
     pub roll_count: u64,
 }
 /// The sender sells `roll_count` rolls. Roll price is defined in configuration
@@ -237,7 +320,7 @@ pub struct RollBuy {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RollSell {
     /// Roll count
-    #[prost(fixed64, tag = "1")]
+    #[prost(uint64, tag = "1")]
     pub roll_count: u64,
 }
 /// Execute a smart contract
@@ -248,10 +331,10 @@ pub struct ExecuteSc {
     #[prost(bytes = "vec", tag = "1")]
     pub data: ::prost::alloc::vec::Vec<u8>,
     /// The maximum of coins that could be spent by the operation sender
-    #[prost(fixed64, tag = "2")]
+    #[prost(uint64, tag = "2")]
     pub max_coins: u64,
     /// The maximum amount of gas that the execution of the contract is allowed to cost
-    #[prost(fixed64, tag = "3")]
+    #[prost(uint64, tag = "3")]
     pub max_gas: u64,
     /// A key-value store associating a hash to arbitrary bytes
     #[prost(message, repeated, tag = "4")]
@@ -271,11 +354,11 @@ pub struct CallSc {
     #[prost(bytes = "vec", tag = "3")]
     pub param: ::prost::alloc::vec::Vec<u8>,
     /// The maximum amount of gas that the execution of the contract is allowed to cost
-    #[prost(fixed64, tag = "4")]
+    #[prost(uint64, tag = "4")]
     pub max_gas: u64,
     /// Extra coins that are spent from the caller's balance and transferred to the target
-    #[prost(fixed64, tag = "5")]
-    pub coins: u64,
+    #[prost(message, optional, tag = "5")]
+    pub coins: ::core::option::Option<NativeAmount>,
 }
 /// Signed operation
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -293,11 +376,11 @@ pub struct SignedOperation {
     /// Derived from the same public key used to generate the signature
     #[prost(string, tag = "4")]
     pub content_creator_address: ::prost::alloc::string::String,
-    /// A secure hash of the data. See also \[massa_hash::Hash\]
+    /// A secure hash of the non-malleable contents of a deterministic binary representation of the block header
     #[prost(string, tag = "5")]
-    pub id: ::prost::alloc::string::String,
-    /// The size of the serialized operation
-    #[prost(fixed64, tag = "6")]
+    pub secure_hash: ::prost::alloc::string::String,
+    /// The size of the serialized operation in bytes
+    #[prost(uint64, tag = "6")]
     pub serialized_size: u64,
 }
 /// A wrapper around an operation with its metadata
@@ -308,59 +391,72 @@ pub struct OperationWrapper {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
     /// The IDs of the blocks in which the operation appears
-    #[prost(string, repeated, tag = "3")]
+    #[prost(string, repeated, tag = "2")]
     pub block_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// The thread in which the operation can be included
-    #[prost(fixed32, tag = "5")]
+    #[prost(uint32, tag = "3")]
     pub thread: u32,
     /// The operation object itself
-    #[prost(message, optional, tag = "6")]
+    #[prost(message, optional, tag = "4")]
     pub operation: ::core::option::Option<SignedOperation>,
-    /// The execution statuses of the operation
-    #[prost(enumeration = "OperationStatus", repeated, tag = "7")]
-    pub status: ::prost::alloc::vec::Vec<i32>,
 }
-/// Possible statuses for an operation
+/// OperationIds
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct OperationIds {
+    /// Operations ids
+    #[prost(string, repeated, tag = "1")]
+    pub operation_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// OpTypes
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct OpTypes {
+    /// Operations types
+    #[prost(enumeration = "OpType", repeated, tag = "1")]
+    pub op_types: ::prost::alloc::vec::Vec<i32>,
+}
+/// Operation type enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
-pub enum OperationStatus {
+pub enum OpType {
     /// Default enum value
     Unspecified = 0,
-    /// The operation is still pending
-    Pending = 1,
-    /// The operation is final
-    Final = 2,
-    /// The operation was executed successfully
-    Success = 3,
-    /// The operation failed to execute
-    Failure = 4,
-    /// The status of the operation is unknown
-    Unknown = 5,
+    /// Transaction
+    Transaction = 1,
+    /// Roll buy
+    RollBuy = 2,
+    /// Roll sell
+    RollSell = 3,
+    /// Execute smart contract
+    ExecuteSc = 4,
+    /// Call smart contract
+    CallSc = 5,
 }
-impl OperationStatus {
+impl OpType {
     /// String value of the enum field names used in the ProtoBuf definition.
     ///
     /// The values are not transformed in any way and thus are considered stable
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            OperationStatus::Unspecified => "OPERATION_STATUS_UNSPECIFIED",
-            OperationStatus::Pending => "OPERATION_STATUS_PENDING",
-            OperationStatus::Final => "OPERATION_STATUS_FINAL",
-            OperationStatus::Success => "OPERATION_STATUS_SUCCESS",
-            OperationStatus::Failure => "OPERATION_STATUS_FAILURE",
-            OperationStatus::Unknown => "OPERATION_STATUS_UNKNOWN",
+            OpType::Unspecified => "OP_TYPE_UNSPECIFIED",
+            OpType::Transaction => "OP_TYPE_TRANSACTION",
+            OpType::RollBuy => "OP_TYPE_ROLL_BUY",
+            OpType::RollSell => "OP_TYPE_ROLL_SELL",
+            OpType::ExecuteSc => "OP_TYPE_EXECUTE_SC",
+            OpType::CallSc => "OP_TYPE_CALL_SC",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
-            "OPERATION_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
-            "OPERATION_STATUS_PENDING" => Some(Self::Pending),
-            "OPERATION_STATUS_FINAL" => Some(Self::Final),
-            "OPERATION_STATUS_SUCCESS" => Some(Self::Success),
-            "OPERATION_STATUS_FAILURE" => Some(Self::Failure),
-            "OPERATION_STATUS_UNKNOWN" => Some(Self::Unknown),
+            "OP_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "OP_TYPE_TRANSACTION" => Some(Self::Transaction),
+            "OP_TYPE_ROLL_BUY" => Some(Self::RollBuy),
+            "OP_TYPE_ROLL_SELL" => Some(Self::RollSell),
+            "OP_TYPE_EXECUTE_SC" => Some(Self::ExecuteSc),
+            "OP_TYPE_CALL_SC" => Some(Self::CallSc),
             _ => None,
         }
     }
@@ -385,29 +481,35 @@ pub struct FilledBlock {
     pub header: ::core::option::Option<SignedBlockHeader>,
     /// Operations
     #[prost(message, repeated, tag = "2")]
-    pub operations: ::prost::alloc::vec::Vec<FilledOperationTuple>,
+    pub operations: ::prost::alloc::vec::Vec<FilledOperationEntry>,
 }
 /// Block header
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BlockHeader {
+    /// Current network version
+    #[prost(uint32, tag = "1")]
+    pub current_version: u32,
+    /// Announced network version(Optional)
+    #[prost(message, optional, tag = "2")]
+    pub announced_version: ::core::option::Option<u32>,
     /// Slot
-    #[prost(message, optional, tag = "1")]
+    #[prost(message, optional, tag = "3")]
     pub slot: ::core::option::Option<Slot>,
     /// parents
-    #[prost(string, repeated, tag = "2")]
+    #[prost(string, repeated, tag = "4")]
     pub parents: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// All operations hash
-    #[prost(string, tag = "3")]
-    pub operation_merkle_root: ::prost::alloc::string::String,
+    #[prost(string, tag = "5")]
+    pub operations_hash: ::prost::alloc::string::String,
     /// Signed endorsements
-    #[prost(message, repeated, tag = "4")]
+    #[prost(message, repeated, tag = "6")]
     pub endorsements: ::prost::alloc::vec::Vec<SignedEndorsement>,
 }
 /// Filled Operation Tuple
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct FilledOperationTuple {
+pub struct FilledOperationEntry {
     /// Operation id
     #[prost(string, tag = "1")]
     pub operation_id: ::prost::alloc::string::String,
@@ -431,11 +533,11 @@ pub struct SignedBlock {
     /// Derived from the same public key used to generate the signature
     #[prost(string, tag = "4")]
     pub content_creator_address: ::prost::alloc::string::String,
-    /// A secure hash of the data. See also \[massa_hash::Hash\]
+    /// A secure hash of the non-malleable contents of a deterministic binary representation of the block header
     #[prost(string, tag = "5")]
-    pub id: ::prost::alloc::string::String,
-    /// The size of the serialized block
-    #[prost(fixed64, tag = "6")]
+    pub secure_hash: ::prost::alloc::string::String,
+    /// The size of the serialized block in bytes
+    #[prost(uint64, tag = "6")]
     pub serialized_size: u64,
 }
 /// Signed block header
@@ -454,11 +556,11 @@ pub struct SignedBlockHeader {
     /// Derived from the same public key used to generate the signature
     #[prost(string, tag = "4")]
     pub content_creator_address: ::prost::alloc::string::String,
-    /// A secure hash of the data. See also \[massa_hash::Hash\]
+    /// A secure hash of the non-malleable contents of a deterministic binary representation of the block header
     #[prost(string, tag = "5")]
-    pub id: ::prost::alloc::string::String,
-    /// The size of the serialized block header
-    #[prost(fixed64, tag = "6")]
+    pub secure_hash: ::prost::alloc::string::String,
+    /// The size of the serialized block header in bytes
+    #[prost(uint64, tag = "6")]
     pub serialized_size: u64,
 }
 /// A wrapper around a block with its metadata
@@ -467,13 +569,32 @@ pub struct SignedBlockHeader {
 pub struct BlockWrapper {
     /// The unique ID of the block.
     #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
+    pub block_id: ::prost::alloc::string::String,
     /// The block object itself
     #[prost(message, optional, tag = "2")]
     pub block: ::core::option::Option<Block>,
-    /// The execution statuses of the block
-    #[prost(enumeration = "BlockStatus", repeated, tag = "3")]
-    pub status: ::prost::alloc::vec::Vec<i32>,
+    /// The execution status of the block
+    #[prost(enumeration = "BlockStatus", tag = "3")]
+    pub status: i32,
+}
+/// BlockIds holds block ids
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BlockIds {
+    /// Block ids
+    #[prost(string, repeated, tag = "1")]
+    pub block_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// Block parent tuple
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BlockParent {
+    /// Block id
+    #[prost(string, tag = "1")]
+    pub block_id: ::prost::alloc::string::String,
+    /// Period
+    #[prost(uint64, tag = "2")]
+    pub period: u64,
 }
 /// Possible statuses for a block
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -482,11 +603,11 @@ pub enum BlockStatus {
     /// Default enum value
     Unspecified = 0,
     /// The block is in the greatest clique (and not final)
-    InBlockclique = 1,
+    NonFinalBlockclique = 1,
     /// The block is final
     Final = 2,
     /// The block is candidate (active any clique but not final)
-    Candidate = 3,
+    NonFinalAlternateClique = 3,
     /// The block is discarded
     Discarded = 4,
 }
@@ -498,9 +619,11 @@ impl BlockStatus {
     pub fn as_str_name(&self) -> &'static str {
         match self {
             BlockStatus::Unspecified => "BLOCK_STATUS_UNSPECIFIED",
-            BlockStatus::InBlockclique => "BLOCK_STATUS_IN_BLOCKCLIQUE",
+            BlockStatus::NonFinalBlockclique => "BLOCK_STATUS_NON_FINAL_BLOCKCLIQUE",
             BlockStatus::Final => "BLOCK_STATUS_FINAL",
-            BlockStatus::Candidate => "BLOCK_STATUS_CANDIDATE",
+            BlockStatus::NonFinalAlternateClique => {
+                "BLOCK_STATUS_NON_FINAL_ALTERNATE_CLIQUE"
+            }
             BlockStatus::Discarded => "BLOCK_STATUS_DISCARDED",
         }
     }
@@ -508,35 +631,119 @@ impl BlockStatus {
     pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
         match value {
             "BLOCK_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
-            "BLOCK_STATUS_IN_BLOCKCLIQUE" => Some(Self::InBlockclique),
+            "BLOCK_STATUS_NON_FINAL_BLOCKCLIQUE" => Some(Self::NonFinalBlockclique),
             "BLOCK_STATUS_FINAL" => Some(Self::Final),
-            "BLOCK_STATUS_CANDIDATE" => Some(Self::Candidate),
+            "BLOCK_STATUS_NON_FINAL_ALTERNATE_CLIQUE" => {
+                Some(Self::NonFinalAlternateClique)
+            }
             "BLOCK_STATUS_DISCARDED" => Some(Self::Discarded),
             _ => None,
         }
     }
 }
-/// Selector draws
+/// AddressKeys holds a list of addresses - keys
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SelectorDraws {
-    /// Address
+pub struct AddressKeysEntries {
+    /// List of address- key entries
+    #[prost(message, repeated, tag = "1")]
+    pub address_key_entries: ::prost::alloc::vec::Vec<AddressKeyEntry>,
+}
+/// AddressKeyEntry
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressKeyEntry {
+    /// Associated address of the entry
     #[prost(string, tag = "1")]
     pub address: ::prost::alloc::string::String,
-    /// Next block draws
-    #[prost(message, repeated, tag = "2")]
-    pub next_block_draws: ::prost::alloc::vec::Vec<Slot>,
-    /// Next endorsements draws
+    /// Datastore key
+    #[prost(bytes = "vec", tag = "2")]
+    pub key: ::prost::alloc::vec::Vec<u8>,
+}
+/// DatastoreEntry
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DatastoreEntry {
+    /// final datastore entry value
+    #[prost(bytes = "vec", tag = "1")]
+    pub final_value: ::prost::alloc::vec::Vec<u8>,
+    /// candidate_value datastore entry value
+    #[prost(bytes = "vec", tag = "2")]
+    pub candidate_value: ::prost::alloc::vec::Vec<u8>,
+}
+/// Index for Denunciations in collections (e.g. like a HashMap...)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DenunciationIndex {
+    /// DenunciationBlockHeader or DenunciationEndorsement
+    #[prost(oneof = "denunciation_index::Entry", tags = "1, 2")]
+    pub entry: ::core::option::Option<denunciation_index::Entry>,
+}
+/// Nested message and enum types in `DenunciationIndex`.
+pub mod denunciation_index {
+    /// DenunciationBlockHeader or DenunciationEndorsement
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Entry {
+        /// Denunciation block header
+        #[prost(message, tag = "1")]
+        BlockHeader(super::DenunciationBlockHeader),
+        /// Denunciation endorsement
+        #[prost(message, tag = "2")]
+        Endorsement(super::DenunciationEndorsement),
+    }
+}
+/// Variant for Block header denunciation index
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DenunciationBlockHeader {
+    /// Denounciation slot
+    #[prost(message, optional, tag = "1")]
+    pub slot: ::core::option::Option<Slot>,
+}
+/// Variant for Endorsement denunciation index
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DenunciationEndorsement {
+    /// Denounciation slot
+    #[prost(message, optional, tag = "1")]
+    pub slot: ::core::option::Option<Slot>,
+    /// Denounciation index
+    #[prost(uint32, tag = "2")]
+    pub index: u32,
+}
+/// Slot draw
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SlotDraw {
+    /// Slot
+    #[prost(message, optional, tag = "1")]
+    pub slot: ::core::option::Option<Slot>,
+    /// Block producer address (Optional)
+    #[prost(message, optional, tag = "2")]
+    pub block_producer: ::core::option::Option<::prost::alloc::string::String>,
+    /// Endorsement draws
     #[prost(message, repeated, tag = "3")]
-    pub next_endorsement_draws: ::prost::alloc::vec::Vec<IndexedSlot>,
+    pub endorsement_draws: ::prost::alloc::vec::Vec<EndorsementDraw>,
+}
+/// Endorsement draw
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EndorsementDraw {
+    /// Endorsement index
+    #[prost(uint64, tag = "1")]
+    pub index: u64,
+    /// Producer address
+    #[prost(string, tag = "2")]
+    pub producer: ::prost::alloc::string::String,
 }
 /// SlotExecutionOutput
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SlotExecutionOutput {
     /// Status
-    #[prost(enumeration = "ExecutionOutputStatus", repeated, tag = "1")]
-    pub status: ::prost::alloc::vec::Vec<i32>,
+    #[prost(enumeration = "ExecutionOutputStatus", tag = "1")]
+    pub status: i32,
     /// Executed slot output
     #[prost(message, optional, tag = "2")]
     pub execution_output: ::core::option::Option<ExecutionOutput>,
@@ -556,8 +763,8 @@ pub struct ExecutionOutput {
     /// Slot
     #[prost(message, optional, tag = "1")]
     pub slot: ::core::option::Option<Slot>,
-    /// Block id at that slot (optional)
-    #[prost(string, optional, tag = "2")]
+    /// Block id at that slot (Optional)
+    #[prost(message, optional, tag = "2")]
     pub block_id: ::core::option::Option<::prost::alloc::string::String>,
     /// Events emitted by the execution step
     #[prost(message, repeated, tag = "3")]
@@ -573,34 +780,42 @@ pub struct ScExecutionEvent {
     /// Sc execution context
     #[prost(message, optional, tag = "1")]
     pub context: ::core::option::Option<ScExecutionEventContext>,
-    /// json data string
-    #[prost(string, tag = "2")]
-    pub data: ::prost::alloc::string::String,
+    /// Generated data of the event
+    #[prost(bytes = "vec", tag = "2")]
+    pub data: ::prost::alloc::vec::Vec<u8>,
 }
 /// ScExecutionEvent context
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScExecutionEventContext {
-    /// base58 encoded slot(period + thread) + index_in_slot
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// When was it generated
-    #[prost(message, optional, tag = "2")]
+    #[prost(message, optional, tag = "1")]
     pub origin_slot: ::core::option::Option<Slot>,
-    /// Block id if there was a block at that slot (optional)
-    #[prost(string, optional, tag = "3")]
+    /// Block id if there was a block at that slot (Optional)
+    #[prost(message, optional, tag = "2")]
     pub block_id: ::core::option::Option<::prost::alloc::string::String>,
     /// Index of the event in the slot
-    #[prost(fixed64, tag = "4")]
+    #[prost(uint64, tag = "3")]
     pub index_in_slot: u64,
     /// Call stack addresses. most recent at the end
-    #[prost(string, repeated, tag = "5")]
+    #[prost(string, repeated, tag = "4")]
     pub call_stack: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// Origin operation id (optional)
-    #[prost(string, optional, tag = "6")]
+    /// Origin operation id (Optional)
+    #[prost(message, optional, tag = "5")]
     pub origin_operation_id: ::core::option::Option<::prost::alloc::string::String>,
+    /// If a failure occurred
+    #[prost(bool, tag = "6")]
+    pub is_failure: bool,
     /// Status
-    #[prost(enumeration = "ScExecutionEventStatus", repeated, tag = "7")]
+    #[prost(enumeration = "ScExecutionEventStatus", tag = "7")]
+    pub status: i32,
+}
+/// ScExecutionEventsStatus
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ScExecutionEventsStatus {
+    /// Status
+    #[prost(enumeration = "ScExecutionEventStatus", repeated, tag = "1")]
     pub status: ::prost::alloc::vec::Vec<i32>,
 }
 /// StateChanges
@@ -624,7 +839,7 @@ pub struct StateChanges {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutedOpsChangeEntry {
-    /// OperationId
+    /// string
     #[prost(string, tag = "1")]
     pub operation_id: ::prost::alloc::string::String,
     /// ExecutedOpsChangeValue
@@ -636,8 +851,8 @@ pub struct ExecutedOpsChangeEntry {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutedOpsChangeValue {
     /// The status of the execution of the operation
-    #[prost(enumeration = "OperationExecutionStatus", repeated, tag = "1")]
-    pub status: ::prost::alloc::vec::Vec<i32>,
+    #[prost(enumeration = "OperationExecutionStatus", tag = "1")]
+    pub status: i32,
     /// Slot until which the operation remains valid (included)
     #[prost(message, optional, tag = "2")]
     pub slot: ::core::option::Option<Slot>,
@@ -687,7 +902,7 @@ pub struct AsyncMessage {
     pub emission_slot: ::core::option::Option<Slot>,
     /// Index of the emitted message within the `emission_slot`.
     /// This is used for disambiguate the emission of multiple messages at the same slot.
-    #[prost(fixed64, tag = "2")]
+    #[prost(uint64, tag = "2")]
     pub emission_index: u64,
     /// The address that sent the message
     #[prost(string, tag = "3")]
@@ -699,17 +914,17 @@ pub struct AsyncMessage {
     #[prost(string, tag = "5")]
     pub handler: ::prost::alloc::string::String,
     /// Maximum gas to use when processing the message
-    #[prost(fixed64, tag = "6")]
+    #[prost(uint64, tag = "6")]
     pub max_gas: u64,
     /// Fee paid by the sender when the message is processed.
-    #[prost(fixed64, tag = "7")]
-    pub fee: u64,
+    #[prost(message, optional, tag = "7")]
+    pub fee: ::core::option::Option<NativeAmount>,
     /// Coins sent from the sender to the target address of the message.
     /// Those coins are spent by the sender address when the message is sent,
     /// and credited to the destination address when receiving the message.
     /// In case of failure or discard, those coins are reimbursed to the sender.
-    #[prost(fixed64, tag = "8")]
-    pub coins: u64,
+    #[prost(message, optional, tag = "8")]
+    pub coins: ::core::option::Option<NativeAmount>,
     /// Slot at which the message starts being valid (bound included in the validity range)
     #[prost(message, optional, tag = "9")]
     pub validity_start: ::core::option::Option<Slot>,
@@ -726,9 +941,6 @@ pub struct AsyncMessage {
     /// For messages with filter, this boolean is true if the filter has been matched between `validity_start` and current slot.
     #[prost(bool, tag = "13")]
     pub can_be_executed: bool,
-    /// Hash of the message
-    #[prost(string, tag = "14")]
-    pub hash: ::prost::alloc::string::String,
 }
 /// Asynchronous smart contract message
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -740,7 +952,7 @@ pub struct AsyncMessageUpdate {
     /// Change the index of the emitted message within the `emission_slot`.
     /// This is used for disambiguate the emission of multiple messages at the same slot.
     #[prost(message, optional, tag = "2")]
-    pub emission_index: ::core::option::Option<SetOrKeepFixed64>,
+    pub emission_index: ::core::option::Option<SetOrKeepUint64>,
     /// Change the address that sent the message
     #[prost(message, optional, tag = "3")]
     pub sender: ::core::option::Option<SetOrKeepString>,
@@ -752,16 +964,16 @@ pub struct AsyncMessageUpdate {
     pub handler: ::core::option::Option<SetOrKeepString>,
     /// Change the maximum gas to use when processing the message
     #[prost(message, optional, tag = "6")]
-    pub max_gas: ::core::option::Option<SetOrKeepFixed64>,
+    pub max_gas: ::core::option::Option<SetOrKeepUint64>,
     /// Change the fee paid by the sender when the message is processed.
     #[prost(message, optional, tag = "7")]
-    pub fee: ::core::option::Option<SetOrKeepFixed64>,
+    pub fee: ::core::option::Option<SetOrKeepUint64>,
     /// Change the coins sent from the sender to the target address of the message.
     /// Those coins are spent by the sender address when the message is sent,
     /// and credited to the destination address when receiving the message.
     /// In case of failure or discard, those coins are reimbursed to the sender.
     #[prost(message, optional, tag = "8")]
-    pub coins: ::core::option::Option<SetOrKeepFixed64>,
+    pub coins: ::core::option::Option<SetOrKeepUint64>,
     /// Change the slot at which the message starts being valid (bound included in the validity range)
     #[prost(message, optional, tag = "9")]
     pub validity_start: ::core::option::Option<SetOrKeepSlot>,
@@ -778,75 +990,138 @@ pub struct AsyncMessageUpdate {
     /// For messages with filter, this boolean is true if the filter has been matched between `validity_start` and current slot.
     #[prost(message, optional, tag = "13")]
     pub can_be_executed: ::core::option::Option<SetOrKeepBool>,
-    /// Change the hash of the message
-    #[prost(message, optional, tag = "14")]
-    pub hash: ::core::option::Option<SetOrKeepString>,
 }
 /// Set or Keep Slot
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetOrKeepSlot {
     /// The type of the change
-    #[prost(enumeration = "SetOrKeepType", tag = "1")]
-    pub r#type: i32,
-    /// The value of that entry (optional)
-    #[prost(message, optional, tag = "2")]
-    pub value: ::core::option::Option<Slot>,
+    #[prost(oneof = "set_or_keep_slot::Change", tags = "1, 2")]
+    pub change: ::core::option::Option<set_or_keep_slot::Change>,
 }
-/// Set or Keep Fixed64
+/// Nested message and enum types in `SetOrKeepSlot`.
+pub mod set_or_keep_slot {
+    /// The type of the change
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Change {
+        /// The value of that entry (Optional)
+        #[prost(message, tag = "1")]
+        Set(super::Slot),
+        /// Keep the existing value
+        #[prost(message, tag = "2")]
+        Keep(super::Empty),
+    }
+}
+/// Set or Keep Uint64
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SetOrKeepFixed64 {
+pub struct SetOrKeepUint64 {
     /// The type of the change
-    #[prost(enumeration = "SetOrKeepType", tag = "1")]
-    pub r#type: i32,
-    /// The value of that entry (optional)
-    #[prost(fixed64, optional, tag = "2")]
-    pub value: ::core::option::Option<u64>,
+    #[prost(oneof = "set_or_keep_uint64::Change", tags = "1, 2")]
+    pub change: ::core::option::Option<set_or_keep_uint64::Change>,
+}
+/// Nested message and enum types in `SetOrKeepUint64`.
+pub mod set_or_keep_uint64 {
+    /// The type of the change
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Change {
+        /// The value of that entry (Optional)
+        #[prost(message, tag = "1")]
+        Set(u64),
+        /// Keep the existing value
+        #[prost(message, tag = "2")]
+        Keep(super::Empty),
+    }
 }
 /// Set or Keep String
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetOrKeepString {
     /// The type of the change
-    #[prost(enumeration = "SetOrKeepType", tag = "1")]
-    pub r#type: i32,
-    /// The value of that entry (optional)
-    #[prost(string, optional, tag = "2")]
-    pub value: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(oneof = "set_or_keep_string::Change", tags = "1, 2")]
+    pub change: ::core::option::Option<set_or_keep_string::Change>,
+}
+/// Nested message and enum types in `SetOrKeepString`.
+pub mod set_or_keep_string {
+    /// The type of the change
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Change {
+        /// The value of that entry (Optional)
+        #[prost(message, tag = "1")]
+        Set(::prost::alloc::string::String),
+        /// Keep the existing value
+        #[prost(message, tag = "2")]
+        Keep(super::Empty),
+    }
 }
 /// Set or Keep Bytes
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetOrKeepBytes {
     /// The type of the change
-    #[prost(enumeration = "SetOrKeepType", tag = "1")]
-    pub r#type: i32,
-    /// The value of that entry (optional)
-    #[prost(bytes = "vec", optional, tag = "2")]
-    pub value: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
+    #[prost(oneof = "set_or_keep_bytes::Change", tags = "1, 2")]
+    pub change: ::core::option::Option<set_or_keep_bytes::Change>,
+}
+/// Nested message and enum types in `SetOrKeepBytes`.
+pub mod set_or_keep_bytes {
+    /// The type of the change
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Change {
+        /// The value of that entry (Optional)
+        #[prost(message, tag = "1")]
+        Set(::prost::alloc::vec::Vec<u8>),
+        /// Keep the existing value
+        #[prost(message, tag = "2")]
+        Keep(super::Empty),
+    }
 }
 /// Set or Keep Bool
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetOrKeepBool {
     /// The type of the change
-    #[prost(enumeration = "SetOrKeepType", tag = "1")]
-    pub r#type: i32,
-    /// The value of that entry (optional)
-    #[prost(bool, optional, tag = "2")]
-    pub value: ::core::option::Option<bool>,
+    #[prost(oneof = "set_or_keep_bool::Change", tags = "1, 2")]
+    pub change: ::core::option::Option<set_or_keep_bool::Change>,
+}
+/// Nested message and enum types in `SetOrKeepBool`.
+pub mod set_or_keep_bool {
+    /// The type of the change
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Change {
+        /// The value of that entry (Optional)
+        #[prost(message, tag = "1")]
+        Set(bool),
+        /// Keep the existing value
+        #[prost(message, tag = "2")]
+        Keep(super::Empty),
+    }
 }
 /// Set or Keep AsyncMessageTrigger
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetOrKeepAsyncMessageTrigger {
     /// The type of the change
-    #[prost(enumeration = "SetOrKeepType", tag = "1")]
-    pub r#type: i32,
-    /// The value of that entry (optional)
-    #[prost(message, optional, tag = "2")]
-    pub value: ::core::option::Option<AsyncMessageTrigger>,
+    #[prost(oneof = "set_or_keep_async_message_trigger::Change", tags = "1, 2")]
+    pub change: ::core::option::Option<set_or_keep_async_message_trigger::Change>,
+}
+/// Nested message and enum types in `SetOrKeepAsyncMessageTrigger`.
+pub mod set_or_keep_async_message_trigger {
+    /// The type of the change
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Change {
+        /// The value of that entry (Optional)
+        #[prost(message, tag = "1")]
+        Set(super::AsyncMessageTrigger),
+        /// Keep the existing value
+        #[prost(message, tag = "2")]
+        Keep(super::Empty),
+    }
 }
 /// Structure defining a trigger for an asynchronous message
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -855,8 +1130,8 @@ pub struct AsyncMessageTrigger {
     /// Filter on the address
     #[prost(string, tag = "1")]
     pub address: ::prost::alloc::string::String,
-    /// Filter on the datastore key (optional)
-    #[prost(bytes = "vec", optional, tag = "2")]
+    /// Filter on the datastore key (Optional)
+    #[prost(message, optional, tag = "2")]
     pub datastore_key: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
 }
 /// LedgerChangeEntry
@@ -900,14 +1175,14 @@ pub mod ledger_change_value {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LedgerEntry {
     /// The balance of that entry
-    #[prost(fixed64, tag = "1")]
-    pub balance: u64,
+    #[prost(message, optional, tag = "1")]
+    pub balance: ::core::option::Option<NativeAmount>,
     /// Executable bytecode
     #[prost(bytes = "vec", tag = "2")]
     pub bytecode: ::prost::alloc::vec::Vec<u8>,
     /// A key-value store associating a hash to arbitrary bytes
     #[prost(message, repeated, tag = "3")]
-    pub entries: ::prost::alloc::vec::Vec<BytesMapFieldEntry>,
+    pub datastore: ::prost::alloc::vec::Vec<BytesMapFieldEntry>,
 }
 /// Represents an update to one or more fields of a `LedgerEntry`
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -918,8 +1193,8 @@ pub struct LedgerEntryUpdate {
     pub balance: ::core::option::Option<SetOrKeepBalance>,
     /// Change the executable bytecode
     #[prost(message, optional, tag = "2")]
-    pub bytecode: ::core::option::Option<SetOrKeepBytecode>,
-    /// / Change datastore entries
+    pub bytecode: ::core::option::Option<SetOrKeepBytes>,
+    /// Change datastore entries
     #[prost(message, repeated, tag = "3")]
     pub datastore: ::prost::alloc::vec::Vec<SetOrDeleteDatastoreEntry>,
 }
@@ -928,74 +1203,148 @@ pub struct LedgerEntryUpdate {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetOrKeepBalance {
     /// The type of the change
-    #[prost(enumeration = "SetOrKeepType", tag = "1")]
-    pub r#type: i32,
-    /// The balance of that entry (optional)
-    #[prost(fixed64, optional, tag = "2")]
-    pub balance: ::core::option::Option<u64>,
+    #[prost(oneof = "set_or_keep_balance::Change", tags = "1, 2")]
+    pub change: ::core::option::Option<set_or_keep_balance::Change>,
 }
-/// Set or Keep Bytecode
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SetOrKeepBytecode {
+/// Nested message and enum types in `SetOrKeepBalance`.
+pub mod set_or_keep_balance {
     /// The type of the change
-    #[prost(enumeration = "SetOrKeepType", tag = "1")]
-    pub r#type: i32,
-    /// Executable bytecode (optional)
-    #[prost(bytes = "vec", optional, tag = "2")]
-    pub bytecode: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Change {
+        /// The value of that entry (Optional)
+        #[prost(message, tag = "1")]
+        Set(super::NativeAmount),
+        /// Keep the existing value
+        #[prost(message, tag = "2")]
+        Keep(super::Empty),
+    }
 }
 /// Set or Delete DatastoreEntry
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetOrDeleteDatastoreEntry {
     /// The type of the change
-    #[prost(enumeration = "SetOrDeleteType", tag = "1")]
-    pub r#type: i32,
-    /// The balance of that entry (optioal)
-    #[prost(message, optional, tag = "2")]
-    pub datastore_entry: ::core::option::Option<BytesMapFieldEntry>,
+    #[prost(oneof = "set_or_delete_datastore_entry::Change", tags = "1, 2")]
+    pub change: ::core::option::Option<set_or_delete_datastore_entry::Change>,
 }
-/// Index for Denunciations in collections (e.g. like a HashMap...)
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DenunciationIndex {
-    /// DenunciationBlockHeader or DenunciationEndorsement
-    #[prost(oneof = "denunciation_index::Entry", tags = "1, 2")]
-    pub entry: ::core::option::Option<denunciation_index::Entry>,
-}
-/// Nested message and enum types in `DenunciationIndex`.
-pub mod denunciation_index {
-    /// DenunciationBlockHeader or DenunciationEndorsement
+/// Nested message and enum types in `SetOrDeleteDatastoreEntry`.
+pub mod set_or_delete_datastore_entry {
+    /// The type of the change
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Entry {
-        /// Denunciation block header
+    pub enum Change {
+        /// Executable bytecode (Optional)
         #[prost(message, tag = "1")]
-        BlockHeader(super::DenunciationBlockHeader),
-        /// Denunciation endorsement
+        Set(super::BytesMapFieldEntry),
+        /// Delete the existing bytecode
         #[prost(message, tag = "2")]
-        Endorsement(super::DenunciationEndorsement),
+        Delete(super::Empty),
     }
 }
-/// Variant for Block header denunciation index
+/// Read-only execution call
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DenunciationBlockHeader {
-    /// Denounciation slot
-    #[prost(message, optional, tag = "1")]
-    pub slot: ::core::option::Option<Slot>,
+pub struct ReadOnlyExecutionCall {
+    /// Maximum gas to spend in the execution.
+    #[prost(uint64, tag = "1")]
+    pub max_gas: u64,
+    /// Call stack to simulate, older caller first
+    #[prost(message, repeated, tag = "2")]
+    pub call_stack: ::prost::alloc::vec::Vec<ExecutionStackElement>,
+    /// Caller's address, (Optional) if not set, an auto-generated address will be used
+    #[prost(message, optional, tag = "5")]
+    pub caller_address: ::core::option::Option<::prost::alloc::string::String>,
+    /// execution start state
+    ///
+    /// Whether to start execution from final or active state
+    #[prost(bool, tag = "6")]
+    pub is_final: bool,
+    /// Target of the call
+    #[prost(oneof = "read_only_execution_call::Target", tags = "3, 4")]
+    pub target: ::core::option::Option<read_only_execution_call::Target>,
 }
-/// Variant for Endorsement denunciation index
+/// Nested message and enum types in `ReadOnlyExecutionCall`.
+pub mod read_only_execution_call {
+    /// Target of the call
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Target {
+        /// Byte code
+        #[prost(message, tag = "3")]
+        BytecodeCall(super::BytecodeExecution),
+        /// Function call
+        #[prost(message, tag = "4")]
+        FunctionCall(super::FunctionCall),
+    }
+}
+/// / Execute a bytecode
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DenunciationEndorsement {
-    /// Denounciation slot
+pub struct BytecodeExecution {
+    /// Byte code
+    #[prost(bytes = "vec", tag = "1")]
+    pub bytecode: ::prost::alloc::vec::Vec<u8>,
+    /// Serialized datastore (key value store)  for `ExecuteSC` Operation (Optional)
+    #[prost(bytes = "vec", tag = "2")]
+    pub operation_datastore: ::prost::alloc::vec::Vec<u8>,
+}
+/// Execute a function call
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct FunctionCall {
+    /// Target address
+    #[prost(string, tag = "1")]
+    pub target_addr: ::prost::alloc::string::String,
+    /// Target function
+    #[prost(string, tag = "2")]
+    pub target_func: ::prost::alloc::string::String,
+    /// Parameter to pass to the target function
+    #[prost(bytes = "vec", tag = "3")]
+    pub parameter: ::prost::alloc::vec::Vec<u8>,
+}
+/// Structure describing the output of a read only execution
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ReadOnlyExecutionOutput {
+    /// Output of a single execution
     #[prost(message, optional, tag = "1")]
-    pub slot: ::core::option::Option<Slot>,
-    /// Denounciation index
-    #[prost(fixed32, tag = "2")]
-    pub index: u32,
+    pub out: ::core::option::Option<ExecutionOutput>,
+    /// Gas cost for this execution
+    #[prost(uint64, tag = "2")]
+    pub max_gas: u64,
+    /// Returned value from the module call
+    #[prost(bytes = "vec", tag = "3")]
+    pub call_result: ::prost::alloc::vec::Vec<u8>,
+}
+/// Structure describing an element of the execution stack.
+/// Every time a function is called from bytecode,
+/// a new `ExecutionStackElement` is pushed at the top of the execution stack
+/// to represent the local execution context of the called function,
+/// instead of the caller's which should lie just below in the stack.
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionStackElement {
+    /// Called address
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// Coins transferred to the target address during the call
+    #[prost(message, optional, tag = "2")]
+    pub coins: ::core::option::Option<NativeAmount>,
+    /// List of addresses owned by the current call, and on which the current call has write access.
+    /// This list should contain `ExecutionStackElement::address` in the sense that an address should have write access to itself.
+    /// This list should also contain all addresses created previously during the call
+    /// to allow write access on newly created addresses in order to set them up,
+    /// but only within the scope of the current stack element.
+    /// That way, only the current scope and neither its caller not the functions it calls gain this write access,
+    /// which is important for security.
+    /// Note that we use a vector instead of a pre-hashed set to ensure order determinism,
+    /// the performance hit of linear search remains minimal because `owned_addresses` will always contain very few elements.
+    #[prost(string, repeated, tag = "3")]
+    pub owned_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Datastore (key value store) for `ExecuteSC` Operation (Optional)
+    #[prost(message, repeated, tag = "4")]
+    pub operation_datastore: ::prost::alloc::vec::Vec<BytesMapFieldEntry>,
 }
 /// ScExecutionEventStatus type enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -1007,8 +1356,8 @@ pub enum ScExecutionEventStatus {
     Final = 1,
     /// Read only status
     ReadOnly = 2,
-    /// Failure status
-    Failure = 3,
+    /// Candidate status
+    Candidate = 3,
 }
 impl ScExecutionEventStatus {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -1022,7 +1371,7 @@ impl ScExecutionEventStatus {
             }
             ScExecutionEventStatus::Final => "SC_EXECUTION_EVENT_STATUS_FINAL",
             ScExecutionEventStatus::ReadOnly => "SC_EXECUTION_EVENT_STATUS_READ_ONLY",
-            ScExecutionEventStatus::Failure => "SC_EXECUTION_EVENT_STATUS_FAILURE",
+            ScExecutionEventStatus::Candidate => "SC_EXECUTION_EVENT_STATUS_CANDIDATE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1031,7 +1380,7 @@ impl ScExecutionEventStatus {
             "SC_EXECUTION_EVENT_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
             "SC_EXECUTION_EVENT_STATUS_FINAL" => Some(Self::Final),
             "SC_EXECUTION_EVENT_STATUS_READ_ONLY" => Some(Self::ReadOnly),
-            "SC_EXECUTION_EVENT_STATUS_FAILURE" => Some(Self::Failure),
+            "SC_EXECUTION_EVENT_STATUS_CANDIDATE" => Some(Self::Candidate),
             _ => None,
         }
     }
@@ -1046,6 +1395,8 @@ pub enum ExecutionOutputStatus {
     Candidate = 1,
     /// Final status
     Final = 2,
+    /// Unknown status
+    Unknown = 3,
 }
 impl ExecutionOutputStatus {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -1057,6 +1408,7 @@ impl ExecutionOutputStatus {
             ExecutionOutputStatus::Unspecified => "EXECUTION_OUTPUT_STATUS_UNSPECIFIED",
             ExecutionOutputStatus::Candidate => "EXECUTION_OUTPUT_STATUS_CANDIDATE",
             ExecutionOutputStatus::Final => "EXECUTION_OUTPUT_STATUS_FINAL",
+            ExecutionOutputStatus::Unknown => "EXECUTION_OUTPUT_STATUS_UNKNOWN",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1065,6 +1417,7 @@ impl ExecutionOutputStatus {
             "EXECUTION_OUTPUT_STATUS_UNSPECIFIED" => Some(Self::Unspecified),
             "EXECUTION_OUTPUT_STATUS_CANDIDATE" => Some(Self::Candidate),
             "EXECUTION_OUTPUT_STATUS_FINAL" => Some(Self::Final),
+            "EXECUTION_OUTPUT_STATUS_UNKNOWN" => Some(Self::Unknown),
             _ => None,
         }
     }
@@ -1178,79 +1531,262 @@ impl LedgerChangeType {
         }
     }
 }
-/// SetOrKeepType type enum
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum SetOrKeepType {
-    /// Default enum value
-    Unspecified = 0,
-    /// Sets a new absolute value
-    Set = 1,
-    /// Keeps the existing value
-    Keep = 2,
-}
-impl SetOrKeepType {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            SetOrKeepType::Unspecified => "SET_OR_KEEP_TYPE_UNSPECIFIED",
-            SetOrKeepType::Set => "SET_OR_KEEP_TYPE_SET",
-            SetOrKeepType::Keep => "SET_OR_KEEP_TYPE_KEEP",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "SET_OR_KEEP_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
-            "SET_OR_KEEP_TYPE_SET" => Some(Self::Set),
-            "SET_OR_KEEP_TYPE_KEEP" => Some(Self::Keep),
-            _ => None,
-        }
-    }
-}
-/// SetOrDeleteType type enum
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum SetOrDeleteType {
-    /// Default enum value
-    Unspecified = 0,
-    /// Sets a new absolute value
-    Set = 1,
-    /// Deletes the existing value
-    Delete = 2,
-}
-impl SetOrDeleteType {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            SetOrDeleteType::Unspecified => "SET_OR_DELETE_TYPE_UNSPECIFIED",
-            SetOrDeleteType::Set => "SET_OR_DELETE_TYPE_SET",
-            SetOrDeleteType::Delete => "SET_OR_DELETE_TYPE_DELETE",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "SET_OR_DELETE_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
-            "SET_OR_DELETE_TYPE_SET" => Some(Self::Set),
-            "SET_OR_DELETE_TYPE_DELETE" => Some(Self::Delete),
-            _ => None,
-        }
-    }
-}
 /// NativeTime represents a native duration or unix timestamp
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NativeTime {
     /// Milliseconds
-    #[prost(fixed64, tag = "1")]
+    #[prost(uint64, tag = "1")]
     pub milliseconds: u64,
+}
+/// Consensus statistics
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ConsensusStats {
+    /// Start of the time span for stats
+    #[prost(message, optional, tag = "1")]
+    pub start_timespan: ::core::option::Option<NativeTime>,
+    /// End of the time span for stats
+    #[prost(message, optional, tag = "2")]
+    pub end_timespan: ::core::option::Option<NativeTime>,
+    /// Number of final blocks
+    #[prost(uint64, tag = "3")]
+    pub final_block_count: u64,
+    /// Number of stale blocks in memory
+    #[prost(uint64, tag = "4")]
+    pub stale_block_count: u64,
+    /// Number of actives cliques
+    #[prost(uint64, tag = "5")]
+    pub clique_count: u64,
+}
+/// Pool statistics
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PoolStats {
+    /// Endorsements
+    #[prost(uint64, tag = "1")]
+    pub endorsements_count: u64,
+    /// Operations
+    #[prost(uint64, tag = "2")]
+    pub operations_count: u64,
+}
+/// Network statistics
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NetworkStats {
+    /// In connections count
+    #[prost(uint64, tag = "1")]
+    pub in_connection_count: u64,
+    /// Out connections count
+    #[prost(uint64, tag = "2")]
+    pub out_connection_count: u64,
+    /// Total known peers count
+    #[prost(uint64, tag = "3")]
+    pub known_peer_count: u64,
+    /// Banned node count
+    #[prost(uint64, tag = "4")]
+    pub banned_peer_count: u64,
+    /// Active node count
+    #[prost(uint64, tag = "5")]
+    pub active_node_count: u64,
+}
+/// Execution statistics
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionStats {
+    /// Time window start
+    #[prost(message, optional, tag = "1")]
+    pub time_window_start: ::core::option::Option<NativeTime>,
+    /// Time window end
+    #[prost(message, optional, tag = "2")]
+    pub time_window_end: ::core::option::Option<NativeTime>,
+    /// Number of final blocks in the time window
+    #[prost(uint64, tag = "3")]
+    pub final_block_count: u64,
+    /// Number of final executed operations in the time window
+    #[prost(uint64, tag = "4")]
+    pub final_executed_operations_count: u64,
+}
+/// Node status
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NodeStatus {
+    /// Our node id
+    #[prost(string, tag = "1")]
+    pub node_id: ::prost::alloc::string::String,
+    /// Optional node ip
+    #[prost(string, tag = "2")]
+    pub node_ip: ::prost::alloc::string::String,
+    /// Node version
+    #[prost(string, tag = "3")]
+    pub version: ::prost::alloc::string::String,
+    /// Now
+    #[prost(message, optional, tag = "4")]
+    pub current_time: ::core::option::Option<NativeTime>,
+    /// Current cycle
+    #[prost(uint64, tag = "5")]
+    pub current_cycle: u64,
+    /// Current cycle starting timestamp
+    #[prost(message, optional, tag = "6")]
+    pub current_cycle_time: ::core::option::Option<NativeTime>,
+    /// Next cycle starting timestamp
+    #[prost(message, optional, tag = "7")]
+    pub next_cycle_time: ::core::option::Option<NativeTime>,
+    /// Connected nodes
+    #[prost(message, repeated, tag = "8")]
+    pub connected_nodes: ::prost::alloc::vec::Vec<ConnectedNode>,
+    /// Last executed final slot
+    #[prost(message, optional, tag = "9")]
+    pub last_executed_final_slot: ::core::option::Option<Slot>,
+    /// Last executed speculative slot
+    #[prost(message, optional, tag = "10")]
+    pub last_executed_speculative_slot: ::core::option::Option<Slot>,
+    /// The hash of the XOF final state hash
+    #[prost(string, tag = "11")]
+    pub final_state_fingerprint: ::prost::alloc::string::String,
+    /// Consensus stats
+    #[prost(message, optional, tag = "12")]
+    pub consensus_stats: ::core::option::Option<ConsensusStats>,
+    /// Pool stats (operation count and endorsement count)
+    #[prost(message, optional, tag = "13")]
+    pub pool_stats: ::core::option::Option<PoolStats>,
+    /// Network stats
+    #[prost(message, optional, tag = "14")]
+    pub network_stats: ::core::option::Option<NetworkStats>,
+    /// Execution stats
+    #[prost(message, optional, tag = "15")]
+    pub execution_stats: ::core::option::Option<ExecutionStats>,
+    /// Compact configuration
+    #[prost(message, optional, tag = "16")]
+    pub config: ::core::option::Option<CompactConfig>,
+}
+/// Connected node
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ConnectedNode {
+    /// Node id
+    #[prost(string, tag = "1")]
+    pub node_id: ::prost::alloc::string::String,
+    /// Node ip
+    #[prost(string, tag = "2")]
+    pub node_ip: ::prost::alloc::string::String,
+    /// Connection type
+    #[prost(enumeration = "ConnectionType", tag = "3")]
+    pub connection_type: i32,
+}
+/// Compact configuration
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct CompactConfig {
+    /// Time in milliseconds when the blockclique started.
+    #[prost(message, optional, tag = "1")]
+    pub genesis_timestamp: ::core::option::Option<NativeTime>,
+    /// TESTNET: time when the blockclique is ended.
+    #[prost(message, optional, tag = "2")]
+    pub end_timestamp: ::core::option::Option<NativeTime>,
+    /// Number of threads
+    #[prost(uint32, tag = "3")]
+    pub thread_count: u32,
+    /// Time between the periods in the same thread.
+    #[prost(message, optional, tag = "4")]
+    pub t0: ::core::option::Option<NativeTime>,
+    /// Threshold for fitness.
+    #[prost(uint64, tag = "5")]
+    pub delta_f0: u64,
+    /// Maximum operation validity period count
+    #[prost(uint64, tag = "6")]
+    pub operation_validity_periods: u64,
+    /// cycle duration in periods
+    #[prost(uint64, tag = "7")]
+    pub periods_per_cycle: u64,
+    /// Reward amount for a block creation
+    #[prost(message, optional, tag = "8")]
+    pub block_reward: ::core::option::Option<NativeAmount>,
+    /// Price of a roll on the network
+    #[prost(message, optional, tag = "9")]
+    pub roll_price: ::core::option::Option<NativeAmount>,
+    /// Max total size of a block
+    #[prost(uint32, tag = "10")]
+    pub max_block_size: u32,
+}
+/// Public status
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PublicStatus {
+    /// Our node id
+    #[prost(string, tag = "1")]
+    pub node_id: ::prost::alloc::string::String,
+    /// Node version
+    #[prost(string, tag = "3")]
+    pub version: ::prost::alloc::string::String,
+    /// Now
+    #[prost(message, optional, tag = "4")]
+    pub current_time: ::core::option::Option<NativeTime>,
+    /// Current cycle
+    #[prost(uint64, tag = "5")]
+    pub current_cycle: u64,
+    /// Current cycle starting timestamp
+    #[prost(message, optional, tag = "6")]
+    pub current_cycle_time: ::core::option::Option<NativeTime>,
+    /// Next cycle starting timestamp
+    #[prost(message, optional, tag = "7")]
+    pub next_cycle_time: ::core::option::Option<NativeTime>,
+    /// Last executed final slot
+    #[prost(message, optional, tag = "8")]
+    pub last_executed_final_slot: ::core::option::Option<Slot>,
+    /// Last executed speculative slot
+    #[prost(message, optional, tag = "9")]
+    pub last_executed_speculative_slot: ::core::option::Option<Slot>,
+    /// The hash of the XOF final state hash
+    #[prost(string, tag = "10")]
+    pub final_state_fingerprint: ::prost::alloc::string::String,
+    /// Compact configuration
+    #[prost(message, optional, tag = "11")]
+    pub config: ::core::option::Option<CompactConfig>,
+}
+/// ConnectionType enum
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum ConnectionType {
+    /// Default enum value
+    Unspecified = 0,
+    /// Incoming connection
+    Incoming = 1,
+    /// Outgoing connection
+    Outgoing = 2,
+}
+impl ConnectionType {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            ConnectionType::Unspecified => "CONNECTION_TYPE_UNSPECIFIED",
+            ConnectionType::Incoming => "CONNECTION_TYPE_INCOMING",
+            ConnectionType::Outgoing => "CONNECTION_TYPE_OUTGOING",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "CONNECTION_TYPE_UNSPECIFIED" => Some(Self::Unspecified),
+            "CONNECTION_TYPE_INCOMING" => Some(Self::Incoming),
+            "CONNECTION_TYPE_OUTGOING" => Some(Self::Outgoing),
+            _ => None,
+        }
+    }
+}
+/// StakerEntry
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct StakerEntry {
+    /// Address
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// Rolls
+    #[prost(uint64, tag = "2")]
+    pub rolls: u64,
 }
 /// Entry for GetMipStatusResponse
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1271,17 +1807,17 @@ pub struct MipInfo {
     #[prost(string, tag = "1")]
     pub name: ::prost::alloc::string::String,
     /// Network (or global) version (to be included in block header)
-    #[prost(fixed32, tag = "2")]
+    #[prost(uint32, tag = "2")]
     pub version: u32,
     /// A timestamp at which the version gains its meaning (e.g. announced in block header)
-    #[prost(fixed64, tag = "3")]
-    pub start: u64,
+    #[prost(message, optional, tag = "3")]
+    pub start: ::core::option::Option<NativeTime>,
     /// A timestamp at the which the deployment is considered failed
-    #[prost(fixed64, tag = "4")]
-    pub timeout: u64,
+    #[prost(message, optional, tag = "4")]
+    pub timeout: ::core::option::Option<NativeTime>,
     /// Once deployment has been locked, wait for this duration before deployment is considered active
-    #[prost(fixed64, tag = "5")]
-    pub activation_delay: u64,
+    #[prost(message, optional, tag = "5")]
+    pub activation_delay: ::core::option::Option<NativeTime>,
     /// Components concerned by this versioning (e.g. a new Block version), and the associated component_version
     #[prost(message, repeated, tag = "6")]
     pub components: ::prost::alloc::vec::Vec<MipComponentEntry>,
@@ -1294,7 +1830,7 @@ pub struct MipComponentEntry {
     #[prost(enumeration = "MipComponent", tag = "1")]
     pub kind: i32,
     /// Version
-    #[prost(fixed32, tag = "2")]
+    #[prost(uint32, tag = "2")]
     pub version: u32,
 }
 /// State machine for a Versioning component that tracks the deployment state
