@@ -1238,9 +1238,9 @@ pub struct BytecodeExecution {
     /// Byte code
     #[prost(bytes = "vec", tag = "1")]
     pub bytecode: ::prost::alloc::vec::Vec<u8>,
-    /// Datastore (key value store) for `ExecuteSC` Operation (Optional)
-    #[prost(message, repeated, tag = "2")]
-    pub operation_datastore: ::prost::alloc::vec::Vec<BytesMapFieldEntry>,
+    /// Serialized datastore (key value store)  for `ExecuteSC` Operation (Optional)
+    #[prost(bytes = "vec", repeated, tag = "2")]
+    pub operation_datastore: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
 /// Execute a function call
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1295,9 +1295,9 @@ pub struct ExecutionStackElement {
     /// the performance hit of linear search remains minimal because `owned_addresses` will always contain very few elements.
     #[prost(string, repeated, tag = "3")]
     pub owned_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
-    /// Serialized datastore (key value store)  for `ExecuteSC` Operation (Optional)
-    #[prost(bytes = "vec", repeated, tag = "4")]
-    pub operation_datastore: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
+    /// Datastore (key value store) for `ExecuteSC` Operation (Optional)
+    #[prost(message, repeated, tag = "4")]
+    pub operation_datastore: ::prost::alloc::vec::Vec<BytesMapFieldEntry>,
 }
 /// ScExecutionEventStatus type enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
