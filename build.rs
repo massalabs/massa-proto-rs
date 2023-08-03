@@ -37,9 +37,8 @@ mod tonic {
             .compile(&protos, &proto_include_paths)
             .map_err(|e| format!("ABI protobuf compilation error: {:?}", e))?;
 
-        // Generate API bindings
-        let protos_path = parent_dir.join("massa-proto/proto/apis");
-        let protos = find_protos(protos_path)?;
+        // Generate PUBLIC API bindings
+        let public_api_path = parent_dir.join("massa-proto/proto/apis/massa/api/v1/public.proto");
         let proto_include_paths = [
             parent_dir.join("massa-proto/proto/apis"),
             parent_dir.join("massa-proto/proto/commons"),
@@ -58,11 +57,35 @@ mod tonic {
                  /// HACK: see docs in [`HttpRuleComment`] ignored in doctest pass",
             )
             .include_file("_api_includes.rs")
-            .file_descriptor_set_path("src/api.bin")
+            .file_descriptor_set_path("src/_api_public.bin")
             .out_dir("src/")
-            .compile(&protos, &proto_include_paths)
-            .map_err(|e| format!("API protobuf compilation error: {:?}", e))?;
+            .compile(&vec![public_api_path], &proto_include_paths)
+            .map_err(|e| format!("PUBLIC API protobuf compilation error: {:?}", e))?;
 
+        // Generate PRIVATE API bindings
+        let private_api_path = parent_dir.join("massa-proto/proto/apis/massa/api/v1/private.proto");
+        let proto_include_paths = [
+            parent_dir.join("massa-proto/proto/apis"),
+            parent_dir.join("massa-proto/proto/commons"),
+            parent_dir.join("massa-proto/proto/third_party"),
+        ];
+
+        tonic_build::configure()
+            .build_server(true)
+            .build_transport(true)
+            .build_client(true)
+            .type_attribute(
+                ".google.api.HttpRule",
+                "#[cfg(not(doctest))]\n\
+                 #[allow(dead_code)]\n\
+                 pub struct HttpRuleComment{}\n\
+                 /// HACK: see docs in [`HttpRuleComment`] ignored in doctest pass",
+            )
+            .include_file("_api_includes.rs")
+            .file_descriptor_set_path("src/_api_private.bin")
+            .out_dir("src/")
+            .compile(&vec![private_api_path], &proto_include_paths)
+            .map_err(|e| format!("PRIVATE API protobuf compilation error: {:?}", e))?;
             // Generate COMMONS bindings
             let protos_path = parent_dir.join("massa-proto/proto/commons");
             let protos = find_protos(protos_path)?;
