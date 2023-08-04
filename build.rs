@@ -57,7 +57,7 @@ mod tonic {
                  /// HACK: see docs in [`HttpRuleComment`] ignored in doctest pass",
             )
             .include_file("_api_includes.rs")
-            .file_descriptor_set_path("src/_api_public.bin")
+            .file_descriptor_set_path("src/api_public.bin")
             .out_dir("src/")
             .compile(&vec![public_api_path], &proto_include_paths)
             .map_err(|e| format!("PUBLIC API protobuf compilation error: {:?}", e))?;
@@ -82,7 +82,7 @@ mod tonic {
                  /// HACK: see docs in [`HttpRuleComment`] ignored in doctest pass",
             )
             .include_file("_api_includes.rs")
-            .file_descriptor_set_path("src/_api_private.bin")
+            .file_descriptor_set_path("src/api_private.bin")
             .out_dir("src/")
             .compile(&vec![private_api_path], &proto_include_paths)
             .map_err(|e| format!("PRIVATE API protobuf compilation error: {:?}", e))?;

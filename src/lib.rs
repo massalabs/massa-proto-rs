@@ -50,8 +50,10 @@ pub mod massa {
         /// Version 1 of the Massa API protos
         pub mod v1 {
             include!("massa.api.v1.rs");
-            /// Compiled file descriptor set for the Massa protos
-            pub const FILE_DESCRIPTOR_SET: &[u8] = include_bytes!("api.bin");
+            /// Compiled file descriptor set for the Massa public service protos
+            pub const FILE_DESCRIPTOR_SET_PUBLIC: &[u8] = include_bytes!("api_public.bin");
+            /// Compiled file descriptor set for the Massa private service protos
+            pub const FILE_DESCRIPTOR_SET_PRIVATE: &[u8] = include_bytes!("api_private.bin");
         }
     }
 
