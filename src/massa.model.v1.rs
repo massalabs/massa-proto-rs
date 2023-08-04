@@ -147,10 +147,52 @@ pub struct SignedEndorsement {
 /// EndorsementIds holds endorsements ids
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EndorsementsIds {
+pub struct EndorsementIds {
     /// Endorsements ids
     #[prost(string, repeated, tag = "1")]
     pub endorsements_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// A wrapper around an endorsement with its metadata
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EndorsementWrapper {
+    /// Id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// Whether the endorsement is still in pool
+    #[prost(bool, tag = "2")]
+    pub in_pool: bool,
+    /// The endorsement appears in `in_blocks`
+    /// If it appears in multiple blocks, these blocks are in different cliques
+    #[prost(string, repeated, tag = "3")]
+    pub in_blocks: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Whether the the endorsement is final (for example in a final block)
+    #[prost(bool, tag = "4")]
+    pub is_final: bool,
+    /// The endorsement itself
+    #[prost(message, optional, tag = "5")]
+    pub endorsement: ::core::option::Option<SignedEndorsement>,
+}
+/// Informations about an endorsement with its metadata
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EndorsementInfo {
+    /// Id
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// Whether the endorsement is still in pool
+    #[prost(bool, tag = "2")]
+    pub in_pool: bool,
+    /// The endorsement appears in `in_blocks`
+    /// If it appears in multiple blocks, these blocks are in different cliques
+    #[prost(string, repeated, tag = "3")]
+    pub in_blocks: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Whether the the endorsement is final (for example in a final block)
+    #[prost(bool, tag = "4")]
+    pub is_final: bool,
+    /// The endorsement id
+    #[prost(string, tag = "5")]
+    pub endorsement_id: ::prost::alloc::string::String,
 }
 /// Massa error
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -400,6 +442,20 @@ pub struct OperationWrapper {
     #[prost(message, optional, tag = "4")]
     pub operation: ::core::option::Option<SignedOperation>,
 }
+/// Information about an operation with its metadata
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct OperationInfo {
+    /// The unique ID of the operation.
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    /// The IDs of the blocks in which the operation appears
+    #[prost(string, repeated, tag = "2")]
+    pub block_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// The thread in which the operation can be included
+    #[prost(uint32, tag = "3")]
+    pub thread: u32,
+}
 /// OperationIds
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -575,6 +631,17 @@ pub struct BlockWrapper {
     pub block: ::core::option::Option<Block>,
     /// The execution status of the block
     #[prost(enumeration = "BlockStatus", tag = "3")]
+    pub status: i32,
+}
+/// Informations about a block with its metadata
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BlockInfo {
+    /// The unique ID of the block.
+    #[prost(string, tag = "1")]
+    pub block_id: ::prost::alloc::string::String,
+    /// The execution status of the block
+    #[prost(enumeration = "BlockStatus", tag = "2")]
     pub status: i32,
 }
 /// BlockIds holds block ids
