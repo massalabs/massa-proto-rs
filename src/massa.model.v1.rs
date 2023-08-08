@@ -1019,7 +1019,7 @@ pub struct AsyncMessageUpdate {
     pub handler: ::core::option::Option<SetOrKeepString>,
     /// Change the maximum gas to use when processing the message
     #[prost(message, optional, tag = "6")]
-    pub used_gas: ::core::option::Option<SetOrKeepUint64>,
+    pub max_gas: ::core::option::Option<SetOrKeepUint64>,
     /// Change the fee paid by the sender when the message is processed.
     #[prost(message, optional, tag = "7")]
     pub fee: ::core::option::Option<SetOrKeepUint64>,
@@ -1303,7 +1303,7 @@ pub mod set_or_delete_datastore_entry {
 pub struct ReadOnlyExecutionCall {
     /// Maximum gas to spend in the execution.
     #[prost(uint64, tag = "1")]
-    pub used_gas: u64,
+    pub max_gas: u64,
     /// Call stack to simulate, older caller first
     #[prost(message, repeated, tag = "2")]
     pub call_stack: ::prost::alloc::vec::Vec<ExecutionStackElement>,
