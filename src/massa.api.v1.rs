@@ -3017,7 +3017,7 @@ pub mod send_endorsements_response {
     pub enum Result {
         /// Endorsement result
         #[prost(message, tag = "1")]
-        EndorsementsIds(super::super::super::model::v1::EndorsementIds),
+        EndorsementIds(super::super::super::model::v1::EndorsementIds),
         /// Massa error
         #[prost(message, tag = "2")]
         Error(super::super::super::model::v1::Error),
@@ -3047,7 +3047,7 @@ pub mod send_operations_response {
     pub enum Result {
         /// Operation result
         #[prost(message, tag = "1")]
-        OperationsIds(super::super::super::model::v1::OperationIds),
+        OperationIds(super::super::super::model::v1::OperationIds),
         /// Massa error
         #[prost(message, tag = "2")]
         Error(super::super::super::model::v1::Error),

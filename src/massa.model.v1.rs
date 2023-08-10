@@ -150,7 +150,7 @@ pub struct SignedEndorsement {
 pub struct EndorsementIds {
     /// Endorsements ids
     #[prost(string, repeated, tag = "1")]
-    pub endorsements_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub endorsement_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// A wrapper around an endorsement with its metadata
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -382,13 +382,13 @@ pub struct ExecuteSc {
 pub struct CallSc {
     /// Target smart contract address
     #[prost(string, tag = "1")]
-    pub target_addr: ::prost::alloc::string::String,
+    pub target_address: ::prost::alloc::string::String,
     /// Target function name. No function is called if empty
     #[prost(string, tag = "2")]
-    pub target_func: ::prost::alloc::string::String,
+    pub target_function: ::prost::alloc::string::String,
     /// Parameter to pass to the target function
     #[prost(bytes = "vec", tag = "3")]
-    pub param: ::prost::alloc::vec::Vec<u8>,
+    pub parameter: ::prost::alloc::vec::Vec<u8>,
     /// The maximum amount of gas that the execution of the contract is allowed to cost
     #[prost(uint64, tag = "4")]
     pub max_gas: u64,
@@ -1350,10 +1350,10 @@ pub struct BytecodeExecution {
 pub struct FunctionCall {
     /// Target address
     #[prost(string, tag = "1")]
-    pub target_addr: ::prost::alloc::string::String,
+    pub target_address: ::prost::alloc::string::String,
     /// Target function
     #[prost(string, tag = "2")]
-    pub target_func: ::prost::alloc::string::String,
+    pub target_function: ::prost::alloc::string::String,
     /// Parameter to pass to the target function
     #[prost(bytes = "vec", tag = "3")]
     pub parameter: ::prost::alloc::vec::Vec<u8>,
