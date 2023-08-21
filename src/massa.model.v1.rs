@@ -970,7 +970,7 @@ pub struct AsyncMessage {
     pub handler: ::prost::alloc::string::String,
     /// Maximum gas to use when processing the message
     #[prost(uint64, tag = "6")]
-    pub used_gas: u64,
+    pub max_gas: u64,
     /// Fee paid by the sender when the message is processed.
     #[prost(message, optional, tag = "7")]
     pub fee: ::core::option::Option<NativeAmount>,
