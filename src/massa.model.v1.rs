@@ -59,10 +59,10 @@ impl AddressCategory {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NativeAmount {
     /// Mantissa
-    #[prost(uint64, tag = "1")]
+    #[prost(fixed64, tag = "1")]
     pub mantissa: u64,
     /// Scale
-    #[prost(uint32, tag = "2")]
+    #[prost(fixed32, tag = "2")]
     pub scale: u32,
 }
 /// When an address is drawn to create an endorsement it is selected for a specific index
@@ -150,36 +150,33 @@ pub struct SignedEndorsement {
 pub struct EndorsementIds {
     /// Endorsements ids
     #[prost(string, repeated, tag = "1")]
-    pub endorsements_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub endorsement_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// A wrapper around an endorsement with its metadata
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndorsementWrapper {
-    /// Id
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// Whether the endorsement is still in pool
-    #[prost(bool, tag = "2")]
+    #[prost(bool, tag = "1")]
     pub in_pool: bool,
     /// The endorsement appears in `in_blocks`
     /// If it appears in multiple blocks, these blocks are in different cliques
-    #[prost(string, repeated, tag = "3")]
+    #[prost(string, repeated, tag = "2")]
     pub in_blocks: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Whether the the endorsement is final (for example in a final block)
-    #[prost(bool, tag = "4")]
+    #[prost(bool, tag = "3")]
     pub is_final: bool,
     /// The endorsement itself
-    #[prost(message, optional, tag = "5")]
+    #[prost(message, optional, tag = "4")]
     pub endorsement: ::core::option::Option<SignedEndorsement>,
 }
 /// Informations about an endorsement with its metadata
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndorsementInfo {
-    /// Id
+    /// The endorsement id
     #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
+    pub endorsement_id: ::prost::alloc::string::String,
     /// Whether the endorsement is still in pool
     #[prost(bool, tag = "2")]
     pub in_pool: bool,
@@ -190,9 +187,6 @@ pub struct EndorsementInfo {
     /// Whether the the endorsement is final (for example in a final block)
     #[prost(bool, tag = "4")]
     pub is_final: bool,
-    /// The endorsement id
-    #[prost(string, tag = "5")]
-    pub endorsement_id: ::prost::alloc::string::String,
 }
 /// Massa error
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -388,13 +382,13 @@ pub struct ExecuteSc {
 pub struct CallSc {
     /// Target smart contract address
     #[prost(string, tag = "1")]
-    pub target_addr: ::prost::alloc::string::String,
+    pub target_address: ::prost::alloc::string::String,
     /// Target function name. No function is called if empty
     #[prost(string, tag = "2")]
-    pub target_func: ::prost::alloc::string::String,
+    pub target_function: ::prost::alloc::string::String,
     /// Parameter to pass to the target function
     #[prost(bytes = "vec", tag = "3")]
-    pub param: ::prost::alloc::vec::Vec<u8>,
+    pub parameter: ::prost::alloc::vec::Vec<u8>,
     /// The maximum amount of gas that the execution of the contract is allowed to cost
     #[prost(uint64, tag = "4")]
     pub max_gas: u64,
@@ -429,17 +423,14 @@ pub struct SignedOperation {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationWrapper {
-    /// The unique ID of the operation.
-    #[prost(string, tag = "1")]
-    pub id: ::prost::alloc::string::String,
     /// The IDs of the blocks in which the operation appears
-    #[prost(string, repeated, tag = "2")]
+    #[prost(string, repeated, tag = "1")]
     pub block_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// The thread in which the operation can be included
-    #[prost(uint32, tag = "3")]
+    #[prost(uint32, tag = "2")]
     pub thread: u32,
     /// The operation object itself
-    #[prost(message, optional, tag = "4")]
+    #[prost(message, optional, tag = "3")]
     pub operation: ::core::option::Option<SignedOperation>,
 }
 /// Information about an operation with its metadata
@@ -623,15 +614,12 @@ pub struct SignedBlockHeader {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BlockWrapper {
-    /// The unique ID of the block.
-    #[prost(string, tag = "1")]
-    pub block_id: ::prost::alloc::string::String,
+    /// The execution status of the block
+    #[prost(enumeration = "BlockStatus", tag = "1")]
+    pub status: i32,
     /// The block object itself
     #[prost(message, optional, tag = "2")]
     pub block: ::core::option::Option<Block>,
-    /// The execution status of the block
-    #[prost(enumeration = "BlockStatus", tag = "3")]
-    pub status: i32,
 }
 /// Informations about a block with its metadata
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -982,7 +970,7 @@ pub struct AsyncMessage {
     pub handler: ::prost::alloc::string::String,
     /// Maximum gas to use when processing the message
     #[prost(uint64, tag = "6")]
-    pub used_gas: u64,
+    pub max_gas: u64,
     /// Fee paid by the sender when the message is processed.
     #[prost(message, optional, tag = "7")]
     pub fee: ::core::option::Option<NativeAmount>,
@@ -1031,7 +1019,7 @@ pub struct AsyncMessageUpdate {
     pub handler: ::core::option::Option<SetOrKeepString>,
     /// Change the maximum gas to use when processing the message
     #[prost(message, optional, tag = "6")]
-    pub used_gas: ::core::option::Option<SetOrKeepUint64>,
+    pub max_gas: ::core::option::Option<SetOrKeepUint64>,
     /// Change the fee paid by the sender when the message is processed.
     #[prost(message, optional, tag = "7")]
     pub fee: ::core::option::Option<SetOrKeepUint64>,
@@ -1315,7 +1303,7 @@ pub mod set_or_delete_datastore_entry {
 pub struct ReadOnlyExecutionCall {
     /// Maximum gas to spend in the execution.
     #[prost(uint64, tag = "1")]
-    pub used_gas: u64,
+    pub max_gas: u64,
     /// Call stack to simulate, older caller first
     #[prost(message, repeated, tag = "2")]
     pub call_stack: ::prost::alloc::vec::Vec<ExecutionStackElement>,
@@ -1362,10 +1350,10 @@ pub struct BytecodeExecution {
 pub struct FunctionCall {
     /// Target address
     #[prost(string, tag = "1")]
-    pub target_addr: ::prost::alloc::string::String,
+    pub target_address: ::prost::alloc::string::String,
     /// Target function
     #[prost(string, tag = "2")]
-    pub target_func: ::prost::alloc::string::String,
+    pub target_function: ::prost::alloc::string::String,
     /// Parameter to pass to the target function
     #[prost(bytes = "vec", tag = "3")]
     pub parameter: ::prost::alloc::vec::Vec<u8>,
@@ -1603,7 +1591,7 @@ impl LedgerChangeType {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NativeTime {
     /// Milliseconds
-    #[prost(uint64, tag = "1")]
+    #[prost(fixed64, tag = "1")]
     pub milliseconds: u64,
 }
 /// Consensus statistics
