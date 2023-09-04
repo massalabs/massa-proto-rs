@@ -2190,7 +2190,7 @@ pub mod get_datastore_entry_filter {
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
-        /// One of this (address-key) pairs
+        /// One of these (address-key) pairs
         #[prost(message, tag = "1")]
         AddressKey(super::super::super::model::v1::AddressKeyEntry),
     }
@@ -2850,7 +2850,36 @@ pub struct ScOutputEventsWrapper {
 /// NewBlocksRequest holds request for NewBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NewBlocksRequest {}
+pub struct NewBlocksRequest {
+    /// Returns all the blocks that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<NewBlocksFilter>,
+}
+/// NewBlocks Filter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewBlocksFilter {
+    /// Filter
+    #[prost(oneof = "new_blocks_filter::Filter", tags = "1, 2, 3")]
+    pub filter: ::core::option::Option<new_blocks_filter::Filter>,
+}
+/// Nested message and enum types in `NewBlocksFilter`.
+pub mod new_blocks_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// One of these block ids
+        #[prost(message, tag = "1")]
+        BlockIds(super::super::super::model::v1::BlockIds),
+        /// One of these creator addresses
+        #[prost(message, tag = "2")]
+        Addresses(super::super::super::model::v1::Addresses),
+        /// One of these slot ranges (inclusive)
+        #[prost(message, tag = "3")]
+        SlotRange(super::super::super::model::v1::SlotRange),
+    }
+}
 /// NewBlocksResponse holds response from NewBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2859,24 +2888,39 @@ pub struct NewBlocksResponse {
     #[prost(message, optional, tag = "1")]
     pub signed_block: ::core::option::Option<super::super::model::v1::SignedBlock>,
 }
-/// NewBlocksHeadersRequest holds request for NewBlocksHeaders
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NewBlocksHeadersRequest {}
-/// NewBlocksHeadersResponse holds response from NewBlocksHeaders
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NewBlocksHeadersResponse {
-    /// Signed block header
-    #[prost(message, optional, tag = "1")]
-    pub signed_block_header: ::core::option::Option<
-        super::super::model::v1::SignedBlockHeader,
-    >,
-}
 /// NewEndorsementsRequest holds request for NewEndorsements
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NewEndorsementsRequest {}
+pub struct NewEndorsementsRequest {
+    /// Returns all the endorsements that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<NewEndorsementsFilter>,
+}
+/// NewEndorsements Filter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewEndorsementsFilter {
+    /// Filter
+    #[prost(oneof = "new_endorsements_filter::Filter", tags = "1, 2, 3")]
+    pub filter: ::core::option::Option<new_endorsements_filter::Filter>,
+}
+/// Nested message and enum types in `NewEndorsementsFilter`.
+pub mod new_endorsements_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// One of these endorsement ids
+        #[prost(message, tag = "1")]
+        EndorsementIds(super::super::super::model::v1::EndorsementIds),
+        /// One of these creator addresses
+        #[prost(message, tag = "2")]
+        Addresses(super::super::super::model::v1::Addresses),
+        /// One of these block ids
+        #[prost(message, tag = "3")]
+        BlockIds(super::super::super::model::v1::BlockIds),
+    }
+}
 /// NewEndorsementsResponse holds response from NewEndorsements
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2890,7 +2934,36 @@ pub struct NewEndorsementsResponse {
 /// NewFilledBlocksRequest holds request for NewFilledBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NewFilledBlocksRequest {}
+pub struct NewFilledBlocksRequest {
+    /// Returns all the blocks that verify one of the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<NewBlocksFilter>,
+}
+/// NewFilledBlocks Filter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewFilledBlocksFilter {
+    /// Filter
+    #[prost(oneof = "new_filled_blocks_filter::Filter", tags = "1, 2, 3")]
+    pub filter: ::core::option::Option<new_filled_blocks_filter::Filter>,
+}
+/// Nested message and enum types in `NewFilledBlocksFilter`.
+pub mod new_filled_blocks_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// One of these block ids
+        #[prost(message, tag = "1")]
+        BlockIds(super::super::super::model::v1::BlockIds),
+        /// One of these creator addresses
+        #[prost(message, tag = "2")]
+        Addresses(super::super::super::model::v1::Addresses),
+        /// One of these slot ranges (inclusive)
+        #[prost(message, tag = "3")]
+        SlotRange(super::super::super::model::v1::SlotRange),
+    }
+}
 /// NewFilledBlocksResponse holds response from NewFilledBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2912,8 +2985,25 @@ pub struct NewOperationsRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewOperationsFilter {
     /// Filter
-    #[prost(message, optional, tag = "2")]
-    pub operation_types: ::core::option::Option<super::super::model::v1::OpTypes>,
+    #[prost(oneof = "new_operations_filter::Filter", tags = "1, 2, 3")]
+    pub filter: ::core::option::Option<new_operations_filter::Filter>,
+}
+/// Nested message and enum types in `NewOperationsFilter`.
+pub mod new_operations_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// One of the operation ids
+        #[prost(message, tag = "1")]
+        OperationIds(super::super::super::model::v1::OperationIds),
+        /// One of these creator addresses
+        #[prost(message, tag = "2")]
+        Addresses(super::super::super::model::v1::Addresses),
+        /// One of the operation types
+        #[prost(message, tag = "3")]
+        OperationTypes(super::super::super::model::v1::OpTypes),
+    }
 }
 /// NewOperationsResponse holds response from NewOperations
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -2938,7 +3028,10 @@ pub struct NewSlotExecutionOutputsRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotExecutionOutputsFilter {
     /// Filter
-    #[prost(oneof = "new_slot_execution_outputs_filter::Filter", tags = "1")]
+    #[prost(
+        oneof = "new_slot_execution_outputs_filter::Filter",
+        tags = "1, 2, 3, 4, 5, 6, 7"
+    )]
     pub filter: ::core::option::Option<new_slot_execution_outputs_filter::Filter>,
 }
 /// Nested message and enum types in `NewSlotExecutionOutputsFilter`.
@@ -2953,6 +3046,178 @@ pub mod new_slot_execution_outputs_filter {
             tag = "1"
         )]
         Status(i32),
+        /// Slot range
+        #[prost(message, tag = "2")]
+        SlotRange(super::super::super::model::v1::SlotRange),
+        /// AsyncPoolChangesFilter
+        #[prost(message, tag = "3")]
+        AsyncPoolChangesFilter(super::AsyncPoolChangesFilter),
+        /// ExecutedDenounciationFilter
+        #[prost(message, tag = "4")]
+        ExecutedDenounciationFilter(super::ExecutedDenounciationFilter),
+        /// Execution event filter
+        #[prost(message, tag = "5")]
+        EventFilter(super::ExecutionEventFilter),
+        /// ExecutedOpsChangesFilter
+        #[prost(message, tag = "6")]
+        ExecutedOpsChangesFilter(super::ExecutedOpsChangesFilter),
+        /// LedgerChangesFilter
+        #[prost(message, tag = "7")]
+        LedgerChangesFilter(super::LedgerChangesFilter),
+    }
+}
+/// AsyncPoolChangesFilter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AsyncPoolChangesFilter {
+    /// Filter
+    #[prost(oneof = "async_pool_changes_filter::Filter", tags = "1, 2, 3, 4, 5, 6")]
+    pub filter: ::core::option::Option<async_pool_changes_filter::Filter>,
+}
+/// Nested message and enum types in `AsyncPoolChangesFilter`.
+pub mod async_pool_changes_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// Do not return any message
+        #[prost(message, tag = "1")]
+        None(super::super::super::model::v1::Empty),
+        /// The type of the change
+        #[prost(
+            enumeration = "super::super::super::model::v1::AsyncPoolChangeType",
+            tag = "2"
+        )]
+        Type(i32),
+        /// The handler function name within the destination address bytecode
+        #[prost(string, tag = "3")]
+        Handler(::prost::alloc::string::String),
+        /// The address towards which the message is being sent
+        #[prost(string, tag = "4")]
+        DestinationAddress(::prost::alloc::string::String),
+        /// The address that sent the message
+        #[prost(string, tag = "5")]
+        EmitterAddress(::prost::alloc::string::String),
+        /// Boolean that determine if the message can be executed. For messages without filter this boolean is always true.
+        /// For messages with filter, this boolean is true if the filter has been matched between `validity_start` and current slot.
+        #[prost(bool, tag = "6")]
+        CanBeExecuted(bool),
+    }
+}
+/// PosChangesFilter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PosChangesFilter {
+    /// Filter
+    #[prost(oneof = "pos_changes_filter::Filter", tags = "1, 2")]
+    pub filter: ::core::option::Option<pos_changes_filter::Filter>,
+}
+/// Nested message and enum types in `PosChangesFilter`.
+pub mod pos_changes_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// Do not return any message
+        #[prost(message, tag = "1")]
+        None(super::super::super::model::v1::Empty),
+        /// Address for which we have roll changes
+        #[prost(string, tag = "2")]
+        Address(::prost::alloc::string::String),
+    }
+}
+/// ExecutionEventFilter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionEventFilter {
+    /// Filter
+    #[prost(oneof = "execution_event_filter::Filter", tags = "1, 2, 3, 4, 5")]
+    pub filter: ::core::option::Option<execution_event_filter::Filter>,
+}
+/// Nested message and enum types in `ExecutionEventFilter`.
+pub mod execution_event_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// Do not return any message
+        #[prost(message, tag = "1")]
+        None(super::super::super::model::v1::Empty),
+        /// Caller address
+        #[prost(string, tag = "2")]
+        CallerAddress(::prost::alloc::string::String),
+        /// Emitter address
+        #[prost(string, tag = "3")]
+        EmitterAddress(::prost::alloc::string::String),
+        /// Original operation id
+        #[prost(string, tag = "4")]
+        OriginalOperationId(::prost::alloc::string::String),
+        /// Whether the event is a failure
+        #[prost(bool, tag = "5")]
+        IsFailure(bool),
+    }
+}
+/// ExecutedOpsChangesFilter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutedOpsChangesFilter {
+    /// Filter
+    #[prost(oneof = "executed_ops_changes_filter::Filter", tags = "1, 2")]
+    pub filter: ::core::option::Option<executed_ops_changes_filter::Filter>,
+}
+/// Nested message and enum types in `ExecutedOpsChangesFilter`.
+pub mod executed_ops_changes_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// Do not return any message
+        #[prost(message, tag = "1")]
+        None(super::super::super::model::v1::Empty),
+        /// Operation id
+        #[prost(string, tag = "2")]
+        OperationId(::prost::alloc::string::String),
+    }
+}
+/// ExecutedDenounciationFilter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutedDenounciationFilter {
+    /// Filter
+    #[prost(oneof = "executed_denounciation_filter::Filter", tags = "1")]
+    pub filter: ::core::option::Option<executed_denounciation_filter::Filter>,
+}
+/// Nested message and enum types in `ExecutedDenounciationFilter`.
+pub mod executed_denounciation_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// Do not return any message
+        #[prost(message, tag = "1")]
+        None(super::super::super::model::v1::Empty),
+    }
+}
+/// LedgerChangesFilter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LedgerChangesFilter {
+    /// Filter
+    #[prost(oneof = "ledger_changes_filter::Filter", tags = "1, 2")]
+    pub filter: ::core::option::Option<ledger_changes_filter::Filter>,
+}
+/// Nested message and enum types in `LedgerChangesFilter`.
+pub mod ledger_changes_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// Do not return any message
+        #[prost(message, tag = "1")]
+        None(super::super::super::model::v1::Empty),
+        /// Address for which we have ledger changes
+        #[prost(string, tag = "2")]
+        Address(::prost::alloc::string::String),
     }
 }
 /// NewSlotExecutionOutputsResponse holds response from NewSlotExecutionOutputs
@@ -2968,8 +3233,8 @@ pub struct NewSlotExecutionOutputsResponse {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendBlocksRequest {
     /// Secure shared block
-    #[prost(message, optional, tag = "1")]
-    pub block: ::core::option::Option<super::super::model::v1::SecureShare>,
+    #[prost(bytes = "vec", tag = "1")]
+    pub block: ::prost::alloc::vec::Vec<u8>,
 }
 /// SendBlocksResponse holds response from SendBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -2998,8 +3263,8 @@ pub mod send_blocks_response {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendEndorsementsRequest {
     /// Secure shared endorsements
-    #[prost(message, repeated, tag = "1")]
-    pub endorsements: ::prost::alloc::vec::Vec<super::super::model::v1::SecureShare>,
+    #[prost(bytes = "vec", repeated, tag = "1")]
+    pub endorsements: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
 /// SendEndorsementsResponse holds response from SendEndorsements
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -3028,8 +3293,8 @@ pub mod send_endorsements_response {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendOperationsRequest {
     /// Secured shared operations
-    #[prost(message, repeated, tag = "1")]
-    pub operations: ::prost::alloc::vec::Vec<super::super::model::v1::SecureShare>,
+    #[prost(bytes = "vec", repeated, tag = "1")]
+    pub operations: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
 /// SendOperationsResponse holds response from SendOperations
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -3091,13 +3356,13 @@ pub mod search_blocks_filter {
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
-        /// One of this block ids
+        /// One of these block ids
         #[prost(message, tag = "1")]
         BlockIds(super::super::super::model::v1::BlockIds),
-        /// One of this creator addresses
+        /// One of these creator addresses
         #[prost(message, tag = "2")]
         Addresses(super::super::super::model::v1::Addresses),
-        /// One of this slot ranges (inclusive)
+        /// One of these slot ranges (inclusive)
         #[prost(message, tag = "3")]
         SlotRange(super::super::super::model::v1::SlotRange),
     }
@@ -3132,13 +3397,13 @@ pub mod search_endorsements_filter {
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
-        /// One of this endorsement ids
+        /// One of these endorsement ids
         #[prost(message, tag = "1")]
         EndorsementIds(super::super::super::model::v1::EndorsementIds),
-        /// One of this creator addresses
+        /// One of these creator addresses
         #[prost(message, tag = "2")]
         Addresses(super::super::super::model::v1::Addresses),
-        /// One of this block ids
+        /// One of these block ids
         #[prost(message, tag = "3")]
         BlockIds(super::super::super::model::v1::BlockIds),
     }
@@ -3178,9 +3443,9 @@ pub mod search_operations_filter {
         /// One of the operation ids
         #[prost(message, tag = "1")]
         OperationIds(super::super::super::model::v1::OperationIds),
-        /// One of the operation types
+        /// One of these creator addresses
         #[prost(message, tag = "2")]
-        OperationTypes(super::super::super::model::v1::OpTypes),
+        Addresses(super::super::super::model::v1::Addresses),
     }
 }
 /// SearchOperationsResponse holds response from SearchOperations

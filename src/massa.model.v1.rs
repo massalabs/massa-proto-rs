@@ -222,26 +222,6 @@ pub struct ArrayOfBytesWrapper {
     #[prost(bytes = "vec", repeated, tag = "1")]
     pub items: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
-/// Packages a type such that it can be securely sent and received in a trust-free network
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SecureShare {
-    /// Content in sharable, deserializable form. Is used in the secure verification protocols
-    #[prost(bytes = "vec", tag = "1")]
-    pub serialized_data: ::prost::alloc::vec::Vec<u8>,
-    /// A cryptographically generated value using `serialized_data` and a public key.
-    #[prost(string, tag = "2")]
-    pub signature: ::prost::alloc::string::String,
-    /// The public-key component used in the generation of the signature
-    #[prost(string, tag = "3")]
-    pub content_creator_pub_key: ::prost::alloc::string::String,
-    /// Derived from the same public key used to generate the signature
-    #[prost(string, tag = "4")]
-    pub content_creator_address: ::prost::alloc::string::String,
-    /// A secure hash of the non-malleable contents of a deterministic binary representation of the block header
-    #[prost(string, tag = "5")]
-    pub secure_hash: ::prost::alloc::string::String,
-}
 /// KeyPair
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -889,6 +869,9 @@ pub struct StateChanges {
     /// Executed denunciations changes
     #[prost(message, repeated, tag = "5")]
     pub executed_denunciations_changes: ::prost::alloc::vec::Vec<DenunciationIndex>,
+    /// Execution trail hash change
+    #[prost(message, optional, tag = "6")]
+    pub execution_trail_hash_change: ::core::option::Option<SetOrKeepString>,
 }
 /// ExecutedOpsChangeEntry
 #[allow(clippy::derive_partial_eq_without_eq)]
