@@ -17,8 +17,6 @@
 //! You can then import the necessary Rust modules for the Massa API and use the Protobuf messages as needed.
 //!
 #![warn(unused_crate_dependencies)]
-
-
 #![cfg_attr(not(feature = "tonic"), no_std)]
 use prost_types as _;
 

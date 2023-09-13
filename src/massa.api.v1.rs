@@ -1177,7 +1177,11 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).add_to_bootstrap_blacklist(request).await
+                                <T as PrivateService>::add_to_bootstrap_blacklist(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -1225,7 +1229,11 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).add_to_bootstrap_whitelist(request).await
+                                <T as PrivateService>::add_to_bootstrap_whitelist(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -1271,7 +1279,11 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).add_to_peers_whitelist(request).await
+                                <T as PrivateService>::add_to_peers_whitelist(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -1317,7 +1329,11 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).add_staking_secret_keys(request).await
+                                <T as PrivateService>::add_staking_secret_keys(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -1365,7 +1381,11 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).allow_everyone_to_bootstrap(request).await
+                                <T as PrivateService>::allow_everyone_to_bootstrap(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -1411,7 +1431,11 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).get_bootstrap_blacklist(request).await
+                                <T as PrivateService>::get_bootstrap_blacklist(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -1457,7 +1481,11 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).get_bootstrap_whitelist(request).await
+                                <T as PrivateService>::get_bootstrap_whitelist(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -1503,7 +1531,7 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).get_mip_status(request).await
+                                <T as PrivateService>::get_mip_status(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -1549,7 +1577,8 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).get_node_status(request).await
+                                <T as PrivateService>::get_node_status(&inner, request)
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -1595,7 +1624,8 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).get_peers_whitelist(request).await
+                                <T as PrivateService>::get_peers_whitelist(&inner, request)
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -1641,7 +1671,8 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).ban_nodes_by_ids(request).await
+                                <T as PrivateService>::ban_nodes_by_ids(&inner, request)
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -1687,7 +1718,8 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).ban_nodes_by_ips(request).await
+                                <T as PrivateService>::ban_nodes_by_ips(&inner, request)
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -1738,7 +1770,11 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).remove_from_bootstrap_blacklist(request).await
+                                <T as PrivateService>::remove_from_bootstrap_blacklist(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -1789,7 +1825,11 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).remove_from_bootstrap_whitelist(request).await
+                                <T as PrivateService>::remove_from_bootstrap_whitelist(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -1837,7 +1877,11 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).remove_from_peers_whitelist(request).await
+                                <T as PrivateService>::remove_from_peers_whitelist(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -1883,7 +1927,11 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).remove_staking_addresses(request).await
+                                <T as PrivateService>::remove_staking_addresses(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -1929,7 +1977,7 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).sign_messages(request).await
+                                <T as PrivateService>::sign_messages(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -1975,7 +2023,8 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).shutdown_gracefully(request).await
+                                <T as PrivateService>::shutdown_gracefully(&inner, request)
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -2021,7 +2070,8 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).unban_nodes_by_ids(request).await
+                                <T as PrivateService>::unban_nodes_by_ids(&inner, request)
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -2067,7 +2117,8 @@ pub mod private_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).unban_nodes_by_ips(request).await
+                                <T as PrivateService>::unban_nodes_by_ips(&inner, request)
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -4407,7 +4458,7 @@ pub mod public_service_server {
             tonic::Status,
         >;
         /// Server streaming response type for the NewBlocks method.
-        type NewBlocksStream: futures_core::Stream<
+        type NewBlocksStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::NewBlocksResponse, tonic::Status>,
             >
             + Send
@@ -4418,7 +4469,7 @@ pub mod public_service_server {
             request: tonic::Request<tonic::Streaming<super::NewBlocksRequest>>,
         ) -> std::result::Result<tonic::Response<Self::NewBlocksStream>, tonic::Status>;
         /// Server streaming response type for the NewEndorsements method.
-        type NewEndorsementsStream: futures_core::Stream<
+        type NewEndorsementsStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::NewEndorsementsResponse, tonic::Status>,
             >
             + Send
@@ -4432,7 +4483,7 @@ pub mod public_service_server {
             tonic::Status,
         >;
         /// Server streaming response type for the NewFilledBlocks method.
-        type NewFilledBlocksStream: futures_core::Stream<
+        type NewFilledBlocksStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::NewFilledBlocksResponse, tonic::Status>,
             >
             + Send
@@ -4446,7 +4497,7 @@ pub mod public_service_server {
             tonic::Status,
         >;
         /// Server streaming response type for the NewOperations method.
-        type NewOperationsStream: futures_core::Stream<
+        type NewOperationsStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::NewOperationsResponse, tonic::Status>,
             >
             + Send
@@ -4460,7 +4511,7 @@ pub mod public_service_server {
             tonic::Status,
         >;
         /// Server streaming response type for the NewSlotExecutionOutputs method.
-        type NewSlotExecutionOutputsStream: futures_core::Stream<
+        type NewSlotExecutionOutputsStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<
                     super::NewSlotExecutionOutputsResponse,
                     tonic::Status,
@@ -4479,7 +4530,7 @@ pub mod public_service_server {
             tonic::Status,
         >;
         /// Server streaming response type for the SendBlocks method.
-        type SendBlocksStream: futures_core::Stream<
+        type SendBlocksStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::SendBlocksResponse, tonic::Status>,
             >
             + Send
@@ -4490,7 +4541,7 @@ pub mod public_service_server {
             request: tonic::Request<tonic::Streaming<super::SendBlocksRequest>>,
         ) -> std::result::Result<tonic::Response<Self::SendBlocksStream>, tonic::Status>;
         /// Server streaming response type for the SendEndorsements method.
-        type SendEndorsementsStream: futures_core::Stream<
+        type SendEndorsementsStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<
                     super::SendEndorsementsResponse,
                     tonic::Status,
@@ -4507,7 +4558,7 @@ pub mod public_service_server {
             tonic::Status,
         >;
         /// Server streaming response type for the SendOperations method.
-        type SendOperationsStream: futures_core::Stream<
+        type SendOperationsStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::SendOperationsResponse, tonic::Status>,
             >
             + Send
@@ -4521,7 +4572,7 @@ pub mod public_service_server {
             tonic::Status,
         >;
         /// Server streaming response type for the TransactionsThroughput method.
-        type TransactionsThroughputStream: futures_core::Stream<
+        type TransactionsThroughputStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<
                     super::TransactionsThroughputResponse,
                     tonic::Status,
@@ -4638,7 +4689,11 @@ pub mod public_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).execute_read_only_call(request).await
+                                <T as PublicService>::execute_read_only_call(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -4683,7 +4738,9 @@ pub mod public_service_server {
                             request: tonic::Request<super::GetBlocksRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).get_blocks(request).await };
+                            let fut = async move {
+                                <T as PublicService>::get_blocks(&inner, request).await
+                            };
                             Box::pin(fut)
                         }
                     }
@@ -4728,7 +4785,8 @@ pub mod public_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).get_datastore_entries(request).await
+                                <T as PublicService>::get_datastore_entries(&inner, request)
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -4774,7 +4832,8 @@ pub mod public_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).get_endorsements(request).await
+                                <T as PublicService>::get_endorsements(&inner, request)
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -4822,7 +4881,11 @@ pub mod public_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).get_next_block_best_parents(request).await
+                                <T as PublicService>::get_next_block_best_parents(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -4868,7 +4931,7 @@ pub mod public_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).get_operations(request).await
+                                <T as PublicService>::get_operations(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -4914,7 +4977,11 @@ pub mod public_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).get_sc_execution_events(request).await
+                                <T as PublicService>::get_sc_execution_events(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -4960,7 +5027,8 @@ pub mod public_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).get_selector_draws(request).await
+                                <T as PublicService>::get_selector_draws(&inner, request)
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -5005,7 +5073,9 @@ pub mod public_service_server {
                             request: tonic::Request<super::GetStakersRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).get_stakers(request).await };
+                            let fut = async move {
+                                <T as PublicService>::get_stakers(&inner, request).await
+                            };
                             Box::pin(fut)
                         }
                     }
@@ -5049,7 +5119,9 @@ pub mod public_service_server {
                             request: tonic::Request<super::GetStatusRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).get_status(request).await };
+                            let fut = async move {
+                                <T as PublicService>::get_status(&inner, request).await
+                            };
                             Box::pin(fut)
                         }
                     }
@@ -5097,7 +5169,11 @@ pub mod public_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).get_transactions_throughput(request).await
+                                <T as PublicService>::get_transactions_throughput(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -5142,7 +5218,9 @@ pub mod public_service_server {
                             request: tonic::Request<super::QueryStateRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).query_state(request).await };
+                            let fut = async move {
+                                <T as PublicService>::query_state(&inner, request).await
+                            };
                             Box::pin(fut)
                         }
                     }
@@ -5187,7 +5265,7 @@ pub mod public_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).search_blocks(request).await
+                                <T as PublicService>::search_blocks(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -5233,7 +5311,8 @@ pub mod public_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).search_endorsements(request).await
+                                <T as PublicService>::search_endorsements(&inner, request)
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -5279,7 +5358,8 @@ pub mod public_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).search_operations(request).await
+                                <T as PublicService>::search_operations(&inner, request)
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -5327,7 +5407,9 @@ pub mod public_service_server {
                             >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).new_blocks(request).await };
+                            let fut = async move {
+                                <T as PublicService>::new_blocks(&inner, request).await
+                            };
                             Box::pin(fut)
                         }
                     }
@@ -5375,7 +5457,8 @@ pub mod public_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).new_endorsements(request).await
+                                <T as PublicService>::new_endorsements(&inner, request)
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -5424,7 +5507,8 @@ pub mod public_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).new_filled_blocks(request).await
+                                <T as PublicService>::new_filled_blocks(&inner, request)
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -5473,7 +5557,7 @@ pub mod public_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).new_operations(request).await
+                                <T as PublicService>::new_operations(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -5523,7 +5607,11 @@ pub mod public_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).new_slot_execution_outputs(request).await
+                                <T as PublicService>::new_slot_execution_outputs(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -5571,7 +5659,9 @@ pub mod public_service_server {
                             >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
-                            let fut = async move { (*inner).send_blocks(request).await };
+                            let fut = async move {
+                                <T as PublicService>::send_blocks(&inner, request).await
+                            };
                             Box::pin(fut)
                         }
                     }
@@ -5619,7 +5709,8 @@ pub mod public_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).send_endorsements(request).await
+                                <T as PublicService>::send_endorsements(&inner, request)
+                                    .await
                             };
                             Box::pin(fut)
                         }
@@ -5668,7 +5759,7 @@ pub mod public_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).send_operations(request).await
+                                <T as PublicService>::send_operations(&inner, request).await
                             };
                             Box::pin(fut)
                         }
@@ -5718,7 +5809,11 @@ pub mod public_service_server {
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                (*inner).transactions_throughput(request).await
+                                <T as PublicService>::transactions_throughput(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
                             };
                             Box::pin(fut)
                         }
