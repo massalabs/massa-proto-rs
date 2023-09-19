@@ -85,7 +85,7 @@ mod tonic {
             .out_dir("src/")
             .compile(&vec![private_api_path], &proto_include_paths)
             .map_err(|e| format!("PRIVATE API protobuf compilation error: {:?}", e))?;
-            
+
         // Generate API bindings
         let protos_path = parent_dir.join("massa-proto/proto/apis");
         let protos = find_protos(protos_path)?;
@@ -111,21 +111,19 @@ mod tonic {
             .compile(&protos, &proto_include_paths)
             .map_err(|e| format!("API protobuf compilation error: {:?}", e))?;
 
-            // Generate COMMONS bindings
-            let protos_path = parent_dir.join("massa-proto/proto/commons");
-            let protos = find_protos(protos_path)?;
-            let proto_include_paths = [
-                parent_dir.join("massa-proto/proto/commons")
-            ];
-    
-            tonic_build::configure()
-                .build_server(false)
-                .build_transport(false)
-                .build_client(false)
-                .include_file("_commons_includes.rs")
-                .out_dir("src/")
-                .compile(&protos, &proto_include_paths)
-                .map_err(|e| format!("COMMONS protobuf compilation error: {:?}", e))?;
+        // Generate COMMONS bindings
+        let protos_path = parent_dir.join("massa-proto/proto/commons");
+        let protos = find_protos(protos_path)?;
+        let proto_include_paths = [parent_dir.join("massa-proto/proto/commons")];
+
+        tonic_build::configure()
+            .build_server(false)
+            .build_transport(false)
+            .build_client(false)
+            .include_file("_commons_includes.rs")
+            .out_dir("src/")
+            .compile(&protos, &proto_include_paths)
+            .map_err(|e| format!("COMMONS protobuf compilation error: {:?}", e))?;
 
         Ok(())
     }
