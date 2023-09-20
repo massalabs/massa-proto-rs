@@ -2136,14 +2136,6 @@ pub mod private_service_server {
         const NAME: &'static str = "massa.api.v1.PrivateService";
     }
 }
-/// GetBlocksRequest holds request for GetBlocks
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetBlocksRequest {
-    /// Returns all the blocks that verify all the filters
-    #[prost(message, repeated, tag = "1")]
-    pub filters: ::prost::alloc::vec::Vec<GetBlocksFilter>,
-}
 /// ExecuteReadOnlyCallRequest holds request for ExecuteReadOnlyCall
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2160,30 +2152,13 @@ pub struct ExecuteReadOnlyCallResponse {
     #[prost(message, optional, tag = "1")]
     pub output: ::core::option::Option<super::super::model::v1::ReadOnlyExecutionOutput>,
 }
-/// GetBlocks Filter
+/// GetBlocksRequest holds request for GetBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetBlocksFilter {
-    /// Filter
-    #[prost(oneof = "get_blocks_filter::Filter", tags = "1, 2, 3")]
-    pub filter: ::core::option::Option<get_blocks_filter::Filter>,
-}
-/// Nested message and enum types in `GetBlocksFilter`.
-pub mod get_blocks_filter {
-    /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Filter {
-        /// One of this creator addresses
-        #[prost(message, tag = "1")]
-        Addresses(super::super::super::model::v1::Addresses),
-        /// One of this block ids
-        #[prost(message, tag = "2")]
-        BlockIds(super::super::super::model::v1::BlockIds),
-        /// One of this slot ranges (inclusive)
-        #[prost(message, tag = "3")]
-        SlotRange(super::super::super::model::v1::SlotRange),
-    }
+pub struct GetBlocksRequest {
+    /// Block ids
+    #[prost(string, repeated, tag = "1")]
+    pub block_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// GetBlocksResponse holds response from GetBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -2215,7 +2190,7 @@ pub mod get_datastore_entry_filter {
     #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
-        /// One of this (address-key) pairs
+        /// One of these (address-key) pairs
         #[prost(message, tag = "1")]
         AddressKey(super::super::super::model::v1::AddressKeyEntry),
     }
@@ -2228,6 +2203,24 @@ pub struct GetDatastoreEntriesResponse {
     #[prost(message, repeated, tag = "1")]
     pub datastore_entries: ::prost::alloc::vec::Vec<
         super::super::model::v1::DatastoreEntry,
+    >,
+}
+/// GetEndorsementsRequest holds request for GetEndorsements
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetEndorsementsRequest {
+    /// Endorsement ids
+    #[prost(string, repeated, tag = "1")]
+    pub endorsement_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// GetEndorsementsResponse holds response from GetEndorsements
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetEndorsementsResponse {
+    /// Wrapped operations
+    #[prost(message, repeated, tag = "1")]
+    pub wrapped_endorsements: ::prost::alloc::vec::Vec<
+        super::super::model::v1::EndorsementWrapper,
     >,
 }
 /// GetNextBlockBestParentsRequest holds request for GetNextBlockBestParents
@@ -2246,31 +2239,9 @@ pub struct GetNextBlockBestParentsResponse {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOperationsRequest {
-    /// Returns all the operations that verify all the filters
-    #[prost(message, repeated, tag = "1")]
-    pub filters: ::prost::alloc::vec::Vec<GetOperationsFilter>,
-}
-/// GetOperations Filter
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetOperationsFilter {
-    /// Filter
-    #[prost(oneof = "get_operations_filter::Filter", tags = "1, 2")]
-    pub filter: ::core::option::Option<get_operations_filter::Filter>,
-}
-/// Nested message and enum types in `GetOperationsFilter`.
-pub mod get_operations_filter {
-    /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Filter {
-        /// One of the operation ids
-        #[prost(message, tag = "1")]
-        OperationIds(super::super::super::model::v1::OperationIds),
-        /// One of the operation types
-        #[prost(message, tag = "2")]
-        OperationTypes(super::super::super::model::v1::OpTypes),
-    }
+    /// Operation ids
+    #[prost(string, repeated, tag = "1")]
+    pub operation_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// GetOperationsResponse holds response from GetOperations
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -2879,7 +2850,36 @@ pub struct ScOutputEventsWrapper {
 /// NewBlocksRequest holds request for NewBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NewBlocksRequest {}
+pub struct NewBlocksRequest {
+    /// Returns all the blocks that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<NewBlocksFilter>,
+}
+/// NewBlocks Filter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewBlocksFilter {
+    /// Filter
+    #[prost(oneof = "new_blocks_filter::Filter", tags = "1, 2, 3")]
+    pub filter: ::core::option::Option<new_blocks_filter::Filter>,
+}
+/// Nested message and enum types in `NewBlocksFilter`.
+pub mod new_blocks_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// One of these block ids
+        #[prost(message, tag = "1")]
+        BlockIds(super::super::super::model::v1::BlockIds),
+        /// One of these creator addresses
+        #[prost(message, tag = "2")]
+        Addresses(super::super::super::model::v1::Addresses),
+        /// One of these slot ranges (inclusive)
+        #[prost(message, tag = "3")]
+        SlotRange(super::super::super::model::v1::SlotRange),
+    }
+}
 /// NewBlocksResponse holds response from NewBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2888,24 +2888,39 @@ pub struct NewBlocksResponse {
     #[prost(message, optional, tag = "1")]
     pub signed_block: ::core::option::Option<super::super::model::v1::SignedBlock>,
 }
-/// NewBlocksHeadersRequest holds request for NewBlocksHeaders
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NewBlocksHeadersRequest {}
-/// NewBlocksHeadersResponse holds response from NewBlocksHeaders
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NewBlocksHeadersResponse {
-    /// Signed block header
-    #[prost(message, optional, tag = "1")]
-    pub signed_block_header: ::core::option::Option<
-        super::super::model::v1::SignedBlockHeader,
-    >,
-}
 /// NewEndorsementsRequest holds request for NewEndorsements
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NewEndorsementsRequest {}
+pub struct NewEndorsementsRequest {
+    /// Returns all the endorsements that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<NewEndorsementsFilter>,
+}
+/// NewEndorsements Filter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewEndorsementsFilter {
+    /// Filter
+    #[prost(oneof = "new_endorsements_filter::Filter", tags = "1, 2, 3")]
+    pub filter: ::core::option::Option<new_endorsements_filter::Filter>,
+}
+/// Nested message and enum types in `NewEndorsementsFilter`.
+pub mod new_endorsements_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// One of these endorsement ids
+        #[prost(message, tag = "1")]
+        EndorsementIds(super::super::super::model::v1::EndorsementIds),
+        /// One of these creator addresses
+        #[prost(message, tag = "2")]
+        Addresses(super::super::super::model::v1::Addresses),
+        /// One of these block ids
+        #[prost(message, tag = "3")]
+        BlockIds(super::super::super::model::v1::BlockIds),
+    }
+}
 /// NewEndorsementsResponse holds response from NewEndorsements
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2919,7 +2934,36 @@ pub struct NewEndorsementsResponse {
 /// NewFilledBlocksRequest holds request for NewFilledBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NewFilledBlocksRequest {}
+pub struct NewFilledBlocksRequest {
+    /// Returns all the blocks that verify one of the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<NewBlocksFilter>,
+}
+/// NewFilledBlocks Filter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewFilledBlocksFilter {
+    /// Filter
+    #[prost(oneof = "new_filled_blocks_filter::Filter", tags = "1, 2, 3")]
+    pub filter: ::core::option::Option<new_filled_blocks_filter::Filter>,
+}
+/// Nested message and enum types in `NewFilledBlocksFilter`.
+pub mod new_filled_blocks_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// One of these block ids
+        #[prost(message, tag = "1")]
+        BlockIds(super::super::super::model::v1::BlockIds),
+        /// One of these creator addresses
+        #[prost(message, tag = "2")]
+        Addresses(super::super::super::model::v1::Addresses),
+        /// One of these slot ranges (inclusive)
+        #[prost(message, tag = "3")]
+        SlotRange(super::super::super::model::v1::SlotRange),
+    }
+}
 /// NewFilledBlocksResponse holds response from NewFilledBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2941,8 +2985,25 @@ pub struct NewOperationsRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewOperationsFilter {
     /// Filter
-    #[prost(message, optional, tag = "2")]
-    pub operation_types: ::core::option::Option<super::super::model::v1::OpTypes>,
+    #[prost(oneof = "new_operations_filter::Filter", tags = "1, 2, 3")]
+    pub filter: ::core::option::Option<new_operations_filter::Filter>,
+}
+/// Nested message and enum types in `NewOperationsFilter`.
+pub mod new_operations_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// One of the operation ids
+        #[prost(message, tag = "1")]
+        OperationIds(super::super::super::model::v1::OperationIds),
+        /// One of these creator addresses
+        #[prost(message, tag = "2")]
+        Addresses(super::super::super::model::v1::Addresses),
+        /// One of the operation types
+        #[prost(message, tag = "3")]
+        OperationTypes(super::super::super::model::v1::OpTypes),
+    }
 }
 /// NewOperationsResponse holds response from NewOperations
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -2967,7 +3028,10 @@ pub struct NewSlotExecutionOutputsRequest {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotExecutionOutputsFilter {
     /// Filter
-    #[prost(oneof = "new_slot_execution_outputs_filter::Filter", tags = "1")]
+    #[prost(
+        oneof = "new_slot_execution_outputs_filter::Filter",
+        tags = "1, 2, 3, 4, 5, 6, 7"
+    )]
     pub filter: ::core::option::Option<new_slot_execution_outputs_filter::Filter>,
 }
 /// Nested message and enum types in `NewSlotExecutionOutputsFilter`.
@@ -2982,6 +3046,178 @@ pub mod new_slot_execution_outputs_filter {
             tag = "1"
         )]
         Status(i32),
+        /// Slot range
+        #[prost(message, tag = "2")]
+        SlotRange(super::super::super::model::v1::SlotRange),
+        /// AsyncPoolChangesFilter
+        #[prost(message, tag = "3")]
+        AsyncPoolChangesFilter(super::AsyncPoolChangesFilter),
+        /// ExecutedDenounciationFilter
+        #[prost(message, tag = "4")]
+        ExecutedDenounciationFilter(super::ExecutedDenounciationFilter),
+        /// Execution event filter
+        #[prost(message, tag = "5")]
+        EventFilter(super::ExecutionEventFilter),
+        /// ExecutedOpsChangesFilter
+        #[prost(message, tag = "6")]
+        ExecutedOpsChangesFilter(super::ExecutedOpsChangesFilter),
+        /// LedgerChangesFilter
+        #[prost(message, tag = "7")]
+        LedgerChangesFilter(super::LedgerChangesFilter),
+    }
+}
+/// AsyncPoolChangesFilter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AsyncPoolChangesFilter {
+    /// Filter
+    #[prost(oneof = "async_pool_changes_filter::Filter", tags = "1, 2, 3, 4, 5, 6")]
+    pub filter: ::core::option::Option<async_pool_changes_filter::Filter>,
+}
+/// Nested message and enum types in `AsyncPoolChangesFilter`.
+pub mod async_pool_changes_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// Do not return any message
+        #[prost(message, tag = "1")]
+        None(super::super::super::model::v1::Empty),
+        /// The type of the change
+        #[prost(
+            enumeration = "super::super::super::model::v1::AsyncPoolChangeType",
+            tag = "2"
+        )]
+        Type(i32),
+        /// The handler function name within the destination address bytecode
+        #[prost(string, tag = "3")]
+        Handler(::prost::alloc::string::String),
+        /// The address towards which the message is being sent
+        #[prost(string, tag = "4")]
+        DestinationAddress(::prost::alloc::string::String),
+        /// The address that sent the message
+        #[prost(string, tag = "5")]
+        EmitterAddress(::prost::alloc::string::String),
+        /// Boolean that determine if the message can be executed. For messages without filter this boolean is always true.
+        /// For messages with filter, this boolean is true if the filter has been matched between `validity_start` and current slot.
+        #[prost(bool, tag = "6")]
+        CanBeExecuted(bool),
+    }
+}
+/// PosChangesFilter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct PosChangesFilter {
+    /// Filter
+    #[prost(oneof = "pos_changes_filter::Filter", tags = "1, 2")]
+    pub filter: ::core::option::Option<pos_changes_filter::Filter>,
+}
+/// Nested message and enum types in `PosChangesFilter`.
+pub mod pos_changes_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// Do not return any message
+        #[prost(message, tag = "1")]
+        None(super::super::super::model::v1::Empty),
+        /// Address for which we have roll changes
+        #[prost(string, tag = "2")]
+        Address(::prost::alloc::string::String),
+    }
+}
+/// ExecutionEventFilter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionEventFilter {
+    /// Filter
+    #[prost(oneof = "execution_event_filter::Filter", tags = "1, 2, 3, 4, 5")]
+    pub filter: ::core::option::Option<execution_event_filter::Filter>,
+}
+/// Nested message and enum types in `ExecutionEventFilter`.
+pub mod execution_event_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// Do not return any message
+        #[prost(message, tag = "1")]
+        None(super::super::super::model::v1::Empty),
+        /// Caller address
+        #[prost(string, tag = "2")]
+        CallerAddress(::prost::alloc::string::String),
+        /// Emitter address
+        #[prost(string, tag = "3")]
+        EmitterAddress(::prost::alloc::string::String),
+        /// Original operation id
+        #[prost(string, tag = "4")]
+        OriginalOperationId(::prost::alloc::string::String),
+        /// Whether the event is a failure
+        #[prost(bool, tag = "5")]
+        IsFailure(bool),
+    }
+}
+/// ExecutedOpsChangesFilter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutedOpsChangesFilter {
+    /// Filter
+    #[prost(oneof = "executed_ops_changes_filter::Filter", tags = "1, 2")]
+    pub filter: ::core::option::Option<executed_ops_changes_filter::Filter>,
+}
+/// Nested message and enum types in `ExecutedOpsChangesFilter`.
+pub mod executed_ops_changes_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// Do not return any message
+        #[prost(message, tag = "1")]
+        None(super::super::super::model::v1::Empty),
+        /// Operation id
+        #[prost(string, tag = "2")]
+        OperationId(::prost::alloc::string::String),
+    }
+}
+/// ExecutedDenounciationFilter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutedDenounciationFilter {
+    /// Filter
+    #[prost(oneof = "executed_denounciation_filter::Filter", tags = "1")]
+    pub filter: ::core::option::Option<executed_denounciation_filter::Filter>,
+}
+/// Nested message and enum types in `ExecutedDenounciationFilter`.
+pub mod executed_denounciation_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// Do not return any message
+        #[prost(message, tag = "1")]
+        None(super::super::super::model::v1::Empty),
+    }
+}
+/// LedgerChangesFilter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct LedgerChangesFilter {
+    /// Filter
+    #[prost(oneof = "ledger_changes_filter::Filter", tags = "1, 2")]
+    pub filter: ::core::option::Option<ledger_changes_filter::Filter>,
+}
+/// Nested message and enum types in `LedgerChangesFilter`.
+pub mod ledger_changes_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// Do not return any message
+        #[prost(message, tag = "1")]
+        None(super::super::super::model::v1::Empty),
+        /// Address for which we have ledger changes
+        #[prost(string, tag = "2")]
+        Address(::prost::alloc::string::String),
     }
 }
 /// NewSlotExecutionOutputsResponse holds response from NewSlotExecutionOutputs
@@ -2997,8 +3233,8 @@ pub struct NewSlotExecutionOutputsResponse {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendBlocksRequest {
     /// Secure shared block
-    #[prost(message, optional, tag = "1")]
-    pub block: ::core::option::Option<super::super::model::v1::SecureShare>,
+    #[prost(bytes = "vec", tag = "1")]
+    pub block: ::prost::alloc::vec::Vec<u8>,
 }
 /// SendBlocksResponse holds response from SendBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -3027,8 +3263,8 @@ pub mod send_blocks_response {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendEndorsementsRequest {
     /// Secure shared endorsements
-    #[prost(message, repeated, tag = "1")]
-    pub endorsements: ::prost::alloc::vec::Vec<super::super::model::v1::SecureShare>,
+    #[prost(bytes = "vec", repeated, tag = "1")]
+    pub endorsements: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
 /// SendEndorsementsResponse holds response from SendEndorsements
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -3046,7 +3282,7 @@ pub mod send_endorsements_response {
     pub enum Result {
         /// Endorsement result
         #[prost(message, tag = "1")]
-        EndorsementsIds(super::super::super::model::v1::EndorsementsIds),
+        EndorsementIds(super::super::super::model::v1::EndorsementIds),
         /// Massa error
         #[prost(message, tag = "2")]
         Error(super::super::super::model::v1::Error),
@@ -3057,8 +3293,8 @@ pub mod send_endorsements_response {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendOperationsRequest {
     /// Secured shared operations
-    #[prost(message, repeated, tag = "1")]
-    pub operations: ::prost::alloc::vec::Vec<super::super::model::v1::SecureShare>,
+    #[prost(bytes = "vec", repeated, tag = "1")]
+    pub operations: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
 /// SendOperationsResponse holds response from SendOperations
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -3076,7 +3312,7 @@ pub mod send_operations_response {
     pub enum Result {
         /// Operation result
         #[prost(message, tag = "1")]
-        OperationsIds(super::super::super::model::v1::OperationIds),
+        OperationIds(super::super::super::model::v1::OperationIds),
         /// Massa error
         #[prost(message, tag = "2")]
         Error(super::super::super::model::v1::Error),
@@ -3097,6 +3333,130 @@ pub struct TransactionsThroughputResponse {
     /// Transactions throughput per second
     #[prost(uint32, tag = "1")]
     pub throughput: u32,
+}
+/// SearchBlocksRequest holds request for SearchBlocks
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchBlocksRequest {
+    /// Returns all the blocks that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<SearchBlocksFilter>,
+}
+/// SearchBlocks Filter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchBlocksFilter {
+    /// Filter
+    #[prost(oneof = "search_blocks_filter::Filter", tags = "1, 2, 3")]
+    pub filter: ::core::option::Option<search_blocks_filter::Filter>,
+}
+/// Nested message and enum types in `SearchBlocksFilter`.
+pub mod search_blocks_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// One of these block ids
+        #[prost(message, tag = "1")]
+        BlockIds(super::super::super::model::v1::BlockIds),
+        /// One of these creator addresses
+        #[prost(message, tag = "2")]
+        Addresses(super::super::super::model::v1::Addresses),
+        /// One of these slot ranges (inclusive)
+        #[prost(message, tag = "3")]
+        SlotRange(super::super::super::model::v1::SlotRange),
+    }
+}
+/// SearchBlocksResponse holds response from SearchBlocks
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchBlocksResponse {
+    /// Information about the blocks
+    #[prost(message, repeated, tag = "1")]
+    pub block_infos: ::prost::alloc::vec::Vec<super::super::model::v1::BlockInfo>,
+}
+/// SearchEndorsementsRequest holds request for SearchEndorsements
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchEndorsementsRequest {
+    /// Returns all the endorsements informations that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<SearchEndorsementsFilter>,
+}
+/// SearchEndorsements Filter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchEndorsementsFilter {
+    /// Filter
+    #[prost(oneof = "search_endorsements_filter::Filter", tags = "1, 2, 3")]
+    pub filter: ::core::option::Option<search_endorsements_filter::Filter>,
+}
+/// Nested message and enum types in `SearchEndorsementsFilter`.
+pub mod search_endorsements_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// One of these endorsement ids
+        #[prost(message, tag = "1")]
+        EndorsementIds(super::super::super::model::v1::EndorsementIds),
+        /// One of these creator addresses
+        #[prost(message, tag = "2")]
+        Addresses(super::super::super::model::v1::Addresses),
+        /// One of these block ids
+        #[prost(message, tag = "3")]
+        BlockIds(super::super::super::model::v1::BlockIds),
+    }
+}
+/// SearchEndorsementsResponse holds response from SearchEndorsements
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchEndorsementsResponse {
+    /// Information about the endorsements
+    #[prost(message, repeated, tag = "1")]
+    pub endorsement_infos: ::prost::alloc::vec::Vec<
+        super::super::model::v1::EndorsementInfo,
+    >,
+}
+/// SearchOperationsRequest holds request for SearchOperations
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchOperationsRequest {
+    /// Returns all the operations that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<SearchOperationsFilter>,
+}
+/// SearchOperations Filter
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchOperationsFilter {
+    /// Filter
+    #[prost(oneof = "search_operations_filter::Filter", tags = "1, 2")]
+    pub filter: ::core::option::Option<search_operations_filter::Filter>,
+}
+/// Nested message and enum types in `SearchOperationsFilter`.
+pub mod search_operations_filter {
+    /// Filter
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Filter {
+        /// One of the operation ids
+        #[prost(message, tag = "1")]
+        OperationIds(super::super::super::model::v1::OperationIds),
+        /// One of these creator addresses
+        #[prost(message, tag = "2")]
+        Addresses(super::super::super::model::v1::Addresses),
+    }
+}
+/// SearchOperationsResponse holds response from SearchOperations
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SearchOperationsResponse {
+    /// Information about the operations
+    #[prost(message, repeated, tag = "1")]
+    pub operation_infos: ::prost::alloc::vec::Vec<
+        super::super::model::v1::OperationInfo,
+    >,
 }
 /// Execution status of an operation or denunciation
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -3317,6 +3677,34 @@ pub mod public_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        /// Get endorsements by ids
+        pub async fn get_endorsements(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetEndorsementsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetEndorsementsResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/GetEndorsements",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("massa.api.v1.PublicService", "GetEndorsements"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
         /// Get next block best parents
         pub async fn get_next_block_best_parents(
             &mut self,
@@ -3348,7 +3736,7 @@ pub mod public_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /// Get operations
+        /// Get operations by ids
         pub async fn get_operations(
             &mut self,
             request: impl tonic::IntoRequest<super::GetOperationsRequest>,
@@ -3539,6 +3927,88 @@ pub mod public_service_client {
                 .insert(GrpcMethod::new("massa.api.v1.PublicService", "QueryState"));
             self.inner.unary(req, path, codec).await
         }
+        /// Search blocks
+        pub async fn search_blocks(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SearchBlocksRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SearchBlocksResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/SearchBlocks",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("massa.api.v1.PublicService", "SearchBlocks"));
+            self.inner.unary(req, path, codec).await
+        }
+        /// Search endorsements
+        pub async fn search_endorsements(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SearchEndorsementsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SearchEndorsementsResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/SearchEndorsements",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("massa.api.v1.PublicService", "SearchEndorsements"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Search operations
+        pub async fn search_operations(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SearchOperationsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SearchOperationsResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/SearchOperations",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("massa.api.v1.PublicService", "SearchOperations"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
         /// New received and produced blocks
         pub async fn new_blocks(
             &mut self,
@@ -3687,6 +4157,39 @@ pub mod public_service_client {
                     ),
                 );
             self.inner.streaming(req, path, codec).await
+        }
+        /// unidirectional streaming
+        pub async fn new_slot_execution_outputs_server_stream(
+            &mut self,
+            request: impl tonic::IntoRequest<super::NewSlotExecutionOutputsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<
+                tonic::codec::Streaming<super::NewSlotExecutionOutputsResponse>,
+            >,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/NewSlotExecutionOutputsServerStream",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PublicService",
+                        "NewSlotExecutionOutputsServerStream",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
         }
         /// Send blocks
         pub async fn send_blocks(
@@ -3840,6 +4343,14 @@ pub mod public_service_server {
             tonic::Response<super::GetDatastoreEntriesResponse>,
             tonic::Status,
         >;
+        /// Get endorsements by ids
+        async fn get_endorsements(
+            &self,
+            request: tonic::Request<super::GetEndorsementsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetEndorsementsResponse>,
+            tonic::Status,
+        >;
         /// Get next block best parents
         async fn get_next_block_best_parents(
             &self,
@@ -3848,7 +4359,7 @@ pub mod public_service_server {
             tonic::Response<super::GetNextBlockBestParentsResponse>,
             tonic::Status,
         >;
-        /// Get operations
+        /// Get operations by ids
         async fn get_operations(
             &self,
             request: tonic::Request<super::GetOperationsRequest>,
@@ -3902,6 +4413,30 @@ pub mod public_service_server {
             request: tonic::Request<super::QueryStateRequest>,
         ) -> std::result::Result<
             tonic::Response<super::QueryStateResponse>,
+            tonic::Status,
+        >;
+        /// Search blocks
+        async fn search_blocks(
+            &self,
+            request: tonic::Request<super::SearchBlocksRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SearchBlocksResponse>,
+            tonic::Status,
+        >;
+        /// Search endorsements
+        async fn search_endorsements(
+            &self,
+            request: tonic::Request<super::SearchEndorsementsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SearchEndorsementsResponse>,
+            tonic::Status,
+        >;
+        /// Search operations
+        async fn search_operations(
+            &self,
+            request: tonic::Request<super::SearchOperationsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::SearchOperationsResponse>,
             tonic::Status,
         >;
         /// Server streaming response type for the NewBlocks method.
@@ -3974,6 +4509,23 @@ pub mod public_service_server {
             >,
         ) -> std::result::Result<
             tonic::Response<Self::NewSlotExecutionOutputsStream>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the NewSlotExecutionOutputsServerStream method.
+        type NewSlotExecutionOutputsServerStreamStream: futures_core::Stream<
+                Item = std::result::Result<
+                    super::NewSlotExecutionOutputsResponse,
+                    tonic::Status,
+                >,
+            >
+            + Send
+            + 'static;
+        /// unidirectional streaming
+        async fn new_slot_execution_outputs_server_stream(
+            &self,
+            request: tonic::Request<super::NewSlotExecutionOutputsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::NewSlotExecutionOutputsServerStreamStream>,
             tonic::Status,
         >;
         /// Server streaming response type for the SendBlocks method.
@@ -4239,6 +4791,52 @@ pub mod public_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = GetDatastoreEntriesSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/GetEndorsements" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetEndorsementsSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::UnaryService<super::GetEndorsementsRequest>
+                    for GetEndorsementsSvc<T> {
+                        type Response = super::GetEndorsementsResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetEndorsementsRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).get_endorsements(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetEndorsementsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
@@ -4621,6 +5219,144 @@ pub mod public_service_server {
                     };
                     Box::pin(fut)
                 }
+                "/massa.api.v1.PublicService/SearchBlocks" => {
+                    #[allow(non_camel_case_types)]
+                    struct SearchBlocksSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::UnaryService<super::SearchBlocksRequest>
+                    for SearchBlocksSvc<T> {
+                        type Response = super::SearchBlocksResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SearchBlocksRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).search_blocks(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SearchBlocksSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/SearchEndorsements" => {
+                    #[allow(non_camel_case_types)]
+                    struct SearchEndorsementsSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::UnaryService<super::SearchEndorsementsRequest>
+                    for SearchEndorsementsSvc<T> {
+                        type Response = super::SearchEndorsementsResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SearchEndorsementsRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).search_endorsements(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SearchEndorsementsSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/SearchOperations" => {
+                    #[allow(non_camel_case_types)]
+                    struct SearchOperationsSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::UnaryService<super::SearchOperationsRequest>
+                    for SearchOperationsSvc<T> {
+                        type Response = super::SearchOperationsResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SearchOperationsRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner).search_operations(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SearchOperationsSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
                 "/massa.api.v1.PublicService/NewBlocks" => {
                     #[allow(non_camel_case_types)]
                     struct NewBlocksSvc<T: PublicService>(pub Arc<T>);
@@ -4861,6 +5597,60 @@ pub mod public_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/NewSlotExecutionOutputsServerStream" => {
+                    #[allow(non_camel_case_types)]
+                    struct NewSlotExecutionOutputsServerStreamSvc<T: PublicService>(
+                        pub Arc<T>,
+                    );
+                    impl<
+                        T: PublicService,
+                    > tonic::server::ServerStreamingService<
+                        super::NewSlotExecutionOutputsRequest,
+                    > for NewSlotExecutionOutputsServerStreamSvc<T> {
+                        type Response = super::NewSlotExecutionOutputsResponse;
+                        type ResponseStream = T::NewSlotExecutionOutputsServerStreamStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::NewSlotExecutionOutputsRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                (*inner)
+                                    .new_slot_execution_outputs_server_stream(request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = NewSlotExecutionOutputsServerStreamSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)

@@ -147,10 +147,46 @@ pub struct SignedEndorsement {
 /// EndorsementIds holds endorsements ids
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EndorsementsIds {
+pub struct EndorsementIds {
     /// Endorsements ids
     #[prost(string, repeated, tag = "1")]
-    pub endorsements_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    pub endorsement_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// A wrapper around an endorsement with its metadata
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EndorsementWrapper {
+    /// Whether the endorsement is still in pool
+    #[prost(bool, tag = "1")]
+    pub in_pool: bool,
+    /// The endorsement appears in `in_blocks`
+    /// If it appears in multiple blocks, these blocks are in different cliques
+    #[prost(string, repeated, tag = "2")]
+    pub in_blocks: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Whether the the endorsement is final (for example in a final block)
+    #[prost(bool, tag = "3")]
+    pub is_final: bool,
+    /// The endorsement itself
+    #[prost(message, optional, tag = "4")]
+    pub endorsement: ::core::option::Option<SignedEndorsement>,
+}
+/// Informations about an endorsement with its metadata
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EndorsementInfo {
+    /// The endorsement id
+    #[prost(string, tag = "1")]
+    pub endorsement_id: ::prost::alloc::string::String,
+    /// Whether the endorsement is still in pool
+    #[prost(bool, tag = "2")]
+    pub in_pool: bool,
+    /// The endorsement appears in `in_blocks`
+    /// If it appears in multiple blocks, these blocks are in different cliques
+    #[prost(string, repeated, tag = "3")]
+    pub in_blocks: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Whether the the endorsement is final (for example in a final block)
+    #[prost(bool, tag = "4")]
+    pub is_final: bool,
 }
 /// Massa error
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -185,26 +221,6 @@ pub struct ArrayOfBytesWrapper {
     /// Repeated bytes
     #[prost(bytes = "vec", repeated, tag = "1")]
     pub items: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
-}
-/// Packages a type such that it can be securely sent and received in a trust-free network
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct SecureShare {
-    /// Content in sharable, deserializable form. Is used in the secure verification protocols
-    #[prost(bytes = "vec", tag = "1")]
-    pub serialized_data: ::prost::alloc::vec::Vec<u8>,
-    /// A cryptographically generated value using `serialized_data` and a public key.
-    #[prost(string, tag = "2")]
-    pub signature: ::prost::alloc::string::String,
-    /// The public-key component used in the generation of the signature
-    #[prost(string, tag = "3")]
-    pub content_creator_pub_key: ::prost::alloc::string::String,
-    /// Derived from the same public key used to generate the signature
-    #[prost(string, tag = "4")]
-    pub content_creator_address: ::prost::alloc::string::String,
-    /// A secure hash of the non-malleable contents of a deterministic binary representation of the block header
-    #[prost(string, tag = "5")]
-    pub secure_hash: ::prost::alloc::string::String,
 }
 /// KeyPair
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -346,13 +362,13 @@ pub struct ExecuteSc {
 pub struct CallSc {
     /// Target smart contract address
     #[prost(string, tag = "1")]
-    pub target_addr: ::prost::alloc::string::String,
+    pub target_address: ::prost::alloc::string::String,
     /// Target function name. No function is called if empty
     #[prost(string, tag = "2")]
-    pub target_func: ::prost::alloc::string::String,
+    pub target_function: ::prost::alloc::string::String,
     /// Parameter to pass to the target function
     #[prost(bytes = "vec", tag = "3")]
-    pub param: ::prost::alloc::vec::Vec<u8>,
+    pub parameter: ::prost::alloc::vec::Vec<u8>,
     /// The maximum amount of gas that the execution of the contract is allowed to cost
     #[prost(uint64, tag = "4")]
     pub max_gas: u64,
@@ -387,6 +403,20 @@ pub struct SignedOperation {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationWrapper {
+    /// The IDs of the blocks in which the operation appears
+    #[prost(string, repeated, tag = "1")]
+    pub block_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// The thread in which the operation can be included
+    #[prost(uint32, tag = "2")]
+    pub thread: u32,
+    /// The operation object itself
+    #[prost(message, optional, tag = "3")]
+    pub operation: ::core::option::Option<SignedOperation>,
+}
+/// Information about an operation with its metadata
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct OperationInfo {
     /// The unique ID of the operation.
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
@@ -396,9 +426,6 @@ pub struct OperationWrapper {
     /// The thread in which the operation can be included
     #[prost(uint32, tag = "3")]
     pub thread: u32,
-    /// The operation object itself
-    #[prost(message, optional, tag = "4")]
-    pub operation: ::core::option::Option<SignedOperation>,
 }
 /// OperationIds
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -567,14 +594,22 @@ pub struct SignedBlockHeader {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BlockWrapper {
-    /// The unique ID of the block.
-    #[prost(string, tag = "1")]
-    pub block_id: ::prost::alloc::string::String,
+    /// The execution status of the block
+    #[prost(enumeration = "BlockStatus", tag = "1")]
+    pub status: i32,
     /// The block object itself
     #[prost(message, optional, tag = "2")]
     pub block: ::core::option::Option<Block>,
+}
+/// Informations about a block with its metadata
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BlockInfo {
+    /// The unique ID of the block.
+    #[prost(string, tag = "1")]
+    pub block_id: ::prost::alloc::string::String,
     /// The execution status of the block
-    #[prost(enumeration = "BlockStatus", tag = "3")]
+    #[prost(enumeration = "BlockStatus", tag = "2")]
     pub status: i32,
 }
 /// BlockIds holds block ids
@@ -834,6 +869,9 @@ pub struct StateChanges {
     /// Executed denunciations changes
     #[prost(message, repeated, tag = "5")]
     pub executed_denunciations_changes: ::prost::alloc::vec::Vec<DenunciationIndex>,
+    /// Execution trail hash change
+    #[prost(message, optional, tag = "6")]
+    pub execution_trail_hash_change: ::core::option::Option<SetOrKeepString>,
 }
 /// ExecutedOpsChangeEntry
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1295,10 +1333,10 @@ pub struct BytecodeExecution {
 pub struct FunctionCall {
     /// Target address
     #[prost(string, tag = "1")]
-    pub target_addr: ::prost::alloc::string::String,
+    pub target_address: ::prost::alloc::string::String,
     /// Target function
     #[prost(string, tag = "2")]
-    pub target_func: ::prost::alloc::string::String,
+    pub target_function: ::prost::alloc::string::String,
     /// Parameter to pass to the target function
     #[prost(bytes = "vec", tag = "3")]
     pub parameter: ::prost::alloc::vec::Vec<u8>,
@@ -1312,7 +1350,7 @@ pub struct ReadOnlyExecutionOutput {
     pub out: ::core::option::Option<ExecutionOutput>,
     /// Gas cost for this execution
     #[prost(uint64, tag = "2")]
-    pub max_gas: u64,
+    pub used_gas: u64,
     /// Returned value from the module call
     #[prost(bytes = "vec", tag = "3")]
     pub call_result: ::prost::alloc::vec::Vec<u8>,
