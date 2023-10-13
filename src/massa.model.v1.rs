@@ -1298,6 +1298,12 @@ pub struct ReadOnlyExecutionCall {
     /// Whether to start execution from final or active state
     #[prost(bool, tag = "6")]
     pub is_final: bool,
+    /// Coins transferred to the target address during the call
+    #[prost(message, optional, tag = "7")]
+    pub coins: ::core::option::Option<NativeAmount>,
+    /// fee paid by the caller when the call is processed.
+    #[prost(message, optional, tag = "8")]
+    pub fee: ::core::option::Option<NativeAmount>,
     /// Target of the call
     #[prost(oneof = "read_only_execution_call::Target", tags = "3, 4")]
     pub target: ::core::option::Option<read_only_execution_call::Target>,
