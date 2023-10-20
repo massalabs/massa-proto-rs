@@ -1298,11 +1298,8 @@ pub struct ReadOnlyExecutionCall {
     /// Whether to start execution from final or active state
     #[prost(bool, tag = "6")]
     pub is_final: bool,
-    /// Coins transferred to the target address during the call
-    #[prost(message, optional, tag = "7")]
-    pub coins: ::core::option::Option<NativeAmount>,
     /// fee paid by the caller when the call is processed.
-    #[prost(message, optional, tag = "8")]
+    #[prost(message, optional, tag = "7")]
     pub fee: ::core::option::Option<NativeAmount>,
     /// Target of the call
     #[prost(oneof = "read_only_execution_call::Target", tags = "3, 4")]
@@ -1346,6 +1343,9 @@ pub struct FunctionCall {
     /// Parameter to pass to the target function
     #[prost(bytes = "vec", tag = "3")]
     pub parameter: ::prost::alloc::vec::Vec<u8>,
+    /// Coins transferred to the target address during the call
+    #[prost(message, optional, tag = "4")]
+    pub coins: ::core::option::Option<NativeAmount>,
 }
 /// Structure describing the output of a read only execution
 #[allow(clippy::derive_partial_eq_without_eq)]
