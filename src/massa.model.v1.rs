@@ -1293,12 +1293,7 @@ pub struct ReadOnlyExecutionCall {
     /// Caller's address, (Optional) if not set, an auto-generated address will be used
     #[prost(message, optional, tag = "5")]
     pub caller_address: ::core::option::Option<::prost::alloc::string::String>,
-    /// execution start state
-    ///
-    /// Whether to start execution from final or active state
-    #[prost(bool, tag = "6")]
-    pub is_final: bool,
-    /// fee paid by the caller when the call is processed.
+    /// fee paid by the caller when the call is processed (optional)
     #[prost(message, optional, tag = "7")]
     pub fee: ::core::option::Option<NativeAmount>,
     /// Target of the call
