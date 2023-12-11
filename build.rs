@@ -1,5 +1,11 @@
 // Copyright (c) 2023 MASSA LABS <info@massa.net>
 
+macro_rules! p {
+    ($($tokens: tt)*) => {
+        println!("cargo:warning={}", format!($($tokens)*))
+    }
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     #[cfg(feature = "tonic-build")]
     tonic::build()?;
@@ -45,6 +51,7 @@ mod tonic {
             parent_dir.join("massa-proto/proto/third_party"),
         ];
 
+        p!("public api path: {:?}", public_api_path);
         tonic_build::configure()
             .build_server(true)
             .build_transport(true)
@@ -70,6 +77,7 @@ mod tonic {
             parent_dir.join("massa-proto/proto/third_party"),
         ];
 
+        p!("private api path: {:?}", private_api_path);
         tonic_build::configure()
             .build_server(true)
             .build_transport(true)
@@ -82,6 +90,7 @@ mod tonic {
                  /// HACK: see docs in [`HttpRuleComment`] ignored in doctest pass",
             )
             .include_file("_api_includes.rs")
+            .file_descriptor_set_path("src/api_private.bin")
             .out_dir("src/")
             .compile(&vec![private_api_path], &proto_include_paths)
             .map_err(|e| format!("PRIVATE API protobuf compilation error: {:?}", e))?;
