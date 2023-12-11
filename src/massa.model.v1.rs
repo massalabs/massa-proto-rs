@@ -1698,6 +1698,9 @@ pub struct NodeStatus {
     /// Compact configuration
     #[prost(message, optional, tag = "16")]
     pub config: ::core::option::Option<CompactConfig>,
+    /// Chain id
+    #[prost(uint64, tag = "17")]
+    pub chain_id: u64,
 }
 /// Connected node
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1782,6 +1785,9 @@ pub struct PublicStatus {
     /// Compact configuration
     #[prost(message, optional, tag = "11")]
     pub config: ::core::option::Option<CompactConfig>,
+    /// Chain id
+    #[prost(uint64, tag = "12")]
+    pub chain_id: u64,
 }
 /// ConnectionType enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
