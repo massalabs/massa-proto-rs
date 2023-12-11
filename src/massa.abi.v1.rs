@@ -1267,3 +1267,14 @@ pub struct Base58CheckToBytesResult {
     #[prost(bytes = "vec", tag = "1")]
     pub bytes: ::prost::alloc::vec::Vec<u8>,
 }
+/// Chain id request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ChainIdRequest {}
+/// Chain id result
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ChainIdResult {
+    #[prost(uint64, tag = "1")]
+    pub id: u64,
+}
