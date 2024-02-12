@@ -3279,6 +3279,28 @@ pub struct NewSlotExecutionOutputsResponse {
     #[prost(message, optional, tag = "1")]
     pub output: ::core::option::Option<super::super::model::v1::SlotExecutionOutput>,
 }
+/// NewSlotABICallStacks request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewSlotAbiCallStacksRequest {
+    /// Finality level to receive informations from
+    #[prost(enumeration = "FinalityLevel", tag = "1")]
+    pub finality_level: i32,
+}
+/// NewSlotABICallStacks response
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewSlotAbiCallStacksResponse {
+    /// Finality level to receive informations from
+    #[prost(message, optional, tag = "1")]
+    pub slot: ::core::option::Option<super::super::model::v1::Slot>,
+    /// Call stacks for asynchronous execution
+    #[prost(message, repeated, tag = "2")]
+    pub asc_call_stacks: ::prost::alloc::vec::Vec<AscabiCallStack>,
+    /// Call stack for operations
+    #[prost(message, repeated, tag = "3")]
+    pub operation_call_stacks: ::prost::alloc::vec::Vec<OperationAbiCallStack>,
+}
 /// SendBlocksRequest holds parameters to SendBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3509,6 +3531,125 @@ pub struct SearchOperationsResponse {
         super::super::model::v1::OperationInfo,
     >,
 }
+/// GetOperationABICallStacks request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetOperationAbiCallStacksRequest {
+    /// Operations ids to get the call stack from
+    #[prost(string, repeated, tag = "1")]
+    pub operation_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+/// Definition of an ABI call stack element
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AbiCallStackElement {
+    /// name of the ABI
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+    /// Parameters of the ABI
+    #[prost(string, repeated, tag = "2")]
+    pub parameters: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Return value of the ABI
+    #[prost(string, tag = "3")]
+    pub return_value: ::prost::alloc::string::String,
+}
+/// Definition of an ABI call stack element that is the 'call' ABI
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AbiCallStackElementCall {
+    /// name of the ABI
+    #[prost(string, tag = "1")]
+    pub name: ::prost::alloc::string::String,
+    /// Parameters of the ABI
+    #[prost(string, repeated, tag = "2")]
+    pub parameters: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+    /// Calls made within this SC call
+    #[prost(message, repeated, tag = "3")]
+    pub sub_calls: ::prost::alloc::vec::Vec<AbiCallStackElementParent>,
+    /// Return value of the ABI
+    #[prost(string, tag = "4")]
+    pub return_value: ::prost::alloc::string::String,
+}
+/// Definition of an ABI call stack element parent
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AbiCallStackElementParent {
+    /// Element of the call stack
+    #[prost(oneof = "abi_call_stack_element_parent::CallStackElement", tags = "1, 2")]
+    pub call_stack_element: ::core::option::Option<
+        abi_call_stack_element_parent::CallStackElement,
+    >,
+}
+/// Nested message and enum types in `ABICallStackElementParent`.
+pub mod abi_call_stack_element_parent {
+    /// Element of the call stack
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum CallStackElement {
+        /// Any ABI call that is not the ABI 'call'
+        #[prost(message, tag = "1")]
+        Element(super::AbiCallStackElement),
+        /// Element that is the ABI 'call'
+        #[prost(message, tag = "2")]
+        ElementCall(super::AbiCallStackElementCall),
+    }
+}
+/// Definition of an ABI call stack
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AbiCallStack {
+    /// All elements of the call stack
+    #[prost(message, repeated, tag = "1")]
+    pub call_stack: ::prost::alloc::vec::Vec<AbiCallStackElementParent>,
+}
+/// GetOperationABICallStacks response
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetOperationAbiCallStacksResponse {
+    #[prost(message, repeated, tag = "1")]
+    pub call_stacks: ::prost::alloc::vec::Vec<AbiCallStack>,
+}
+/// GetSlotABICallStacks request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetSlotAbiCallStacksRequest {
+    /// Slots asked
+    #[prost(message, repeated, tag = "1")]
+    pub slots: ::prost::alloc::vec::Vec<super::super::model::v1::Slot>,
+}
+/// ABI asynchronous execution call stack
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AscabiCallStack {
+    /// Index of the execution in the slot
+    #[prost(uint64, tag = "1")]
+    pub index: u64,
+    /// Call stack
+    #[prost(message, repeated, tag = "2")]
+    pub call_stack: ::prost::alloc::vec::Vec<AbiCallStackElementParent>,
+}
+/// Operation execution call stack
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct OperationAbiCallStack {
+    /// Operation id
+    #[prost(string, tag = "1")]
+    pub operation_id: ::prost::alloc::string::String,
+    /// Call stack
+    #[prost(message, repeated, tag = "2")]
+    pub call_stack: ::prost::alloc::vec::Vec<AbiCallStackElementParent>,
+}
+/// GetSlotABICallStacks response
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetSlotAbiCallStacksResponse {
+    /// Call stacks for asynchronous execution
+    #[prost(message, repeated, tag = "1")]
+    pub asc_call_stacks: ::prost::alloc::vec::Vec<AscabiCallStack>,
+    /// Call stack for operations
+    #[prost(message, repeated, tag = "2")]
+    pub operation_call_stacks: ::prost::alloc::vec::Vec<OperationAbiCallStack>,
+}
 /// Execution status of an operation or denunciation
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -3556,6 +3697,39 @@ impl ExecutionQueryExecutionStatus {
             "EXECUTION_QUERY_EXECUTION_STATUS_EXECUTABLE_OR_EXPIRED" => {
                 Some(Self::ExecutableOrExpired)
             }
+            _ => None,
+        }
+    }
+}
+/// Finality level to filter on in streams
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum FinalityLevel {
+    /// Unspecified (receive both)
+    Unspecified = 0,
+    /// Candidate level
+    Candidate = 1,
+    /// Final level
+    Final = 2,
+}
+impl FinalityLevel {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            FinalityLevel::Unspecified => "FINALITY_LEVEL_UNSPECIFIED",
+            FinalityLevel::Candidate => "FINALITY_LEVEL_CANDIDATE",
+            FinalityLevel::Final => "FINALITY_LEVEL_FINAL",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "FINALITY_LEVEL_UNSPECIFIED" => Some(Self::Unspecified),
+            "FINALITY_LEVEL_CANDIDATE" => Some(Self::Candidate),
+            "FINALITY_LEVEL_FINAL" => Some(Self::Final),
             _ => None,
         }
     }
@@ -4060,6 +4234,65 @@ pub mod public_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        /// Get ABI call stack of an operation
+        pub async fn get_operation_abi_call_stacks(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetOperationAbiCallStacksRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetOperationAbiCallStacksResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/GetOperationABICallStacks",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PublicService",
+                        "GetOperationABICallStacks",
+                    ),
+                );
+            self.inner.unary(req, path, codec).await
+        }
+        /// Get ABI call stack of all asynchronous executions and all operations for a given slot
+        pub async fn get_slot_abi_call_stacks(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetSlotAbiCallStacksRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetSlotAbiCallStacksResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/GetSlotABICallStacks",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("massa.api.v1.PublicService", "GetSlotABICallStacks"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
         /// New received and produced blocks
         pub async fn new_blocks(
             &mut self,
@@ -4206,6 +4439,38 @@ pub mod public_service_client {
                         "massa.api.v1.PublicService",
                         "NewSlotExecutionOutputs",
                     ),
+                );
+            self.inner.streaming(req, path, codec).await
+        }
+        /// Call stack for each slot executed
+        pub async fn new_slot_abi_call_stacks(
+            &mut self,
+            request: impl tonic::IntoStreamingRequest<
+                Message = super::NewSlotAbiCallStacksRequest,
+            >,
+        ) -> std::result::Result<
+            tonic::Response<
+                tonic::codec::Streaming<super::NewSlotAbiCallStacksResponse>,
+            >,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/NewSlotABICallStacks",
+            );
+            let mut req = request.into_streaming_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("massa.api.v1.PublicService", "NewSlotABICallStacks"),
                 );
             self.inner.streaming(req, path, codec).await
         }
@@ -4457,6 +4722,22 @@ pub mod public_service_server {
             tonic::Response<super::SearchOperationsResponse>,
             tonic::Status,
         >;
+        /// Get ABI call stack of an operation
+        async fn get_operation_abi_call_stacks(
+            &self,
+            request: tonic::Request<super::GetOperationAbiCallStacksRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetOperationAbiCallStacksResponse>,
+            tonic::Status,
+        >;
+        /// Get ABI call stack of all asynchronous executions and all operations for a given slot
+        async fn get_slot_abi_call_stacks(
+            &self,
+            request: tonic::Request<super::GetSlotAbiCallStacksRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetSlotAbiCallStacksResponse>,
+            tonic::Status,
+        >;
         /// Server streaming response type for the NewBlocks method.
         type NewBlocksStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::NewBlocksResponse, tonic::Status>,
@@ -4527,6 +4808,23 @@ pub mod public_service_server {
             >,
         ) -> std::result::Result<
             tonic::Response<Self::NewSlotExecutionOutputsStream>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the NewSlotABICallStacks method.
+        type NewSlotABICallStacksStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<
+                    super::NewSlotAbiCallStacksResponse,
+                    tonic::Status,
+                >,
+            >
+            + Send
+            + 'static;
+        /// Call stack for each slot executed
+        async fn new_slot_abi_call_stacks(
+            &self,
+            request: tonic::Request<tonic::Streaming<super::NewSlotAbiCallStacksRequest>>,
+        ) -> std::result::Result<
+            tonic::Response<Self::NewSlotABICallStacksStream>,
             tonic::Status,
         >;
         /// Server streaming response type for the SendBlocks method.
@@ -5387,6 +5685,109 @@ pub mod public_service_server {
                     };
                     Box::pin(fut)
                 }
+                "/massa.api.v1.PublicService/GetOperationABICallStacks" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetOperationABICallStacksSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::UnaryService<
+                        super::GetOperationAbiCallStacksRequest,
+                    > for GetOperationABICallStacksSvc<T> {
+                        type Response = super::GetOperationAbiCallStacksResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::GetOperationAbiCallStacksRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PublicService>::get_operation_abi_call_stacks(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetOperationABICallStacksSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/GetSlotABICallStacks" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetSlotABICallStacksSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::UnaryService<super::GetSlotAbiCallStacksRequest>
+                    for GetSlotABICallStacksSvc<T> {
+                        type Response = super::GetSlotAbiCallStacksResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetSlotAbiCallStacksRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PublicService>::get_slot_abi_call_stacks(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetSlotABICallStacksSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
                 "/massa.api.v1.PublicService/NewBlocks" => {
                     #[allow(non_camel_case_types)]
                     struct NewBlocksSvc<T: PublicService>(pub Arc<T>);
@@ -5624,6 +6025,59 @@ pub mod public_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = NewSlotExecutionOutputsSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/NewSlotABICallStacks" => {
+                    #[allow(non_camel_case_types)]
+                    struct NewSlotABICallStacksSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::StreamingService<super::NewSlotAbiCallStacksRequest>
+                    for NewSlotABICallStacksSvc<T> {
+                        type Response = super::NewSlotAbiCallStacksResponse;
+                        type ResponseStream = T::NewSlotABICallStacksStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                tonic::Streaming<super::NewSlotAbiCallStacksRequest>,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PublicService>::new_slot_abi_call_stacks(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = NewSlotABICallStacksSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
