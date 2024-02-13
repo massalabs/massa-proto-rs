@@ -3639,16 +3639,24 @@ pub struct OperationAbiCallStack {
     #[prost(message, repeated, tag = "2")]
     pub call_stack: ::prost::alloc::vec::Vec<AbiCallStackElementParent>,
 }
-/// GetSlotABICallStacks response
+/// Call stack for a slot
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct GetSlotAbiCallStacksResponse {
+pub struct SlotAbiCallStacks {
     /// Call stacks for asynchronous execution
     #[prost(message, repeated, tag = "1")]
     pub asc_call_stacks: ::prost::alloc::vec::Vec<AscabiCallStack>,
     /// Call stack for operations
     #[prost(message, repeated, tag = "2")]
     pub operation_call_stacks: ::prost::alloc::vec::Vec<OperationAbiCallStack>,
+}
+/// GetSlotABICallStacks response
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetSlotAbiCallStacksResponse {
+    /// Call stacks for the slots
+    #[prost(message, repeated, tag = "1")]
+    pub slot_call_stacks: ::prost::alloc::vec::Vec<SlotAbiCallStacks>,
 }
 /// Execution status of an operation or denunciation
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
