@@ -3301,6 +3301,25 @@ pub struct NewSlotAbiCallStacksResponse {
     #[prost(message, repeated, tag = "3")]
     pub operation_call_stacks: ::prost::alloc::vec::Vec<OperationAbiCallStack>,
 }
+/// NewSlotTransfers request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewSlotTransfersRequest {
+    /// Finality level to receive informations from
+    #[prost(enumeration = "FinalityLevel", tag = "1")]
+    pub finality_level: i32,
+}
+/// NewSlotTransfers response
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewSlotTransfersResponse {
+    /// Finality level to receive informations from
+    #[prost(message, optional, tag = "1")]
+    pub slot: ::core::option::Option<super::super::model::v1::Slot>,
+    /// Transfers
+    #[prost(message, repeated, tag = "2")]
+    pub transfers: ::prost::alloc::vec::Vec<TransferInfo>,
+}
 /// SendBlocksRequest holds parameters to SendBlocks
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3657,6 +3676,66 @@ pub struct GetSlotAbiCallStacksResponse {
     /// Call stacks for the slots
     #[prost(message, repeated, tag = "1")]
     pub slot_call_stacks: ::prost::alloc::vec::Vec<SlotAbiCallStacks>,
+}
+/// GetSlotTransfersRequest holds request for GetSlotTransfers
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetSlotTransfersRequest {
+    /// Slot to get the transfers from
+    #[prost(message, repeated, tag = "1")]
+    pub slot: ::prost::alloc::vec::Vec<super::super::model::v1::Slot>,
+}
+/// Transfer info
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TransferInfo {
+    /// Sender
+    #[prost(string, tag = "1")]
+    pub from: ::prost::alloc::string::String,
+    /// Receiver
+    #[prost(string, tag = "2")]
+    pub to: ::prost::alloc::string::String,
+    /// Amount in nMAS
+    #[prost(uint64, tag = "3")]
+    pub amount: u64,
+    /// Operation id or asc index
+    #[prost(oneof = "transfer_info::OperationIdOrAscIndex", tags = "4, 5")]
+    pub operation_id_or_asc_index: ::core::option::Option<
+        transfer_info::OperationIdOrAscIndex,
+    >,
+}
+/// Nested message and enum types in `TransferInfo`.
+pub mod transfer_info {
+    /// Operation id or asc index
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum OperationIdOrAscIndex {
+        /// Operation id
+        #[prost(string, tag = "4")]
+        OperationId(::prost::alloc::string::String),
+        /// Asynchronous execution index
+        #[prost(uint64, tag = "5")]
+        AscIndex(u64),
+    }
+}
+/// List of transfers for a slot
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TransferInfos {
+    /// Slot
+    #[prost(message, optional, tag = "1")]
+    pub slot: ::core::option::Option<super::super::model::v1::Slot>,
+    /// Transfers
+    #[prost(message, repeated, tag = "2")]
+    pub transfers: ::prost::alloc::vec::Vec<TransferInfo>,
+}
+/// GetSlotTransfersResponse holds response from GetSlotTransfers
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetSlotTransfersResponse {
+    /// Transfers for the slot
+    #[prost(message, repeated, tag = "1")]
+    pub transfer_each_slot: ::prost::alloc::vec::Vec<TransferInfos>,
 }
 /// Execution status of an operation or denunciation
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -4301,6 +4380,34 @@ pub mod public_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
+        /// Get all the transfers of MAS for a given slot
+        pub async fn get_slot_transfers(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetSlotTransfersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetSlotTransfersResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/GetSlotTransfers",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("massa.api.v1.PublicService", "GetSlotTransfers"),
+                );
+            self.inner.unary(req, path, codec).await
+        }
         /// New received and produced blocks
         pub async fn new_blocks(
             &mut self,
@@ -4479,6 +4586,36 @@ pub mod public_service_client {
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new("massa.api.v1.PublicService", "NewSlotABICallStacks"),
+                );
+            self.inner.streaming(req, path, codec).await
+        }
+        /// Transfer list for each slot executed
+        pub async fn new_slot_transfers(
+            &mut self,
+            request: impl tonic::IntoStreamingRequest<
+                Message = super::NewSlotTransfersRequest,
+            >,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::NewSlotTransfersResponse>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/NewSlotTransfers",
+            );
+            let mut req = request.into_streaming_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("massa.api.v1.PublicService", "NewSlotTransfers"),
                 );
             self.inner.streaming(req, path, codec).await
         }
@@ -4746,6 +4883,14 @@ pub mod public_service_server {
             tonic::Response<super::GetSlotAbiCallStacksResponse>,
             tonic::Status,
         >;
+        /// Get all the transfers of MAS for a given slot
+        async fn get_slot_transfers(
+            &self,
+            request: tonic::Request<super::GetSlotTransfersRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::GetSlotTransfersResponse>,
+            tonic::Status,
+        >;
         /// Server streaming response type for the NewBlocks method.
         type NewBlocksStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::NewBlocksResponse, tonic::Status>,
@@ -4833,6 +4978,23 @@ pub mod public_service_server {
             request: tonic::Request<tonic::Streaming<super::NewSlotAbiCallStacksRequest>>,
         ) -> std::result::Result<
             tonic::Response<Self::NewSlotABICallStacksStream>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the NewSlotTransfers method.
+        type NewSlotTransfersStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<
+                    super::NewSlotTransfersResponse,
+                    tonic::Status,
+                >,
+            >
+            + Send
+            + 'static;
+        /// Transfer list for each slot executed
+        async fn new_slot_transfers(
+            &self,
+            request: tonic::Request<tonic::Streaming<super::NewSlotTransfersRequest>>,
+        ) -> std::result::Result<
+            tonic::Response<Self::NewSlotTransfersStream>,
             tonic::Status,
         >;
         /// Server streaming response type for the SendBlocks method.
@@ -5796,6 +5958,53 @@ pub mod public_service_server {
                     };
                     Box::pin(fut)
                 }
+                "/massa.api.v1.PublicService/GetSlotTransfers" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetSlotTransfersSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::UnaryService<super::GetSlotTransfersRequest>
+                    for GetSlotTransfersSvc<T> {
+                        type Response = super::GetSlotTransfersResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetSlotTransfersRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PublicService>::get_slot_transfers(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetSlotTransfersSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
                 "/massa.api.v1.PublicService/NewBlocks" => {
                     #[allow(non_camel_case_types)]
                     struct NewBlocksSvc<T: PublicService>(pub Arc<T>);
@@ -6086,6 +6295,56 @@ pub mod public_service_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = NewSlotABICallStacksSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/NewSlotTransfers" => {
+                    #[allow(non_camel_case_types)]
+                    struct NewSlotTransfersSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::StreamingService<super::NewSlotTransfersRequest>
+                    for NewSlotTransfersSvc<T> {
+                        type Response = super::NewSlotTransfersResponse;
+                        type ResponseStream = T::NewSlotTransfersStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                tonic::Streaming<super::NewSlotTransfersRequest>,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PublicService>::new_slot_transfers(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = NewSlotTransfersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
