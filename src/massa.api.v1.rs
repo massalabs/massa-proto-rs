@@ -3683,7 +3683,7 @@ pub struct GetSlotAbiCallStacksResponse {
 pub struct GetSlotTransfersRequest {
     /// Slot to get the transfers from
     #[prost(message, repeated, tag = "1")]
-    pub slot: ::prost::alloc::vec::Vec<super::super::model::v1::Slot>,
+    pub slots: ::prost::alloc::vec::Vec<super::super::model::v1::Slot>,
 }
 /// Transfer info
 #[allow(clippy::derive_partial_eq_without_eq)]
