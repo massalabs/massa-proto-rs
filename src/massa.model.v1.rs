@@ -1788,6 +1788,9 @@ pub struct PublicStatus {
     /// Chain id
     #[prost(uint64, tag = "12")]
     pub chain_id: u64,
+    /// minimal fees
+    #[prost(message, optional, tag = "13")]
+    pub minimal_fees: ::core::option::Option<NativeAmount>,
 }
 /// ConnectionType enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
