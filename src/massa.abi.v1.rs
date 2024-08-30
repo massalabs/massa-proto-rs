@@ -967,6 +967,17 @@ pub struct DeferredCallQuoteRequest {
     #[prost(uint64, tag = "2")]
     pub max_gas: u64,
 }
+/// Deferred call quote result
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallQuoteResult {
+    /// / available
+    #[prost(bool, tag = "1")]
+    pub available: bool,
+    /// / cost
+    #[prost(uint64, tag = "2")]
+    pub cost: u64,
+}
 /// Send async message request filter
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
