@@ -980,6 +980,22 @@ pub struct DeferredCallQuoteResult {
     #[prost(uint64, tag = "2")]
     pub cost: u64,
 }
+/// deferred call exists request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallExistsRequest {
+    /// / call id
+    #[prost(message, optional, tag = "1")]
+    pub call_id: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// deferred call exists result
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallExistsResult {
+    /// / call exists
+    #[prost(bool, tag = "1")]
+    pub call_exists: bool,
+}
 /// Send async message request filter
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
