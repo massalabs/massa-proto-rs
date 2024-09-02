@@ -129,7 +129,7 @@ pub struct FunctionExistsResult {
 pub struct RespResult {
     #[prost(
         oneof = "resp_result::Res",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66"
     )]
     pub res: ::core::option::Option<resp_result::Res>,
 }
@@ -268,6 +268,8 @@ pub mod resp_result {
         DeferredCallQuoteResult(super::DeferredCallQuoteResult),
         #[prost(message, tag = "65")]
         DeferredCallExistsResult(super::DeferredCallExistsResult),
+        #[prost(message, tag = "66")]
+        DeferredCallRegisterResult(super::DeferredCallRegisterResult),
     }
 }
 /// Generic message that encapsulate response from ABI calls.
