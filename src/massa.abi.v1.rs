@@ -998,6 +998,37 @@ pub struct DeferredCallExistsResult {
     #[prost(bool, tag = "1")]
     pub call_exists: bool,
 }
+/// deferred call register request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallRegisterRequest {
+    /// / target address
+    #[prost(string, tag = "1")]
+    pub target_address: ::prost::alloc::string::String,
+    /// / target function
+    #[prost(string, tag = "2")]
+    pub target_function: ::prost::alloc::string::String,
+    /// / start slot
+    #[prost(message, optional, tag = "3")]
+    pub target_slot: ::core::option::Option<super::super::model::v1::Slot>,
+    /// / gas
+    #[prost(uint64, tag = "4")]
+    pub max_gas: u64,
+    /// / params
+    #[prost(bytes = "vec", tag = "5")]
+    pub params: ::prost::alloc::vec::Vec<u8>,
+    /// / coins
+    #[prost(uint64, tag = "6")]
+    pub coins: u64,
+}
+/// / deferred call register result
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallRegisterResult {
+    /// / call id
+    #[prost(message, optional, tag = "1")]
+    pub call_id: ::core::option::Option<::prost::alloc::string::String>,
+}
 /// Send async message request filter
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
