@@ -975,11 +975,7 @@ pub struct DeferredCallCancelRequest {
 /// / Deferred call cancel result
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DeferredCallCancelResult {
-    /// / call canceled
-    #[prost(bool, tag = "1")]
-    pub canceled: bool,
-}
+pub struct DeferredCallCancelResult {}
 /// Deferred call quote
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
