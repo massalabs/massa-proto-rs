@@ -307,7 +307,7 @@ pub mod operation_type {
         RollSell(super::RollSell),
         /// Execute a smart contract
         #[prost(message, tag = "4")]
-        ExecutSc(super::ExecuteSc),
+        ExecuteSc(super::ExecuteSc),
         /// Calls an exported function from a stored smart contract
         #[prost(message, tag = "5")]
         CallSc(super::CallSc),
