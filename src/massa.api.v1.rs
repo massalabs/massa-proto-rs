@@ -2452,7 +2452,8 @@ pub struct GetStakersResponse {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTransactionsThroughputRequest {}
-/// GetTransactionsThroughputResponse holds response from GetTransactionsThroughput
+/// GetTransactionsThroughputResponse holds response from
+/// GetTransactionsThroughput
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetTransactionsThroughputResponse {
@@ -2474,7 +2475,7 @@ pub struct QueryStateRequest {
 pub struct ExecutionQueryRequestItem {
     #[prost(
         oneof = "execution_query_request_item::RequestItem",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21"
     )]
     pub request_item: ::core::option::Option<execution_query_request_item::RequestItem>,
 }
@@ -2545,6 +2546,9 @@ pub mod execution_query_request_item {
         /// Gets filtered events
         #[prost(message, tag = "20")]
         Events(super::Events),
+        /// Deferred call quote
+        #[prost(message, tag = "21")]
+        DeferredCallQuote(super::DeferredCallQuote),
     }
 }
 /// Request to check if address exists (candidate)
@@ -2714,7 +2718,8 @@ pub struct CycleInfos {
     /// Cycle to query
     #[prost(uint64, tag = "1")]
     pub cycle: u64,
-    /// Addresses to restrict the query (if None, info for all addresses will be returned)
+    /// Addresses to restrict the query (if None, info for all addresses will be
+    /// returned)
     #[prost(string, repeated, tag = "2")]
     pub restrict_to_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
@@ -2725,6 +2730,32 @@ pub struct Events {
     /// Returns all the events that verify all the filters
     #[prost(message, repeated, tag = "1")]
     pub filters: ::prost::alloc::vec::Vec<ScExecutionEventsFilter>,
+}
+/// Deferred call quote
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallQuote {
+    #[prost(message, optional, tag = "1")]
+    pub target_slot: ::core::option::Option<super::super::model::v1::Slot>,
+    #[prost(uint64, tag = "2")]
+    pub max_gas_request: u64,
+}
+/// deferred call quote response
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallQuoteResponse {
+    /// the slot requested
+    #[prost(message, optional, tag = "1")]
+    pub target_slot: ::core::option::Option<super::super::model::v1::Slot>,
+    /// The gas requested
+    #[prost(uint64, tag = "2")]
+    pub max_gas_request: u64,
+    /// if the quote is available
+    #[prost(bool, tag = "3")]
+    pub available: bool,
+    /// The amount
+    #[prost(message, optional, tag = "4")]
+    pub price: ::core::option::Option<super::super::model::v1::NativeAmount>,
 }
 /// Response to atomically execute a batch of execution state queries
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -2771,7 +2802,7 @@ pub mod execution_query_response {
 pub struct ExecutionQueryResponseItem {
     #[prost(
         oneof = "execution_query_response_item::ResponseItem",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10"
     )]
     pub response_item: ::core::option::Option<
         execution_query_response_item::ResponseItem,
@@ -2809,6 +2840,9 @@ pub mod execution_query_response_item {
         /// Events
         #[prost(message, tag = "9")]
         Events(super::ScOutputEventsWrapper),
+        /// Deferred call quote
+        #[prost(message, tag = "10")]
+        DeferredCallQuote(super::DeferredCallQuoteResponse),
     }
 }
 /// Deferred credits entry wrapper
@@ -3149,8 +3183,10 @@ pub mod async_pool_changes_filter {
         /// The address that sent the message
         #[prost(string, tag = "5")]
         EmitterAddress(::prost::alloc::string::String),
-        /// Boolean that determine if the message can be executed. For messages without filter this boolean is always true.
-        /// For messages with filter, this boolean is true if the filter has been matched between `validity_start` and current slot.
+        /// Boolean that determine if the message can be executed. For messages
+        /// without filter this boolean is always true. For messages with filter,
+        /// this boolean is true if the filter has been matched between
+        /// `validity_start` and current slot.
         #[prost(bool, tag = "6")]
         CanBeExecuted(bool),
     }
@@ -3747,7 +3783,7 @@ pub enum ExecutionQueryExecutionStatus {
     AlreadyExecutedWithSuccess = 1,
     /// The operation or denunciation was executed recently with failure
     AlreadyExecutedWithFailure = 2,
-    /// The operation or denunciation was not executed recently but can still be executed unless expired
+    /// The operation or denunciation was not executed recently but can
     ExecutableOrExpired = 3,
 }
 impl ExecutionQueryExecutionStatus {
@@ -4352,7 +4388,8 @@ pub mod public_service_client {
                 );
             self.inner.unary(req, path, codec).await
         }
-        /// Get ABI call stack of all asynchronous executions and all operations for a given slot
+        /// Get ABI call stack of all asynchronous executions and all operations for a
+        /// given slot
         pub async fn get_slot_abi_call_stacks(
             &mut self,
             request: impl tonic::IntoRequest<super::GetSlotAbiCallStacksRequest>,
@@ -4875,7 +4912,8 @@ pub mod public_service_server {
             tonic::Response<super::GetOperationAbiCallStacksResponse>,
             tonic::Status,
         >;
-        /// Get ABI call stack of all asynchronous executions and all operations for a given slot
+        /// Get ABI call stack of all asynchronous executions and all operations for a
+        /// given slot
         async fn get_slot_abi_call_stacks(
             &self,
             request: tonic::Request<super::GetSlotAbiCallStacksRequest>,
