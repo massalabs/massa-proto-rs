@@ -2475,7 +2475,7 @@ pub struct QueryStateRequest {
 pub struct ExecutionQueryRequestItem {
     #[prost(
         oneof = "execution_query_request_item::RequestItem",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22"
     )]
     pub request_item: ::core::option::Option<execution_query_request_item::RequestItem>,
 }
@@ -2549,6 +2549,9 @@ pub mod execution_query_request_item {
         /// Deferred call quote
         #[prost(message, tag = "21")]
         DeferredCallQuote(super::DeferredCallQuote),
+        /// Deferred calls info
+        #[prost(message, tag = "22")]
+        DeferredCallInfo(super::DeferredCallInfo),
     }
 }
 /// Request to check if address exists (candidate)
@@ -2740,6 +2743,42 @@ pub struct DeferredCallQuote {
     #[prost(uint64, tag = "2")]
     pub max_gas_request: u64,
 }
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallInfo {
+    #[prost(string, repeated, tag = "1")]
+    pub call_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallInfoResponse {
+    #[prost(string, tag = "1")]
+    pub call_id: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "2")]
+    pub call: ::core::option::Option<DeferredCallInfoEntry>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallInfoEntry {
+    #[prost(string, tag = "1")]
+    pub sender_address: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "2")]
+    pub target_slot: ::core::option::Option<super::super::model::v1::Slot>,
+    #[prost(string, tag = "3")]
+    pub target_address: ::prost::alloc::string::String,
+    #[prost(string, tag = "4")]
+    pub target_function: ::prost::alloc::string::String,
+    #[prost(bytes = "vec", tag = "5")]
+    pub parameters: ::prost::alloc::vec::Vec<u8>,
+    #[prost(message, optional, tag = "6")]
+    pub coins: ::core::option::Option<super::super::model::v1::NativeAmount>,
+    #[prost(uint64, tag = "7")]
+    pub max_gas: u64,
+    #[prost(message, optional, tag = "8")]
+    pub fee: ::core::option::Option<super::super::model::v1::NativeAmount>,
+    #[prost(bool, tag = "9")]
+    pub cancelled: bool,
+}
 /// deferred call quote response
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2802,7 +2841,7 @@ pub mod execution_query_response {
 pub struct ExecutionQueryResponseItem {
     #[prost(
         oneof = "execution_query_response_item::ResponseItem",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11"
     )]
     pub response_item: ::core::option::Option<
         execution_query_response_item::ResponseItem,
@@ -2843,6 +2882,9 @@ pub mod execution_query_response_item {
         /// Deferred call quote
         #[prost(message, tag = "10")]
         DeferredCallQuote(super::DeferredCallQuoteResponse),
+        /// Deferred call info
+        #[prost(message, tag = "11")]
+        DeferredCallInfo(super::DeferredCallInfoResponse),
     }
 }
 /// Deferred credits entry wrapper
