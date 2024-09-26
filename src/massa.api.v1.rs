@@ -2475,7 +2475,7 @@ pub struct QueryStateRequest {
 pub struct ExecutionQueryRequestItem {
     #[prost(
         oneof = "execution_query_request_item::RequestItem",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23"
     )]
     pub request_item: ::core::option::Option<execution_query_request_item::RequestItem>,
 }
@@ -2552,6 +2552,9 @@ pub mod execution_query_request_item {
         /// Deferred calls info
         #[prost(message, tag = "22")]
         DeferredCallInfo(super::DeferredCallInfo),
+        /// Deferred calls by slot
+        #[prost(message, tag = "23")]
+        DeferredCallsBySlot(super::DeferredCallsBySlot),
     }
 }
 /// Request to check if address exists (candidate)
@@ -2759,6 +2762,20 @@ pub struct DeferredCallInfoResponse {
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallsBySlot {
+    #[prost(message, optional, tag = "1")]
+    pub slot: ::core::option::Option<super::super::model::v1::Slot>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallsBySlotResponse {
+    #[prost(message, optional, tag = "1")]
+    pub slot: ::core::option::Option<super::super::model::v1::Slot>,
+    #[prost(message, repeated, tag = "2")]
+    pub calls: ::prost::alloc::vec::Vec<DeferredCallInfoEntry>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeferredCallInfoEntry {
     #[prost(string, tag = "1")]
     pub sender_address: ::prost::alloc::string::String,
@@ -2841,7 +2858,7 @@ pub mod execution_query_response {
 pub struct ExecutionQueryResponseItem {
     #[prost(
         oneof = "execution_query_response_item::ResponseItem",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12"
     )]
     pub response_item: ::core::option::Option<
         execution_query_response_item::ResponseItem,
@@ -2885,6 +2902,9 @@ pub mod execution_query_response_item {
         /// Deferred call info
         #[prost(message, tag = "11")]
         DeferredCallInfo(super::DeferredCallInfoResponse),
+        /// Deferred calls by slot
+        #[prost(message, tag = "12")]
+        DeferredCallsBySlot(super::DeferredCallsBySlotResponse),
     }
 }
 /// Deferred credits entry wrapper
