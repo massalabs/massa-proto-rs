@@ -2772,7 +2772,7 @@ pub struct DeferredCallsBySlotResponse {
     #[prost(message, optional, tag = "1")]
     pub slot: ::core::option::Option<super::super::model::v1::Slot>,
     #[prost(message, repeated, tag = "2")]
-    pub calls: ::prost::alloc::vec::Vec<DeferredCallInfoEntry>,
+    pub calls: ::prost::alloc::vec::Vec<DeferredCallInfoResponse>,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
