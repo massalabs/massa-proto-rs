@@ -1090,7 +1090,7 @@ pub mod private_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for PrivateServiceServer<T>
+    impl<T, B> tonic::codegen::Service<hyper::Request<B>> for PrivateServiceServer<T>
     where
         T: PrivateService,
         B: hyper::body::Body + std::marker::Send + 'static,
@@ -4885,7 +4885,7 @@ pub mod public_service_server {
             self
         }
     }
-    impl<T, B> tonic::codegen::Service<http::Request<B>> for PublicServiceServer<T>
+    impl<T, B> tonic::codegen::Service<hyper::Request<B>> for PublicServiceServer<T>
     where
         T: PublicService,
         B: hyper::body::Body + std::marker::Send + 'static,
