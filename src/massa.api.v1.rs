@@ -2741,10 +2741,15 @@ pub struct Events {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeferredCallQuote {
+    /// / target slot
     #[prost(message, optional, tag = "1")]
     pub target_slot: ::core::option::Option<super::super::model::v1::Slot>,
+    /// / max gas requested
     #[prost(uint64, tag = "2")]
-    pub max_gas_request: u64,
+    pub max_gas: u64,
+    /// / params size in bytes
+    #[prost(uint64, tag = "3")]
+    pub params_size: u64,
 }
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]

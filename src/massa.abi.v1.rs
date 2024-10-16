@@ -986,6 +986,9 @@ pub struct DeferredCallQuoteRequest {
     /// / max gas requested
     #[prost(uint64, tag = "2")]
     pub max_gas: u64,
+    /// / params size in bytes
+    #[prost(uint64, tag = "3")]
+    pub params_size: u64,
 }
 /// Deferred call quote result
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1002,7 +1005,7 @@ pub struct DeferredCallQuoteResult {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeferredCallExistsRequest {
-    /// / call id
+    /// / deferred call id
     #[prost(message, optional, tag = "1")]
     pub call_id: ::core::option::Option<::prost::alloc::string::String>,
 }
@@ -1027,10 +1030,10 @@ pub struct DeferredCallRegisterRequest {
     /// / start slot
     #[prost(message, optional, tag = "3")]
     pub target_slot: ::core::option::Option<super::super::model::v1::Slot>,
-    /// / gas
+    /// / gas requested
     #[prost(uint64, tag = "4")]
     pub max_gas: u64,
-    /// / params
+    /// / params of the call
     #[prost(bytes = "vec", tag = "5")]
     pub params: ::prost::alloc::vec::Vec<u8>,
     /// / coins
@@ -1041,7 +1044,7 @@ pub struct DeferredCallRegisterRequest {
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeferredCallRegisterResult {
-    /// / call id
+    /// / deferred call id
     #[prost(message, optional, tag = "1")]
     pub call_id: ::core::option::Option<::prost::alloc::string::String>,
 }
