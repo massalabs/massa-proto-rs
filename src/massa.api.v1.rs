@@ -1,5 +1,4 @@
 /// AddToBootstrapBlacklistRequest holds the request for AddToBootstrapBlacklist
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddToBootstrapBlacklistRequest {
     /// IP addresses to add to bootstrap blacklist
@@ -7,11 +6,9 @@ pub struct AddToBootstrapBlacklistRequest {
     pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// AddToBootstrapBlacklistResponse holds the response from AddToBootstrapBlacklist
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AddToBootstrapBlacklistResponse {}
 /// AddToBootstrapWhitelistRequest holds the request for AddToBootstrapWhitelist
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddToBootstrapWhitelistRequest {
     /// IP addresses to add to bootstrap whitelist
@@ -19,11 +16,9 @@ pub struct AddToBootstrapWhitelistRequest {
     pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// AddToBootstrapWhitelistResponse holds the response from AddToBootstrapWhitelist
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AddToBootstrapWhitelistResponse {}
 /// AddToPeersWhitelistRequest holds the request for AddToPeersWhitelist
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddToPeersWhitelistRequest {
     /// IP addresses to add to peers whitelist
@@ -31,11 +26,9 @@ pub struct AddToPeersWhitelistRequest {
     pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// AddToPeersWhitelistResponse holds the response from AddToPeersWhitelist
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AddToPeersWhitelistResponse {}
 /// AddStakingSecretKeysRequest holds the request for AddStakingSecretKeys
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddStakingSecretKeysRequest {
     /// Secret keys to add to wallet
@@ -43,23 +36,18 @@ pub struct AddStakingSecretKeysRequest {
     pub secret_keys: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// AddStakingSecretKeysResponse holds the response from AddStakingSecretKeys
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AddStakingSecretKeysResponse {}
 /// AllowEveryoneToBootstrapRequest holds the request for AllowEveryoneToBootstrap
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AllowEveryoneToBootstrapRequest {}
 /// AllowEveryoneToBootstrapResponse holds the response from AllowEveryoneToBootstrap
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct AllowEveryoneToBootstrapResponse {}
 /// GetBootstrapBlacklistRequest holds the request for GetBootstrapBlacklist
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GetBootstrapBlacklistRequest {}
 /// GetBootstrapBlacklistResponse holds the response from GetBootstrapBlacklist
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBootstrapBlacklistResponse {
     /// Bootstrap blacklisted IP addresses
@@ -67,11 +55,9 @@ pub struct GetBootstrapBlacklistResponse {
     pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// GetBootstrapWhitelistRequest holds the request for GetBootstrapWhitelist
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GetBootstrapWhitelistRequest {}
 /// GetBootstrapWhitelistResponse holds the response from GetBootstrapWhitelist
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBootstrapWhitelistResponse {
     /// Bootstrap whitelisted IP addresses
@@ -79,11 +65,9 @@ pub struct GetBootstrapWhitelistResponse {
     pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// GetMipStatusRequest holds request for GetMipStatus
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GetMipStatusRequest {}
 /// GetMipStatusResponse holds response from GetMipStatus
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetMipStatusResponse {
     /// (MipInfo - status id) entries
@@ -93,11 +77,9 @@ pub struct GetMipStatusResponse {
     >,
 }
 /// GetNodeStatusRequest holds the request for GetNodeStatus
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GetNodeStatusRequest {}
 /// GetNodeStatusResponse holds the response from GetNodeStatus
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetNodeStatusResponse {
     /// Node status
@@ -105,11 +87,9 @@ pub struct GetNodeStatusResponse {
     pub status: ::core::option::Option<super::super::model::v1::NodeStatus>,
 }
 /// GetPeersWhitelistRequest holds the request for GetPeersWhitelist
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GetPeersWhitelistRequest {}
 /// GetPeersWhitelistResponse holds the response from GetPeersWhitelist
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetPeersWhitelistResponse {
     /// Whitelisted IP addresses
@@ -117,7 +97,6 @@ pub struct GetPeersWhitelistResponse {
     pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// BanNodesByIdsRequest holds the request for BanNodesByIds
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BanNodesByIdsRequest {
     /// Node ids to ban
@@ -125,11 +104,9 @@ pub struct BanNodesByIdsRequest {
     pub node_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// BanNodesByIdsResponse holds the response from BanNodesByIds
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BanNodesByIdsResponse {}
 /// BanNodesByIpsRequest holds the request for BanNodesByIps
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BanNodesByIpsRequest {
     /// Node IP addresses to ban
@@ -137,11 +114,9 @@ pub struct BanNodesByIpsRequest {
     pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// BanNodesByIpsResponse holds the response from BanNodesByIps
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct BanNodesByIpsResponse {}
 /// RemoveFromBootstrapBlacklistRequest holds the request for RemoveFromBootstrapBlacklist
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RemoveFromBootstrapBlacklistRequest {
     /// IP addresses to remove from bootstrap blacklist
@@ -149,11 +124,9 @@ pub struct RemoveFromBootstrapBlacklistRequest {
     pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// RemoveFromBootstrapBlacklistResponse holds the response from RemoveFromBootstrapBlacklist
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RemoveFromBootstrapBlacklistResponse {}
 /// RemoveFromBootstrapWhitelistRequest holds the request for RemoveFromBootstrapWhitelist
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RemoveFromBootstrapWhitelistRequest {
     /// IP addresses to remove from bootstrap whitelist
@@ -161,11 +134,9 @@ pub struct RemoveFromBootstrapWhitelistRequest {
     pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// RemoveFromBootstrapWhitelistResponse holds the response from RemoveFromBootstrapWhitelist
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RemoveFromBootstrapWhitelistResponse {}
 /// RemoveFromPeersWhitelistRequest holds the request for RemoveFromPeersWhitelist
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RemoveFromPeersWhitelistRequest {
     /// IP addresses to remove from peers whitelist
@@ -173,11 +144,9 @@ pub struct RemoveFromPeersWhitelistRequest {
     pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// RemoveFromPeersWhitelistResponse holds the response from RemoveFromPeersWhitelist
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RemoveFromPeersWhitelistResponse {}
 /// RemoveStakingAddressesRequest holds the request for RemoveStakingAddresses
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct RemoveStakingAddressesRequest {
     /// Addresses to remove from staking
@@ -185,11 +154,9 @@ pub struct RemoveStakingAddressesRequest {
     pub addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// RemoveStakingAddressesResponse holds the response from RemoveStakingAddresses
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RemoveStakingAddressesResponse {}
 /// SignMessagesRequest holds the request for SignMessages
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SignMessagesRequest {
     /// Messages to sign in bytes
@@ -197,7 +164,6 @@ pub struct SignMessagesRequest {
     pub messages: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
 /// SignMessagesResponse holds the response from SignMessages
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SignMessagesResponse {
     /// Public key that signed the message
@@ -208,15 +174,12 @@ pub struct SignMessagesResponse {
     pub signatures: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// ShutdownGracefullyRequest holds the request for ShutdownGracefully
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ShutdownGracefullyRequest {}
 /// ShutdownGracefullyResponse holds the response from ShutdownGracefully
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ShutdownGracefullyResponse {}
 /// UnbanNodesByIdsRequest holds the request for UnbanNodesByIds
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UnbanNodesByIdsRequest {
     /// Node ids to unban
@@ -224,11 +187,9 @@ pub struct UnbanNodesByIdsRequest {
     pub node_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// UnbanNodesByIdsResponse holds the response from UnbanNodesByIds
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct UnbanNodesByIdsResponse {}
 /// UnbanNodesByIpsRequest holds the request for UnbanNodesByIps
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct UnbanNodesByIpsRequest {
     /// Nodes IP addresses to unban
@@ -236,12 +197,17 @@ pub struct UnbanNodesByIpsRequest {
     pub ips: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// UnbanNodesByIpsResponse holds the response from UnbanNodesByIps
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct UnbanNodesByIpsResponse {}
 /// Generated client implementations.
 pub mod private_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Massa private gRPC service
@@ -264,8 +230,8 @@ pub mod private_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -290,7 +256,7 @@ pub mod private_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             PrivateServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -337,8 +303,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -368,8 +333,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -400,8 +364,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -428,8 +391,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -459,8 +421,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -490,8 +451,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -521,8 +481,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -552,8 +511,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -578,8 +536,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -604,8 +561,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -632,8 +588,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -658,8 +613,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -684,8 +638,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -715,8 +668,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -746,8 +698,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -777,8 +728,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -808,8 +758,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -834,8 +783,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -862,8 +810,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -890,8 +837,7 @@ pub mod private_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -910,11 +856,17 @@ pub mod private_service_client {
 }
 /// Generated server implementations.
 pub mod private_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with PrivateServiceServer.
     #[async_trait]
-    pub trait PrivateService: Send + Sync + 'static {
+    pub trait PrivateService: std::marker::Send + std::marker::Sync + 'static {
         /// Add IP addresses to node bootstrap blacklist
         async fn add_to_bootstrap_blacklist(
             &self,
@@ -1079,20 +1031,18 @@ pub mod private_service_server {
     }
     /// Massa private gRPC service
     #[derive(Debug)]
-    pub struct PrivateServiceServer<T: PrivateService> {
-        inner: _Inner<T>,
+    pub struct PrivateServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: PrivateService> PrivateServiceServer<T> {
+    impl<T> PrivateServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -1142,8 +1092,8 @@ pub mod private_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for PrivateServiceServer<T>
     where
         T: PrivateService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -1155,7 +1105,6 @@ pub mod private_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/massa.api.v1.PrivateService/AddToBootstrapBlacklist" => {
                     #[allow(non_camel_case_types)]
@@ -1192,7 +1141,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = AddToBootstrapBlacklistSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1244,7 +1192,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = AddToBootstrapWhitelistSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1294,7 +1241,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = AddToPeersWhitelistSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1344,7 +1290,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = AddStakingSecretKeysSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1396,7 +1341,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = AllowEveryoneToBootstrapSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1446,7 +1390,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetBootstrapBlacklistSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1496,7 +1439,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetBootstrapWhitelistSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1542,7 +1484,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetMipStatusSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1589,7 +1530,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetNodeStatusSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1636,7 +1576,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetPeersWhitelistSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1683,7 +1622,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = BanNodesByIdsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1730,7 +1668,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = BanNodesByIpsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1785,7 +1722,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = RemoveFromBootstrapBlacklistSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1840,7 +1776,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = RemoveFromBootstrapWhitelistSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1892,7 +1827,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = RemoveFromPeersWhitelistSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1942,7 +1876,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = RemoveStakingAddressesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -1988,7 +1921,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SignMessagesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2035,7 +1967,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ShutdownGracefullySvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2082,7 +2013,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UnbanNodesByIdsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2129,7 +2059,6 @@ pub mod private_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = UnbanNodesByIpsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -2148,20 +2077,25 @@ pub mod private_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: PrivateService> Clone for PrivateServiceServer<T> {
+    impl<T> Clone for PrivateServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -2173,22 +2107,13 @@ pub mod private_service_server {
             }
         }
     }
-    impl<T: PrivateService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: PrivateService> tonic::server::NamedService for PrivateServiceServer<T> {
-        const NAME: &'static str = "massa.api.v1.PrivateService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "massa.api.v1.PrivateService";
+    impl<T> tonic::server::NamedService for PrivateServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }
 /// ExecuteReadOnlyCallRequest holds request for ExecuteReadOnlyCall
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecuteReadOnlyCallRequest {
     /// Execution call
@@ -2196,7 +2121,6 @@ pub struct ExecuteReadOnlyCallRequest {
     pub call: ::core::option::Option<super::super::model::v1::ReadOnlyExecutionCall>,
 }
 /// ExecuteReadOnlyCallResponse holds response from ExecuteReadOnlyCall
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecuteReadOnlyCallResponse {
     /// Execution output
@@ -2204,7 +2128,6 @@ pub struct ExecuteReadOnlyCallResponse {
     pub output: ::core::option::Option<super::super::model::v1::ReadOnlyExecutionOutput>,
 }
 /// GetBlocksRequest holds request for GetBlocks
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBlocksRequest {
     /// Block ids
@@ -2212,7 +2135,6 @@ pub struct GetBlocksRequest {
     pub block_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// GetBlocksResponse holds response from GetBlocks
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetBlocksResponse {
     /// Wrapped blocks
@@ -2220,7 +2142,6 @@ pub struct GetBlocksResponse {
     pub wrapped_blocks: ::prost::alloc::vec::Vec<super::super::model::v1::BlockWrapper>,
 }
 /// GetDatastoreEntriesRequest holds request from GetDatastoreEntries
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDatastoreEntriesRequest {
     /// Returns all the datastore entries that verify all the filters
@@ -2228,7 +2149,6 @@ pub struct GetDatastoreEntriesRequest {
     pub filters: ::prost::alloc::vec::Vec<GetDatastoreEntryFilter>,
 }
 /// DatastoreEntryFilter
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDatastoreEntryFilter {
     /// Filter
@@ -2238,7 +2158,6 @@ pub struct GetDatastoreEntryFilter {
 /// Nested message and enum types in `GetDatastoreEntryFilter`.
 pub mod get_datastore_entry_filter {
     /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// One of these (address-key) pairs
@@ -2247,7 +2166,6 @@ pub mod get_datastore_entry_filter {
     }
 }
 /// GetDatastoreEntriesResponse holds response from GetDatastoreEntries
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetDatastoreEntriesResponse {
     /// Datastore entries
@@ -2257,7 +2175,6 @@ pub struct GetDatastoreEntriesResponse {
     >,
 }
 /// GetEndorsementsRequest holds request for GetEndorsements
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEndorsementsRequest {
     /// Endorsement ids
@@ -2265,7 +2182,6 @@ pub struct GetEndorsementsRequest {
     pub endorsement_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// GetEndorsementsResponse holds response from GetEndorsements
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetEndorsementsResponse {
     /// Wrapped operations
@@ -2275,11 +2191,9 @@ pub struct GetEndorsementsResponse {
     >,
 }
 /// GetNextBlockBestParentsRequest holds request for GetNextBlockBestParents
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GetNextBlockBestParentsRequest {}
 /// GetNextBlockBestParentsResponse holds response from GetNextBlockBestParents
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetNextBlockBestParentsResponse {
     /// Next block best parents
@@ -2287,7 +2201,6 @@ pub struct GetNextBlockBestParentsResponse {
     pub block_parents: ::prost::alloc::vec::Vec<super::super::model::v1::BlockParent>,
 }
 /// GetOperationsRequest holds request for GetOperations
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOperationsRequest {
     /// Operation ids
@@ -2295,7 +2208,6 @@ pub struct GetOperationsRequest {
     pub operation_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// GetOperationsResponse holds response from GetOperations
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOperationsResponse {
     /// Wrapped operations
@@ -2305,7 +2217,6 @@ pub struct GetOperationsResponse {
     >,
 }
 /// GetScExecutionEventsRequest holds request for GetScExecutionEvents
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetScExecutionEventsRequest {
     /// Returns all the sc execution events that verify all the filters
@@ -2313,7 +2224,6 @@ pub struct GetScExecutionEventsRequest {
     pub filters: ::prost::alloc::vec::Vec<ScExecutionEventsFilter>,
 }
 /// ScExecutionEvents Filter
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScExecutionEventsFilter {
     /// Filter
@@ -2323,7 +2233,6 @@ pub struct ScExecutionEventsFilter {
 /// Nested message and enum types in `ScExecutionEventsFilter`.
 pub mod sc_execution_events_filter {
     /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// Slot range
@@ -2350,7 +2259,6 @@ pub mod sc_execution_events_filter {
     }
 }
 /// GetScExecutionEventsResponse holds response from GetScExecutionEvents
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetScExecutionEventsResponse {
     /// ScExecutionEvents
@@ -2358,11 +2266,9 @@ pub struct GetScExecutionEventsResponse {
     pub events: ::prost::alloc::vec::Vec<super::super::model::v1::ScExecutionEvent>,
 }
 /// GetStatusRequest holds request from GetStatus
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GetStatusRequest {}
 /// GetStatusResponse holds request from GetStatus
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetStatusResponse {
     /// Status
@@ -2370,7 +2276,6 @@ pub struct GetStatusResponse {
     pub status: ::core::option::Option<super::super::model::v1::PublicStatus>,
 }
 /// GetSelectorDrawsRequest holds request from GetSelectorDraws
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSelectorDrawsRequest {
     /// Returns all the selector draws that verify all the filters
@@ -2378,7 +2283,6 @@ pub struct GetSelectorDrawsRequest {
     pub filters: ::prost::alloc::vec::Vec<SelectorDrawsFilter>,
 }
 /// SelectorDraws Filter
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SelectorDrawsFilter {
     /// Returns all the selector draws that verify all the filters
@@ -2388,7 +2292,6 @@ pub struct SelectorDrawsFilter {
 /// Nested message and enum types in `SelectorDrawsFilter`.
 pub mod selector_draws_filter {
     /// Returns all the selector draws that verify all the filters
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// One of the Addresses
@@ -2400,7 +2303,6 @@ pub mod selector_draws_filter {
     }
 }
 /// GetSelectorDrawsResponse holds response from GetSelectorDraws
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSelectorDrawsResponse {
     /// Selector draws
@@ -2408,7 +2310,6 @@ pub struct GetSelectorDrawsResponse {
     pub draws: ::prost::alloc::vec::Vec<super::super::model::v1::SlotDraw>,
 }
 /// GetStakersRequest holds request from GetStakers
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetStakersRequest {
     /// Returns all the stakers that verify all the filters
@@ -2416,8 +2317,7 @@ pub struct GetStakersRequest {
     pub filters: ::prost::alloc::vec::Vec<StakersFilter>,
 }
 /// Stakers Filter
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct StakersFilter {
     /// Returns all the stakers that verify all the filters
     #[prost(oneof = "stakers_filter::Filter", tags = "1, 2, 3")]
@@ -2426,8 +2326,7 @@ pub struct StakersFilter {
 /// Nested message and enum types in `StakersFilter`.
 pub mod stakers_filter {
     /// Returns all the stakers that verify all the filters
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// Minimum rolls
         #[prost(uint64, tag = "1")]
@@ -2441,7 +2340,6 @@ pub mod stakers_filter {
     }
 }
 /// GetStakersResponse holds response from GetStakers
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetStakersResponse {
     /// Stakers
@@ -2449,20 +2347,16 @@ pub struct GetStakersResponse {
     pub stakers: ::prost::alloc::vec::Vec<super::super::model::v1::StakerEntry>,
 }
 /// GetTransactionsThroughputRequest holds request for GetTransactionsThroughput
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GetTransactionsThroughputRequest {}
-/// GetTransactionsThroughputResponse holds response from
-/// GetTransactionsThroughput
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+/// GetTransactionsThroughputResponse holds response from GetTransactionsThroughput
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GetTransactionsThroughputResponse {
     /// Transactions throughput
     #[prost(uint32, tag = "1")]
     pub throughput: u32,
 }
 /// Request to atomically execute a batch of execution state queries
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryStateRequest {
     /// Execution queries
@@ -2470,7 +2364,6 @@ pub struct QueryStateRequest {
     pub queries: ::prost::alloc::vec::Vec<ExecutionQueryRequestItem>,
 }
 /// Query state query item
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutionQueryRequestItem {
     #[prost(
@@ -2481,7 +2374,6 @@ pub struct ExecutionQueryRequestItem {
 }
 /// Nested message and enum types in `ExecutionQueryRequestItem`.
 pub mod execution_query_request_item {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum RequestItem {
         /// Checks if address exists (candidate)
@@ -2558,7 +2450,6 @@ pub mod execution_query_request_item {
     }
 }
 /// Request to check if address exists (candidate)
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressExistsCandidate {
     /// Address to check
@@ -2566,7 +2457,6 @@ pub struct AddressExistsCandidate {
     pub address: ::prost::alloc::string::String,
 }
 /// Request to check if address exists (final)
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressExistsFinal {
     /// Address to check
@@ -2574,7 +2464,6 @@ pub struct AddressExistsFinal {
     pub address: ::prost::alloc::string::String,
 }
 /// Request to get the balance (candidate) of an address
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressBalanceCandidate {
     /// Address to query
@@ -2582,7 +2471,6 @@ pub struct AddressBalanceCandidate {
     pub address: ::prost::alloc::string::String,
 }
 /// Request to get the balance (final) of an address
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressBalanceFinal {
     /// Address to query
@@ -2590,7 +2478,6 @@ pub struct AddressBalanceFinal {
     pub address: ::prost::alloc::string::String,
 }
 /// Request to get the bytecode (candidate) of an address
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressBytecodeCandidate {
     /// Address to query
@@ -2598,7 +2485,6 @@ pub struct AddressBytecodeCandidate {
     pub address: ::prost::alloc::string::String,
 }
 /// Request to get the bytecode (final) of an address
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressBytecodeFinal {
     /// Address to query
@@ -2606,7 +2492,6 @@ pub struct AddressBytecodeFinal {
     pub address: ::prost::alloc::string::String,
 }
 /// Request to get the datastore keys (candidate) of an address
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressDatastoreKeysCandidate {
     /// Address to query
@@ -2617,7 +2502,6 @@ pub struct AddressDatastoreKeysCandidate {
     pub prefix: ::prost::alloc::vec::Vec<u8>,
 }
 /// Request to get the datastore keys (final) of an address
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressDatastoreKeysFinal {
     /// Address to query
@@ -2628,7 +2512,6 @@ pub struct AddressDatastoreKeysFinal {
     pub prefix: ::prost::alloc::vec::Vec<u8>,
 }
 /// Request to get a datastore value (candidate) for an address
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressDatastoreValueCandidate {
     /// Address to query
@@ -2639,7 +2522,6 @@ pub struct AddressDatastoreValueCandidate {
     pub key: ::prost::alloc::vec::Vec<u8>,
 }
 /// Request to get a datastore value (final) for an address
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressDatastoreValueFinal {
     /// Address to query
@@ -2650,7 +2532,6 @@ pub struct AddressDatastoreValueFinal {
     pub key: ::prost::alloc::vec::Vec<u8>,
 }
 /// Request to get the execution status (candidate) for an operation
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OpExecutionStatusCandidate {
     /// Operation ID to query
@@ -2658,7 +2539,6 @@ pub struct OpExecutionStatusCandidate {
     pub operation_id: ::prost::alloc::string::String,
 }
 /// Request to get the execution status (final) for an operation
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OpExecutionStatusFinal {
     /// Operation ID to query
@@ -2666,8 +2546,7 @@ pub struct OpExecutionStatusFinal {
     pub operation_id: ::prost::alloc::string::String,
 }
 /// Request to get the execution status (candidate) for a denunciation
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DenunciationExecutionStatusCandidate {
     /// Denunciation index to query
     #[prost(message, optional, tag = "1")]
@@ -2676,8 +2555,7 @@ pub struct DenunciationExecutionStatusCandidate {
     >,
 }
 /// Request to get the execution status (final) for a denunciation
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DenunciationExecutionStatusFinal {
     /// Denunciation index to query
     #[prost(message, optional, tag = "1")]
@@ -2686,7 +2564,6 @@ pub struct DenunciationExecutionStatusFinal {
     >,
 }
 /// Request to get the roll count (candidate) of an address
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressRollsCandidate {
     /// Address to query
@@ -2694,7 +2571,6 @@ pub struct AddressRollsCandidate {
     pub address: ::prost::alloc::string::String,
 }
 /// Request to get the roll count (final) of an address
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressRollsFinal {
     /// Address to query
@@ -2702,7 +2578,6 @@ pub struct AddressRollsFinal {
     pub address: ::prost::alloc::string::String,
 }
 /// Request to get the deferred credits (candidate) of an address
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressDeferredCreditsCandidate {
     /// Address to query
@@ -2710,7 +2585,6 @@ pub struct AddressDeferredCreditsCandidate {
     pub address: ::prost::alloc::string::String,
 }
 /// Request to get the deferred credits (final) of an address
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressDeferredCreditsFinal {
     /// Address to query
@@ -2718,7 +2592,6 @@ pub struct AddressDeferredCreditsFinal {
     pub address: ::prost::alloc::string::String,
 }
 /// Request to get all information for a given cycle
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CycleInfos {
     /// Cycle to query
@@ -2730,7 +2603,6 @@ pub struct CycleInfos {
     pub restrict_to_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Request to get filtered events
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Events {
     /// Returns all the events that verify all the filters
@@ -2819,7 +2691,6 @@ pub struct DeferredCallQuoteResponse {
     pub price: ::core::option::Option<super::super::model::v1::NativeAmount>,
 }
 /// Response to atomically execute a batch of execution state queries
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct QueryStateResponse {
     /// Final cursor position
@@ -2836,7 +2707,6 @@ pub struct QueryStateResponse {
     pub responses: ::prost::alloc::vec::Vec<ExecutionQueryResponse>,
 }
 /// Execution state query response
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutionQueryResponse {
     /// Result or error
@@ -2846,7 +2716,6 @@ pub struct ExecutionQueryResponse {
 /// Nested message and enum types in `ExecutionQueryResponse`.
 pub mod execution_query_response {
     /// Result or error
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Response {
         /// Execution query response item
@@ -2858,7 +2727,6 @@ pub mod execution_query_response {
     }
 }
 /// Execution state query response item
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutionQueryResponseItem {
     #[prost(
@@ -2871,7 +2739,6 @@ pub struct ExecutionQueryResponseItem {
 }
 /// Nested message and enum types in `ExecutionQueryResponseItem`.
 pub mod execution_query_response_item {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum ResponseItem {
         /// Boolean value
@@ -2913,7 +2780,6 @@ pub mod execution_query_response_item {
     }
 }
 /// Deferred credits entry wrapper
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeferredCreditsEntryWrapper {
     /// Deferred credits entry
@@ -2921,8 +2787,7 @@ pub struct DeferredCreditsEntryWrapper {
     pub entries: ::prost::alloc::vec::Vec<DeferredCreditsEntry>,
 }
 /// Deferred credits entry
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct DeferredCreditsEntry {
     /// Slot
     #[prost(message, optional, tag = "1")]
@@ -2932,7 +2797,6 @@ pub struct DeferredCreditsEntry {
     pub amount: ::core::option::Option<super::super::model::v1::NativeAmount>,
 }
 /// Cycle information for execution query
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutionQueryCycleInfos {
     /// Cycle number
@@ -2946,7 +2810,6 @@ pub struct ExecutionQueryCycleInfos {
     pub staker_infos: ::prost::alloc::vec::Vec<ExecutionQueryStakerInfoEntry>,
 }
 /// Staker information for a given cycle
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutionQueryStakerInfoEntry {
     /// Address of the staker
@@ -2957,7 +2820,6 @@ pub struct ExecutionQueryStakerInfoEntry {
     pub info: ::core::option::Option<ExecutionQueryStakerInfo>,
 }
 /// Staker information for execution query
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutionQueryStakerInfo {
     /// Active roll count
@@ -2970,7 +2832,6 @@ pub struct ExecutionQueryStakerInfo {
     >,
 }
 /// ExecutionQueryStakerInfoProductionStats entry
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutionQueryStakerInfoProductionStatsEntry {
     /// Address of the staker
@@ -2981,8 +2842,7 @@ pub struct ExecutionQueryStakerInfoProductionStatsEntry {
     pub stats: ::core::option::Option<ExecutionQueryStakerInfoProductionStats>,
 }
 /// Production statistics for staker info in execution query
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ExecutionQueryStakerInfoProductionStats {
     /// Production successes
     #[prost(uint64, tag = "1")]
@@ -2992,7 +2852,6 @@ pub struct ExecutionQueryStakerInfoProductionStats {
     pub block_failure_count: u64,
 }
 /// ScOutputEvents wrapper
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScOutputEventsWrapper {
     /// Events
@@ -3000,7 +2859,6 @@ pub struct ScOutputEventsWrapper {
     pub events: ::prost::alloc::vec::Vec<super::super::model::v1::ScExecutionEvent>,
 }
 /// NewBlocksRequest holds request for NewBlocks
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewBlocksRequest {
     /// Returns all the blocks that verify all the filters
@@ -3008,7 +2866,6 @@ pub struct NewBlocksRequest {
     pub filters: ::prost::alloc::vec::Vec<NewBlocksFilter>,
 }
 /// NewBlocks Filter
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewBlocksFilter {
     /// Filter
@@ -3018,7 +2875,6 @@ pub struct NewBlocksFilter {
 /// Nested message and enum types in `NewBlocksFilter`.
 pub mod new_blocks_filter {
     /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// One of these block ids
@@ -3033,7 +2889,6 @@ pub mod new_blocks_filter {
     }
 }
 /// NewBlocksResponse holds response from NewBlocks
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewBlocksResponse {
     /// Signed block
@@ -3041,7 +2896,6 @@ pub struct NewBlocksResponse {
     pub signed_block: ::core::option::Option<super::super::model::v1::SignedBlock>,
 }
 /// NewEndorsementsRequest holds request for NewEndorsements
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewEndorsementsRequest {
     /// Returns all the endorsements that verify all the filters
@@ -3049,7 +2903,6 @@ pub struct NewEndorsementsRequest {
     pub filters: ::prost::alloc::vec::Vec<NewEndorsementsFilter>,
 }
 /// NewEndorsements Filter
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewEndorsementsFilter {
     /// Filter
@@ -3059,7 +2912,6 @@ pub struct NewEndorsementsFilter {
 /// Nested message and enum types in `NewEndorsementsFilter`.
 pub mod new_endorsements_filter {
     /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// One of these endorsement ids
@@ -3074,7 +2926,6 @@ pub mod new_endorsements_filter {
     }
 }
 /// NewEndorsementsResponse holds response from NewEndorsements
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewEndorsementsResponse {
     /// Signed endorsement
@@ -3084,7 +2935,6 @@ pub struct NewEndorsementsResponse {
     >,
 }
 /// NewFilledBlocksRequest holds request for NewFilledBlocks
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewFilledBlocksRequest {
     /// Returns all the blocks that verify one of the filters
@@ -3092,7 +2942,6 @@ pub struct NewFilledBlocksRequest {
     pub filters: ::prost::alloc::vec::Vec<NewBlocksFilter>,
 }
 /// NewFilledBlocks Filter
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewFilledBlocksFilter {
     /// Filter
@@ -3102,7 +2951,6 @@ pub struct NewFilledBlocksFilter {
 /// Nested message and enum types in `NewFilledBlocksFilter`.
 pub mod new_filled_blocks_filter {
     /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// One of these block ids
@@ -3117,7 +2965,6 @@ pub mod new_filled_blocks_filter {
     }
 }
 /// NewFilledBlocksResponse holds response from NewFilledBlocks
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewFilledBlocksResponse {
     /// Block with operations content found in the node.
@@ -3125,7 +2972,6 @@ pub struct NewFilledBlocksResponse {
     pub filled_block: ::core::option::Option<super::super::model::v1::FilledBlock>,
 }
 /// NewOperationsRequest holds request for NewOperations
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewOperationsRequest {
     /// Returns all the operations that verify all the filters
@@ -3133,7 +2979,6 @@ pub struct NewOperationsRequest {
     pub filters: ::prost::alloc::vec::Vec<NewOperationsFilter>,
 }
 /// NewOperations Filter
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewOperationsFilter {
     /// Filter
@@ -3143,7 +2988,6 @@ pub struct NewOperationsFilter {
 /// Nested message and enum types in `NewOperationsFilter`.
 pub mod new_operations_filter {
     /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// One of the operation ids
@@ -3158,7 +3002,6 @@ pub mod new_operations_filter {
     }
 }
 /// NewOperationsResponse holds response from NewOperations
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewOperationsResponse {
     /// Signed operation
@@ -3168,7 +3011,6 @@ pub struct NewOperationsResponse {
     >,
 }
 /// NewSlotExecutionOutputsRequest holds request for NewSlotExecutionOutputs
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotExecutionOutputsRequest {
     /// Returns all the slot execution outputs that verify all the filters
@@ -3176,7 +3018,6 @@ pub struct NewSlotExecutionOutputsRequest {
     pub filters: ::prost::alloc::vec::Vec<NewSlotExecutionOutputsFilter>,
 }
 /// NewSlotExecutionOutputs Filter
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotExecutionOutputsFilter {
     /// Filter
@@ -3189,7 +3030,6 @@ pub struct NewSlotExecutionOutputsFilter {
 /// Nested message and enum types in `NewSlotExecutionOutputsFilter`.
 pub mod new_slot_execution_outputs_filter {
     /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// Execution output status
@@ -3219,7 +3059,6 @@ pub mod new_slot_execution_outputs_filter {
     }
 }
 /// AsyncPoolChangesFilter
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AsyncPoolChangesFilter {
     /// Filter
@@ -3229,7 +3068,6 @@ pub struct AsyncPoolChangesFilter {
 /// Nested message and enum types in `AsyncPoolChangesFilter`.
 pub mod async_pool_changes_filter {
     /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// Do not return any message
@@ -3259,7 +3097,6 @@ pub mod async_pool_changes_filter {
     }
 }
 /// PosChangesFilter
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PosChangesFilter {
     /// Filter
@@ -3269,7 +3106,6 @@ pub struct PosChangesFilter {
 /// Nested message and enum types in `PosChangesFilter`.
 pub mod pos_changes_filter {
     /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// Do not return any message
@@ -3281,7 +3117,6 @@ pub mod pos_changes_filter {
     }
 }
 /// ExecutionEventFilter
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutionEventFilter {
     /// Filter
@@ -3291,7 +3126,6 @@ pub struct ExecutionEventFilter {
 /// Nested message and enum types in `ExecutionEventFilter`.
 pub mod execution_event_filter {
     /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// Do not return any message
@@ -3312,7 +3146,6 @@ pub mod execution_event_filter {
     }
 }
 /// ExecutedOpsChangesFilter
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutedOpsChangesFilter {
     /// Filter
@@ -3322,7 +3155,6 @@ pub struct ExecutedOpsChangesFilter {
 /// Nested message and enum types in `ExecutedOpsChangesFilter`.
 pub mod executed_ops_changes_filter {
     /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// Do not return any message
@@ -3334,8 +3166,7 @@ pub mod executed_ops_changes_filter {
     }
 }
 /// ExecutedDenounciationFilter
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ExecutedDenounciationFilter {
     /// Filter
     #[prost(oneof = "executed_denounciation_filter::Filter", tags = "1")]
@@ -3344,8 +3175,7 @@ pub struct ExecutedDenounciationFilter {
 /// Nested message and enum types in `ExecutedDenounciationFilter`.
 pub mod executed_denounciation_filter {
     /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// Do not return any message
         #[prost(message, tag = "1")]
@@ -3353,7 +3183,6 @@ pub mod executed_denounciation_filter {
     }
 }
 /// LedgerChangesFilter
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LedgerChangesFilter {
     /// Filter
@@ -3363,7 +3192,6 @@ pub struct LedgerChangesFilter {
 /// Nested message and enum types in `LedgerChangesFilter`.
 pub mod ledger_changes_filter {
     /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// Do not return any message
@@ -3375,7 +3203,6 @@ pub mod ledger_changes_filter {
     }
 }
 /// NewSlotExecutionOutputsResponse holds response from NewSlotExecutionOutputs
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotExecutionOutputsResponse {
     /// Slot execution output
@@ -3383,15 +3210,13 @@ pub struct NewSlotExecutionOutputsResponse {
     pub output: ::core::option::Option<super::super::model::v1::SlotExecutionOutput>,
 }
 /// NewSlotABICallStacks request
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct NewSlotAbiCallStacksRequest {
     /// Finality level to receive informations from
     #[prost(enumeration = "FinalityLevel", tag = "1")]
     pub finality_level: i32,
 }
 /// NewSlotABICallStacks response
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotAbiCallStacksResponse {
     /// Finality level to receive informations from
@@ -3405,15 +3230,13 @@ pub struct NewSlotAbiCallStacksResponse {
     pub operation_call_stacks: ::prost::alloc::vec::Vec<OperationAbiCallStack>,
 }
 /// NewSlotTransfers request
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct NewSlotTransfersRequest {
     /// Finality level to receive informations from
     #[prost(enumeration = "FinalityLevel", tag = "1")]
     pub finality_level: i32,
 }
 /// NewSlotTransfers response
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotTransfersResponse {
     /// Finality level to receive informations from
@@ -3424,7 +3247,6 @@ pub struct NewSlotTransfersResponse {
     pub transfers: ::prost::alloc::vec::Vec<TransferInfo>,
 }
 /// SendBlocksRequest holds parameters to SendBlocks
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendBlocksRequest {
     /// Secure shared block
@@ -3432,7 +3254,6 @@ pub struct SendBlocksRequest {
     pub block: ::prost::alloc::vec::Vec<u8>,
 }
 /// SendBlocksResponse holds response from SendBlocks
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendBlocksResponse {
     /// Block result or a gRPC status
@@ -3442,7 +3263,6 @@ pub struct SendBlocksResponse {
 /// Nested message and enum types in `SendBlocksResponse`.
 pub mod send_blocks_response {
     /// Block result or a gRPC status
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Result {
         /// Block result
@@ -3454,7 +3274,6 @@ pub mod send_blocks_response {
     }
 }
 /// SendEndorsementsRequest holds parameters to SendEndorsements
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendEndorsementsRequest {
     /// Secure shared endorsements
@@ -3462,7 +3281,6 @@ pub struct SendEndorsementsRequest {
     pub endorsements: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
 /// SendEndorsementsResponse holds response from SendEndorsements
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendEndorsementsResponse {
     /// Endorsement result or gRPC status
@@ -3472,7 +3290,6 @@ pub struct SendEndorsementsResponse {
 /// Nested message and enum types in `SendEndorsementsResponse`.
 pub mod send_endorsements_response {
     /// Endorsement result or gRPC status
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Result {
         /// Endorsement result
@@ -3484,7 +3301,6 @@ pub mod send_endorsements_response {
     }
 }
 /// SendOperationsRequest holds parameters to SendOperations
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendOperationsRequest {
     /// Secured shared operations
@@ -3492,7 +3308,6 @@ pub struct SendOperationsRequest {
     pub operations: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
 /// SendOperationsResponse holds response from SendOperations
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SendOperationsResponse {
     /// Operation result or gRPC status
@@ -3502,7 +3317,6 @@ pub struct SendOperationsResponse {
 /// Nested message and enum types in `SendOperationsResponse`.
 pub mod send_operations_response {
     /// Operation result or gRPC status
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Result {
         /// Operation result
@@ -3514,23 +3328,20 @@ pub mod send_operations_response {
     }
 }
 /// TransactionsThroughputRequest holds request for TransactionsThroughput
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TransactionsThroughputRequest {
     /// Timer interval in seconds (Optional). Defaults to 10s
     #[prost(message, optional, tag = "1")]
     pub interval: ::core::option::Option<u64>,
 }
 /// TransactionsThroughputResponse holds response from TransactionsThroughput
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TransactionsThroughputResponse {
     /// Transactions throughput per second
     #[prost(uint32, tag = "1")]
     pub throughput: u32,
 }
 /// SearchBlocksRequest holds request for SearchBlocks
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchBlocksRequest {
     /// Returns all the blocks that verify all the filters
@@ -3538,7 +3349,6 @@ pub struct SearchBlocksRequest {
     pub filters: ::prost::alloc::vec::Vec<SearchBlocksFilter>,
 }
 /// SearchBlocks Filter
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchBlocksFilter {
     /// Filter
@@ -3548,7 +3358,6 @@ pub struct SearchBlocksFilter {
 /// Nested message and enum types in `SearchBlocksFilter`.
 pub mod search_blocks_filter {
     /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// One of these block ids
@@ -3563,7 +3372,6 @@ pub mod search_blocks_filter {
     }
 }
 /// SearchBlocksResponse holds response from SearchBlocks
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchBlocksResponse {
     /// Information about the blocks
@@ -3571,7 +3379,6 @@ pub struct SearchBlocksResponse {
     pub block_infos: ::prost::alloc::vec::Vec<super::super::model::v1::BlockInfo>,
 }
 /// SearchEndorsementsRequest holds request for SearchEndorsements
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchEndorsementsRequest {
     /// Returns all the endorsements informations that verify all the filters
@@ -3579,7 +3386,6 @@ pub struct SearchEndorsementsRequest {
     pub filters: ::prost::alloc::vec::Vec<SearchEndorsementsFilter>,
 }
 /// SearchEndorsements Filter
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchEndorsementsFilter {
     /// Filter
@@ -3589,7 +3395,6 @@ pub struct SearchEndorsementsFilter {
 /// Nested message and enum types in `SearchEndorsementsFilter`.
 pub mod search_endorsements_filter {
     /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// One of these endorsement ids
@@ -3604,7 +3409,6 @@ pub mod search_endorsements_filter {
     }
 }
 /// SearchEndorsementsResponse holds response from SearchEndorsements
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchEndorsementsResponse {
     /// Information about the endorsements
@@ -3614,7 +3418,6 @@ pub struct SearchEndorsementsResponse {
     >,
 }
 /// SearchOperationsRequest holds request for SearchOperations
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchOperationsRequest {
     /// Returns all the operations that verify all the filters
@@ -3622,7 +3425,6 @@ pub struct SearchOperationsRequest {
     pub filters: ::prost::alloc::vec::Vec<SearchOperationsFilter>,
 }
 /// SearchOperations Filter
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchOperationsFilter {
     /// Filter
@@ -3632,7 +3434,6 @@ pub struct SearchOperationsFilter {
 /// Nested message and enum types in `SearchOperationsFilter`.
 pub mod search_operations_filter {
     /// Filter
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Filter {
         /// One of the operation ids
@@ -3644,7 +3445,6 @@ pub mod search_operations_filter {
     }
 }
 /// SearchOperationsResponse holds response from SearchOperations
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SearchOperationsResponse {
     /// Information about the operations
@@ -3654,7 +3454,6 @@ pub struct SearchOperationsResponse {
     >,
 }
 /// GetOperationABICallStacks request
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOperationAbiCallStacksRequest {
     /// Operations ids to get the call stack from
@@ -3662,7 +3461,6 @@ pub struct GetOperationAbiCallStacksRequest {
     pub operation_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Definition of an ABI call stack element
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AbiCallStackElement {
     /// name of the ABI
@@ -3676,7 +3474,6 @@ pub struct AbiCallStackElement {
     pub return_value: ::prost::alloc::string::String,
 }
 /// Definition of an ABI call stack element that is the 'call' ABI
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AbiCallStackElementCall {
     /// name of the ABI
@@ -3693,7 +3490,6 @@ pub struct AbiCallStackElementCall {
     pub return_value: ::prost::alloc::string::String,
 }
 /// Definition of an ABI call stack element parent
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AbiCallStackElementParent {
     /// Element of the call stack
@@ -3705,7 +3501,6 @@ pub struct AbiCallStackElementParent {
 /// Nested message and enum types in `ABICallStackElementParent`.
 pub mod abi_call_stack_element_parent {
     /// Element of the call stack
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum CallStackElement {
         /// Any ABI call that is not the ABI 'call'
@@ -3717,7 +3512,6 @@ pub mod abi_call_stack_element_parent {
     }
 }
 /// Definition of an ABI call stack
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AbiCallStack {
     /// All elements of the call stack
@@ -3725,14 +3519,12 @@ pub struct AbiCallStack {
     pub call_stack: ::prost::alloc::vec::Vec<AbiCallStackElementParent>,
 }
 /// GetOperationABICallStacks response
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetOperationAbiCallStacksResponse {
     #[prost(message, repeated, tag = "1")]
     pub call_stacks: ::prost::alloc::vec::Vec<AbiCallStack>,
 }
 /// GetSlotABICallStacks request
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSlotAbiCallStacksRequest {
     /// Slots asked
@@ -3740,7 +3532,6 @@ pub struct GetSlotAbiCallStacksRequest {
     pub slots: ::prost::alloc::vec::Vec<super::super::model::v1::Slot>,
 }
 /// ABI asynchronous execution call stack
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AscabiCallStack {
     /// Index of the execution in the slot
@@ -3751,7 +3542,6 @@ pub struct AscabiCallStack {
     pub call_stack: ::prost::alloc::vec::Vec<AbiCallStackElementParent>,
 }
 /// Operation execution call stack
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationAbiCallStack {
     /// Operation id
@@ -3762,7 +3552,6 @@ pub struct OperationAbiCallStack {
     pub call_stack: ::prost::alloc::vec::Vec<AbiCallStackElementParent>,
 }
 /// Call stack for a slot
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SlotAbiCallStacks {
     /// Call stacks for asynchronous execution
@@ -3773,7 +3562,6 @@ pub struct SlotAbiCallStacks {
     pub operation_call_stacks: ::prost::alloc::vec::Vec<OperationAbiCallStack>,
 }
 /// GetSlotABICallStacks response
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSlotAbiCallStacksResponse {
     /// Call stacks for the slots
@@ -3781,7 +3569,6 @@ pub struct GetSlotAbiCallStacksResponse {
     pub slot_call_stacks: ::prost::alloc::vec::Vec<SlotAbiCallStacks>,
 }
 /// GetSlotTransfersRequest holds request for GetSlotTransfers
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSlotTransfersRequest {
     /// Slot to get the transfers from
@@ -3789,7 +3576,6 @@ pub struct GetSlotTransfersRequest {
     pub slots: ::prost::alloc::vec::Vec<super::super::model::v1::Slot>,
 }
 /// Transfer info
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransferInfo {
     /// Sender
@@ -3810,7 +3596,6 @@ pub struct TransferInfo {
 /// Nested message and enum types in `TransferInfo`.
 pub mod transfer_info {
     /// Operation id or asc index
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum OperationIdOrAscIndex {
         /// Operation id
@@ -3822,7 +3607,6 @@ pub mod transfer_info {
     }
 }
 /// List of transfers for a slot
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct TransferInfos {
     /// Slot
@@ -3833,7 +3617,6 @@ pub struct TransferInfos {
     pub transfers: ::prost::alloc::vec::Vec<TransferInfo>,
 }
 /// GetSlotTransfersResponse holds response from GetSlotTransfers
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct GetSlotTransfersResponse {
     /// Transfers for the slot
@@ -3860,16 +3643,14 @@ impl ExecutionQueryExecutionStatus {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ExecutionQueryExecutionStatus::Unspecified => {
-                "EXECUTION_QUERY_EXECUTION_STATUS_UNSPECIFIED"
-            }
-            ExecutionQueryExecutionStatus::AlreadyExecutedWithSuccess => {
+            Self::Unspecified => "EXECUTION_QUERY_EXECUTION_STATUS_UNSPECIFIED",
+            Self::AlreadyExecutedWithSuccess => {
                 "EXECUTION_QUERY_EXECUTION_STATUS_ALREADY_EXECUTED_WITH_SUCCESS"
             }
-            ExecutionQueryExecutionStatus::AlreadyExecutedWithFailure => {
+            Self::AlreadyExecutedWithFailure => {
                 "EXECUTION_QUERY_EXECUTION_STATUS_ALREADY_EXECUTED_WITH_FAILURE"
             }
-            ExecutionQueryExecutionStatus::ExecutableOrExpired => {
+            Self::ExecutableOrExpired => {
                 "EXECUTION_QUERY_EXECUTION_STATUS_EXECUTABLE_OR_EXPIRED"
             }
         }
@@ -3909,9 +3690,9 @@ impl FinalityLevel {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            FinalityLevel::Unspecified => "FINALITY_LEVEL_UNSPECIFIED",
-            FinalityLevel::Candidate => "FINALITY_LEVEL_CANDIDATE",
-            FinalityLevel::Final => "FINALITY_LEVEL_FINAL",
+            Self::Unspecified => "FINALITY_LEVEL_UNSPECIFIED",
+            Self::Candidate => "FINALITY_LEVEL_CANDIDATE",
+            Self::Final => "FINALITY_LEVEL_FINAL",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -3926,7 +3707,13 @@ impl FinalityLevel {
 }
 /// Generated client implementations.
 pub mod public_service_client {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     use tonic::codegen::http::Uri;
     /// Massa public gRPC service
@@ -3949,8 +3736,8 @@ pub mod public_service_client {
     where
         T: tonic::client::GrpcService<tonic::body::BoxBody>,
         T::Error: Into<StdError>,
-        T::ResponseBody: Body<Data = Bytes> + Send + 'static,
-        <T::ResponseBody as Body>::Error: Into<StdError> + Send,
+        T::ResponseBody: Body<Data = Bytes> + std::marker::Send + 'static,
+        <T::ResponseBody as Body>::Error: Into<StdError> + std::marker::Send,
     {
         pub fn new(inner: T) -> Self {
             let inner = tonic::client::Grpc::new(inner);
@@ -3975,7 +3762,7 @@ pub mod public_service_client {
             >,
             <T as tonic::codegen::Service<
                 http::Request<tonic::body::BoxBody>,
-            >>::Error: Into<StdError> + Send + Sync,
+            >>::Error: Into<StdError> + std::marker::Send + std::marker::Sync,
         {
             PublicServiceClient::new(InterceptedService::new(inner, interceptor))
         }
@@ -4022,8 +3809,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4050,8 +3836,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4076,8 +3861,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4104,8 +3888,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4132,8 +3915,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4163,8 +3945,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4189,8 +3970,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4217,8 +3997,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4245,8 +4024,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4271,8 +4049,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4297,8 +4074,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4328,8 +4104,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4354,8 +4129,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4380,8 +4154,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4408,8 +4181,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4436,8 +4208,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4468,8 +4239,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4496,8 +4266,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4524,8 +4293,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4552,8 +4320,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4582,8 +4349,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4612,8 +4378,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4642,8 +4407,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4677,8 +4441,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4707,8 +4470,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4735,8 +4497,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4763,8 +4524,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4793,8 +4553,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4823,8 +4582,7 @@ pub mod public_service_client {
                 .ready()
                 .await
                 .map_err(|e| {
-                    tonic::Status::new(
-                        tonic::Code::Unknown,
+                    tonic::Status::unknown(
                         format!("Service was not ready: {}", e.into()),
                     )
                 })?;
@@ -4846,11 +4604,17 @@ pub mod public_service_client {
 }
 /// Generated server implementations.
 pub mod public_service_server {
-    #![allow(unused_variables, dead_code, missing_docs, clippy::let_unit_value)]
+    #![allow(
+        unused_variables,
+        dead_code,
+        missing_docs,
+        clippy::wildcard_imports,
+        clippy::let_unit_value,
+    )]
     use tonic::codegen::*;
     /// Generated trait containing gRPC methods that should be implemented for use with PublicServiceServer.
     #[async_trait]
-    pub trait PublicService: Send + Sync + 'static {
+    pub trait PublicService: std::marker::Send + std::marker::Sync + 'static {
         /// Execute read only call
         async fn execute_read_only_call(
             &self,
@@ -5000,7 +4764,7 @@ pub mod public_service_server {
         type NewBlocksStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::NewBlocksResponse, tonic::Status>,
             >
-            + Send
+            + std::marker::Send
             + 'static;
         /// New received and produced blocks
         async fn new_blocks(
@@ -5011,7 +4775,7 @@ pub mod public_service_server {
         type NewEndorsementsStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::NewEndorsementsResponse, tonic::Status>,
             >
-            + Send
+            + std::marker::Send
             + 'static;
         /// New received and produced endorsements
         async fn new_endorsements(
@@ -5025,7 +4789,7 @@ pub mod public_service_server {
         type NewFilledBlocksStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::NewFilledBlocksResponse, tonic::Status>,
             >
-            + Send
+            + std::marker::Send
             + 'static;
         /// New received and produced blocks with operations
         async fn new_filled_blocks(
@@ -5039,7 +4803,7 @@ pub mod public_service_server {
         type NewOperationsStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::NewOperationsResponse, tonic::Status>,
             >
-            + Send
+            + std::marker::Send
             + 'static;
         /// New received and produced operations
         async fn new_operations(
@@ -5056,7 +4820,7 @@ pub mod public_service_server {
                     tonic::Status,
                 >,
             >
-            + Send
+            + std::marker::Send
             + 'static;
         /// New received and slot execution events
         async fn new_slot_execution_outputs(
@@ -5075,7 +4839,7 @@ pub mod public_service_server {
                     tonic::Status,
                 >,
             >
-            + Send
+            + std::marker::Send
             + 'static;
         /// Call stack for each slot executed
         async fn new_slot_abi_call_stacks(
@@ -5092,7 +4856,7 @@ pub mod public_service_server {
                     tonic::Status,
                 >,
             >
-            + Send
+            + std::marker::Send
             + 'static;
         /// Transfer list for each slot executed
         async fn new_slot_transfers(
@@ -5106,7 +4870,7 @@ pub mod public_service_server {
         type SendBlocksStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::SendBlocksResponse, tonic::Status>,
             >
-            + Send
+            + std::marker::Send
             + 'static;
         /// Send blocks
         async fn send_blocks(
@@ -5120,7 +4884,7 @@ pub mod public_service_server {
                     tonic::Status,
                 >,
             >
-            + Send
+            + std::marker::Send
             + 'static;
         /// Send endorsements
         async fn send_endorsements(
@@ -5134,7 +4898,7 @@ pub mod public_service_server {
         type SendOperationsStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::SendOperationsResponse, tonic::Status>,
             >
-            + Send
+            + std::marker::Send
             + 'static;
         /// Send operations
         async fn send_operations(
@@ -5151,7 +4915,7 @@ pub mod public_service_server {
                     tonic::Status,
                 >,
             >
-            + Send
+            + std::marker::Send
             + 'static;
         /// Transactions throughput
         async fn transactions_throughput(
@@ -5166,20 +4930,18 @@ pub mod public_service_server {
     }
     /// Massa public gRPC service
     #[derive(Debug)]
-    pub struct PublicServiceServer<T: PublicService> {
-        inner: _Inner<T>,
+    pub struct PublicServiceServer<T> {
+        inner: Arc<T>,
         accept_compression_encodings: EnabledCompressionEncodings,
         send_compression_encodings: EnabledCompressionEncodings,
         max_decoding_message_size: Option<usize>,
         max_encoding_message_size: Option<usize>,
     }
-    struct _Inner<T>(Arc<T>);
-    impl<T: PublicService> PublicServiceServer<T> {
+    impl<T> PublicServiceServer<T> {
         pub fn new(inner: T) -> Self {
             Self::from_arc(Arc::new(inner))
         }
         pub fn from_arc(inner: Arc<T>) -> Self {
-            let inner = _Inner(inner);
             Self {
                 inner,
                 accept_compression_encodings: Default::default(),
@@ -5229,8 +4991,8 @@ pub mod public_service_server {
     impl<T, B> tonic::codegen::Service<http::Request<B>> for PublicServiceServer<T>
     where
         T: PublicService,
-        B: Body + Send + 'static,
-        B::Error: Into<StdError> + Send + 'static,
+        B: Body + std::marker::Send + 'static,
+        B::Error: Into<StdError> + std::marker::Send + 'static,
     {
         type Response = http::Response<tonic::body::BoxBody>;
         type Error = std::convert::Infallible;
@@ -5242,7 +5004,6 @@ pub mod public_service_server {
             Poll::Ready(Ok(()))
         }
         fn call(&mut self, req: http::Request<B>) -> Self::Future {
-            let inner = self.inner.clone();
             match req.uri().path() {
                 "/massa.api.v1.PublicService/ExecuteReadOnlyCall" => {
                     #[allow(non_camel_case_types)]
@@ -5277,7 +5038,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = ExecuteReadOnlyCallSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5323,7 +5083,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetBlocksSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5370,7 +5129,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetDatastoreEntriesSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5417,7 +5175,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetEndorsementsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5469,7 +5226,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetNextBlockBestParentsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5515,7 +5271,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetOperationsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5565,7 +5320,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetScExecutionEventsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5612,7 +5366,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetSelectorDrawsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5658,7 +5411,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetStakersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5704,7 +5456,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetStatusSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5757,7 +5508,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetTransactionsThroughputSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5803,7 +5553,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = QueryStateSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5849,7 +5598,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchBlocksSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5896,7 +5644,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchEndorsementsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5943,7 +5690,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SearchOperationsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -5996,7 +5742,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetOperationABICallStacksSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6046,7 +5791,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetSlotABICallStacksSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6093,7 +5837,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = GetSlotTransfersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6142,7 +5885,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = NewBlocksSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6192,7 +5934,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = NewEndorsementsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6242,7 +5983,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = NewFilledBlocksSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6291,7 +6031,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = NewOperationsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6345,7 +6084,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = NewSlotExecutionOutputsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6398,7 +6136,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = NewSlotABICallStacksSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6448,7 +6185,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = NewSlotTransfersSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6497,7 +6233,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SendBlocksSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6547,7 +6282,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SendEndorsementsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6596,7 +6330,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = SendOperationsSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6650,7 +6383,6 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let inner = inner.0;
                         let method = TransactionsThroughputSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
@@ -6669,20 +6401,25 @@ pub mod public_service_server {
                 }
                 _ => {
                     Box::pin(async move {
-                        Ok(
-                            http::Response::builder()
-                                .status(200)
-                                .header("grpc-status", "12")
-                                .header("content-type", "application/grpc")
-                                .body(empty_body())
-                                .unwrap(),
-                        )
+                        let mut response = http::Response::new(empty_body());
+                        let headers = response.headers_mut();
+                        headers
+                            .insert(
+                                tonic::Status::GRPC_STATUS,
+                                (tonic::Code::Unimplemented as i32).into(),
+                            );
+                        headers
+                            .insert(
+                                http::header::CONTENT_TYPE,
+                                tonic::metadata::GRPC_CONTENT_TYPE,
+                            );
+                        Ok(response)
                     })
                 }
             }
         }
     }
-    impl<T: PublicService> Clone for PublicServiceServer<T> {
+    impl<T> Clone for PublicServiceServer<T> {
         fn clone(&self) -> Self {
             let inner = self.inner.clone();
             Self {
@@ -6694,17 +6431,9 @@ pub mod public_service_server {
             }
         }
     }
-    impl<T: PublicService> Clone for _Inner<T> {
-        fn clone(&self) -> Self {
-            Self(Arc::clone(&self.0))
-        }
-    }
-    impl<T: std::fmt::Debug> std::fmt::Debug for _Inner<T> {
-        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-            write!(f, "{:?}", self.0)
-        }
-    }
-    impl<T: PublicService> tonic::server::NamedService for PublicServiceServer<T> {
-        const NAME: &'static str = "massa.api.v1.PublicService";
+    /// Generated gRPC service name
+    pub const SERVICE_NAME: &str = "massa.api.v1.PublicService";
+    impl<T> tonic::server::NamedService for PublicServiceServer<T> {
+        const NAME: &'static str = SERVICE_NAME;
     }
 }

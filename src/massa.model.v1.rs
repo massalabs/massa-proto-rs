@@ -1,5 +1,4 @@
 /// Massa NativeAddress
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NativeAddress {
     /// Address category
@@ -13,7 +12,6 @@ pub struct NativeAddress {
     pub content: ::prost::alloc::vec::Vec<u8>,
 }
 /// Addresses holds addresses
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Addresses {
     /// Addresses
@@ -38,9 +36,9 @@ impl AddressCategory {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            AddressCategory::Unspecified => "ADDRESS_CATEGORY_UNSPECIFIED",
-            AddressCategory::UserAddress => "ADDRESS_CATEGORY_USER_ADDRESS",
-            AddressCategory::ScAddress => "ADDRESS_CATEGORY_SC_ADDRESS",
+            Self::Unspecified => "ADDRESS_CATEGORY_UNSPECIFIED",
+            Self::UserAddress => "ADDRESS_CATEGORY_USER_ADDRESS",
+            Self::ScAddress => "ADDRESS_CATEGORY_SC_ADDRESS",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -55,8 +53,7 @@ impl AddressCategory {
 }
 /// NativeAmount is represented as a fraction so precision can be adjusted in
 /// the future. value = mantissa / (10^scale)
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct NativeAmount {
     /// Mantissa
     #[prost(uint64, tag = "1")]
@@ -66,8 +63,7 @@ pub struct NativeAmount {
     pub scale: u32,
 }
 /// When an address is drawn to create an endorsement it is selected for a specific index
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct IndexedSlot {
     /// Slot
     #[prost(message, optional, tag = "1")]
@@ -77,8 +73,7 @@ pub struct IndexedSlot {
     pub index: u64,
 }
 /// A point in time where a block is expected
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Slot {
     /// Period
     #[prost(uint64, tag = "1")]
@@ -88,7 +83,6 @@ pub struct Slot {
     pub thread: u32,
 }
 /// Slots
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Slots {
     /// Slots
@@ -96,8 +90,7 @@ pub struct Slots {
     pub slots: ::prost::alloc::vec::Vec<Slot>,
 }
 /// SlotRange
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SlotRange {
     /// Start lot (Optional)
     #[prost(message, optional, tag = "1")]
@@ -216,7 +209,6 @@ pub struct DenunciationEndorsement {
     pub index: u32,
 }
 /// An endorsement, as sent in the network
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Endorsement {
     /// Slot in which the endorsement can be included
@@ -231,7 +223,6 @@ pub struct Endorsement {
     pub endorsed_block: ::prost::alloc::string::String,
 }
 /// Signed endorsement
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SignedEndorsement {
     /// Endorsement
@@ -254,7 +245,6 @@ pub struct SignedEndorsement {
     pub serialized_size: u64,
 }
 /// EndorsementIds holds endorsements ids
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndorsementIds {
     /// Endorsements ids
@@ -262,7 +252,6 @@ pub struct EndorsementIds {
     pub endorsement_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// A wrapper around an endorsement with its metadata
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndorsementWrapper {
     /// Whether the endorsement is still in pool
@@ -280,7 +269,6 @@ pub struct EndorsementWrapper {
     pub endorsement: ::core::option::Option<SignedEndorsement>,
 }
 /// Informations about an endorsement with its metadata
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndorsementInfo {
     /// The endorsement id
@@ -298,7 +286,6 @@ pub struct EndorsementInfo {
     pub is_final: bool,
 }
 /// Massa error
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Error {
     /// The error code
@@ -309,11 +296,9 @@ pub struct Error {
     pub message: ::prost::alloc::string::String,
 }
 /// Empty
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct Empty {}
 /// BytesMapFieldEntry
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BytesMapFieldEntry {
     /// bytes key
@@ -324,7 +309,6 @@ pub struct BytesMapFieldEntry {
     pub value: ::prost::alloc::vec::Vec<u8>,
 }
 /// Array of bytes wrapper
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ArrayOfBytesWrapper {
     /// Repeated bytes
@@ -332,7 +316,6 @@ pub struct ArrayOfBytesWrapper {
     pub items: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
 }
 /// KeyPair
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct KeyPair {
     /// Public key
@@ -361,10 +344,10 @@ impl ComparisonResult {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ComparisonResult::Unspecified => "COMPARISON_RESULT_UNSPECIFIED",
-            ComparisonResult::Lower => "COMPARISON_RESULT_LOWER",
-            ComparisonResult::Equal => "COMPARISON_RESULT_EQUAL",
-            ComparisonResult::Greater => "COMPARISON_RESULT_GREATER",
+            Self::Unspecified => "COMPARISON_RESULT_UNSPECIFIED",
+            Self::Lower => "COMPARISON_RESULT_LOWER",
+            Self::Equal => "COMPARISON_RESULT_EQUAL",
+            Self::Greater => "COMPARISON_RESULT_GREATER",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -379,7 +362,6 @@ impl ComparisonResult {
     }
 }
 /// The operation as sent in the network
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Operation {
     /// The fee they have decided for this operation
@@ -393,7 +375,6 @@ pub struct Operation {
     pub op: ::core::option::Option<OperationType>,
 }
 /// Type specific operation content
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationType {
     #[prost(oneof = "operation_type::Type", tags = "1, 2, 3, 4, 5")]
@@ -401,7 +382,6 @@ pub struct OperationType {
 }
 /// Nested message and enum types in `OperationType`.
 pub mod operation_type {
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Type {
         /// Transfer coins from sender to recipient
@@ -422,7 +402,6 @@ pub mod operation_type {
     }
 }
 /// Transfer coins from sender to recipient
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Transaction {
     /// Recipient address
@@ -433,23 +412,20 @@ pub struct Transaction {
     pub amount: ::core::option::Option<NativeAmount>,
 }
 /// The sender buys `roll_count` rolls. Roll price is defined in configuration
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RollBuy {
     /// Roll count
     #[prost(uint64, tag = "1")]
     pub roll_count: u64,
 }
 /// The sender sells `roll_count` rolls. Roll price is defined in configuration
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct RollSell {
     /// Roll count
     #[prost(uint64, tag = "1")]
     pub roll_count: u64,
 }
 /// Execute a smart contract
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecuteSc {
     /// Smart contract bytecode.
@@ -466,7 +442,6 @@ pub struct ExecuteSc {
     pub datastore: ::prost::alloc::vec::Vec<BytesMapFieldEntry>,
 }
 /// Calls an exported function from a stored smart contract
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CallSc {
     /// Target smart contract address
@@ -486,7 +461,6 @@ pub struct CallSc {
     pub coins: ::core::option::Option<NativeAmount>,
 }
 /// Signed operation
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SignedOperation {
     /// Operation
@@ -509,7 +483,6 @@ pub struct SignedOperation {
     pub serialized_size: u64,
 }
 /// A wrapper around an operation with its metadata
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationWrapper {
     /// The IDs of the blocks in which the operation appears
@@ -523,7 +496,6 @@ pub struct OperationWrapper {
     pub operation: ::core::option::Option<SignedOperation>,
 }
 /// Information about an operation with its metadata
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationInfo {
     /// The unique ID of the operation.
@@ -537,7 +509,6 @@ pub struct OperationInfo {
     pub thread: u32,
 }
 /// OperationIds
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationIds {
     /// Operations ids
@@ -545,7 +516,6 @@ pub struct OperationIds {
     pub operation_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// OpTypes
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OpTypes {
     /// Operations types
@@ -576,12 +546,12 @@ impl OpType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            OpType::Unspecified => "OP_TYPE_UNSPECIFIED",
-            OpType::Transaction => "OP_TYPE_TRANSACTION",
-            OpType::RollBuy => "OP_TYPE_ROLL_BUY",
-            OpType::RollSell => "OP_TYPE_ROLL_SELL",
-            OpType::ExecuteSc => "OP_TYPE_EXECUTE_SC",
-            OpType::CallSc => "OP_TYPE_CALL_SC",
+            Self::Unspecified => "OP_TYPE_UNSPECIFIED",
+            Self::Transaction => "OP_TYPE_TRANSACTION",
+            Self::RollBuy => "OP_TYPE_ROLL_BUY",
+            Self::RollSell => "OP_TYPE_ROLL_SELL",
+            Self::ExecuteSc => "OP_TYPE_EXECUTE_SC",
+            Self::CallSc => "OP_TYPE_CALL_SC",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -597,8 +567,108 @@ impl OpType {
         }
     }
 }
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Denunciation {
+    /// BlockHeaderDenunciation or EndorsementDenunciation
+    #[prost(oneof = "denunciation::Entry", tags = "1, 2")]
+    pub entry: ::core::option::Option<denunciation::Entry>,
+}
+/// Nested message and enum types in `Denunciation`.
+pub mod denunciation {
+    /// BlockHeaderDenunciation or EndorsementDenunciation
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Entry {
+        /// Denunciation block header
+        #[prost(message, tag = "1")]
+        BlockHeader(super::BlockHeaderDenunciation),
+        /// Denunciation endorsement
+        #[prost(message, tag = "2")]
+        Endorsement(super::EndorsementDenunciation),
+    }
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BlockHeaderDenunciation {
+    /// Denunciation public key
+    #[prost(string, tag = "1")]
+    pub public_key: ::prost::alloc::string::String,
+    /// Denunciation slot
+    #[prost(message, optional, tag = "2")]
+    pub slot: ::core::option::Option<Slot>,
+    /// Denunciation hash 1
+    #[prost(string, tag = "3")]
+    pub hash_1: ::prost::alloc::string::String,
+    /// Denunciation hash 2
+    #[prost(string, tag = "4")]
+    pub hash_2: ::prost::alloc::string::String,
+    /// Denunciation sig 1
+    #[prost(string, tag = "5")]
+    pub signature_1: ::prost::alloc::string::String,
+    /// Denunciation sig 2
+    #[prost(string, tag = "6")]
+    pub signature_2: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EndorsementDenunciation {
+    /// Denunciation public key
+    #[prost(string, tag = "1")]
+    pub public_key: ::prost::alloc::string::String,
+    /// Denunciation slot
+    #[prost(message, optional, tag = "2")]
+    pub slot: ::core::option::Option<Slot>,
+    /// Denunciation index
+    #[prost(uint32, tag = "3")]
+    pub index: u32,
+    /// Denunciation hash 1
+    #[prost(string, tag = "4")]
+    pub hash_1: ::prost::alloc::string::String,
+    /// Denunciation hash 2
+    #[prost(string, tag = "5")]
+    pub hash_2: ::prost::alloc::string::String,
+    /// Denunciation sig 1
+    #[prost(string, tag = "6")]
+    pub signature_1: ::prost::alloc::string::String,
+    /// Denunciation sig 2
+    #[prost(string, tag = "7")]
+    pub signature_2: ::prost::alloc::string::String,
+}
+/// Index for Denunciations in collections (e.g. like a HashMap...)
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct DenunciationIndex {
+    /// DenunciationBlockHeader or DenunciationEndorsement
+    #[prost(oneof = "denunciation_index::Entry", tags = "1, 2")]
+    pub entry: ::core::option::Option<denunciation_index::Entry>,
+}
+/// Nested message and enum types in `DenunciationIndex`.
+pub mod denunciation_index {
+    /// DenunciationBlockHeader or DenunciationEndorsement
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
+    pub enum Entry {
+        /// Denunciation block header
+        #[prost(message, tag = "1")]
+        BlockHeader(super::DenunciationBlockHeader),
+        /// Denunciation endorsement
+        #[prost(message, tag = "2")]
+        Endorsement(super::DenunciationEndorsement),
+    }
+}
+/// Variant for Block header denunciation index
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct DenunciationBlockHeader {
+    /// Denunciation slot
+    #[prost(message, optional, tag = "1")]
+    pub slot: ::core::option::Option<Slot>,
+}
+/// Variant for Endorsement denunciation index
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct DenunciationEndorsement {
+    /// Denounciation slot
+    #[prost(message, optional, tag = "1")]
+    pub slot: ::core::option::Option<Slot>,
+    /// Denounciation index
+    #[prost(uint32, tag = "2")]
+    pub index: u32,
+}
 /// Block
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Block {
     /// Signed header
@@ -609,7 +679,6 @@ pub struct Block {
     pub operations: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Filled block
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FilledBlock {
     /// Signed header
@@ -620,7 +689,6 @@ pub struct FilledBlock {
     pub operations: ::prost::alloc::vec::Vec<FilledOperationEntry>,
 }
 /// Block header
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BlockHeader {
     /// Current network version
@@ -646,7 +714,6 @@ pub struct BlockHeader {
     pub denunciations: ::prost::alloc::vec::Vec<Denunciation>,
 }
 /// Filled Operation Tuple
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FilledOperationEntry {
     /// Operation id
@@ -657,7 +724,6 @@ pub struct FilledOperationEntry {
     pub operation: ::core::option::Option<SignedOperation>,
 }
 /// Signed block
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SignedBlock {
     /// Block
@@ -680,7 +746,6 @@ pub struct SignedBlock {
     pub serialized_size: u64,
 }
 /// Signed block header
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SignedBlockHeader {
     /// BlockHeader
@@ -703,7 +768,6 @@ pub struct SignedBlockHeader {
     pub serialized_size: u64,
 }
 /// A wrapper around a block with its metadata
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BlockWrapper {
     /// The execution status of the block
@@ -714,7 +778,6 @@ pub struct BlockWrapper {
     pub block: ::core::option::Option<Block>,
 }
 /// Informations about a block with its metadata
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BlockInfo {
     /// The unique ID of the block.
@@ -725,7 +788,6 @@ pub struct BlockInfo {
     pub status: i32,
 }
 /// BlockIds holds block ids
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BlockIds {
     /// Block ids
@@ -733,7 +795,6 @@ pub struct BlockIds {
     pub block_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
 /// Block parent tuple
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BlockParent {
     /// Block id
@@ -765,13 +826,11 @@ impl BlockStatus {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            BlockStatus::Unspecified => "BLOCK_STATUS_UNSPECIFIED",
-            BlockStatus::NonFinalBlockclique => "BLOCK_STATUS_NON_FINAL_BLOCKCLIQUE",
-            BlockStatus::Final => "BLOCK_STATUS_FINAL",
-            BlockStatus::NonFinalAlternateClique => {
-                "BLOCK_STATUS_NON_FINAL_ALTERNATE_CLIQUE"
-            }
-            BlockStatus::Discarded => "BLOCK_STATUS_DISCARDED",
+            Self::Unspecified => "BLOCK_STATUS_UNSPECIFIED",
+            Self::NonFinalBlockclique => "BLOCK_STATUS_NON_FINAL_BLOCKCLIQUE",
+            Self::Final => "BLOCK_STATUS_FINAL",
+            Self::NonFinalAlternateClique => "BLOCK_STATUS_NON_FINAL_ALTERNATE_CLIQUE",
+            Self::Discarded => "BLOCK_STATUS_DISCARDED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -789,7 +848,6 @@ impl BlockStatus {
     }
 }
 /// AddressKeys holds a list of addresses - keys
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressKeysEntries {
     /// List of address- key entries
@@ -797,7 +855,6 @@ pub struct AddressKeysEntries {
     pub address_key_entries: ::prost::alloc::vec::Vec<AddressKeyEntry>,
 }
 /// AddressKeyEntry
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AddressKeyEntry {
     /// Associated address of the entry
@@ -808,7 +865,6 @@ pub struct AddressKeyEntry {
     pub key: ::prost::alloc::vec::Vec<u8>,
 }
 /// DatastoreEntry
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DatastoreEntry {
     /// final datastore entry value
@@ -819,7 +875,6 @@ pub struct DatastoreEntry {
     pub candidate_value: ::prost::alloc::vec::Vec<u8>,
 }
 /// Slot draw
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SlotDraw {
     /// Slot
@@ -833,7 +888,6 @@ pub struct SlotDraw {
     pub endorsement_draws: ::prost::alloc::vec::Vec<EndorsementDraw>,
 }
 /// Endorsement draw
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct EndorsementDraw {
     /// Endorsement index
@@ -844,7 +898,6 @@ pub struct EndorsementDraw {
     pub producer: ::prost::alloc::string::String,
 }
 /// SlotExecutionOutput
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SlotExecutionOutput {
     /// Status
@@ -855,15 +908,13 @@ pub struct SlotExecutionOutput {
     pub execution_output: ::core::option::Option<ExecutionOutput>,
 }
 /// FinalizedExecutionOutput
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct FinalizedExecutionOutput {
     /// Slot
     #[prost(message, optional, tag = "1")]
     pub slot: ::core::option::Option<Slot>,
 }
 /// ExecutionOutput
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutionOutput {
     /// Slot
@@ -880,7 +931,6 @@ pub struct ExecutionOutput {
     pub state_changes: ::core::option::Option<StateChanges>,
 }
 /// ScExecutionEvent
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScExecutionEvent {
     /// Sc execution context
@@ -891,7 +941,6 @@ pub struct ScExecutionEvent {
     pub data: ::prost::alloc::vec::Vec<u8>,
 }
 /// ScExecutionEvent context
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScExecutionEventContext {
     /// When was it generated
@@ -917,7 +966,6 @@ pub struct ScExecutionEventContext {
     pub status: i32,
 }
 /// ScExecutionEventsStatus
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ScExecutionEventsStatus {
     /// Status
@@ -925,7 +973,6 @@ pub struct ScExecutionEventsStatus {
     pub status: ::prost::alloc::vec::Vec<i32>,
 }
 /// StateChanges
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StateChanges {
     /// Ledger changes
@@ -945,7 +992,6 @@ pub struct StateChanges {
     pub execution_trail_hash_change: ::core::option::Option<SetOrKeepString>,
 }
 /// ExecutedOpsChangeEntry
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutedOpsChangeEntry {
     /// string
@@ -956,8 +1002,7 @@ pub struct ExecutedOpsChangeEntry {
     pub value: ::core::option::Option<ExecutedOpsChangeValue>,
 }
 /// ExecutedOpsChangeValue
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ExecutedOpsChangeValue {
     /// The status of the execution of the operation
     #[prost(enumeration = "OperationExecutionStatus", tag = "1")]
@@ -967,7 +1012,6 @@ pub struct ExecutedOpsChangeValue {
     pub slot: ::core::option::Option<Slot>,
 }
 /// AsyncPoolChange Entry
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AsyncPoolChangeEntry {
     /// Async message id
@@ -978,7 +1022,6 @@ pub struct AsyncPoolChangeEntry {
     pub value: ::core::option::Option<AsyncPoolChangeValue>,
 }
 /// AsyncPoolChangeValue
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AsyncPoolChangeValue {
     /// The type of the change
@@ -991,7 +1034,6 @@ pub struct AsyncPoolChangeValue {
 /// Nested message and enum types in `AsyncPoolChangeValue`.
 pub mod async_pool_change_value {
     /// AsyncPool message
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Message {
         /// Created ledger entry
@@ -1003,7 +1045,6 @@ pub mod async_pool_change_value {
     }
 }
 /// Asynchronous smart contract message
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AsyncMessage {
     /// Slot at which the message was emitted
@@ -1052,7 +1093,6 @@ pub struct AsyncMessage {
     pub can_be_executed: bool,
 }
 /// Asynchronous smart contract message
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AsyncMessageUpdate {
     /// Change the slot at which the message was emitted
@@ -1101,8 +1141,7 @@ pub struct AsyncMessageUpdate {
     pub can_be_executed: ::core::option::Option<SetOrKeepBool>,
 }
 /// Set or Keep Slot
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SetOrKeepSlot {
     /// The type of the change
     #[prost(oneof = "set_or_keep_slot::Change", tags = "1, 2")]
@@ -1111,8 +1150,7 @@ pub struct SetOrKeepSlot {
 /// Nested message and enum types in `SetOrKeepSlot`.
 pub mod set_or_keep_slot {
     /// The type of the change
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Change {
         /// The value of that entry (Optional)
         #[prost(message, tag = "1")]
@@ -1123,8 +1161,7 @@ pub mod set_or_keep_slot {
     }
 }
 /// Set or Keep Uint64
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SetOrKeepUint64 {
     /// The type of the change
     #[prost(oneof = "set_or_keep_uint64::Change", tags = "1, 2")]
@@ -1133,8 +1170,7 @@ pub struct SetOrKeepUint64 {
 /// Nested message and enum types in `SetOrKeepUint64`.
 pub mod set_or_keep_uint64 {
     /// The type of the change
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Change {
         /// The value of that entry (Optional)
         #[prost(message, tag = "1")]
@@ -1145,7 +1181,6 @@ pub mod set_or_keep_uint64 {
     }
 }
 /// Set or Keep String
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetOrKeepString {
     /// The type of the change
@@ -1155,7 +1190,6 @@ pub struct SetOrKeepString {
 /// Nested message and enum types in `SetOrKeepString`.
 pub mod set_or_keep_string {
     /// The type of the change
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Change {
         /// The value of that entry (Optional)
@@ -1167,7 +1201,6 @@ pub mod set_or_keep_string {
     }
 }
 /// Set or Keep Bytes
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetOrKeepBytes {
     /// The type of the change
@@ -1177,7 +1210,6 @@ pub struct SetOrKeepBytes {
 /// Nested message and enum types in `SetOrKeepBytes`.
 pub mod set_or_keep_bytes {
     /// The type of the change
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Change {
         /// The value of that entry (Optional)
@@ -1189,8 +1221,7 @@ pub mod set_or_keep_bytes {
     }
 }
 /// Set or Keep Bool
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SetOrKeepBool {
     /// The type of the change
     #[prost(oneof = "set_or_keep_bool::Change", tags = "1, 2")]
@@ -1199,8 +1230,7 @@ pub struct SetOrKeepBool {
 /// Nested message and enum types in `SetOrKeepBool`.
 pub mod set_or_keep_bool {
     /// The type of the change
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Change {
         /// The value of that entry (Optional)
         #[prost(message, tag = "1")]
@@ -1211,7 +1241,6 @@ pub mod set_or_keep_bool {
     }
 }
 /// Set or Keep AsyncMessageTrigger
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetOrKeepAsyncMessageTrigger {
     /// The type of the change
@@ -1221,7 +1250,6 @@ pub struct SetOrKeepAsyncMessageTrigger {
 /// Nested message and enum types in `SetOrKeepAsyncMessageTrigger`.
 pub mod set_or_keep_async_message_trigger {
     /// The type of the change
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Change {
         /// The value of that entry (Optional)
@@ -1233,7 +1261,6 @@ pub mod set_or_keep_async_message_trigger {
     }
 }
 /// Structure defining a trigger for an asynchronous message
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct AsyncMessageTrigger {
     /// Filter on the address
@@ -1244,7 +1271,6 @@ pub struct AsyncMessageTrigger {
     pub datastore_key: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
 }
 /// LedgerChangeEntry
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LedgerChangeEntry {
     /// Address
@@ -1255,7 +1281,6 @@ pub struct LedgerChangeEntry {
     pub value: ::core::option::Option<LedgerChangeValue>,
 }
 /// LedgerChangeValue
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LedgerChangeValue {
     /// The type of the change
@@ -1268,7 +1293,6 @@ pub struct LedgerChangeValue {
 /// Nested message and enum types in `LedgerChangeValue`.
 pub mod ledger_change_value {
     /// LedgerEntry or LedgerEntryUpdate
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Entry {
         /// Created ledger entry
@@ -1280,7 +1304,6 @@ pub mod ledger_change_value {
     }
 }
 /// An entry associated to an address in the `FinalLedger`
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LedgerEntry {
     /// The balance of that entry
@@ -1294,7 +1317,6 @@ pub struct LedgerEntry {
     pub datastore: ::prost::alloc::vec::Vec<BytesMapFieldEntry>,
 }
 /// Represents an update to one or more fields of a `LedgerEntry`
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct LedgerEntryUpdate {
     /// Change the balance
@@ -1308,8 +1330,7 @@ pub struct LedgerEntryUpdate {
     pub datastore: ::prost::alloc::vec::Vec<SetOrDeleteDatastoreEntry>,
 }
 /// Set or Keep Balance
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct SetOrKeepBalance {
     /// The type of the change
     #[prost(oneof = "set_or_keep_balance::Change", tags = "1, 2")]
@@ -1318,8 +1339,7 @@ pub struct SetOrKeepBalance {
 /// Nested message and enum types in `SetOrKeepBalance`.
 pub mod set_or_keep_balance {
     /// The type of the change
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Change {
         /// The value of that entry (Optional)
         #[prost(message, tag = "1")]
@@ -1330,7 +1350,6 @@ pub mod set_or_keep_balance {
     }
 }
 /// Set or Delete DatastoreEntry
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SetOrDeleteDatastoreEntry {
     /// The type of the change
@@ -1340,7 +1359,6 @@ pub struct SetOrDeleteDatastoreEntry {
 /// Nested message and enum types in `SetOrDeleteDatastoreEntry`.
 pub mod set_or_delete_datastore_entry {
     /// The type of the change
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Change {
         /// Executable bytecode (Optional)
@@ -1352,7 +1370,6 @@ pub mod set_or_delete_datastore_entry {
     }
 }
 /// Read-only execution call
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadOnlyExecutionCall {
     /// Maximum gas to spend in the execution.
@@ -1374,7 +1391,6 @@ pub struct ReadOnlyExecutionCall {
 /// Nested message and enum types in `ReadOnlyExecutionCall`.
 pub mod read_only_execution_call {
     /// Target of the call
-    #[allow(clippy::derive_partial_eq_without_eq)]
     #[derive(Clone, PartialEq, ::prost::Oneof)]
     pub enum Target {
         /// Byte code
@@ -1386,7 +1402,6 @@ pub mod read_only_execution_call {
     }
 }
 /// / Execute a bytecode
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct BytecodeExecution {
     /// Byte code
@@ -1397,7 +1412,6 @@ pub struct BytecodeExecution {
     pub operation_datastore: ::prost::alloc::vec::Vec<u8>,
 }
 /// Execute a function call
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct FunctionCall {
     /// Target address
@@ -1414,7 +1428,6 @@ pub struct FunctionCall {
     pub coins: ::core::option::Option<NativeAmount>,
 }
 /// Structure describing the output of a read only execution
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ReadOnlyExecutionOutput {
     /// Output of a single execution
@@ -1432,7 +1445,6 @@ pub struct ReadOnlyExecutionOutput {
 /// a new `ExecutionStackElement` is pushed at the top of the execution stack
 /// to represent the local execution context of the called function,
 /// instead of the caller's which should lie just below in the stack.
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ExecutionStackElement {
     /// Called address
@@ -1476,12 +1488,10 @@ impl ScExecutionEventStatus {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ScExecutionEventStatus::Unspecified => {
-                "SC_EXECUTION_EVENT_STATUS_UNSPECIFIED"
-            }
-            ScExecutionEventStatus::Final => "SC_EXECUTION_EVENT_STATUS_FINAL",
-            ScExecutionEventStatus::ReadOnly => "SC_EXECUTION_EVENT_STATUS_READ_ONLY",
-            ScExecutionEventStatus::Candidate => "SC_EXECUTION_EVENT_STATUS_CANDIDATE",
+            Self::Unspecified => "SC_EXECUTION_EVENT_STATUS_UNSPECIFIED",
+            Self::Final => "SC_EXECUTION_EVENT_STATUS_FINAL",
+            Self::ReadOnly => "SC_EXECUTION_EVENT_STATUS_READ_ONLY",
+            Self::Candidate => "SC_EXECUTION_EVENT_STATUS_CANDIDATE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1515,10 +1525,10 @@ impl ExecutionOutputStatus {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ExecutionOutputStatus::Unspecified => "EXECUTION_OUTPUT_STATUS_UNSPECIFIED",
-            ExecutionOutputStatus::Candidate => "EXECUTION_OUTPUT_STATUS_CANDIDATE",
-            ExecutionOutputStatus::Final => "EXECUTION_OUTPUT_STATUS_FINAL",
-            ExecutionOutputStatus::Unknown => "EXECUTION_OUTPUT_STATUS_UNKNOWN",
+            Self::Unspecified => "EXECUTION_OUTPUT_STATUS_UNSPECIFIED",
+            Self::Candidate => "EXECUTION_OUTPUT_STATUS_CANDIDATE",
+            Self::Final => "EXECUTION_OUTPUT_STATUS_FINAL",
+            Self::Unknown => "EXECUTION_OUTPUT_STATUS_UNKNOWN",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1550,11 +1560,9 @@ impl OperationExecutionStatus {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            OperationExecutionStatus::Unspecified => {
-                "OPERATION_EXECUTION_STATUS_UNSPECIFIED"
-            }
-            OperationExecutionStatus::Success => "OPERATION_EXECUTION_STATUS_SUCCESS",
-            OperationExecutionStatus::Failed => "OPERATION_EXECUTION_STATUS_FAILED",
+            Self::Unspecified => "OPERATION_EXECUTION_STATUS_UNSPECIFIED",
+            Self::Success => "OPERATION_EXECUTION_STATUS_SUCCESS",
+            Self::Failed => "OPERATION_EXECUTION_STATUS_FAILED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1587,10 +1595,10 @@ impl AsyncPoolChangeType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            AsyncPoolChangeType::Unspecified => "ASYNC_POOL_CHANGE_TYPE_UNSPECIFIED",
-            AsyncPoolChangeType::Set => "ASYNC_POOL_CHANGE_TYPE_SET",
-            AsyncPoolChangeType::Update => "ASYNC_POOL_CHANGE_TYPE_UPDATE",
-            AsyncPoolChangeType::Delete => "ASYNC_POOL_CHANGE_TYPE_DELETE",
+            Self::Unspecified => "ASYNC_POOL_CHANGE_TYPE_UNSPECIFIED",
+            Self::Set => "ASYNC_POOL_CHANGE_TYPE_SET",
+            Self::Update => "ASYNC_POOL_CHANGE_TYPE_UPDATE",
+            Self::Delete => "ASYNC_POOL_CHANGE_TYPE_DELETE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1624,10 +1632,10 @@ impl LedgerChangeType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            LedgerChangeType::Unspecified => "LEDGER_CHANGE_TYPE_UNSPECIFIED",
-            LedgerChangeType::Set => "LEDGER_CHANGE_TYPE_SET",
-            LedgerChangeType::Update => "LEDGER_CHANGE_TYPE_UPDATE",
-            LedgerChangeType::Delete => "LEDGER_CHANGE_TYPE_DELETE",
+            Self::Unspecified => "LEDGER_CHANGE_TYPE_UNSPECIFIED",
+            Self::Set => "LEDGER_CHANGE_TYPE_SET",
+            Self::Update => "LEDGER_CHANGE_TYPE_UPDATE",
+            Self::Delete => "LEDGER_CHANGE_TYPE_DELETE",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1642,16 +1650,14 @@ impl LedgerChangeType {
     }
 }
 /// NativeTime represents a native duration or unix timestamp
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct NativeTime {
     /// Milliseconds
     #[prost(uint64, tag = "1")]
     pub milliseconds: u64,
 }
 /// Consensus statistics
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ConsensusStats {
     /// Start of the time span for stats
     #[prost(message, optional, tag = "1")]
@@ -1670,8 +1676,7 @@ pub struct ConsensusStats {
     pub clique_count: u64,
 }
 /// Pool statistics
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct PoolStats {
     /// Endorsements
     #[prost(uint64, tag = "1")]
@@ -1681,8 +1686,7 @@ pub struct PoolStats {
     pub operations_count: u64,
 }
 /// Network statistics
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct NetworkStats {
     /// In connections count
     #[prost(uint64, tag = "1")]
@@ -1701,8 +1705,7 @@ pub struct NetworkStats {
     pub active_node_count: u64,
 }
 /// Execution statistics
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct ExecutionStats {
     /// Time window start
     #[prost(message, optional, tag = "1")]
@@ -1718,7 +1721,6 @@ pub struct ExecutionStats {
     pub final_executed_operations_count: u64,
 }
 /// Node status
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NodeStatus {
     /// Our node id
@@ -1774,7 +1776,6 @@ pub struct NodeStatus {
     pub chain_id: u64,
 }
 /// Connected node
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct ConnectedNode {
     /// Node id
@@ -1788,8 +1789,7 @@ pub struct ConnectedNode {
     pub connection_type: i32,
 }
 /// Compact configuration
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct CompactConfig {
     /// Time in milliseconds when the blockclique started.
     #[prost(message, optional, tag = "1")]
@@ -1823,7 +1823,6 @@ pub struct CompactConfig {
     pub max_block_size: u32,
 }
 /// Public status
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PublicStatus {
     /// Our node id
@@ -1881,9 +1880,9 @@ impl ConnectionType {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ConnectionType::Unspecified => "CONNECTION_TYPE_UNSPECIFIED",
-            ConnectionType::Incoming => "CONNECTION_TYPE_INCOMING",
-            ConnectionType::Outgoing => "CONNECTION_TYPE_OUTGOING",
+            Self::Unspecified => "CONNECTION_TYPE_UNSPECIFIED",
+            Self::Incoming => "CONNECTION_TYPE_INCOMING",
+            Self::Outgoing => "CONNECTION_TYPE_OUTGOING",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1897,7 +1896,6 @@ impl ConnectionType {
     }
 }
 /// StakerEntry
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StakerEntry {
     /// Address
@@ -1908,7 +1906,6 @@ pub struct StakerEntry {
     pub rolls: u64,
 }
 /// Entry for GetMipStatusResponse
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MipStatusEntry {
     /// Mip info
@@ -1919,7 +1916,6 @@ pub struct MipStatusEntry {
     pub state_id: i32,
 }
 /// MIP info (name & versions & time range for a MIP)
-#[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct MipInfo {
     /// MIP name or descriptive name
@@ -1942,8 +1938,7 @@ pub struct MipInfo {
     pub components: ::prost::alloc::vec::Vec<MipComponentEntry>,
 }
 /// MipComponentEntry
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct MipComponentEntry {
     /// Kind
     #[prost(enumeration = "MipComponent", tag = "1")]
@@ -1978,13 +1973,13 @@ impl ComponentStateId {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            ComponentStateId::Unspecified => "COMPONENT_STATE_ID_UNSPECIFIED",
-            ComponentStateId::Error => "COMPONENT_STATE_ID_ERROR",
-            ComponentStateId::Defined => "COMPONENT_STATE_ID_DEFINED",
-            ComponentStateId::Started => "COMPONENT_STATE_ID_STARTED",
-            ComponentStateId::Lockedin => "COMPONENT_STATE_ID_LOCKEDIN",
-            ComponentStateId::Active => "COMPONENT_STATE_ID_ACTIVE",
-            ComponentStateId::Failed => "COMPONENT_STATE_ID_FAILED",
+            Self::Unspecified => "COMPONENT_STATE_ID_UNSPECIFIED",
+            Self::Error => "COMPONENT_STATE_ID_ERROR",
+            Self::Defined => "COMPONENT_STATE_ID_DEFINED",
+            Self::Started => "COMPONENT_STATE_ID_STARTED",
+            Self::Lockedin => "COMPONENT_STATE_ID_LOCKEDIN",
+            Self::Active => "COMPONENT_STATE_ID_ACTIVE",
+            Self::Failed => "COMPONENT_STATE_ID_FAILED",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -2019,9 +2014,9 @@ impl MipComponent {
     /// (if the ProtoBuf definition does not change) and safe for programmatic use.
     pub fn as_str_name(&self) -> &'static str {
         match self {
-            MipComponent::Unspecified => "MIP_COMPONENT_UNSPECIFIED",
-            MipComponent::Address => "MIP_COMPONENT_ADDRESS",
-            MipComponent::Keypair => "MIP_COMPONENT_KEYPAIR",
+            Self::Unspecified => "MIP_COMPONENT_UNSPECIFIED",
+            Self::Address => "MIP_COMPONENT_ADDRESS",
+            Self::Keypair => "MIP_COMPONENT_KEYPAIR",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
