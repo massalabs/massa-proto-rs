@@ -2350,8 +2350,7 @@ pub struct GetStakersResponse {
 /// GetTransactionsThroughputRequest holds request for GetTransactionsThroughput
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GetTransactionsThroughputRequest {}
-/// GetTransactionsThroughputResponse holds response from
-/// GetTransactionsThroughput
+/// GetTransactionsThroughputResponse holds response from GetTransactionsThroughput
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct GetTransactionsThroughputResponse {
     /// Transactions throughput
