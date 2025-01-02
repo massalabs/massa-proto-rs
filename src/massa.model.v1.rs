@@ -1756,6 +1756,9 @@ pub struct PublicStatus {
     /// minimal fees
     #[prost(message, optional, tag = "13")]
     pub minimal_fees: ::core::option::Option<NativeAmount>,
+    /// current mip version
+    #[prost(uint32, tag = "14")]
+    pub current_mip_version: u32,
 }
 /// ConnectionType enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
