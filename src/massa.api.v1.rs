@@ -2502,6 +2502,15 @@ pub struct AddressDatastoreKeysCandidate {
     /// Prefix for the keys
     #[prost(bytes = "vec", tag = "2")]
     pub prefix: ::prost::alloc::vec::Vec<u8>,
+    /// Key offset for the search
+    #[prost(bytes = "vec", tag = "3")]
+    pub start_key: ::prost::alloc::vec::Vec<u8>,
+    /// included start_key
+    #[prost(bool, tag = "4")]
+    pub inclusive_start_key: bool,
+    /// Limit for the number of keys
+    #[prost(uint32, tag = "5")]
+    pub limit: u32,
 }
 /// Request to get the datastore keys (final) of an address
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2512,6 +2521,15 @@ pub struct AddressDatastoreKeysFinal {
     /// Prefix for the keys
     #[prost(bytes = "vec", tag = "2")]
     pub prefix: ::prost::alloc::vec::Vec<u8>,
+    /// Key offset for the search
+    #[prost(bytes = "vec", tag = "3")]
+    pub start_key: ::prost::alloc::vec::Vec<u8>,
+    /// included start_key
+    #[prost(bool, tag = "4")]
+    pub inclusive_start_key: bool,
+    /// Limit for the number of keys
+    #[prost(uint32, tag = "5")]
+    pub limit: u32,
 }
 /// Request to get a datastore value (candidate) for an address
 #[derive(Clone, PartialEq, ::prost::Message)]
