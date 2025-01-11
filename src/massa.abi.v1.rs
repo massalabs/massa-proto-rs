@@ -130,7 +130,7 @@ pub struct FunctionExistsResult {
 pub struct RespResult {
     #[prost(
         oneof = "resp_result::Res",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67"
     )]
     pub res: ::core::option::Option<resp_result::Res>,
 }
@@ -265,6 +265,14 @@ pub mod resp_result {
         IsAddressEoaResult(super::IsAddressEoaResult),
         #[prost(message, tag = "63")]
         ChainIdResult(super::ChainIdResult),
+        #[prost(message, tag = "64")]
+        DeferredCallQuoteResult(super::DeferredCallQuoteResult),
+        #[prost(message, tag = "65")]
+        DeferredCallExistsResult(super::DeferredCallExistsResult),
+        #[prost(message, tag = "66")]
+        DeferredCallRegisterResult(super::DeferredCallRegisterResult),
+        #[prost(message, tag = "67")]
+        DeferredCallCancelResult(super::DeferredCallCancelResult),
     }
 }
 /// Generic message that encapsulate response from ABI calls.
@@ -956,6 +964,90 @@ pub struct UnsafeRandomResult {
     /// Random bytes generated
     #[prost(bytes = "vec", tag = "1")]
     pub random_bytes: ::prost::alloc::vec::Vec<u8>,
+}
+/// / Deferred call cancel request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallCancelRequest {
+    /// / call id
+    #[prost(message, optional, tag = "1")]
+    pub call_id: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// / Deferred call cancel result
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallCancelResult {}
+/// Deferred call quote
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallQuoteRequest {
+    /// / target slot
+    #[prost(message, optional, tag = "1")]
+    pub target_slot: ::core::option::Option<super::super::model::v1::Slot>,
+    /// / max gas requested
+    #[prost(uint64, tag = "2")]
+    pub max_gas: u64,
+    /// / params size in bytes
+    #[prost(uint64, tag = "3")]
+    pub params_size: u64,
+}
+/// Deferred call quote result
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallQuoteResult {
+    /// / available
+    #[prost(bool, tag = "1")]
+    pub available: bool,
+    /// / cost
+    #[prost(uint64, tag = "2")]
+    pub cost: u64,
+}
+/// deferred call exists request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallExistsRequest {
+    /// / deferred call id
+    #[prost(message, optional, tag = "1")]
+    pub call_id: ::core::option::Option<::prost::alloc::string::String>,
+}
+/// deferred call exists result
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallExistsResult {
+    /// / call exists
+    #[prost(bool, tag = "1")]
+    pub call_exists: bool,
+}
+/// deferred call register request
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallRegisterRequest {
+    /// / target address
+    #[prost(string, tag = "1")]
+    pub target_address: ::prost::alloc::string::String,
+    /// / target function
+    #[prost(string, tag = "2")]
+    pub target_function: ::prost::alloc::string::String,
+    /// / start slot
+    #[prost(message, optional, tag = "3")]
+    pub target_slot: ::core::option::Option<super::super::model::v1::Slot>,
+    /// / gas requested
+    #[prost(uint64, tag = "4")]
+    pub max_gas: u64,
+    /// / params of the call
+    #[prost(bytes = "vec", tag = "5")]
+    pub params: ::prost::alloc::vec::Vec<u8>,
+    /// / coins
+    #[prost(uint64, tag = "6")]
+    pub coins: u64,
+}
+/// / deferred call register result
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallRegisterResult {
+    /// / deferred call id
+    #[prost(message, optional, tag = "1")]
+    pub call_id: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// Send async message request filter
 #[allow(clippy::derive_partial_eq_without_eq)]

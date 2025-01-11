@@ -107,6 +107,115 @@ pub struct SlotRange {
     #[prost(message, optional, tag = "2")]
     pub end_slot: ::core::option::Option<Slot>,
 }
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Denunciation {
+    /// BlockHeaderDenunciation or EndorsementDenunciation
+    #[prost(oneof = "denunciation::Entry", tags = "1, 2")]
+    pub entry: ::core::option::Option<denunciation::Entry>,
+}
+/// Nested message and enum types in `Denunciation`.
+pub mod denunciation {
+    /// BlockHeaderDenunciation or EndorsementDenunciation
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Entry {
+        /// Denunciation block header
+        #[prost(message, tag = "1")]
+        BlockHeader(super::BlockHeaderDenunciation),
+        /// Denunciation endorsement
+        #[prost(message, tag = "2")]
+        Endorsement(super::EndorsementDenunciation),
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct BlockHeaderDenunciation {
+    /// Denunciation public key
+    #[prost(string, tag = "1")]
+    pub public_key: ::prost::alloc::string::String,
+    /// Denunciation slot
+    #[prost(message, optional, tag = "2")]
+    pub slot: ::core::option::Option<Slot>,
+    /// Denunciation hash 1
+    #[prost(string, tag = "3")]
+    pub hash_1: ::prost::alloc::string::String,
+    /// Denunciation hash 2
+    #[prost(string, tag = "4")]
+    pub hash_2: ::prost::alloc::string::String,
+    /// Denunciation sig 1
+    #[prost(string, tag = "5")]
+    pub signature_1: ::prost::alloc::string::String,
+    /// Denunciation sig 2
+    #[prost(string, tag = "6")]
+    pub signature_2: ::prost::alloc::string::String,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct EndorsementDenunciation {
+    /// Denunciation public key
+    #[prost(string, tag = "1")]
+    pub public_key: ::prost::alloc::string::String,
+    /// Denunciation slot
+    #[prost(message, optional, tag = "2")]
+    pub slot: ::core::option::Option<Slot>,
+    /// Denunciation index
+    #[prost(uint32, tag = "3")]
+    pub index: u32,
+    /// Denunciation hash 1
+    #[prost(string, tag = "4")]
+    pub hash_1: ::prost::alloc::string::String,
+    /// Denunciation hash 2
+    #[prost(string, tag = "5")]
+    pub hash_2: ::prost::alloc::string::String,
+    /// Denunciation sig 1
+    #[prost(string, tag = "6")]
+    pub signature_1: ::prost::alloc::string::String,
+    /// Denunciation sig 2
+    #[prost(string, tag = "7")]
+    pub signature_2: ::prost::alloc::string::String,
+}
+/// Index for Denunciations in collections (e.g. like a HashMap...)
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DenunciationIndex {
+    /// DenunciationBlockHeader or DenunciationEndorsement
+    #[prost(oneof = "denunciation_index::Entry", tags = "1, 2")]
+    pub entry: ::core::option::Option<denunciation_index::Entry>,
+}
+/// Nested message and enum types in `DenunciationIndex`.
+pub mod denunciation_index {
+    /// DenunciationBlockHeader or DenunciationEndorsement
+    #[allow(clippy::derive_partial_eq_without_eq)]
+    #[derive(Clone, PartialEq, ::prost::Oneof)]
+    pub enum Entry {
+        /// Denunciation block header
+        #[prost(message, tag = "1")]
+        BlockHeader(super::DenunciationBlockHeader),
+        /// Denunciation endorsement
+        #[prost(message, tag = "2")]
+        Endorsement(super::DenunciationEndorsement),
+    }
+}
+/// Variant for Block header denunciation index
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DenunciationBlockHeader {
+    /// Denunciation slot
+    #[prost(message, optional, tag = "1")]
+    pub slot: ::core::option::Option<Slot>,
+}
+/// Variant for Endorsement denunciation index
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DenunciationEndorsement {
+    /// Denounciation slot
+    #[prost(message, optional, tag = "1")]
+    pub slot: ::core::option::Option<Slot>,
+    /// Denounciation index
+    #[prost(uint32, tag = "2")]
+    pub index: u32,
+}
 /// An endorsement, as sent in the network
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -488,115 +597,6 @@ impl OpType {
             _ => None,
         }
     }
-}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Denunciation {
-    /// BlockHeaderDenunciation or EndorsementDenunciation
-    #[prost(oneof = "denunciation::Entry", tags = "1, 2")]
-    pub entry: ::core::option::Option<denunciation::Entry>,
-}
-/// Nested message and enum types in `Denunciation`.
-pub mod denunciation {
-    /// BlockHeaderDenunciation or EndorsementDenunciation
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Entry {
-        /// Denunciation block header
-        #[prost(message, tag = "1")]
-        BlockHeader(super::BlockHeaderDenunciation),
-        /// Denunciation endorsement
-        #[prost(message, tag = "2")]
-        Endorsement(super::EndorsementDenunciation),
-    }
-}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct BlockHeaderDenunciation {
-    /// Denunciation public key
-    #[prost(string, tag = "1")]
-    pub public_key: ::prost::alloc::string::String,
-    /// Denunciation slot
-    #[prost(message, optional, tag = "2")]
-    pub slot: ::core::option::Option<Slot>,
-    /// Denunciation hash 1
-    #[prost(string, tag = "3")]
-    pub hash_1: ::prost::alloc::string::String,
-    /// Denunciation hash 2
-    #[prost(string, tag = "4")]
-    pub hash_2: ::prost::alloc::string::String,
-    /// Denunciation sig 1
-    #[prost(string, tag = "5")]
-    pub signature_1: ::prost::alloc::string::String,
-    /// Denunciation sig 2
-    #[prost(string, tag = "6")]
-    pub signature_2: ::prost::alloc::string::String,
-}
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct EndorsementDenunciation {
-    /// Denunciation public key
-    #[prost(string, tag = "1")]
-    pub public_key: ::prost::alloc::string::String,
-    /// Denunciation slot
-    #[prost(message, optional, tag = "2")]
-    pub slot: ::core::option::Option<Slot>,
-    /// Denunciation index
-    #[prost(uint32, tag = "3")]
-    pub index: u32,
-    /// Denunciation hash 1
-    #[prost(string, tag = "4")]
-    pub hash_1: ::prost::alloc::string::String,
-    /// Denunciation hash 2
-    #[prost(string, tag = "5")]
-    pub hash_2: ::prost::alloc::string::String,
-    /// Denunciation sig 1
-    #[prost(string, tag = "6")]
-    pub signature_1: ::prost::alloc::string::String,
-    /// Denunciation sig 2
-    #[prost(string, tag = "7")]
-    pub signature_2: ::prost::alloc::string::String,
-}
-/// Index for Denunciations in collections (e.g. like a HashMap...)
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DenunciationIndex {
-    /// DenunciationBlockHeader or DenunciationEndorsement
-    #[prost(oneof = "denunciation_index::Entry", tags = "1, 2")]
-    pub entry: ::core::option::Option<denunciation_index::Entry>,
-}
-/// Nested message and enum types in `DenunciationIndex`.
-pub mod denunciation_index {
-    /// DenunciationBlockHeader or DenunciationEndorsement
-    #[allow(clippy::derive_partial_eq_without_eq)]
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Entry {
-        /// Denunciation block header
-        #[prost(message, tag = "1")]
-        BlockHeader(super::DenunciationBlockHeader),
-        /// Denunciation endorsement
-        #[prost(message, tag = "2")]
-        Endorsement(super::DenunciationEndorsement),
-    }
-}
-/// Variant for Block header denunciation index
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DenunciationBlockHeader {
-    /// Denunciation slot
-    #[prost(message, optional, tag = "1")]
-    pub slot: ::core::option::Option<Slot>,
-}
-/// Variant for Endorsement denunciation index
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DenunciationEndorsement {
-    /// Denounciation slot
-    #[prost(message, optional, tag = "1")]
-    pub slot: ::core::option::Option<Slot>,
-    /// Denounciation index
-    #[prost(uint32, tag = "2")]
-    pub index: u32,
 }
 /// Block
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1773,6 +1773,9 @@ pub struct NodeStatus {
     /// Chain id
     #[prost(uint64, tag = "17")]
     pub chain_id: u64,
+    /// Current mip version
+    #[prost(uint32, tag = "18")]
+    pub current_mip_version: u32,
 }
 /// Connected node
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -1863,6 +1866,9 @@ pub struct PublicStatus {
     /// minimal fees
     #[prost(message, optional, tag = "13")]
     pub minimal_fees: ::core::option::Option<NativeAmount>,
+    /// current mip version
+    #[prost(uint32, tag = "14")]
+    pub current_mip_version: u32,
 }
 /// ConnectionType enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
