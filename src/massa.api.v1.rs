@@ -2508,8 +2508,14 @@ pub struct AddressDatastoreKeysCandidate {
     /// included start_key
     #[prost(message, optional, tag = "4")]
     pub inclusive_start_key: ::core::option::Option<bool>,
-    /// Limit for the number of keys
+    /// End key for the search
     #[prost(message, optional, tag = "5")]
+    pub end_key: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
+    /// included end_key
+    #[prost(message, optional, tag = "6")]
+    pub inclusive_end_key: ::core::option::Option<bool>,
+    /// Limit for the number of keys
+    #[prost(message, optional, tag = "7")]
     pub limit: ::core::option::Option<u32>,
 }
 /// Request to get the datastore keys (final) of an address
@@ -2527,8 +2533,14 @@ pub struct AddressDatastoreKeysFinal {
     /// included start_key
     #[prost(message, optional, tag = "4")]
     pub inclusive_start_key: ::core::option::Option<bool>,
-    /// Limit for the number of keys
+    /// End key for the search
     #[prost(message, optional, tag = "5")]
+    pub end_key: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
+    /// included end_key
+    #[prost(message, optional, tag = "6")]
+    pub inclusive_end_key: ::core::option::Option<bool>,
+    /// Limit for the number of keys
+    #[prost(message, optional, tag = "7")]
     pub limit: ::core::option::Option<u32>,
 }
 /// Request to get a datastore value (candidate) for an address
