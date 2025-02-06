@@ -4450,6 +4450,38 @@ pub mod public_service_client {
                 );
             self.inner.streaming(req, path, codec).await
         }
+        /// unidirectional stream NewSlotExecutionOutputs
+        pub async fn new_slot_execution_outputs_server(
+            &mut self,
+            request: impl tonic::IntoRequest<super::NewSlotExecutionOutputsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<
+                tonic::codec::Streaming<super::NewSlotExecutionOutputsResponse>,
+            >,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/NewSlotExecutionOutputsServer",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PublicService",
+                        "NewSlotExecutionOutputsServer",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
         /// Call stack for each slot executed
         pub async fn new_slot_abi_call_stacks(
             &mut self,
@@ -4855,6 +4887,23 @@ pub mod public_service_server {
             >,
         ) -> std::result::Result<
             tonic::Response<Self::NewSlotExecutionOutputsStream>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the NewSlotExecutionOutputsServer method.
+        type NewSlotExecutionOutputsServerStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<
+                    super::NewSlotExecutionOutputsResponse,
+                    tonic::Status,
+                >,
+            >
+            + std::marker::Send
+            + 'static;
+        /// unidirectional stream NewSlotExecutionOutputs
+        async fn new_slot_execution_outputs_server(
+            &self,
+            request: tonic::Request<super::NewSlotExecutionOutputsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::NewSlotExecutionOutputsServerStream>,
             tonic::Status,
         >;
         /// Server streaming response type for the NewSlotABICallStacks method.
@@ -6121,6 +6170,61 @@ pub mod public_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/NewSlotExecutionOutputsServer" => {
+                    #[allow(non_camel_case_types)]
+                    struct NewSlotExecutionOutputsServerSvc<T: PublicService>(
+                        pub Arc<T>,
+                    );
+                    impl<
+                        T: PublicService,
+                    > tonic::server::ServerStreamingService<
+                        super::NewSlotExecutionOutputsRequest,
+                    > for NewSlotExecutionOutputsServerSvc<T> {
+                        type Response = super::NewSlotExecutionOutputsResponse;
+                        type ResponseStream = T::NewSlotExecutionOutputsServerStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::NewSlotExecutionOutputsRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PublicService>::new_slot_execution_outputs_server(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = NewSlotExecutionOutputsServerSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
