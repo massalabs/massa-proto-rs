@@ -4416,6 +4416,36 @@ pub mod public_service_client {
                 );
             self.inner.streaming(req, path, codec).await
         }
+        /// New received and produced blocks with operations unidirectional
+        pub async fn new_filled_blocks_server(
+            &mut self,
+            request: impl tonic::IntoRequest<super::NewFilledBlocksRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::NewFilledBlocksResponse>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/NewFilledBlocksServer",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PublicService",
+                        "NewFilledBlocksServer",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
         /// New received and produced operations
         pub async fn new_operations(
             &mut self,
@@ -4442,6 +4472,33 @@ pub mod public_service_client {
             req.extensions_mut()
                 .insert(GrpcMethod::new("massa.api.v1.PublicService", "NewOperations"));
             self.inner.streaming(req, path, codec).await
+        }
+        /// unidirectional stream NewOperations
+        pub async fn new_operations_server(
+            &mut self,
+            request: impl tonic::IntoRequest<super::NewOperationsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::NewOperationsResponse>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/NewOperationsServer",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("massa.api.v1.PublicService", "NewOperationsServer"),
+                );
+            self.inner.server_streaming(req, path, codec).await
         }
         /// New received and slot execution events
         pub async fn new_slot_execution_outputs(
@@ -4684,6 +4741,38 @@ pub mod public_service_client {
                 );
             self.inner.streaming(req, path, codec).await
         }
+        /// Transactions throughput unidirectional
+        pub async fn transactions_throughput_server(
+            &mut self,
+            request: impl tonic::IntoRequest<super::TransactionsThroughputRequest>,
+        ) -> std::result::Result<
+            tonic::Response<
+                tonic::codec::Streaming<super::TransactionsThroughputResponse>,
+            >,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/TransactionsThroughputServer",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PublicService",
+                        "TransactionsThroughputServer",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -4897,6 +4986,20 @@ pub mod public_service_server {
             tonic::Response<Self::NewFilledBlocksStream>,
             tonic::Status,
         >;
+        /// Server streaming response type for the NewFilledBlocksServer method.
+        type NewFilledBlocksServerStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::NewFilledBlocksResponse, tonic::Status>,
+            >
+            + std::marker::Send
+            + 'static;
+        /// New received and produced blocks with operations unidirectional
+        async fn new_filled_blocks_server(
+            &self,
+            request: tonic::Request<super::NewFilledBlocksRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::NewFilledBlocksServerStream>,
+            tonic::Status,
+        >;
         /// Server streaming response type for the NewOperations method.
         type NewOperationsStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::NewOperationsResponse, tonic::Status>,
@@ -4909,6 +5012,20 @@ pub mod public_service_server {
             request: tonic::Request<tonic::Streaming<super::NewOperationsRequest>>,
         ) -> std::result::Result<
             tonic::Response<Self::NewOperationsStream>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the NewOperationsServer method.
+        type NewOperationsServerStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::NewOperationsResponse, tonic::Status>,
+            >
+            + std::marker::Send
+            + 'static;
+        /// unidirectional stream NewOperations
+        async fn new_operations_server(
+            &self,
+            request: tonic::Request<super::NewOperationsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::NewOperationsServerStream>,
             tonic::Status,
         >;
         /// Server streaming response type for the NewSlotExecutionOutputs method.
@@ -5040,6 +5157,23 @@ pub mod public_service_server {
             >,
         ) -> std::result::Result<
             tonic::Response<Self::TransactionsThroughputStream>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the TransactionsThroughputServer method.
+        type TransactionsThroughputServerStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<
+                    super::TransactionsThroughputResponse,
+                    tonic::Status,
+                >,
+            >
+            + std::marker::Send
+            + 'static;
+        /// Transactions throughput unidirectional
+        async fn transactions_throughput_server(
+            &self,
+            request: tonic::Request<super::TransactionsThroughputRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::TransactionsThroughputServerStream>,
             tonic::Status,
         >;
     }
@@ -6161,6 +6295,57 @@ pub mod public_service_server {
                     };
                     Box::pin(fut)
                 }
+                "/massa.api.v1.PublicService/NewFilledBlocksServer" => {
+                    #[allow(non_camel_case_types)]
+                    struct NewFilledBlocksServerSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::ServerStreamingService<
+                        super::NewFilledBlocksRequest,
+                    > for NewFilledBlocksServerSvc<T> {
+                        type Response = super::NewFilledBlocksResponse;
+                        type ResponseStream = T::NewFilledBlocksServerStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::NewFilledBlocksRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PublicService>::new_filled_blocks_server(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = NewFilledBlocksServerSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
                 "/massa.api.v1.PublicService/NewOperations" => {
                     #[allow(non_camel_case_types)]
                     struct NewOperationsSvc<T: PublicService>(pub Arc<T>);
@@ -6205,6 +6390,53 @@ pub mod public_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/NewOperationsServer" => {
+                    #[allow(non_camel_case_types)]
+                    struct NewOperationsServerSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::ServerStreamingService<super::NewOperationsRequest>
+                    for NewOperationsServerSvc<T> {
+                        type Response = super::NewOperationsResponse;
+                        type ResponseStream = T::NewOperationsServerStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::NewOperationsRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PublicService>::new_operations_server(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = NewOperationsServerSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
@@ -6612,6 +6844,57 @@ pub mod public_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/TransactionsThroughputServer" => {
+                    #[allow(non_camel_case_types)]
+                    struct TransactionsThroughputServerSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::ServerStreamingService<
+                        super::TransactionsThroughputRequest,
+                    > for TransactionsThroughputServerSvc<T> {
+                        type Response = super::TransactionsThroughputResponse;
+                        type ResponseStream = T::TransactionsThroughputServerStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::TransactionsThroughputRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PublicService>::transactions_throughput_server(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = TransactionsThroughputServerSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
