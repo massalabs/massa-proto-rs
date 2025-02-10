@@ -4387,6 +4387,36 @@ pub mod public_service_client {
                 );
             self.inner.streaming(req, path, codec).await
         }
+        /// New received and produced endorsements
+        pub async fn new_endorsements_server(
+            &mut self,
+            request: impl tonic::IntoRequest<super::NewEndorsementsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::NewEndorsementsResponse>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/NewEndorsementsServer",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PublicService",
+                        "NewEndorsementsServer",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
         /// New received and produced blocks with operations
         pub async fn new_filled_blocks(
             &mut self,
@@ -4970,6 +5000,20 @@ pub mod public_service_server {
             request: tonic::Request<tonic::Streaming<super::NewEndorsementsRequest>>,
         ) -> std::result::Result<
             tonic::Response<Self::NewEndorsementsStream>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the NewEndorsementsServer method.
+        type NewEndorsementsServerStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::NewEndorsementsResponse, tonic::Status>,
+            >
+            + std::marker::Send
+            + 'static;
+        /// New received and produced endorsements
+        async fn new_endorsements_server(
+            &self,
+            request: tonic::Request<super::NewEndorsementsRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::NewEndorsementsServerStream>,
             tonic::Status,
         >;
         /// Server streaming response type for the NewFilledBlocks method.
@@ -6242,6 +6286,57 @@ pub mod public_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/NewEndorsementsServer" => {
+                    #[allow(non_camel_case_types)]
+                    struct NewEndorsementsServerSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::ServerStreamingService<
+                        super::NewEndorsementsRequest,
+                    > for NewEndorsementsServerSvc<T> {
+                        type Response = super::NewEndorsementsResponse;
+                        type ResponseStream = T::NewEndorsementsServerStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::NewEndorsementsRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PublicService>::new_endorsements_server(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = NewEndorsementsServerSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
