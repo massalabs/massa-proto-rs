@@ -2890,6 +2890,13 @@ pub struct NewBlocksRequest {
     #[prost(message, repeated, tag = "1")]
     pub filters: ::prost::alloc::vec::Vec<NewBlocksFilter>,
 }
+/// NewBlocksServerRequest holds request for unidirectional NewBlocks
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewBlocksServerRequest {
+    /// Returns all the blocks that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<NewBlocksFilter>,
+}
 /// NewBlocks Filter
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewBlocksFilter {
@@ -2920,9 +2927,23 @@ pub struct NewBlocksResponse {
     #[prost(message, optional, tag = "1")]
     pub signed_block: ::core::option::Option<super::super::model::v1::SignedBlock>,
 }
+/// NewBlocksServerResponse holds response from unidirectional NewBlocks
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewBlocksServerResponse {
+    /// Signed block
+    #[prost(message, optional, tag = "1")]
+    pub signed_block: ::core::option::Option<super::super::model::v1::SignedBlock>,
+}
 /// NewEndorsementsRequest holds request for NewEndorsements
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewEndorsementsRequest {
+    /// Returns all the endorsements that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<NewEndorsementsFilter>,
+}
+/// NewEndorsementsServerRequest holds request for NewEndorsements
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewEndorsementsServerRequest {
     /// Returns all the endorsements that verify all the filters
     #[prost(message, repeated, tag = "1")]
     pub filters: ::prost::alloc::vec::Vec<NewEndorsementsFilter>,
@@ -2953,6 +2974,15 @@ pub mod new_endorsements_filter {
 /// NewEndorsementsResponse holds response from NewEndorsements
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewEndorsementsResponse {
+    /// Signed endorsement
+    #[prost(message, optional, tag = "1")]
+    pub signed_endorsement: ::core::option::Option<
+        super::super::model::v1::SignedEndorsement,
+    >,
+}
+/// NewEndorsementsServerResponse holds response from NewEndorsements
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewEndorsementsServerResponse {
     /// Signed endorsement
     #[prost(message, optional, tag = "1")]
     pub signed_endorsement: ::core::option::Option<
@@ -4334,9 +4364,9 @@ pub mod public_service_client {
         /// unidirecitonnal
         pub async fn new_blocks_server(
             &mut self,
-            request: impl tonic::IntoRequest<super::NewBlocksRequest>,
+            request: impl tonic::IntoRequest<super::NewBlocksServerRequest>,
         ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::NewBlocksResponse>>,
+            tonic::Response<tonic::codec::Streaming<super::NewBlocksServerResponse>>,
             tonic::Status,
         > {
             self.inner
@@ -4390,9 +4420,11 @@ pub mod public_service_client {
         /// New received and produced endorsements
         pub async fn new_endorsements_server(
             &mut self,
-            request: impl tonic::IntoRequest<super::NewEndorsementsRequest>,
+            request: impl tonic::IntoRequest<super::NewEndorsementsServerRequest>,
         ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::NewEndorsementsResponse>>,
+            tonic::Response<
+                tonic::codec::Streaming<super::NewEndorsementsServerResponse>,
+            >,
             tonic::Status,
         > {
             self.inner
@@ -4976,14 +5008,14 @@ pub mod public_service_server {
         ) -> std::result::Result<tonic::Response<Self::NewBlocksStream>, tonic::Status>;
         /// Server streaming response type for the NewBlocksServer method.
         type NewBlocksServerStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::NewBlocksResponse, tonic::Status>,
+                Item = std::result::Result<super::NewBlocksServerResponse, tonic::Status>,
             >
             + std::marker::Send
             + 'static;
         /// unidirecitonnal
         async fn new_blocks_server(
             &self,
-            request: tonic::Request<super::NewBlocksRequest>,
+            request: tonic::Request<super::NewBlocksServerRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::NewBlocksServerStream>,
             tonic::Status,
@@ -5004,14 +5036,17 @@ pub mod public_service_server {
         >;
         /// Server streaming response type for the NewEndorsementsServer method.
         type NewEndorsementsServerStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::NewEndorsementsResponse, tonic::Status>,
+                Item = std::result::Result<
+                    super::NewEndorsementsServerResponse,
+                    tonic::Status,
+                >,
             >
             + std::marker::Send
             + 'static;
         /// New received and produced endorsements
         async fn new_endorsements_server(
             &self,
-            request: tonic::Request<super::NewEndorsementsRequest>,
+            request: tonic::Request<super::NewEndorsementsServerRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::NewEndorsementsServerStream>,
             tonic::Status,
@@ -6199,9 +6234,10 @@ pub mod public_service_server {
                     struct NewBlocksServerSvc<T: PublicService>(pub Arc<T>);
                     impl<
                         T: PublicService,
-                    > tonic::server::ServerStreamingService<super::NewBlocksRequest>
-                    for NewBlocksServerSvc<T> {
-                        type Response = super::NewBlocksResponse;
+                    > tonic::server::ServerStreamingService<
+                        super::NewBlocksServerRequest,
+                    > for NewBlocksServerSvc<T> {
+                        type Response = super::NewBlocksServerResponse;
                         type ResponseStream = T::NewBlocksServerStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
@@ -6209,7 +6245,7 @@ pub mod public_service_server {
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::NewBlocksRequest>,
+                            request: tonic::Request<super::NewBlocksServerRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
@@ -6296,9 +6332,9 @@ pub mod public_service_server {
                     impl<
                         T: PublicService,
                     > tonic::server::ServerStreamingService<
-                        super::NewEndorsementsRequest,
+                        super::NewEndorsementsServerRequest,
                     > for NewEndorsementsServerSvc<T> {
-                        type Response = super::NewEndorsementsResponse;
+                        type Response = super::NewEndorsementsServerResponse;
                         type ResponseStream = T::NewEndorsementsServerStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
@@ -6306,7 +6342,7 @@ pub mod public_service_server {
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::NewEndorsementsRequest>,
+                            request: tonic::Request<super::NewEndorsementsServerRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
