@@ -2890,6 +2890,13 @@ pub struct NewBlocksRequest {
     #[prost(message, repeated, tag = "1")]
     pub filters: ::prost::alloc::vec::Vec<NewBlocksFilter>,
 }
+/// NewBlocksServerRequest holds request for unidirectional NewBlocks
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewBlocksServerRequest {
+    /// Returns all the blocks that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<NewBlocksFilter>,
+}
 /// NewBlocks Filter
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewBlocksFilter {
@@ -2920,9 +2927,23 @@ pub struct NewBlocksResponse {
     #[prost(message, optional, tag = "1")]
     pub signed_block: ::core::option::Option<super::super::model::v1::SignedBlock>,
 }
+/// NewBlocksServerResponse holds response from unidirectional NewBlocks
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewBlocksServerResponse {
+    /// Signed block
+    #[prost(message, optional, tag = "1")]
+    pub signed_block: ::core::option::Option<super::super::model::v1::SignedBlock>,
+}
 /// NewEndorsementsRequest holds request for NewEndorsements
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewEndorsementsRequest {
+    /// Returns all the endorsements that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<NewEndorsementsFilter>,
+}
+/// NewEndorsementsServerRequest holds request for NewEndorsements
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewEndorsementsServerRequest {
     /// Returns all the endorsements that verify all the filters
     #[prost(message, repeated, tag = "1")]
     pub filters: ::prost::alloc::vec::Vec<NewEndorsementsFilter>,
@@ -2959,9 +2980,25 @@ pub struct NewEndorsementsResponse {
         super::super::model::v1::SignedEndorsement,
     >,
 }
+/// NewEndorsementsServerResponse holds response from NewEndorsements
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewEndorsementsServerResponse {
+    /// Signed endorsement
+    #[prost(message, optional, tag = "1")]
+    pub signed_endorsement: ::core::option::Option<
+        super::super::model::v1::SignedEndorsement,
+    >,
+}
 /// NewFilledBlocksRequest holds request for NewFilledBlocks
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewFilledBlocksRequest {
+    /// Returns all the blocks that verify one of the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<NewBlocksFilter>,
+}
+/// NewFilledBlocksServerRequest holds request for NewFilledBlocks
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewFilledBlocksServerRequest {
     /// Returns all the blocks that verify one of the filters
     #[prost(message, repeated, tag = "1")]
     pub filters: ::prost::alloc::vec::Vec<NewBlocksFilter>,
@@ -2996,9 +3033,23 @@ pub struct NewFilledBlocksResponse {
     #[prost(message, optional, tag = "1")]
     pub filled_block: ::core::option::Option<super::super::model::v1::FilledBlock>,
 }
+/// NewFilledBlocksServerResponse holds response from NewFilledBlocks
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewFilledBlocksServerResponse {
+    /// Block with operations content found in the node.
+    #[prost(message, optional, tag = "1")]
+    pub filled_block: ::core::option::Option<super::super::model::v1::FilledBlock>,
+}
 /// NewOperationsRequest holds request for NewOperations
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewOperationsRequest {
+    /// Returns all the operations that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<NewOperationsFilter>,
+}
+/// NewOperationsRequest holds request for NewOperations
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewOperationsServerRequest {
     /// Returns all the operations that verify all the filters
     #[prost(message, repeated, tag = "1")]
     pub filters: ::prost::alloc::vec::Vec<NewOperationsFilter>,
@@ -3035,9 +3086,25 @@ pub struct NewOperationsResponse {
         super::super::model::v1::SignedOperation,
     >,
 }
+/// NewOperationsServerResponse holds response from NewOperations
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewOperationsServerResponse {
+    /// Signed operation
+    #[prost(message, optional, tag = "1")]
+    pub signed_operation: ::core::option::Option<
+        super::super::model::v1::SignedOperation,
+    >,
+}
 /// NewSlotExecutionOutputsRequest holds request for NewSlotExecutionOutputs
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotExecutionOutputsRequest {
+    /// Returns all the slot execution outputs that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<NewSlotExecutionOutputsFilter>,
+}
+/// NewSlotExecutionOutputsServerRequest holds request for NewSlotExecutionOutputs
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewSlotExecutionOutputsServerRequest {
     /// Returns all the slot execution outputs that verify all the filters
     #[prost(message, repeated, tag = "1")]
     pub filters: ::prost::alloc::vec::Vec<NewSlotExecutionOutputsFilter>,
@@ -3234,6 +3301,13 @@ pub struct NewSlotExecutionOutputsResponse {
     #[prost(message, optional, tag = "1")]
     pub output: ::core::option::Option<super::super::model::v1::SlotExecutionOutput>,
 }
+/// NewSlotExecutionOutputsServerResponse holds response from NewSlotExecutionOutputs
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewSlotExecutionOutputsServerResponse {
+    /// Slot execution output
+    #[prost(message, optional, tag = "1")]
+    pub output: ::core::option::Option<super::super::model::v1::SlotExecutionOutput>,
+}
 /// NewSlotABICallStacks request
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct NewSlotAbiCallStacksRequest {
@@ -3359,9 +3433,23 @@ pub struct TransactionsThroughputRequest {
     #[prost(message, optional, tag = "1")]
     pub interval: ::core::option::Option<u64>,
 }
+/// TransactionsThroughputServerRequest holds request for TransactionsThroughput
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct TransactionsThroughputServerRequest {
+    /// Timer interval in seconds (Optional). Defaults to 10s
+    #[prost(message, optional, tag = "1")]
+    pub interval: ::core::option::Option<u64>,
+}
 /// TransactionsThroughputResponse holds response from TransactionsThroughput
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TransactionsThroughputResponse {
+    /// Transactions throughput per second
+    #[prost(uint32, tag = "1")]
+    pub throughput: u32,
+}
+/// TransactionsThroughputServerResponse holds response from TransactionsThroughput
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct TransactionsThroughputServerResponse {
     /// Transactions throughput per second
     #[prost(uint32, tag = "1")]
     pub throughput: u32,
@@ -4331,6 +4419,33 @@ pub mod public_service_client {
                 .insert(GrpcMethod::new("massa.api.v1.PublicService", "NewBlocks"));
             self.inner.streaming(req, path, codec).await
         }
+        /// unidirecitonnal
+        pub async fn new_blocks_server(
+            &mut self,
+            request: impl tonic::IntoRequest<super::NewBlocksServerRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::NewBlocksServerResponse>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/NewBlocksServer",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("massa.api.v1.PublicService", "NewBlocksServer"),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
         /// New received and produced endorsements
         pub async fn new_endorsements(
             &mut self,
@@ -4359,6 +4474,38 @@ pub mod public_service_client {
                     GrpcMethod::new("massa.api.v1.PublicService", "NewEndorsements"),
                 );
             self.inner.streaming(req, path, codec).await
+        }
+        /// New received and produced endorsements
+        pub async fn new_endorsements_server(
+            &mut self,
+            request: impl tonic::IntoRequest<super::NewEndorsementsServerRequest>,
+        ) -> std::result::Result<
+            tonic::Response<
+                tonic::codec::Streaming<super::NewEndorsementsServerResponse>,
+            >,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/NewEndorsementsServer",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PublicService",
+                        "NewEndorsementsServer",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
         }
         /// New received and produced blocks with operations
         pub async fn new_filled_blocks(
@@ -4389,6 +4536,38 @@ pub mod public_service_client {
                 );
             self.inner.streaming(req, path, codec).await
         }
+        /// New received and produced blocks with operations unidirectional
+        pub async fn new_filled_blocks_server(
+            &mut self,
+            request: impl tonic::IntoRequest<super::NewFilledBlocksServerRequest>,
+        ) -> std::result::Result<
+            tonic::Response<
+                tonic::codec::Streaming<super::NewFilledBlocksServerResponse>,
+            >,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/NewFilledBlocksServer",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PublicService",
+                        "NewFilledBlocksServer",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
         /// New received and produced operations
         pub async fn new_operations(
             &mut self,
@@ -4415,6 +4594,33 @@ pub mod public_service_client {
             req.extensions_mut()
                 .insert(GrpcMethod::new("massa.api.v1.PublicService", "NewOperations"));
             self.inner.streaming(req, path, codec).await
+        }
+        /// unidirectional stream NewOperations
+        pub async fn new_operations_server(
+            &mut self,
+            request: impl tonic::IntoRequest<super::NewOperationsServerRequest>,
+        ) -> std::result::Result<
+            tonic::Response<tonic::codec::Streaming<super::NewOperationsServerResponse>>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/NewOperationsServer",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new("massa.api.v1.PublicService", "NewOperationsServer"),
+                );
+            self.inner.server_streaming(req, path, codec).await
         }
         /// New received and slot execution events
         pub async fn new_slot_execution_outputs(
@@ -4449,6 +4655,38 @@ pub mod public_service_client {
                     ),
                 );
             self.inner.streaming(req, path, codec).await
+        }
+        /// unidirectional stream NewSlotExecutionOutputs
+        pub async fn new_slot_execution_outputs_server(
+            &mut self,
+            request: impl tonic::IntoRequest<super::NewSlotExecutionOutputsServerRequest>,
+        ) -> std::result::Result<
+            tonic::Response<
+                tonic::codec::Streaming<super::NewSlotExecutionOutputsServerResponse>,
+            >,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/NewSlotExecutionOutputsServer",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PublicService",
+                        "NewSlotExecutionOutputsServer",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
         }
         /// Call stack for each slot executed
         pub async fn new_slot_abi_call_stacks(
@@ -4625,6 +4863,38 @@ pub mod public_service_client {
                 );
             self.inner.streaming(req, path, codec).await
         }
+        /// Transactions throughput unidirectional
+        pub async fn transactions_throughput_server(
+            &mut self,
+            request: impl tonic::IntoRequest<super::TransactionsThroughputServerRequest>,
+        ) -> std::result::Result<
+            tonic::Response<
+                tonic::codec::Streaming<super::TransactionsThroughputServerResponse>,
+            >,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/TransactionsThroughputServer",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PublicService",
+                        "TransactionsThroughputServer",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -4796,6 +5066,20 @@ pub mod public_service_server {
             &self,
             request: tonic::Request<tonic::Streaming<super::NewBlocksRequest>>,
         ) -> std::result::Result<tonic::Response<Self::NewBlocksStream>, tonic::Status>;
+        /// Server streaming response type for the NewBlocksServer method.
+        type NewBlocksServerStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<super::NewBlocksServerResponse, tonic::Status>,
+            >
+            + std::marker::Send
+            + 'static;
+        /// unidirecitonnal
+        async fn new_blocks_server(
+            &self,
+            request: tonic::Request<super::NewBlocksServerRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::NewBlocksServerStream>,
+            tonic::Status,
+        >;
         /// Server streaming response type for the NewEndorsements method.
         type NewEndorsementsStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::NewEndorsementsResponse, tonic::Status>,
@@ -4808,6 +5092,23 @@ pub mod public_service_server {
             request: tonic::Request<tonic::Streaming<super::NewEndorsementsRequest>>,
         ) -> std::result::Result<
             tonic::Response<Self::NewEndorsementsStream>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the NewEndorsementsServer method.
+        type NewEndorsementsServerStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<
+                    super::NewEndorsementsServerResponse,
+                    tonic::Status,
+                >,
+            >
+            + std::marker::Send
+            + 'static;
+        /// New received and produced endorsements
+        async fn new_endorsements_server(
+            &self,
+            request: tonic::Request<super::NewEndorsementsServerRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::NewEndorsementsServerStream>,
             tonic::Status,
         >;
         /// Server streaming response type for the NewFilledBlocks method.
@@ -4824,6 +5125,23 @@ pub mod public_service_server {
             tonic::Response<Self::NewFilledBlocksStream>,
             tonic::Status,
         >;
+        /// Server streaming response type for the NewFilledBlocksServer method.
+        type NewFilledBlocksServerStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<
+                    super::NewFilledBlocksServerResponse,
+                    tonic::Status,
+                >,
+            >
+            + std::marker::Send
+            + 'static;
+        /// New received and produced blocks with operations unidirectional
+        async fn new_filled_blocks_server(
+            &self,
+            request: tonic::Request<super::NewFilledBlocksServerRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::NewFilledBlocksServerStream>,
+            tonic::Status,
+        >;
         /// Server streaming response type for the NewOperations method.
         type NewOperationsStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<super::NewOperationsResponse, tonic::Status>,
@@ -4836,6 +5154,23 @@ pub mod public_service_server {
             request: tonic::Request<tonic::Streaming<super::NewOperationsRequest>>,
         ) -> std::result::Result<
             tonic::Response<Self::NewOperationsStream>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the NewOperationsServer method.
+        type NewOperationsServerStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<
+                    super::NewOperationsServerResponse,
+                    tonic::Status,
+                >,
+            >
+            + std::marker::Send
+            + 'static;
+        /// unidirectional stream NewOperations
+        async fn new_operations_server(
+            &self,
+            request: tonic::Request<super::NewOperationsServerRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::NewOperationsServerStream>,
             tonic::Status,
         >;
         /// Server streaming response type for the NewSlotExecutionOutputs method.
@@ -4855,6 +5190,23 @@ pub mod public_service_server {
             >,
         ) -> std::result::Result<
             tonic::Response<Self::NewSlotExecutionOutputsStream>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the NewSlotExecutionOutputsServer method.
+        type NewSlotExecutionOutputsServerStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<
+                    super::NewSlotExecutionOutputsServerResponse,
+                    tonic::Status,
+                >,
+            >
+            + std::marker::Send
+            + 'static;
+        /// unidirectional stream NewSlotExecutionOutputs
+        async fn new_slot_execution_outputs_server(
+            &self,
+            request: tonic::Request<super::NewSlotExecutionOutputsServerRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::NewSlotExecutionOutputsServerStream>,
             tonic::Status,
         >;
         /// Server streaming response type for the NewSlotABICallStacks method.
@@ -4950,6 +5302,23 @@ pub mod public_service_server {
             >,
         ) -> std::result::Result<
             tonic::Response<Self::TransactionsThroughputStream>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the TransactionsThroughputServer method.
+        type TransactionsThroughputServerStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<
+                    super::TransactionsThroughputServerResponse,
+                    tonic::Status,
+                >,
+            >
+            + std::marker::Send
+            + 'static;
+        /// Transactions throughput unidirectional
+        async fn transactions_throughput_server(
+            &self,
+            request: tonic::Request<super::TransactionsThroughputServerRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::TransactionsThroughputServerStream>,
             tonic::Status,
         >;
     }
@@ -5926,6 +6295,54 @@ pub mod public_service_server {
                     };
                     Box::pin(fut)
                 }
+                "/massa.api.v1.PublicService/NewBlocksServer" => {
+                    #[allow(non_camel_case_types)]
+                    struct NewBlocksServerSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::ServerStreamingService<
+                        super::NewBlocksServerRequest,
+                    > for NewBlocksServerSvc<T> {
+                        type Response = super::NewBlocksServerResponse;
+                        type ResponseStream = T::NewBlocksServerStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::NewBlocksServerRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PublicService>::new_blocks_server(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = NewBlocksServerSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
                 "/massa.api.v1.PublicService/NewEndorsements" => {
                     #[allow(non_camel_case_types)]
                     struct NewEndorsementsSvc<T: PublicService>(pub Arc<T>);
@@ -5971,6 +6388,57 @@ pub mod public_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/NewEndorsementsServer" => {
+                    #[allow(non_camel_case_types)]
+                    struct NewEndorsementsServerSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::ServerStreamingService<
+                        super::NewEndorsementsServerRequest,
+                    > for NewEndorsementsServerSvc<T> {
+                        type Response = super::NewEndorsementsServerResponse;
+                        type ResponseStream = T::NewEndorsementsServerStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::NewEndorsementsServerRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PublicService>::new_endorsements_server(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = NewEndorsementsServerSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
@@ -6024,6 +6492,57 @@ pub mod public_service_server {
                     };
                     Box::pin(fut)
                 }
+                "/massa.api.v1.PublicService/NewFilledBlocksServer" => {
+                    #[allow(non_camel_case_types)]
+                    struct NewFilledBlocksServerSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::ServerStreamingService<
+                        super::NewFilledBlocksServerRequest,
+                    > for NewFilledBlocksServerSvc<T> {
+                        type Response = super::NewFilledBlocksServerResponse;
+                        type ResponseStream = T::NewFilledBlocksServerStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::NewFilledBlocksServerRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PublicService>::new_filled_blocks_server(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = NewFilledBlocksServerSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
                 "/massa.api.v1.PublicService/NewOperations" => {
                     #[allow(non_camel_case_types)]
                     struct NewOperationsSvc<T: PublicService>(pub Arc<T>);
@@ -6068,6 +6587,54 @@ pub mod public_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/NewOperationsServer" => {
+                    #[allow(non_camel_case_types)]
+                    struct NewOperationsServerSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::ServerStreamingService<
+                        super::NewOperationsServerRequest,
+                    > for NewOperationsServerSvc<T> {
+                        type Response = super::NewOperationsServerResponse;
+                        type ResponseStream = T::NewOperationsServerStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::NewOperationsServerRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PublicService>::new_operations_server(&inner, request)
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = NewOperationsServerSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
@@ -6121,6 +6688,61 @@ pub mod public_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/NewSlotExecutionOutputsServer" => {
+                    #[allow(non_camel_case_types)]
+                    struct NewSlotExecutionOutputsServerSvc<T: PublicService>(
+                        pub Arc<T>,
+                    );
+                    impl<
+                        T: PublicService,
+                    > tonic::server::ServerStreamingService<
+                        super::NewSlotExecutionOutputsServerRequest,
+                    > for NewSlotExecutionOutputsServerSvc<T> {
+                        type Response = super::NewSlotExecutionOutputsServerResponse;
+                        type ResponseStream = T::NewSlotExecutionOutputsServerStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::NewSlotExecutionOutputsServerRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PublicService>::new_slot_execution_outputs_server(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = NewSlotExecutionOutputsServerSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
@@ -6420,6 +7042,59 @@ pub mod public_service_server {
                                 max_encoding_message_size,
                             );
                         let res = grpc.streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/TransactionsThroughputServer" => {
+                    #[allow(non_camel_case_types)]
+                    struct TransactionsThroughputServerSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::ServerStreamingService<
+                        super::TransactionsThroughputServerRequest,
+                    > for TransactionsThroughputServerSvc<T> {
+                        type Response = super::TransactionsThroughputServerResponse;
+                        type ResponseStream = T::TransactionsThroughputServerStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::TransactionsThroughputServerRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PublicService>::transactions_throughput_server(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = TransactionsThroughputServerSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
                         Ok(res)
                     };
                     Box::pin(fut)
