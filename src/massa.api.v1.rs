@@ -2996,6 +2996,13 @@ pub struct NewFilledBlocksRequest {
     #[prost(message, repeated, tag = "1")]
     pub filters: ::prost::alloc::vec::Vec<NewBlocksFilter>,
 }
+/// NewFilledBlocksServerRequest holds request for NewFilledBlocks
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewFilledBlocksServerRequest {
+    /// Returns all the blocks that verify one of the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<NewBlocksFilter>,
+}
 /// NewFilledBlocks Filter
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewFilledBlocksFilter {
@@ -3026,9 +3033,23 @@ pub struct NewFilledBlocksResponse {
     #[prost(message, optional, tag = "1")]
     pub filled_block: ::core::option::Option<super::super::model::v1::FilledBlock>,
 }
+/// NewFilledBlocksServerResponse holds response from NewFilledBlocks
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewFilledBlocksServerResponse {
+    /// Block with operations content found in the node.
+    #[prost(message, optional, tag = "1")]
+    pub filled_block: ::core::option::Option<super::super::model::v1::FilledBlock>,
+}
 /// NewOperationsRequest holds request for NewOperations
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewOperationsRequest {
+    /// Returns all the operations that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<NewOperationsFilter>,
+}
+/// NewOperationsRequest holds request for NewOperations
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewOperationsServerRequest {
     /// Returns all the operations that verify all the filters
     #[prost(message, repeated, tag = "1")]
     pub filters: ::prost::alloc::vec::Vec<NewOperationsFilter>,
@@ -3065,9 +3086,25 @@ pub struct NewOperationsResponse {
         super::super::model::v1::SignedOperation,
     >,
 }
+/// NewOperationsServerResponse holds response from NewOperations
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewOperationsServerResponse {
+    /// Signed operation
+    #[prost(message, optional, tag = "1")]
+    pub signed_operation: ::core::option::Option<
+        super::super::model::v1::SignedOperation,
+    >,
+}
 /// NewSlotExecutionOutputsRequest holds request for NewSlotExecutionOutputs
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotExecutionOutputsRequest {
+    /// Returns all the slot execution outputs that verify all the filters
+    #[prost(message, repeated, tag = "1")]
+    pub filters: ::prost::alloc::vec::Vec<NewSlotExecutionOutputsFilter>,
+}
+/// NewSlotExecutionOutputsServerRequest holds request for NewSlotExecutionOutputs
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewSlotExecutionOutputsServerRequest {
     /// Returns all the slot execution outputs that verify all the filters
     #[prost(message, repeated, tag = "1")]
     pub filters: ::prost::alloc::vec::Vec<NewSlotExecutionOutputsFilter>,
@@ -3264,6 +3301,13 @@ pub struct NewSlotExecutionOutputsResponse {
     #[prost(message, optional, tag = "1")]
     pub output: ::core::option::Option<super::super::model::v1::SlotExecutionOutput>,
 }
+/// NewSlotExecutionOutputsServerResponse holds response from NewSlotExecutionOutputs
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewSlotExecutionOutputsServerResponse {
+    /// Slot execution output
+    #[prost(message, optional, tag = "1")]
+    pub output: ::core::option::Option<super::super::model::v1::SlotExecutionOutput>,
+}
 /// NewSlotABICallStacks request
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct NewSlotAbiCallStacksRequest {
@@ -3389,9 +3433,23 @@ pub struct TransactionsThroughputRequest {
     #[prost(message, optional, tag = "1")]
     pub interval: ::core::option::Option<u64>,
 }
+/// TransactionsThroughputServerRequest holds request for TransactionsThroughput
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct TransactionsThroughputServerRequest {
+    /// Timer interval in seconds (Optional). Defaults to 10s
+    #[prost(message, optional, tag = "1")]
+    pub interval: ::core::option::Option<u64>,
+}
 /// TransactionsThroughputResponse holds response from TransactionsThroughput
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TransactionsThroughputResponse {
+    /// Transactions throughput per second
+    #[prost(uint32, tag = "1")]
+    pub throughput: u32,
+}
+/// TransactionsThroughputServerResponse holds response from TransactionsThroughput
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct TransactionsThroughputServerResponse {
     /// Transactions throughput per second
     #[prost(uint32, tag = "1")]
     pub throughput: u32,
@@ -4481,9 +4539,11 @@ pub mod public_service_client {
         /// New received and produced blocks with operations unidirectional
         pub async fn new_filled_blocks_server(
             &mut self,
-            request: impl tonic::IntoRequest<super::NewFilledBlocksRequest>,
+            request: impl tonic::IntoRequest<super::NewFilledBlocksServerRequest>,
         ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::NewFilledBlocksResponse>>,
+            tonic::Response<
+                tonic::codec::Streaming<super::NewFilledBlocksServerResponse>,
+            >,
             tonic::Status,
         > {
             self.inner
@@ -4538,9 +4598,9 @@ pub mod public_service_client {
         /// unidirectional stream NewOperations
         pub async fn new_operations_server(
             &mut self,
-            request: impl tonic::IntoRequest<super::NewOperationsRequest>,
+            request: impl tonic::IntoRequest<super::NewOperationsServerRequest>,
         ) -> std::result::Result<
-            tonic::Response<tonic::codec::Streaming<super::NewOperationsResponse>>,
+            tonic::Response<tonic::codec::Streaming<super::NewOperationsServerResponse>>,
             tonic::Status,
         > {
             self.inner
@@ -4599,10 +4659,10 @@ pub mod public_service_client {
         /// unidirectional stream NewSlotExecutionOutputs
         pub async fn new_slot_execution_outputs_server(
             &mut self,
-            request: impl tonic::IntoRequest<super::NewSlotExecutionOutputsRequest>,
+            request: impl tonic::IntoRequest<super::NewSlotExecutionOutputsServerRequest>,
         ) -> std::result::Result<
             tonic::Response<
-                tonic::codec::Streaming<super::NewSlotExecutionOutputsResponse>,
+                tonic::codec::Streaming<super::NewSlotExecutionOutputsServerResponse>,
             >,
             tonic::Status,
         > {
@@ -4806,10 +4866,10 @@ pub mod public_service_client {
         /// Transactions throughput unidirectional
         pub async fn transactions_throughput_server(
             &mut self,
-            request: impl tonic::IntoRequest<super::TransactionsThroughputRequest>,
+            request: impl tonic::IntoRequest<super::TransactionsThroughputServerRequest>,
         ) -> std::result::Result<
             tonic::Response<
-                tonic::codec::Streaming<super::TransactionsThroughputResponse>,
+                tonic::codec::Streaming<super::TransactionsThroughputServerResponse>,
             >,
             tonic::Status,
         > {
@@ -5067,14 +5127,17 @@ pub mod public_service_server {
         >;
         /// Server streaming response type for the NewFilledBlocksServer method.
         type NewFilledBlocksServerStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::NewFilledBlocksResponse, tonic::Status>,
+                Item = std::result::Result<
+                    super::NewFilledBlocksServerResponse,
+                    tonic::Status,
+                >,
             >
             + std::marker::Send
             + 'static;
         /// New received and produced blocks with operations unidirectional
         async fn new_filled_blocks_server(
             &self,
-            request: tonic::Request<super::NewFilledBlocksRequest>,
+            request: tonic::Request<super::NewFilledBlocksServerRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::NewFilledBlocksServerStream>,
             tonic::Status,
@@ -5095,14 +5158,17 @@ pub mod public_service_server {
         >;
         /// Server streaming response type for the NewOperationsServer method.
         type NewOperationsServerStream: tonic::codegen::tokio_stream::Stream<
-                Item = std::result::Result<super::NewOperationsResponse, tonic::Status>,
+                Item = std::result::Result<
+                    super::NewOperationsServerResponse,
+                    tonic::Status,
+                >,
             >
             + std::marker::Send
             + 'static;
         /// unidirectional stream NewOperations
         async fn new_operations_server(
             &self,
-            request: tonic::Request<super::NewOperationsRequest>,
+            request: tonic::Request<super::NewOperationsServerRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::NewOperationsServerStream>,
             tonic::Status,
@@ -5129,7 +5195,7 @@ pub mod public_service_server {
         /// Server streaming response type for the NewSlotExecutionOutputsServer method.
         type NewSlotExecutionOutputsServerStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<
-                    super::NewSlotExecutionOutputsResponse,
+                    super::NewSlotExecutionOutputsServerResponse,
                     tonic::Status,
                 >,
             >
@@ -5138,7 +5204,7 @@ pub mod public_service_server {
         /// unidirectional stream NewSlotExecutionOutputs
         async fn new_slot_execution_outputs_server(
             &self,
-            request: tonic::Request<super::NewSlotExecutionOutputsRequest>,
+            request: tonic::Request<super::NewSlotExecutionOutputsServerRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::NewSlotExecutionOutputsServerStream>,
             tonic::Status,
@@ -5241,7 +5307,7 @@ pub mod public_service_server {
         /// Server streaming response type for the TransactionsThroughputServer method.
         type TransactionsThroughputServerStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<
-                    super::TransactionsThroughputResponse,
+                    super::TransactionsThroughputServerResponse,
                     tonic::Status,
                 >,
             >
@@ -5250,7 +5316,7 @@ pub mod public_service_server {
         /// Transactions throughput unidirectional
         async fn transactions_throughput_server(
             &self,
-            request: tonic::Request<super::TransactionsThroughputRequest>,
+            request: tonic::Request<super::TransactionsThroughputServerRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::TransactionsThroughputServerStream>,
             tonic::Status,
@@ -6432,9 +6498,9 @@ pub mod public_service_server {
                     impl<
                         T: PublicService,
                     > tonic::server::ServerStreamingService<
-                        super::NewFilledBlocksRequest,
+                        super::NewFilledBlocksServerRequest,
                     > for NewFilledBlocksServerSvc<T> {
-                        type Response = super::NewFilledBlocksResponse;
+                        type Response = super::NewFilledBlocksServerResponse;
                         type ResponseStream = T::NewFilledBlocksServerStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
@@ -6442,7 +6508,7 @@ pub mod public_service_server {
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::NewFilledBlocksRequest>,
+                            request: tonic::Request<super::NewFilledBlocksServerRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
@@ -6530,9 +6596,10 @@ pub mod public_service_server {
                     struct NewOperationsServerSvc<T: PublicService>(pub Arc<T>);
                     impl<
                         T: PublicService,
-                    > tonic::server::ServerStreamingService<super::NewOperationsRequest>
-                    for NewOperationsServerSvc<T> {
-                        type Response = super::NewOperationsResponse;
+                    > tonic::server::ServerStreamingService<
+                        super::NewOperationsServerRequest,
+                    > for NewOperationsServerSvc<T> {
+                        type Response = super::NewOperationsServerResponse;
                         type ResponseStream = T::NewOperationsServerStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
@@ -6540,7 +6607,7 @@ pub mod public_service_server {
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::NewOperationsRequest>,
+                            request: tonic::Request<super::NewOperationsServerRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
@@ -6633,9 +6700,9 @@ pub mod public_service_server {
                     impl<
                         T: PublicService,
                     > tonic::server::ServerStreamingService<
-                        super::NewSlotExecutionOutputsRequest,
+                        super::NewSlotExecutionOutputsServerRequest,
                     > for NewSlotExecutionOutputsServerSvc<T> {
-                        type Response = super::NewSlotExecutionOutputsResponse;
+                        type Response = super::NewSlotExecutionOutputsServerResponse;
                         type ResponseStream = T::NewSlotExecutionOutputsServerStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
@@ -6644,7 +6711,7 @@ pub mod public_service_server {
                         fn call(
                             &mut self,
                             request: tonic::Request<
-                                super::NewSlotExecutionOutputsRequest,
+                                super::NewSlotExecutionOutputsServerRequest,
                             >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
@@ -6985,9 +7052,9 @@ pub mod public_service_server {
                     impl<
                         T: PublicService,
                     > tonic::server::ServerStreamingService<
-                        super::TransactionsThroughputRequest,
+                        super::TransactionsThroughputServerRequest,
                     > for TransactionsThroughputServerSvc<T> {
-                        type Response = super::TransactionsThroughputResponse;
+                        type Response = super::TransactionsThroughputServerResponse;
                         type ResponseStream = T::TransactionsThroughputServerStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
@@ -6995,7 +7062,9 @@ pub mod public_service_server {
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::TransactionsThroughputRequest>,
+                            request: tonic::Request<
+                                super::TransactionsThroughputServerRequest,
+                            >,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
