@@ -3097,8 +3097,8 @@ pub struct NewOperationsServerResponse {
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewExecutionInfoServerRequest {
-    #[prost(string, tag = "1")]
-    pub address: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "1")]
+    pub address: ::core::option::Option<::prost::alloc::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewExecutionInfoServerResponse {
