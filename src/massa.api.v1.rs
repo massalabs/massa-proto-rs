@@ -3106,16 +3106,39 @@ pub struct NewExecutionInfoServerResponse {
     pub block_producer_reward: ::core::option::Option<
         super::super::model::v1::TargetAmount,
     >,
-    /// todo
-    #[prost(string, tag = "2")]
-    pub endorsement_creator_rewards: ::prost::alloc::string::String,
+    #[prost(message, repeated, tag = "2")]
+    pub endorsement_creator_rewards: ::prost::alloc::vec::Vec<
+        super::super::model::v1::TargetAmount,
+    >,
     #[prost(message, optional, tag = "3")]
     pub endorsement_target_reward: ::core::option::Option<
         super::super::model::v1::TargetAmount,
     >,
     #[prost(message, repeated, tag = "4")]
     pub denunciations: ::prost::alloc::vec::Vec<
-        super::super::model::v1::DenunciationResult,
+        super::super::model::v1::DenunciationAddress,
+    >,
+    #[prost(message, repeated, tag = "5")]
+    pub operations: ::prost::alloc::vec::Vec<super::super::model::v1::OperationTypeRoll>,
+    #[prost(message, repeated, tag = "6")]
+    pub async_messages: ::prost::alloc::vec::Vec<
+        super::super::model::v1::AsyncMessageExecution,
+    >,
+    #[prost(message, repeated, tag = "7")]
+    pub deferred_calls_messages: ::prost::alloc::vec::Vec<
+        super::super::model::v1::DeferredCallExecution,
+    >,
+    #[prost(message, repeated, tag = "8")]
+    pub deferred_credits_execution: ::prost::alloc::vec::Vec<
+        super::super::model::v1::TargetAmount,
+    >,
+    #[prost(message, repeated, tag = "9")]
+    pub cancel_async_message_execution: ::prost::alloc::vec::Vec<
+        super::super::model::v1::TargetAmount,
+    >,
+    #[prost(message, repeated, tag = "10")]
+    pub auto_sell_execution: ::prost::alloc::vec::Vec<
+        super::super::model::v1::TargetAmount,
     >,
 }
 /// NewSlotExecutionOutputsRequest holds request for NewSlotExecutionOutputs

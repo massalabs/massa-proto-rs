@@ -205,21 +205,6 @@ pub struct DenunciationEndorsement {
     pub index: u32,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct DenunciationResult {
-    #[prost(oneof = "denunciation_result::Result", tags = "1, 2")]
-    pub result: ::core::option::Option<denunciation_result::Result>,
-}
-/// Nested message and enum types in `DenunciationResult`.
-pub mod denunciation_result {
-    #[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Result {
-        #[prost(message, tag = "1")]
-        DenunciationAddress(super::DenunciationAddress),
-        #[prost(string, tag = "2")]
-        Error(::prost::alloc::string::String),
-    }
-}
-#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DenunciationAddress {
     /// target address
     #[prost(string, tag = "1")]
@@ -410,10 +395,12 @@ pub mod operation_type {
         /// Transfer coins from sender to recipient
         #[prost(message, tag = "1")]
         Transaction(super::Transaction),
-        /// The sender buys `roll_count` rolls. Roll price is defined in configuration
+        /// The sender buys `roll_count` rolls. Roll price is defined in
+        /// configuration
         #[prost(message, tag = "2")]
         RollBuy(super::RollBuy),
-        /// The sender sells `roll_count` rolls. Roll price is defined in configuration
+        /// The sender sells `roll_count` rolls. Roll price is defined in
+        /// configuration
         #[prost(message, tag = "3")]
         RollSell(super::RollSell),
         /// Execute a smart contract
@@ -457,7 +444,8 @@ pub struct ExecuteSc {
     /// The maximum of coins that could be spent by the operation sender
     #[prost(uint64, tag = "2")]
     pub max_coins: u64,
-    /// The maximum amount of gas that the execution of the contract is allowed to cost
+    /// The maximum amount of gas that the execution of the contract is allowed to
+    /// cost
     #[prost(uint64, tag = "3")]
     pub max_gas: u64,
     /// A key-value store associating a hash to arbitrary bytes
@@ -476,10 +464,12 @@ pub struct CallSc {
     /// Parameter to pass to the target function
     #[prost(bytes = "vec", tag = "3")]
     pub parameter: ::prost::alloc::vec::Vec<u8>,
-    /// The maximum amount of gas that the execution of the contract is allowed to cost
+    /// The maximum amount of gas that the execution of the contract is allowed to
+    /// cost
     #[prost(uint64, tag = "4")]
     pub max_gas: u64,
-    /// Extra coins that are spent from the caller's balance and transferred to the target
+    /// Extra coins that are spent from the caller's balance and transferred to the
+    /// target
     #[prost(message, optional, tag = "5")]
     pub coins: ::core::option::Option<NativeAmount>,
 }
@@ -489,7 +479,8 @@ pub struct SignedOperation {
     /// Operation
     #[prost(message, optional, tag = "1")]
     pub content: ::core::option::Option<Operation>,
-    /// A cryptographically generated value using `serialized_data` and a public key.
+    /// A cryptographically generated value using `serialized_data` and a public
+    /// key.
     #[prost(string, tag = "2")]
     pub signature: ::prost::alloc::string::String,
     /// The public-key component used in the generation of the signature
@@ -498,7 +489,8 @@ pub struct SignedOperation {
     /// Derived from the same public key used to generate the signature
     #[prost(string, tag = "4")]
     pub content_creator_address: ::prost::alloc::string::String,
-    /// A secure hash of the non-malleable contents of a deterministic binary representation of the block header
+    /// A secure hash of the non-malleable contents of a deterministic binary
+    /// representation of the block header
     #[prost(string, tag = "5")]
     pub secure_hash: ::prost::alloc::string::String,
     /// The size of the serialized operation in bytes
@@ -544,6 +536,21 @@ pub struct OpTypes {
     /// Operations types
     #[prost(enumeration = "OpType", repeated, tag = "1")]
     pub op_types: ::prost::alloc::vec::Vec<i32>,
+}
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct OperationTypeRoll {
+    #[prost(oneof = "operation_type_roll::Type", tags = "1, 2")]
+    pub r#type: ::core::option::Option<operation_type_roll::Type>,
+}
+/// Nested message and enum types in `OperationTypeRoll`.
+pub mod operation_type_roll {
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
+    pub enum Type {
+        #[prost(message, tag = "1")]
+        RollBuy(super::RollBuy),
+        #[prost(message, tag = "2")]
+        RollSell(super::RollSell),
+    }
 }
 /// Operation type enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -1410,6 +1417,30 @@ pub struct TargetAmount {
     pub amount: ::core::option::Option<NativeAmount>,
     #[prost(string, tag = "2")]
     pub address: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AsyncMessageExecution {
+    #[prost(bool, tag = "1")]
+    pub success: bool,
+    #[prost(string, tag = "2")]
+    pub sender: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub destination: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "4")]
+    pub coins: ::core::option::Option<NativeAmount>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallExecution {
+    #[prost(bool, tag = "1")]
+    pub success: bool,
+    #[prost(string, tag = "2")]
+    pub sender: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub target_address: ::prost::alloc::string::String,
+    #[prost(string, tag = "4")]
+    pub target_function: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "5")]
+    pub coins: ::core::option::Option<NativeAmount>,
 }
 /// ScExecutionEventStatus type enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
