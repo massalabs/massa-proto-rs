@@ -3095,6 +3095,26 @@ pub struct NewOperationsServerResponse {
         super::super::model::v1::SignedOperation,
     >,
 }
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewExecutionInfoServerRequest {
+    #[prost(message, optional, tag = "1")]
+    pub block_producer_reward: ::core::option::Option<
+        super::super::model::v1::TargetAmount,
+    >,
+    /// todo
+    #[prost(string, tag = "2")]
+    pub endorsement_creator_rewards: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "3")]
+    pub endorsement_target_reward: ::core::option::Option<
+        super::super::model::v1::TargetAmount,
+    >,
+    #[prost(message, repeated, tag = "4")]
+    pub denunciations: ::prost::alloc::vec::Vec<
+        super::super::model::v1::DenunciationResult,
+    >,
+}
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct NewExecutionInfoServerResponse {}
 /// NewSlotExecutionOutputsRequest holds request for NewSlotExecutionOutputs
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotExecutionOutputsRequest {
@@ -3102,7 +3122,8 @@ pub struct NewSlotExecutionOutputsRequest {
     #[prost(message, repeated, tag = "1")]
     pub filters: ::prost::alloc::vec::Vec<NewSlotExecutionOutputsFilter>,
 }
-/// NewSlotExecutionOutputsServerRequest holds request for NewSlotExecutionOutputs
+/// NewSlotExecutionOutputsServerRequest holds request for
+/// NewSlotExecutionOutputs
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotExecutionOutputsServerRequest {
     /// Returns all the slot execution outputs that verify all the filters
@@ -3301,7 +3322,8 @@ pub struct NewSlotExecutionOutputsResponse {
     #[prost(message, optional, tag = "1")]
     pub output: ::core::option::Option<super::super::model::v1::SlotExecutionOutput>,
 }
-/// NewSlotExecutionOutputsServerResponse holds response from NewSlotExecutionOutputs
+/// NewSlotExecutionOutputsServerResponse holds response from
+/// NewSlotExecutionOutputs
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotExecutionOutputsServerResponse {
     /// Slot execution output
@@ -3447,7 +3469,8 @@ pub struct TransactionsThroughputResponse {
     #[prost(uint32, tag = "1")]
     pub throughput: u32,
 }
-/// TransactionsThroughputServerResponse holds response from TransactionsThroughput
+/// TransactionsThroughputServerResponse holds response from
+/// TransactionsThroughput
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TransactionsThroughputServerResponse {
     /// Transactions throughput per second
@@ -4895,6 +4918,38 @@ pub mod public_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
+        /// New execution Info
+        pub async fn new_execution_info_server(
+            &mut self,
+            request: impl tonic::IntoRequest<super::NewExecutionInfoServerRequest>,
+        ) -> std::result::Result<
+            tonic::Response<
+                tonic::codec::Streaming<super::NewExecutionInfoServerResponse>,
+            >,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/NewExecutionInfoServer",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PublicService",
+                        "NewExecutionInfoServer",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -5319,6 +5374,23 @@ pub mod public_service_server {
             request: tonic::Request<super::TransactionsThroughputServerRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::TransactionsThroughputServerStream>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the NewExecutionInfoServer method.
+        type NewExecutionInfoServerStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<
+                    super::NewExecutionInfoServerResponse,
+                    tonic::Status,
+                >,
+            >
+            + std::marker::Send
+            + 'static;
+        /// New execution Info
+        async fn new_execution_info_server(
+            &self,
+            request: tonic::Request<super::NewExecutionInfoServerRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::NewExecutionInfoServerStream>,
             tonic::Status,
         >;
     }
@@ -7084,6 +7156,57 @@ pub mod public_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = TransactionsThroughputServerSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/NewExecutionInfoServer" => {
+                    #[allow(non_camel_case_types)]
+                    struct NewExecutionInfoServerSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::ServerStreamingService<
+                        super::NewExecutionInfoServerRequest,
+                    > for NewExecutionInfoServerSvc<T> {
+                        type Response = super::NewExecutionInfoServerResponse;
+                        type ResponseStream = T::NewExecutionInfoServerStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::NewExecutionInfoServerRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PublicService>::new_execution_info_server(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = NewExecutionInfoServerSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
