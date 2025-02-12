@@ -3097,6 +3097,11 @@ pub struct NewOperationsServerResponse {
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewExecutionInfoServerRequest {
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewExecutionInfoServerResponse {
     #[prost(message, optional, tag = "1")]
     pub block_producer_reward: ::core::option::Option<
         super::super::model::v1::TargetAmount,
@@ -3113,8 +3118,6 @@ pub struct NewExecutionInfoServerRequest {
         super::super::model::v1::DenunciationResult,
     >,
 }
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-pub struct NewExecutionInfoServerResponse {}
 /// NewSlotExecutionOutputsRequest holds request for NewSlotExecutionOutputs
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotExecutionOutputsRequest {
