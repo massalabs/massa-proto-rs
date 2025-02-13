@@ -537,18 +537,20 @@ pub struct OpTypes {
     #[prost(enumeration = "OpType", repeated, tag = "1")]
     pub op_types: ::prost::alloc::vec::Vec<i32>,
 }
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct OperationTypeRoll {
-    #[prost(oneof = "operation_type_roll::Type", tags = "1, 2")]
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    #[prost(oneof = "operation_type_roll::Type", tags = "2, 3")]
     pub r#type: ::core::option::Option<operation_type_roll::Type>,
 }
 /// Nested message and enum types in `OperationTypeRoll`.
 pub mod operation_type_roll {
     #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
     pub enum Type {
-        #[prost(message, tag = "1")]
-        RollBuy(super::RollBuy),
         #[prost(message, tag = "2")]
+        RollBuy(super::RollBuy),
+        #[prost(message, tag = "3")]
         RollSell(super::RollSell),
     }
 }
