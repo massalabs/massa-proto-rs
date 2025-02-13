@@ -1729,6 +1729,8 @@ pub enum CoinOrigin {
     OpTransactionCoins = 14,
     OpTransactionFees = 15,
     AsyncMsg = 16,
+    DeferredCredit = 17,
+    RollAutosell = 18,
 }
 impl CoinOrigin {
     /// String value of the enum field names used in the ProtoBuf definition.
@@ -1754,6 +1756,8 @@ impl CoinOrigin {
             Self::OpTransactionCoins => "COIN_ORIGIN_OP_TRANSACTION_COINS",
             Self::OpTransactionFees => "COIN_ORIGIN_OP_TRANSACTION_FEES",
             Self::AsyncMsg => "COIN_ORIGIN_ASYNC_MSG",
+            Self::DeferredCredit => "COIN_ORIGIN_DEFERRED_CREDIT",
+            Self::RollAutosell => "COIN_ORIGIN_ROLL_AUTOSELL",
         }
     }
     /// Creates an enum from field names used in the ProtoBuf definition.
@@ -1776,6 +1780,8 @@ impl CoinOrigin {
             "COIN_ORIGIN_OP_TRANSACTION_COINS" => Some(Self::OpTransactionCoins),
             "COIN_ORIGIN_OP_TRANSACTION_FEES" => Some(Self::OpTransactionFees),
             "COIN_ORIGIN_ASYNC_MSG" => Some(Self::AsyncMsg),
+            "COIN_ORIGIN_DEFERRED_CREDIT" => Some(Self::DeferredCredit),
+            "COIN_ORIGIN_ROLL_AUTOSELL" => Some(Self::RollAutosell),
             _ => None,
         }
     }
