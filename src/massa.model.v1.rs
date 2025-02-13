@@ -1444,6 +1444,29 @@ pub struct DeferredCallExecution {
     #[prost(message, optional, tag = "5")]
     pub coins: ::core::option::Option<NativeAmount>,
 }
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecutionInfo {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    #[prost(string, tag = "2")]
+    pub address: ::prost::alloc::string::String,
+    #[prost(enumeration = "CoinDirection", tag = "3")]
+    pub direction: i32,
+    #[prost(enumeration = "Item", tag = "4")]
+    pub item: i32,
+    #[prost(message, optional, tag = "5")]
+    pub prev_amount: ::core::option::Option<NativeAmount>,
+    #[prost(message, optional, tag = "6")]
+    pub amount: ::core::option::Option<NativeAmount>,
+    #[prost(message, optional, tag = "7")]
+    pub post_amount: ::core::option::Option<NativeAmount>,
+    #[prost(int64, tag = "8")]
+    pub timestamp: i64,
+    #[prost(message, optional, tag = "9")]
+    pub slot: ::core::option::Option<Slot>,
+    #[prost(enumeration = "CoinOrigin", tag = "10")]
+    pub origin: i32,
+}
 /// ScExecutionEventStatus type enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
 #[repr(i32)]
@@ -1621,6 +1644,138 @@ impl LedgerChangeType {
             "LEDGER_CHANGE_TYPE_SET" => Some(Self::Set),
             "LEDGER_CHANGE_TYPE_UPDATE" => Some(Self::Update),
             "LEDGER_CHANGE_TYPE_DELETE" => Some(Self::Delete),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum CoinDirection {
+    Unspecified = 0,
+    Debit = 1,
+    Credit = 2,
+}
+impl CoinDirection {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::Unspecified => "COIN_DIRECTION_UNSPECIFIED",
+            Self::Debit => "COIN_DIRECTION_DEBIT",
+            Self::Credit => "COIN_DIRECTION_CREDIT",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "COIN_DIRECTION_UNSPECIFIED" => Some(Self::Unspecified),
+            "COIN_DIRECTION_DEBIT" => Some(Self::Debit),
+            "COIN_DIRECTION_CREDIT" => Some(Self::Credit),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum Item {
+    Unspecified = 0,
+    Roll = 1,
+    Mas = 2,
+    DeferredMas = 3,
+}
+impl Item {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::Unspecified => "ITEM_UNSPECIFIED",
+            Self::Roll => "ITEM_ROLL",
+            Self::Mas => "ITEM_MAS",
+            Self::DeferredMas => "ITEM_DEFERRED_MAS",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "ITEM_UNSPECIFIED" => Some(Self::Unspecified),
+            "ITEM_ROLL" => Some(Self::Roll),
+            "ITEM_MAS" => Some(Self::Mas),
+            "ITEM_DEFERRED_MAS" => Some(Self::DeferredMas),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum CoinOrigin {
+    Unspecified = 0,
+    BlockReward = 1,
+    DeferredCall = 2,
+    EndorsementReward = 3,
+    EndorsedReward = 4,
+    Slash = 5,
+    OpRollBuyCoins = 6,
+    OpRollBuyFees = 7,
+    OpRollBuyRolls = 8,
+    OpRollSellRolls = 9,
+    OpRollSellDeferredMas = 10,
+    OpExecutescFees = 11,
+    OpCallscCoins = 12,
+    OpCallscFees = 13,
+    OpTransactionCoins = 14,
+    OpTransactionFees = 15,
+    AsyncMsg = 16,
+}
+impl CoinOrigin {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::Unspecified => "COIN_ORIGIN_UNSPECIFIED",
+            Self::BlockReward => "COIN_ORIGIN_BLOCK_REWARD",
+            Self::DeferredCall => "COIN_ORIGIN_DEFERRED_CALL",
+            Self::EndorsementReward => "COIN_ORIGIN_ENDORSEMENT_REWARD",
+            Self::EndorsedReward => "COIN_ORIGIN_ENDORSED_REWARD",
+            Self::Slash => "COIN_ORIGIN_SLASH",
+            Self::OpRollBuyCoins => "COIN_ORIGIN_OP_ROLL_BUY_COINS",
+            Self::OpRollBuyFees => "COIN_ORIGIN_OP_ROLL_BUY_FEES",
+            Self::OpRollBuyRolls => "COIN_ORIGIN_OP_ROLL_BUY_ROLLS",
+            Self::OpRollSellRolls => "COIN_ORIGIN_OP_ROLL_SELL_ROLLS",
+            Self::OpRollSellDeferredMas => "COIN_ORIGIN_OP_ROLL_SELL_DEFERRED_MAS",
+            Self::OpExecutescFees => "COIN_ORIGIN_OP_EXECUTESC_FEES",
+            Self::OpCallscCoins => "COIN_ORIGIN_OP_CALLSC_COINS",
+            Self::OpCallscFees => "COIN_ORIGIN_OP_CALLSC_FEES",
+            Self::OpTransactionCoins => "COIN_ORIGIN_OP_TRANSACTION_COINS",
+            Self::OpTransactionFees => "COIN_ORIGIN_OP_TRANSACTION_FEES",
+            Self::AsyncMsg => "COIN_ORIGIN_ASYNC_MSG",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "COIN_ORIGIN_UNSPECIFIED" => Some(Self::Unspecified),
+            "COIN_ORIGIN_BLOCK_REWARD" => Some(Self::BlockReward),
+            "COIN_ORIGIN_DEFERRED_CALL" => Some(Self::DeferredCall),
+            "COIN_ORIGIN_ENDORSEMENT_REWARD" => Some(Self::EndorsementReward),
+            "COIN_ORIGIN_ENDORSED_REWARD" => Some(Self::EndorsedReward),
+            "COIN_ORIGIN_SLASH" => Some(Self::Slash),
+            "COIN_ORIGIN_OP_ROLL_BUY_COINS" => Some(Self::OpRollBuyCoins),
+            "COIN_ORIGIN_OP_ROLL_BUY_FEES" => Some(Self::OpRollBuyFees),
+            "COIN_ORIGIN_OP_ROLL_BUY_ROLLS" => Some(Self::OpRollBuyRolls),
+            "COIN_ORIGIN_OP_ROLL_SELL_ROLLS" => Some(Self::OpRollSellRolls),
+            "COIN_ORIGIN_OP_ROLL_SELL_DEFERRED_MAS" => Some(Self::OpRollSellDeferredMas),
+            "COIN_ORIGIN_OP_EXECUTESC_FEES" => Some(Self::OpExecutescFees),
+            "COIN_ORIGIN_OP_CALLSC_COINS" => Some(Self::OpCallscCoins),
+            "COIN_ORIGIN_OP_CALLSC_FEES" => Some(Self::OpCallscFees),
+            "COIN_ORIGIN_OP_TRANSACTION_COINS" => Some(Self::OpTransactionCoins),
+            "COIN_ORIGIN_OP_TRANSACTION_FEES" => Some(Self::OpTransactionFees),
+            "COIN_ORIGIN_ASYNC_MSG" => Some(Self::AsyncMsg),
             _ => None,
         }
     }

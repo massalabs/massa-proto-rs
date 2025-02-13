@@ -3103,53 +3103,29 @@ pub struct NewExecutionInfoServerRequest {
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewExecutionInfoServerResponse {
-    /// reward for block producer
-    #[prost(message, optional, tag = "1")]
-    pub block_producer_reward: ::core::option::Option<
-        super::super::model::v1::TargetAmount,
-    >,
-    /// reward for endorsement creator
-    #[prost(message, repeated, tag = "2")]
-    pub endorsement_creator_rewards: ::prost::alloc::vec::Vec<
-        super::super::model::v1::TargetAmount,
-    >,
-    /// reward for endorsement target
-    #[prost(message, optional, tag = "3")]
-    pub endorsement_target_reward: ::core::option::Option<
-        super::super::model::v1::TargetAmount,
-    >,
-    /// executed denunciations
-    #[prost(message, repeated, tag = "4")]
-    pub denunciations: ::prost::alloc::vec::Vec<
-        super::super::model::v1::DenunciationAddress,
-    >,
-    /// executed roll buy / roll sell
-    #[prost(message, repeated, tag = "5")]
-    pub operations: ::prost::alloc::vec::Vec<super::super::model::v1::OperationTypeRoll>,
-    /// executed async messages
-    #[prost(message, repeated, tag = "6")]
-    pub async_messages: ::prost::alloc::vec::Vec<
-        super::super::model::v1::AsyncMessageExecution,
-    >,
-    /// executed deferred calls
-    #[prost(message, repeated, tag = "7")]
-    pub deferred_calls_messages: ::prost::alloc::vec::Vec<
-        super::super::model::v1::DeferredCallExecution,
-    >,
-    /// executed deferred credits
-    #[prost(message, repeated, tag = "8")]
-    pub deferred_credits_execution: ::prost::alloc::vec::Vec<
-        super::super::model::v1::TargetAmount,
-    >,
-    /// executed cancel async messages
-    #[prost(message, repeated, tag = "9")]
-    pub cancel_async_message_execution: ::prost::alloc::vec::Vec<
-        super::super::model::v1::TargetAmount,
-    >,
-    /// executed auto sell roll
-    #[prost(message, repeated, tag = "10")]
-    pub auto_sell_execution: ::prost::alloc::vec::Vec<
-        super::super::model::v1::TargetAmount,
+    /// // reward for block producer
+    /// massa.model.v1.TargetAmount block_producer_reward = 1;
+    /// // reward for endorsement creator
+    /// repeated massa.model.v1.TargetAmount endorsement_creator_rewards = 2;
+    /// // reward for endorsement target
+    /// massa.model.v1.TargetAmount endorsement_target_reward = 3;
+    /// // executed denunciations
+    /// repeated massa.model.v1.DenunciationAddress denunciations = 4;
+    /// // executed roll buy / roll sell
+    /// repeated massa.model.v1.OperationTypeRoll operations = 5;
+    /// // executed async messages
+    /// repeated massa.model.v1.AsyncMessageExecution async_messages = 6;
+    /// // executed deferred calls
+    /// repeated massa.model.v1.DeferredCallExecution deferred_calls_messages = 7;
+    /// // executed deferred credits
+    /// repeated massa.model.v1.TargetAmount deferred_credits_execution = 8;
+    /// // executed cancel async messages
+    /// repeated massa.model.v1.TargetAmount cancel_async_message_execution = 9;
+    /// // executed auto sell roll
+    /// repeated massa.model.v1.TargetAmount auto_sell_execution = 10;
+    #[prost(message, repeated, tag = "1")]
+    pub execution_infos: ::prost::alloc::vec::Vec<
+        super::super::model::v1::ExecutionInfo,
     >,
 }
 /// NewSlotExecutionOutputsRequest holds request for NewSlotExecutionOutputs
