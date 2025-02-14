@@ -1455,16 +1455,8 @@ pub struct ExecutionInfo {
     #[prost(enumeration = "Item", tag = "4")]
     pub item: i32,
     #[prost(message, optional, tag = "5")]
-    pub prev_amount: ::core::option::Option<NativeAmount>,
-    #[prost(message, optional, tag = "6")]
     pub amount: ::core::option::Option<NativeAmount>,
-    #[prost(message, optional, tag = "7")]
-    pub post_amount: ::core::option::Option<NativeAmount>,
-    #[prost(int64, tag = "8")]
-    pub timestamp: i64,
-    #[prost(message, optional, tag = "9")]
-    pub slot: ::core::option::Option<Slot>,
-    #[prost(enumeration = "CoinOrigin", tag = "10")]
+    #[prost(enumeration = "CoinOrigin", tag = "6")]
     pub origin: i32,
 }
 /// ScExecutionEventStatus type enum

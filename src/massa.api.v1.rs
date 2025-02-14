@@ -3103,6 +3103,10 @@ pub struct NewExecutionInfoServerRequest {
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewExecutionInfoServerResponse {
+    #[prost(message, optional, tag = "1")]
+    pub slot: ::core::option::Option<super::super::model::v1::Slot>,
+    #[prost(int64, tag = "2")]
+    pub timestamp: i64,
     /// // reward for block producer
     /// massa.model.v1.TargetAmount block_producer_reward = 1;
     /// // reward for endorsement creator
@@ -3123,7 +3127,7 @@ pub struct NewExecutionInfoServerResponse {
     /// repeated massa.model.v1.TargetAmount cancel_async_message_execution = 9;
     /// // executed auto sell roll
     /// repeated massa.model.v1.TargetAmount auto_sell_execution = 10;
-    #[prost(message, repeated, tag = "1")]
+    #[prost(message, repeated, tag = "3")]
     pub execution_infos: ::prost::alloc::vec::Vec<
         super::super::model::v1::ExecutionInfo,
     >,
