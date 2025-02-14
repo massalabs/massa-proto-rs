@@ -1448,14 +1448,15 @@ pub struct DeferredCallExecution {
 pub struct ExecutionInfo {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
-    #[prost(string, tag = "2")]
-    pub address: ::prost::alloc::string::String,
-    #[prost(enumeration = "CoinDirection", tag = "3")]
-    pub direction: i32,
+    #[prost(message, optional, tag = "2")]
+    pub from_address: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "3")]
+    pub to_address: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(enumeration = "Item", tag = "4")]
     pub item: i32,
-    #[prost(message, optional, tag = "5")]
-    pub amount: ::core::option::Option<NativeAmount>,
+    /// both mas and rolls are represented in the same field
+    #[prost(uint64, tag = "5")]
+    pub amount: u64,
     #[prost(enumeration = "CoinOrigin", tag = "6")]
     pub origin: i32,
 }
