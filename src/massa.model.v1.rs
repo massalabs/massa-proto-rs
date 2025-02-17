@@ -1445,7 +1445,7 @@ pub struct DeferredCallExecution {
     pub coins: ::core::option::Option<NativeAmount>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct ExecutionInfo {
+pub struct TransferInfo {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
     #[prost(message, optional, tag = "2")]
@@ -1459,6 +1459,8 @@ pub struct ExecutionInfo {
     pub amount: u64,
     #[prost(enumeration = "CoinOrigin", tag = "6")]
     pub origin: i32,
+    #[prost(message, optional, tag = "7")]
+    pub operation_id: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ScExecutionEventStatus type enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -1637,35 +1639,6 @@ impl LedgerChangeType {
             "LEDGER_CHANGE_TYPE_SET" => Some(Self::Set),
             "LEDGER_CHANGE_TYPE_UPDATE" => Some(Self::Update),
             "LEDGER_CHANGE_TYPE_DELETE" => Some(Self::Delete),
-            _ => None,
-        }
-    }
-}
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum CoinDirection {
-    Unspecified = 0,
-    Debit = 1,
-    Credit = 2,
-}
-impl CoinDirection {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            Self::Unspecified => "COIN_DIRECTION_UNSPECIFIED",
-            Self::Debit => "COIN_DIRECTION_DEBIT",
-            Self::Credit => "COIN_DIRECTION_CREDIT",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "COIN_DIRECTION_UNSPECIFIED" => Some(Self::Unspecified),
-            "COIN_DIRECTION_DEBIT" => Some(Self::Debit),
-            "COIN_DIRECTION_CREDIT" => Some(Self::Credit),
             _ => None,
         }
     }
