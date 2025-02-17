@@ -1463,6 +1463,8 @@ pub struct TransferInfo {
     pub origin: i32,
     #[prost(message, optional, tag = "8")]
     pub operation_id: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "9")]
+    pub async_msg_id: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ScExecutionEventStatus type enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
