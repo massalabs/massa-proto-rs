@@ -1454,12 +1454,14 @@ pub struct TransferInfo {
     pub to_address: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(enumeration = "Item", tag = "4")]
     pub item: i32,
-    /// both mas and rolls are represented in the same field
-    #[prost(uint64, tag = "5")]
-    pub amount: u64,
-    #[prost(enumeration = "CoinOrigin", tag = "6")]
+    /// mas
+    #[prost(message, optional, tag = "5")]
+    pub amount: ::core::option::Option<u64>,
+    #[prost(message, optional, tag = "6")]
+    pub rolls_count: ::core::option::Option<u64>,
+    #[prost(enumeration = "CoinOrigin", tag = "7")]
     pub origin: i32,
-    #[prost(message, optional, tag = "7")]
+    #[prost(message, optional, tag = "8")]
     pub operation_id: ::core::option::Option<::prost::alloc::string::String>,
 }
 /// ScExecutionEventStatus type enum
