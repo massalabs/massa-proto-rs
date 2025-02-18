@@ -1467,6 +1467,8 @@ pub struct TransferInfo {
     pub async_msg_id: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(message, optional, tag = "10")]
     pub deferred_call_id: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "11")]
+    pub denunciation_index: ::core::option::Option<DenunciationIndex>,
 }
 /// ScExecutionEventStatus type enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
