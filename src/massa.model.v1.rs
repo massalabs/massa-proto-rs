@@ -1445,30 +1445,42 @@ pub struct DeferredCallExecution {
     pub coins: ::core::option::Option<NativeAmount>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct TransferInfo {
+pub struct ExecTransferInfo {
     #[prost(string, tag = "1")]
     pub id: ::prost::alloc::string::String,
     #[prost(message, optional, tag = "2")]
     pub from_address: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(message, optional, tag = "3")]
     pub to_address: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(enumeration = "Item", tag = "4")]
-    pub item: i32,
-    /// mas
-    #[prost(message, optional, tag = "5")]
-    pub amount: ::core::option::Option<u64>,
-    #[prost(message, optional, tag = "6")]
-    pub rolls_count: ::core::option::Option<u64>,
-    #[prost(enumeration = "CoinOrigin", tag = "7")]
+    #[prost(message, optional, tag = "4")]
+    pub value: ::core::option::Option<TransferValue>,
+    #[prost(enumeration = "CoinOrigin", tag = "5")]
     pub origin: i32,
-    #[prost(message, optional, tag = "8")]
+    #[prost(message, optional, tag = "6")]
     pub operation_id: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(message, optional, tag = "9")]
+    #[prost(message, optional, tag = "7")]
     pub async_msg_id: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(message, optional, tag = "10")]
+    #[prost(message, optional, tag = "8")]
     pub deferred_call_id: ::core::option::Option<::prost::alloc::string::String>,
-    #[prost(message, optional, tag = "11")]
+    #[prost(message, optional, tag = "9")]
     pub denunciation_index: ::core::option::Option<DenunciationIndex>,
+}
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct TransferValue {
+    #[prost(oneof = "transfer_value::Value", tags = "1, 2, 3")]
+    pub value: ::core::option::Option<transfer_value::Value>,
+}
+/// Nested message and enum types in `TransferValue`.
+pub mod transfer_value {
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
+    pub enum Value {
+        #[prost(uint64, tag = "1")]
+        Rolls(u64),
+        #[prost(message, tag = "2")]
+        Coins(super::NativeAmount),
+        #[prost(message, tag = "3")]
+        DeferredCredits(super::NativeAmount),
+    }
 }
 /// ScExecutionEventStatus type enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -1647,38 +1659,6 @@ impl LedgerChangeType {
             "LEDGER_CHANGE_TYPE_SET" => Some(Self::Set),
             "LEDGER_CHANGE_TYPE_UPDATE" => Some(Self::Update),
             "LEDGER_CHANGE_TYPE_DELETE" => Some(Self::Delete),
-            _ => None,
-        }
-    }
-}
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
-#[repr(i32)]
-pub enum Item {
-    Unspecified = 0,
-    Roll = 1,
-    Mas = 2,
-    DeferredMas = 3,
-}
-impl Item {
-    /// String value of the enum field names used in the ProtoBuf definition.
-    ///
-    /// The values are not transformed in any way and thus are considered stable
-    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
-    pub fn as_str_name(&self) -> &'static str {
-        match self {
-            Self::Unspecified => "ITEM_UNSPECIFIED",
-            Self::Roll => "ITEM_ROLL",
-            Self::Mas => "ITEM_MAS",
-            Self::DeferredMas => "ITEM_DEFERRED_MAS",
-        }
-    }
-    /// Creates an enum from field names used in the ProtoBuf definition.
-    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
-        match value {
-            "ITEM_UNSPECIFIED" => Some(Self::Unspecified),
-            "ITEM_ROLL" => Some(Self::Roll),
-            "ITEM_MAS" => Some(Self::Mas),
-            "ITEM_DEFERRED_MAS" => Some(Self::DeferredMas),
             _ => None,
         }
     }

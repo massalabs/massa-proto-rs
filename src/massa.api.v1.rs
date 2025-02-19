@@ -3135,7 +3135,9 @@ pub struct NewTransfersInfoServerResponse {
     /// // executed auto sell roll
     /// repeated massa.model.v1.TargetAmount auto_sell_execution = 10;
     #[prost(message, repeated, tag = "4")]
-    pub transfers_info: ::prost::alloc::vec::Vec<super::super::model::v1::TransferInfo>,
+    pub transfers_info: ::prost::alloc::vec::Vec<
+        super::super::model::v1::ExecTransferInfo,
+    >,
 }
 /// NewSlotExecutionOutputsRequest holds request for NewSlotExecutionOutputs
 #[derive(Clone, PartialEq, ::prost::Message)]
