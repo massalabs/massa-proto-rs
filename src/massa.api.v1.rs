@@ -3096,13 +3096,13 @@ pub struct NewOperationsServerResponse {
     >,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NewExecutionInfoServerRequest {
+pub struct NewTransfersInfoServerRequest {
     /// optional filter address
     #[prost(message, optional, tag = "1")]
     pub address: ::core::option::Option<::prost::alloc::string::String>,
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
-pub struct NewExecutionInfoServerResponse {
+pub struct NewTransfersInfoServerResponse {
     /// executed slot
     #[prost(message, optional, tag = "1")]
     pub slot: ::core::option::Option<super::super::model::v1::Slot>,
@@ -4941,12 +4941,12 @@ pub mod public_service_client {
             self.inner.server_streaming(req, path, codec).await
         }
         /// New execution Info
-        pub async fn new_execution_info_server(
+        pub async fn new_transfers_info_server(
             &mut self,
-            request: impl tonic::IntoRequest<super::NewExecutionInfoServerRequest>,
+            request: impl tonic::IntoRequest<super::NewTransfersInfoServerRequest>,
         ) -> std::result::Result<
             tonic::Response<
-                tonic::codec::Streaming<super::NewExecutionInfoServerResponse>,
+                tonic::codec::Streaming<super::NewTransfersInfoServerResponse>,
             >,
             tonic::Status,
         > {
@@ -4960,14 +4960,14 @@ pub mod public_service_client {
                 })?;
             let codec = tonic::codec::ProstCodec::default();
             let path = http::uri::PathAndQuery::from_static(
-                "/massa.api.v1.PublicService/NewExecutionInfoServer",
+                "/massa.api.v1.PublicService/NewTransfersInfoServer",
             );
             let mut req = request.into_request();
             req.extensions_mut()
                 .insert(
                     GrpcMethod::new(
                         "massa.api.v1.PublicService",
-                        "NewExecutionInfoServer",
+                        "NewTransfersInfoServer",
                     ),
                 );
             self.inner.server_streaming(req, path, codec).await
@@ -5398,21 +5398,21 @@ pub mod public_service_server {
             tonic::Response<Self::TransactionsThroughputServerStream>,
             tonic::Status,
         >;
-        /// Server streaming response type for the NewExecutionInfoServer method.
-        type NewExecutionInfoServerStream: tonic::codegen::tokio_stream::Stream<
+        /// Server streaming response type for the NewTransfersInfoServer method.
+        type NewTransfersInfoServerStream: tonic::codegen::tokio_stream::Stream<
                 Item = std::result::Result<
-                    super::NewExecutionInfoServerResponse,
+                    super::NewTransfersInfoServerResponse,
                     tonic::Status,
                 >,
             >
             + std::marker::Send
             + 'static;
         /// New execution Info
-        async fn new_execution_info_server(
+        async fn new_transfers_info_server(
             &self,
-            request: tonic::Request<super::NewExecutionInfoServerRequest>,
+            request: tonic::Request<super::NewTransfersInfoServerRequest>,
         ) -> std::result::Result<
-            tonic::Response<Self::NewExecutionInfoServerStream>,
+            tonic::Response<Self::NewTransfersInfoServerStream>,
             tonic::Status,
         >;
     }
@@ -7193,27 +7193,27 @@ pub mod public_service_server {
                     };
                     Box::pin(fut)
                 }
-                "/massa.api.v1.PublicService/NewExecutionInfoServer" => {
+                "/massa.api.v1.PublicService/NewTransfersInfoServer" => {
                     #[allow(non_camel_case_types)]
-                    struct NewExecutionInfoServerSvc<T: PublicService>(pub Arc<T>);
+                    struct NewTransfersInfoServerSvc<T: PublicService>(pub Arc<T>);
                     impl<
                         T: PublicService,
                     > tonic::server::ServerStreamingService<
-                        super::NewExecutionInfoServerRequest,
-                    > for NewExecutionInfoServerSvc<T> {
-                        type Response = super::NewExecutionInfoServerResponse;
-                        type ResponseStream = T::NewExecutionInfoServerStream;
+                        super::NewTransfersInfoServerRequest,
+                    > for NewTransfersInfoServerSvc<T> {
+                        type Response = super::NewTransfersInfoServerResponse;
+                        type ResponseStream = T::NewTransfersInfoServerStream;
                         type Future = BoxFuture<
                             tonic::Response<Self::ResponseStream>,
                             tonic::Status,
                         >;
                         fn call(
                             &mut self,
-                            request: tonic::Request<super::NewExecutionInfoServerRequest>,
+                            request: tonic::Request<super::NewTransfersInfoServerRequest>,
                         ) -> Self::Future {
                             let inner = Arc::clone(&self.0);
                             let fut = async move {
-                                <T as PublicService>::new_execution_info_server(
+                                <T as PublicService>::new_transfers_info_server(
                                         &inner,
                                         request,
                                     )
@@ -7228,7 +7228,7 @@ pub mod public_service_server {
                     let max_encoding_message_size = self.max_encoding_message_size;
                     let inner = self.inner.clone();
                     let fut = async move {
-                        let method = NewExecutionInfoServerSvc(inner);
+                        let method = NewTransfersInfoServerSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
