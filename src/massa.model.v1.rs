@@ -856,6 +856,9 @@ pub struct ScExecutionEventContext {
     /// Status
     #[prost(enumeration = "ScExecutionEventStatus", tag = "7")]
     pub status: i32,
+    /// read only
+    #[prost(bool, tag = "8")]
+    pub read_only: bool,
 }
 /// ScExecutionEventsStatus
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -943,7 +946,8 @@ pub struct AsyncMessage {
     #[prost(message, optional, tag = "1")]
     pub emission_slot: ::core::option::Option<Slot>,
     /// Index of the emitted message within the `emission_slot`.
-    /// This is used for disambiguate the emission of multiple messages at the same slot.
+    /// This is used for disambiguate the emission of multiple messages at the same
+    /// slot.
     #[prost(uint64, tag = "2")]
     pub emission_index: u64,
     /// The address that sent the message
@@ -967,10 +971,12 @@ pub struct AsyncMessage {
     /// In case of failure or discard, those coins are reimbursed to the sender.
     #[prost(message, optional, tag = "8")]
     pub coins: ::core::option::Option<NativeAmount>,
-    /// Slot at which the message starts being valid (bound included in the validity range)
+    /// Slot at which the message starts being valid (bound included in the
+    /// validity range)
     #[prost(message, optional, tag = "9")]
     pub validity_start: ::core::option::Option<Slot>,
-    /// Slot at which the message stops being valid (bound not included in the validity range)
+    /// Slot at which the message stops being valid (bound not included in the
+    /// validity range)
     #[prost(message, optional, tag = "10")]
     pub validity_end: ::core::option::Option<Slot>,
     /// Raw payload data of the message
@@ -979,8 +985,10 @@ pub struct AsyncMessage {
     /// Trigger that define whenever a message can be executed
     #[prost(message, optional, tag = "12")]
     pub trigger: ::core::option::Option<AsyncMessageTrigger>,
-    /// Boolean that determine if the message can be executed. For messages without filter this boolean is always true.
-    /// For messages with filter, this boolean is true if the filter has been matched between `validity_start` and current slot.
+    /// Boolean that determine if the message can be executed. For messages without
+    /// filter this boolean is always true. For messages with filter, this boolean
+    /// is true if the filter has been matched between `validity_start` and current
+    /// slot.
     #[prost(bool, tag = "13")]
     pub can_be_executed: bool,
 }
@@ -991,7 +999,8 @@ pub struct AsyncMessageUpdate {
     #[prost(message, optional, tag = "1")]
     pub emission_slot: ::core::option::Option<SetOrKeepSlot>,
     /// Change the index of the emitted message within the `emission_slot`.
-    /// This is used for disambiguate the emission of multiple messages at the same slot.
+    /// This is used for disambiguate the emission of multiple messages at the same
+    /// slot.
     #[prost(message, optional, tag = "2")]
     pub emission_index: ::core::option::Option<SetOrKeepUint64>,
     /// Change the address that sent the message
@@ -1015,10 +1024,12 @@ pub struct AsyncMessageUpdate {
     /// In case of failure or discard, those coins are reimbursed to the sender.
     #[prost(message, optional, tag = "8")]
     pub coins: ::core::option::Option<SetOrKeepUint64>,
-    /// Change the slot at which the message starts being valid (bound included in the validity range)
+    /// Change the slot at which the message starts being valid (bound included in
+    /// the validity range)
     #[prost(message, optional, tag = "9")]
     pub validity_start: ::core::option::Option<SetOrKeepSlot>,
-    /// Change the slot at which the message stops being valid (bound not included in the validity range)
+    /// Change the slot at which the message stops being valid (bound not included
+    /// in the validity range)
     #[prost(message, optional, tag = "10")]
     pub validity_end: ::core::option::Option<SetOrKeepSlot>,
     /// Change the raw payload data of the message
@@ -1027,8 +1038,10 @@ pub struct AsyncMessageUpdate {
     /// Change the trigger that define whenever a message can be executed
     #[prost(message, optional, tag = "12")]
     pub trigger: ::core::option::Option<SetOrKeepAsyncMessageTrigger>,
-    /// Change the boolean that determine if the message can be executed. For messages without filter this boolean is always true.
-    /// For messages with filter, this boolean is true if the filter has been matched between `validity_start` and current slot.
+    /// Change the boolean that determine if the message can be executed. For
+    /// messages without filter this boolean is always true. For messages with
+    /// filter, this boolean is true if the filter has been matched between
+    /// `validity_start` and current slot.
     #[prost(message, optional, tag = "13")]
     pub can_be_executed: ::core::option::Option<SetOrKeepBool>,
 }
@@ -1270,7 +1283,8 @@ pub struct ReadOnlyExecutionCall {
     /// Call stack to simulate, older caller first
     #[prost(message, repeated, tag = "2")]
     pub call_stack: ::prost::alloc::vec::Vec<ExecutionStackElement>,
-    /// Caller's address, (Optional) if not set, an auto-generated address will be used
+    /// Caller's address, (Optional) if not set, an auto-generated address will be
+    /// used
     #[prost(message, optional, tag = "5")]
     pub caller_address: ::core::option::Option<::prost::alloc::string::String>,
     /// fee paid by the caller when the call is processed (optional)
@@ -1299,7 +1313,8 @@ pub struct BytecodeExecution {
     /// Byte code
     #[prost(bytes = "vec", tag = "1")]
     pub bytecode: ::prost::alloc::vec::Vec<u8>,
-    /// Serialized datastore (key value store)  for `ExecuteSC` Operation (Optional)
+    /// Serialized datastore (key value store)  for `ExecuteSC` Operation
+    /// (Optional)
     #[prost(bytes = "vec", tag = "2")]
     pub operation_datastore: ::prost::alloc::vec::Vec<u8>,
 }
@@ -1345,15 +1360,17 @@ pub struct ExecutionStackElement {
     /// Coins transferred to the target address during the call
     #[prost(message, optional, tag = "2")]
     pub coins: ::core::option::Option<NativeAmount>,
-    /// List of addresses owned by the current call, and on which the current call has write access.
-    /// This list should contain `ExecutionStackElement::address` in the sense that an address should have write access to itself.
-    /// This list should also contain all addresses created previously during the call
-    /// to allow write access on newly created addresses in order to set them up,
-    /// but only within the scope of the current stack element.
-    /// That way, only the current scope and neither its caller not the functions it calls gain this write access,
-    /// which is important for security.
-    /// Note that we use a vector instead of a pre-hashed set to ensure order determinism,
-    /// the performance hit of linear search remains minimal because `owned_addresses` will always contain very few elements.
+    /// List of addresses owned by the current call, and on which the current call
+    /// has write access. This list should contain `ExecutionStackElement::address`
+    /// in the sense that an address should have write access to itself. This list
+    /// should also contain all addresses created previously during the call to
+    /// allow write access on newly created addresses in order to set them up, but
+    /// only within the scope of the current stack element. That way, only the
+    /// current scope and neither its caller not the functions it calls gain this
+    /// write access, which is important for security. Note that we use a vector
+    /// instead of a pre-hashed set to ensure order determinism, the performance
+    /// hit of linear search remains minimal because `owned_addresses` will always
+    /// contain very few elements.
     #[prost(string, repeated, tag = "3")]
     pub owned_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Datastore (key value store) for `ExecuteSC` Operation (Optional)
