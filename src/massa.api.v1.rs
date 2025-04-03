@@ -3095,6 +3095,50 @@ pub struct NewOperationsServerResponse {
         super::super::model::v1::SignedOperation,
     >,
 }
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewTransfersInfoServerRequest {
+    /// optional filter address
+    #[prost(message, optional, tag = "1")]
+    pub address: ::core::option::Option<::prost::alloc::string::String>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct NewTransfersInfoServerResponse {
+    /// executed slot
+    #[prost(message, optional, tag = "1")]
+    pub slot: ::core::option::Option<super::super::model::v1::Slot>,
+    /// timestamp
+    #[prost(int64, tag = "2")]
+    pub timestamp: i64,
+    /// block id
+    #[prost(message, optional, tag = "3")]
+    pub block_id: ::core::option::Option<::prost::alloc::string::String>,
+    /// transfers info
+    ///
+    /// // reward for block producer
+    /// massa.model.v1.TargetAmount block_producer_reward = 1;
+    /// // reward for endorsement creator
+    /// repeated massa.model.v1.TargetAmount endorsement_creator_rewards = 2;
+    /// // reward for endorsement target
+    /// massa.model.v1.TargetAmount endorsement_target_reward = 3;
+    /// // executed denunciations
+    /// repeated massa.model.v1.DenunciationAddress denunciations = 4;
+    /// // executed roll buy / roll sell
+    /// repeated massa.model.v1.OperationTypeRoll operations = 5;
+    /// // executed async messages
+    /// repeated massa.model.v1.AsyncMessageExecution async_messages = 6;
+    /// // executed deferred calls
+    /// repeated massa.model.v1.DeferredCallExecution deferred_calls_messages = 7;
+    /// // executed deferred credits
+    /// repeated massa.model.v1.TargetAmount deferred_credits_execution = 8;
+    /// // executed cancel async messages
+    /// repeated massa.model.v1.TargetAmount cancel_async_message_execution = 9;
+    /// // executed auto sell roll
+    /// repeated massa.model.v1.TargetAmount auto_sell_execution = 10;
+    #[prost(message, repeated, tag = "4")]
+    pub transfers_info: ::prost::alloc::vec::Vec<
+        super::super::model::v1::ExecTransferInfo,
+    >,
+}
 /// NewSlotExecutionOutputsRequest holds request for NewSlotExecutionOutputs
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotExecutionOutputsRequest {
@@ -3102,7 +3146,8 @@ pub struct NewSlotExecutionOutputsRequest {
     #[prost(message, repeated, tag = "1")]
     pub filters: ::prost::alloc::vec::Vec<NewSlotExecutionOutputsFilter>,
 }
-/// NewSlotExecutionOutputsServerRequest holds request for NewSlotExecutionOutputs
+/// NewSlotExecutionOutputsServerRequest holds request for
+/// NewSlotExecutionOutputs
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotExecutionOutputsServerRequest {
     /// Returns all the slot execution outputs that verify all the filters
@@ -3301,7 +3346,8 @@ pub struct NewSlotExecutionOutputsResponse {
     #[prost(message, optional, tag = "1")]
     pub output: ::core::option::Option<super::super::model::v1::SlotExecutionOutput>,
 }
-/// NewSlotExecutionOutputsServerResponse holds response from NewSlotExecutionOutputs
+/// NewSlotExecutionOutputsServerResponse holds response from
+/// NewSlotExecutionOutputs
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct NewSlotExecutionOutputsServerResponse {
     /// Slot execution output
@@ -3447,7 +3493,8 @@ pub struct TransactionsThroughputResponse {
     #[prost(uint32, tag = "1")]
     pub throughput: u32,
 }
-/// TransactionsThroughputServerResponse holds response from TransactionsThroughput
+/// TransactionsThroughputServerResponse holds response from
+/// TransactionsThroughput
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
 pub struct TransactionsThroughputServerResponse {
     /// Transactions throughput per second
@@ -4895,6 +4942,38 @@ pub mod public_service_client {
                 );
             self.inner.server_streaming(req, path, codec).await
         }
+        /// New execution Info
+        pub async fn new_transfers_info_server(
+            &mut self,
+            request: impl tonic::IntoRequest<super::NewTransfersInfoServerRequest>,
+        ) -> std::result::Result<
+            tonic::Response<
+                tonic::codec::Streaming<super::NewTransfersInfoServerResponse>,
+            >,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/massa.api.v1.PublicService/NewTransfersInfoServer",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(
+                    GrpcMethod::new(
+                        "massa.api.v1.PublicService",
+                        "NewTransfersInfoServer",
+                    ),
+                );
+            self.inner.server_streaming(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -5319,6 +5398,23 @@ pub mod public_service_server {
             request: tonic::Request<super::TransactionsThroughputServerRequest>,
         ) -> std::result::Result<
             tonic::Response<Self::TransactionsThroughputServerStream>,
+            tonic::Status,
+        >;
+        /// Server streaming response type for the NewTransfersInfoServer method.
+        type NewTransfersInfoServerStream: tonic::codegen::tokio_stream::Stream<
+                Item = std::result::Result<
+                    super::NewTransfersInfoServerResponse,
+                    tonic::Status,
+                >,
+            >
+            + std::marker::Send
+            + 'static;
+        /// New execution Info
+        async fn new_transfers_info_server(
+            &self,
+            request: tonic::Request<super::NewTransfersInfoServerRequest>,
+        ) -> std::result::Result<
+            tonic::Response<Self::NewTransfersInfoServerStream>,
             tonic::Status,
         >;
     }
@@ -7084,6 +7180,57 @@ pub mod public_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = TransactionsThroughputServerSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.server_streaming(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/massa.api.v1.PublicService/NewTransfersInfoServer" => {
+                    #[allow(non_camel_case_types)]
+                    struct NewTransfersInfoServerSvc<T: PublicService>(pub Arc<T>);
+                    impl<
+                        T: PublicService,
+                    > tonic::server::ServerStreamingService<
+                        super::NewTransfersInfoServerRequest,
+                    > for NewTransfersInfoServerSvc<T> {
+                        type Response = super::NewTransfersInfoServerResponse;
+                        type ResponseStream = T::NewTransfersInfoServerStream;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::ResponseStream>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::NewTransfersInfoServerRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as PublicService>::new_transfers_info_server(
+                                        &inner,
+                                        request,
+                                    )
+                                    .await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = NewTransfersInfoServerSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(
