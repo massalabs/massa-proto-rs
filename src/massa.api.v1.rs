@@ -3223,6 +3223,9 @@ pub struct NewSlotAbiCallStacksResponse {
     /// Call stack for operations
     #[prost(message, repeated, tag = "3")]
     pub operation_call_stacks: ::prost::alloc::vec::Vec<OperationAbiCallStack>,
+    /// Call stack for deferred calls
+    #[prost(message, repeated, tag = "4")]
+    pub deferred_call_stacks: ::prost::alloc::vec::Vec<DeferredCallAbiCallStack>,
 }
 /// NewSlotTransfers request
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -3546,6 +3549,16 @@ pub struct OperationAbiCallStack {
     #[prost(message, repeated, tag = "2")]
     pub call_stack: ::prost::alloc::vec::Vec<AbiCallStackElementParent>,
 }
+/// Operation execution call stack
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallAbiCallStack {
+    /// Deferred call id
+    #[prost(string, tag = "1")]
+    pub deferred_call_id: ::prost::alloc::string::String,
+    /// Call stack
+    #[prost(message, repeated, tag = "2")]
+    pub call_stack: ::prost::alloc::vec::Vec<AbiCallStackElementParent>,
+}
 /// Call stack for a slot
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct SlotAbiCallStacks {
@@ -3555,6 +3568,9 @@ pub struct SlotAbiCallStacks {
     /// Call stack for operations
     #[prost(message, repeated, tag = "2")]
     pub operation_call_stacks: ::prost::alloc::vec::Vec<OperationAbiCallStack>,
+    /// Call stacks for deferred calls
+    #[prost(message, repeated, tag = "3")]
+    pub deferred_call_stacks: ::prost::alloc::vec::Vec<DeferredCallAbiCallStack>,
 }
 /// GetSlotABICallStacks response
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -3583,7 +3599,7 @@ pub struct TransferInfo {
     #[prost(uint64, tag = "3")]
     pub amount: u64,
     /// Operation id or asc index
-    #[prost(oneof = "transfer_info::OperationIdOrAscIndex", tags = "4, 5")]
+    #[prost(oneof = "transfer_info::OperationIdOrAscIndex", tags = "4, 5, 6")]
     pub operation_id_or_asc_index: ::core::option::Option<
         transfer_info::OperationIdOrAscIndex,
     >,
@@ -3599,6 +3615,9 @@ pub mod transfer_info {
         /// Asynchronous execution index
         #[prost(uint64, tag = "5")]
         AscIndex(u64),
+        /// Deferred call id
+        #[prost(string, tag = "6")]
+        DeferredCallId(::prost::alloc::string::String),
     }
 }
 /// List of transfers for a slot
