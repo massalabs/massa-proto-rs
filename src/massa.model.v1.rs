@@ -103,7 +103,7 @@ pub struct SlotRange {
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Denunciation {
     /// BlockHeaderDenunciation or EndorsementDenunciation
-    #[prost(oneof = "denunciation::Entry", tags = "1, 2")]
+    #[prost(oneof = "denunciation::Entry", tags = "1, 2, 3")]
     pub entry: ::core::option::Option<denunciation::Entry>,
 }
 /// Nested message and enum types in `Denunciation`.
@@ -117,6 +117,9 @@ pub mod denunciation {
         /// Denunciation endorsement
         #[prost(message, tag = "2")]
         Endorsement(super::EndorsementDenunciation),
+        /// Denunciation address
+        #[prost(message, tag = "3")]
+        Address(super::DenunciationAddress),
     }
 }
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -200,6 +203,18 @@ pub struct DenunciationEndorsement {
     /// Denounciation index
     #[prost(uint32, tag = "2")]
     pub index: u32,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DenunciationAddress {
+    /// target address
+    #[prost(string, tag = "1")]
+    pub address_denounced: ::prost::alloc::string::String,
+    /// slot
+    #[prost(message, optional, tag = "2")]
+    pub slot: ::core::option::Option<Slot>,
+    /// amount slashed
+    #[prost(message, optional, tag = "4")]
+    pub slashed: ::core::option::Option<NativeAmount>,
 }
 /// An endorsement, as sent in the network
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -380,10 +395,12 @@ pub mod operation_type {
         /// Transfer coins from sender to recipient
         #[prost(message, tag = "1")]
         Transaction(super::Transaction),
-        /// The sender buys `roll_count` rolls. Roll price is defined in configuration
+        /// The sender buys `roll_count` rolls. Roll price is defined in
+        /// configuration
         #[prost(message, tag = "2")]
         RollBuy(super::RollBuy),
-        /// The sender sells `roll_count` rolls. Roll price is defined in configuration
+        /// The sender sells `roll_count` rolls. Roll price is defined in
+        /// configuration
         #[prost(message, tag = "3")]
         RollSell(super::RollSell),
         /// Execute a smart contract
@@ -427,7 +444,8 @@ pub struct ExecuteSc {
     /// The maximum of coins that could be spent by the operation sender
     #[prost(uint64, tag = "2")]
     pub max_coins: u64,
-    /// The maximum amount of gas that the execution of the contract is allowed to cost
+    /// The maximum amount of gas that the execution of the contract is allowed to
+    /// cost
     #[prost(uint64, tag = "3")]
     pub max_gas: u64,
     /// A key-value store associating a hash to arbitrary bytes
@@ -446,10 +464,12 @@ pub struct CallSc {
     /// Parameter to pass to the target function
     #[prost(bytes = "vec", tag = "3")]
     pub parameter: ::prost::alloc::vec::Vec<u8>,
-    /// The maximum amount of gas that the execution of the contract is allowed to cost
+    /// The maximum amount of gas that the execution of the contract is allowed to
+    /// cost
     #[prost(uint64, tag = "4")]
     pub max_gas: u64,
-    /// Extra coins that are spent from the caller's balance and transferred to the target
+    /// Extra coins that are spent from the caller's balance and transferred to the
+    /// target
     #[prost(message, optional, tag = "5")]
     pub coins: ::core::option::Option<NativeAmount>,
 }
@@ -459,7 +479,8 @@ pub struct SignedOperation {
     /// Operation
     #[prost(message, optional, tag = "1")]
     pub content: ::core::option::Option<Operation>,
-    /// A cryptographically generated value using `serialized_data` and a public key.
+    /// A cryptographically generated value using `serialized_data` and a public
+    /// key.
     #[prost(string, tag = "2")]
     pub signature: ::prost::alloc::string::String,
     /// The public-key component used in the generation of the signature
@@ -468,7 +489,8 @@ pub struct SignedOperation {
     /// Derived from the same public key used to generate the signature
     #[prost(string, tag = "4")]
     pub content_creator_address: ::prost::alloc::string::String,
-    /// A secure hash of the non-malleable contents of a deterministic binary representation of the block header
+    /// A secure hash of the non-malleable contents of a deterministic binary
+    /// representation of the block header
     #[prost(string, tag = "5")]
     pub secure_hash: ::prost::alloc::string::String,
     /// The size of the serialized operation in bytes
@@ -514,6 +536,23 @@ pub struct OpTypes {
     /// Operations types
     #[prost(enumeration = "OpType", repeated, tag = "1")]
     pub op_types: ::prost::alloc::vec::Vec<i32>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct OperationTypeRoll {
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    #[prost(oneof = "operation_type_roll::Type", tags = "2, 3")]
+    pub r#type: ::core::option::Option<operation_type_roll::Type>,
+}
+/// Nested message and enum types in `OperationTypeRoll`.
+pub mod operation_type_roll {
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
+    pub enum Type {
+        #[prost(message, tag = "2")]
+        RollBuy(super::RollBuy),
+        #[prost(message, tag = "3")]
+        RollSell(super::RollSell),
+    }
 }
 /// Operation type enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -943,7 +982,8 @@ pub struct AsyncMessage {
     #[prost(message, optional, tag = "1")]
     pub emission_slot: ::core::option::Option<Slot>,
     /// Index of the emitted message within the `emission_slot`.
-    /// This is used for disambiguate the emission of multiple messages at the same slot.
+    /// This is used for disambiguate the emission of multiple messages at the same
+    /// slot.
     #[prost(uint64, tag = "2")]
     pub emission_index: u64,
     /// The address that sent the message
@@ -967,10 +1007,12 @@ pub struct AsyncMessage {
     /// In case of failure or discard, those coins are reimbursed to the sender.
     #[prost(message, optional, tag = "8")]
     pub coins: ::core::option::Option<NativeAmount>,
-    /// Slot at which the message starts being valid (bound included in the validity range)
+    /// Slot at which the message starts being valid (bound included in the
+    /// validity range)
     #[prost(message, optional, tag = "9")]
     pub validity_start: ::core::option::Option<Slot>,
-    /// Slot at which the message stops being valid (bound not included in the validity range)
+    /// Slot at which the message stops being valid (bound not included in the
+    /// validity range)
     #[prost(message, optional, tag = "10")]
     pub validity_end: ::core::option::Option<Slot>,
     /// Raw payload data of the message
@@ -979,8 +1021,10 @@ pub struct AsyncMessage {
     /// Trigger that define whenever a message can be executed
     #[prost(message, optional, tag = "12")]
     pub trigger: ::core::option::Option<AsyncMessageTrigger>,
-    /// Boolean that determine if the message can be executed. For messages without filter this boolean is always true.
-    /// For messages with filter, this boolean is true if the filter has been matched between `validity_start` and current slot.
+    /// Boolean that determine if the message can be executed. For messages without
+    /// filter this boolean is always true. For messages with filter, this boolean
+    /// is true if the filter has been matched between `validity_start` and current
+    /// slot.
     #[prost(bool, tag = "13")]
     pub can_be_executed: bool,
 }
@@ -991,7 +1035,8 @@ pub struct AsyncMessageUpdate {
     #[prost(message, optional, tag = "1")]
     pub emission_slot: ::core::option::Option<SetOrKeepSlot>,
     /// Change the index of the emitted message within the `emission_slot`.
-    /// This is used for disambiguate the emission of multiple messages at the same slot.
+    /// This is used for disambiguate the emission of multiple messages at the same
+    /// slot.
     #[prost(message, optional, tag = "2")]
     pub emission_index: ::core::option::Option<SetOrKeepUint64>,
     /// Change the address that sent the message
@@ -1015,10 +1060,12 @@ pub struct AsyncMessageUpdate {
     /// In case of failure or discard, those coins are reimbursed to the sender.
     #[prost(message, optional, tag = "8")]
     pub coins: ::core::option::Option<SetOrKeepUint64>,
-    /// Change the slot at which the message starts being valid (bound included in the validity range)
+    /// Change the slot at which the message starts being valid (bound included in
+    /// the validity range)
     #[prost(message, optional, tag = "9")]
     pub validity_start: ::core::option::Option<SetOrKeepSlot>,
-    /// Change the slot at which the message stops being valid (bound not included in the validity range)
+    /// Change the slot at which the message stops being valid (bound not included
+    /// in the validity range)
     #[prost(message, optional, tag = "10")]
     pub validity_end: ::core::option::Option<SetOrKeepSlot>,
     /// Change the raw payload data of the message
@@ -1027,8 +1074,10 @@ pub struct AsyncMessageUpdate {
     /// Change the trigger that define whenever a message can be executed
     #[prost(message, optional, tag = "12")]
     pub trigger: ::core::option::Option<SetOrKeepAsyncMessageTrigger>,
-    /// Change the boolean that determine if the message can be executed. For messages without filter this boolean is always true.
-    /// For messages with filter, this boolean is true if the filter has been matched between `validity_start` and current slot.
+    /// Change the boolean that determine if the message can be executed. For
+    /// messages without filter this boolean is always true. For messages with
+    /// filter, this boolean is true if the filter has been matched between
+    /// `validity_start` and current slot.
     #[prost(message, optional, tag = "13")]
     pub can_be_executed: ::core::option::Option<SetOrKeepBool>,
 }
@@ -1270,7 +1319,8 @@ pub struct ReadOnlyExecutionCall {
     /// Call stack to simulate, older caller first
     #[prost(message, repeated, tag = "2")]
     pub call_stack: ::prost::alloc::vec::Vec<ExecutionStackElement>,
-    /// Caller's address, (Optional) if not set, an auto-generated address will be used
+    /// Caller's address, (Optional) if not set, an auto-generated address will be
+    /// used
     #[prost(message, optional, tag = "5")]
     pub caller_address: ::core::option::Option<::prost::alloc::string::String>,
     /// fee paid by the caller when the call is processed (optional)
@@ -1299,7 +1349,8 @@ pub struct BytecodeExecution {
     /// Byte code
     #[prost(bytes = "vec", tag = "1")]
     pub bytecode: ::prost::alloc::vec::Vec<u8>,
-    /// Serialized datastore (key value store)  for `ExecuteSC` Operation (Optional)
+    /// Serialized datastore (key value store)  for `ExecuteSC` Operation
+    /// (Optional)
     #[prost(bytes = "vec", tag = "2")]
     pub operation_datastore: ::prost::alloc::vec::Vec<u8>,
 }
@@ -1345,20 +1396,91 @@ pub struct ExecutionStackElement {
     /// Coins transferred to the target address during the call
     #[prost(message, optional, tag = "2")]
     pub coins: ::core::option::Option<NativeAmount>,
-    /// List of addresses owned by the current call, and on which the current call has write access.
-    /// This list should contain `ExecutionStackElement::address` in the sense that an address should have write access to itself.
-    /// This list should also contain all addresses created previously during the call
-    /// to allow write access on newly created addresses in order to set them up,
-    /// but only within the scope of the current stack element.
-    /// That way, only the current scope and neither its caller not the functions it calls gain this write access,
-    /// which is important for security.
-    /// Note that we use a vector instead of a pre-hashed set to ensure order determinism,
-    /// the performance hit of linear search remains minimal because `owned_addresses` will always contain very few elements.
+    /// List of addresses owned by the current call, and on which the current call
+    /// has write access. This list should contain `ExecutionStackElement::address`
+    /// in the sense that an address should have write access to itself. This list
+    /// should also contain all addresses created previously during the call to
+    /// allow write access on newly created addresses in order to set them up, but
+    /// only within the scope of the current stack element. That way, only the
+    /// current scope and neither its caller not the functions it calls gain this
+    /// write access, which is important for security. Note that we use a vector
+    /// instead of a pre-hashed set to ensure order determinism, the performance
+    /// hit of linear search remains minimal because `owned_addresses` will always
+    /// contain very few elements.
     #[prost(string, repeated, tag = "3")]
     pub owned_addresses: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
     /// Datastore (key value store) for `ExecuteSC` Operation (Optional)
     #[prost(message, repeated, tag = "4")]
     pub operation_datastore: ::prost::alloc::vec::Vec<BytesMapFieldEntry>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TargetAmount {
+    #[prost(message, optional, tag = "1")]
+    pub amount: ::core::option::Option<NativeAmount>,
+    #[prost(string, tag = "2")]
+    pub address: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AsyncMessageExecution {
+    #[prost(bool, tag = "1")]
+    pub success: bool,
+    #[prost(string, tag = "2")]
+    pub sender: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub destination: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "4")]
+    pub coins: ::core::option::Option<NativeAmount>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct DeferredCallExecution {
+    #[prost(bool, tag = "1")]
+    pub success: bool,
+    #[prost(string, tag = "2")]
+    pub sender: ::prost::alloc::string::String,
+    #[prost(string, tag = "3")]
+    pub target_address: ::prost::alloc::string::String,
+    #[prost(string, tag = "4")]
+    pub target_function: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "5")]
+    pub coins: ::core::option::Option<NativeAmount>,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ExecTransferInfo {
+    #[prost(string, tag = "1")]
+    pub id: ::prost::alloc::string::String,
+    #[prost(message, optional, tag = "2")]
+    pub from_address: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "3")]
+    pub to_address: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "4")]
+    pub value: ::core::option::Option<TransferValue>,
+    #[prost(enumeration = "CoinOrigin", tag = "5")]
+    pub origin: i32,
+    #[prost(message, optional, tag = "6")]
+    pub operation_id: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "7")]
+    pub async_msg_id: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "8")]
+    pub deferred_call_id: ::core::option::Option<::prost::alloc::string::String>,
+    #[prost(message, optional, tag = "9")]
+    pub denunciation_index: ::core::option::Option<DenunciationIndex>,
+}
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct TransferValue {
+    #[prost(oneof = "transfer_value::Value", tags = "1, 2, 3")]
+    pub value: ::core::option::Option<transfer_value::Value>,
+}
+/// Nested message and enum types in `TransferValue`.
+pub mod transfer_value {
+    #[derive(Clone, Copy, PartialEq, ::prost::Oneof)]
+    pub enum Value {
+        #[prost(uint64, tag = "1")]
+        Rolls(u64),
+        #[prost(message, tag = "2")]
+        Coins(super::NativeAmount),
+        #[prost(message, tag = "3")]
+        DeferredCredits(super::NativeAmount),
+    }
 }
 /// ScExecutionEventStatus type enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
@@ -1537,6 +1659,123 @@ impl LedgerChangeType {
             "LEDGER_CHANGE_TYPE_SET" => Some(Self::Set),
             "LEDGER_CHANGE_TYPE_UPDATE" => Some(Self::Update),
             "LEDGER_CHANGE_TYPE_DELETE" => Some(Self::Delete),
+            _ => None,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum CoinOrigin {
+    Unspecified = 0,
+    BlockReward = 1,
+    DeferredCallFail = 2,
+    DeferredCallCancel = 3,
+    DeferredCallCoins = 4,
+    DeferredCallRegister = 5,
+    DeferredCallStorageRefund = 6,
+    EndorsementReward = 7,
+    EndorsedReward = 8,
+    Slash = 9,
+    OpRollBuy = 10,
+    OpRollSell = 11,
+    OpCallscCoins = 12,
+    ReadOnlyFnCallFees = 13,
+    ReadOnlyFnCallCoins = 14,
+    ReadOnlyBytecodeExecFees = 15,
+    SetBytecodeStorage = 16,
+    AbiCallCoins = 17,
+    AbiTransferCoins = 18,
+    AbiTransferForCoins = 19,
+    AbiSendMsgCoins = 20,
+    AbiSendMsgFees = 21,
+    OpRollSellDeferredMas = 22,
+    OpExecutescFees = 23,
+    OpTransactionCoins = 24,
+    OpTransactionFees = 25,
+    AsyncMsgCoins = 26,
+    AsyncMsgCancel = 27,
+    CreateScStorage = 28,
+    DatastoreStorage = 29,
+    DeferredCredit = 30,
+}
+impl CoinOrigin {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            Self::Unspecified => "COIN_ORIGIN_UNSPECIFIED",
+            Self::BlockReward => "COIN_ORIGIN_BLOCK_REWARD",
+            Self::DeferredCallFail => "COIN_ORIGIN_DEFERRED_CALL_FAIL",
+            Self::DeferredCallCancel => "COIN_ORIGIN_DEFERRED_CALL_CANCEL",
+            Self::DeferredCallCoins => "COIN_ORIGIN_DEFERRED_CALL_COINS",
+            Self::DeferredCallRegister => "COIN_ORIGIN_DEFERRED_CALL_REGISTER",
+            Self::DeferredCallStorageRefund => "COIN_ORIGIN_DEFERRED_CALL_STORAGE_REFUND",
+            Self::EndorsementReward => "COIN_ORIGIN_ENDORSEMENT_REWARD",
+            Self::EndorsedReward => "COIN_ORIGIN_ENDORSED_REWARD",
+            Self::Slash => "COIN_ORIGIN_SLASH",
+            Self::OpRollBuy => "COIN_ORIGIN_OP_ROLL_BUY",
+            Self::OpRollSell => "COIN_ORIGIN_OP_ROLL_SELL",
+            Self::OpCallscCoins => "COIN_ORIGIN_OP_CALLSC_COINS",
+            Self::ReadOnlyFnCallFees => "COIN_ORIGIN_READ_ONLY_FN_CALL_FEES",
+            Self::ReadOnlyFnCallCoins => "COIN_ORIGIN_READ_ONLY_FN_CALL_COINS",
+            Self::ReadOnlyBytecodeExecFees => "COIN_ORIGIN_READ_ONLY_BYTECODE_EXEC_FEES",
+            Self::SetBytecodeStorage => "COIN_ORIGIN_SET_BYTECODE_STORAGE",
+            Self::AbiCallCoins => "COIN_ORIGIN_ABI_CALL_COINS",
+            Self::AbiTransferCoins => "COIN_ORIGIN_ABI_TRANSFER_COINS",
+            Self::AbiTransferForCoins => "COIN_ORIGIN_ABI_TRANSFER_FOR_COINS",
+            Self::AbiSendMsgCoins => "COIN_ORIGIN_ABI_SEND_MSG_COINS",
+            Self::AbiSendMsgFees => "COIN_ORIGIN_ABI_SEND_MSG_FEES",
+            Self::OpRollSellDeferredMas => "COIN_ORIGIN_OP_ROLL_SELL_DEFERRED_MAS",
+            Self::OpExecutescFees => "COIN_ORIGIN_OP_EXECUTESC_FEES",
+            Self::OpTransactionCoins => "COIN_ORIGIN_OP_TRANSACTION_COINS",
+            Self::OpTransactionFees => "COIN_ORIGIN_OP_TRANSACTION_FEES",
+            Self::AsyncMsgCoins => "COIN_ORIGIN_ASYNC_MSG_COINS",
+            Self::AsyncMsgCancel => "COIN_ORIGIN_ASYNC_MSG_CANCEL",
+            Self::CreateScStorage => "COIN_ORIGIN_CREATE_SC_STORAGE",
+            Self::DatastoreStorage => "COIN_ORIGIN_DATASTORE_STORAGE",
+            Self::DeferredCredit => "COIN_ORIGIN_DEFERRED_CREDIT",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "COIN_ORIGIN_UNSPECIFIED" => Some(Self::Unspecified),
+            "COIN_ORIGIN_BLOCK_REWARD" => Some(Self::BlockReward),
+            "COIN_ORIGIN_DEFERRED_CALL_FAIL" => Some(Self::DeferredCallFail),
+            "COIN_ORIGIN_DEFERRED_CALL_CANCEL" => Some(Self::DeferredCallCancel),
+            "COIN_ORIGIN_DEFERRED_CALL_COINS" => Some(Self::DeferredCallCoins),
+            "COIN_ORIGIN_DEFERRED_CALL_REGISTER" => Some(Self::DeferredCallRegister),
+            "COIN_ORIGIN_DEFERRED_CALL_STORAGE_REFUND" => {
+                Some(Self::DeferredCallStorageRefund)
+            }
+            "COIN_ORIGIN_ENDORSEMENT_REWARD" => Some(Self::EndorsementReward),
+            "COIN_ORIGIN_ENDORSED_REWARD" => Some(Self::EndorsedReward),
+            "COIN_ORIGIN_SLASH" => Some(Self::Slash),
+            "COIN_ORIGIN_OP_ROLL_BUY" => Some(Self::OpRollBuy),
+            "COIN_ORIGIN_OP_ROLL_SELL" => Some(Self::OpRollSell),
+            "COIN_ORIGIN_OP_CALLSC_COINS" => Some(Self::OpCallscCoins),
+            "COIN_ORIGIN_READ_ONLY_FN_CALL_FEES" => Some(Self::ReadOnlyFnCallFees),
+            "COIN_ORIGIN_READ_ONLY_FN_CALL_COINS" => Some(Self::ReadOnlyFnCallCoins),
+            "COIN_ORIGIN_READ_ONLY_BYTECODE_EXEC_FEES" => {
+                Some(Self::ReadOnlyBytecodeExecFees)
+            }
+            "COIN_ORIGIN_SET_BYTECODE_STORAGE" => Some(Self::SetBytecodeStorage),
+            "COIN_ORIGIN_ABI_CALL_COINS" => Some(Self::AbiCallCoins),
+            "COIN_ORIGIN_ABI_TRANSFER_COINS" => Some(Self::AbiTransferCoins),
+            "COIN_ORIGIN_ABI_TRANSFER_FOR_COINS" => Some(Self::AbiTransferForCoins),
+            "COIN_ORIGIN_ABI_SEND_MSG_COINS" => Some(Self::AbiSendMsgCoins),
+            "COIN_ORIGIN_ABI_SEND_MSG_FEES" => Some(Self::AbiSendMsgFees),
+            "COIN_ORIGIN_OP_ROLL_SELL_DEFERRED_MAS" => Some(Self::OpRollSellDeferredMas),
+            "COIN_ORIGIN_OP_EXECUTESC_FEES" => Some(Self::OpExecutescFees),
+            "COIN_ORIGIN_OP_TRANSACTION_COINS" => Some(Self::OpTransactionCoins),
+            "COIN_ORIGIN_OP_TRANSACTION_FEES" => Some(Self::OpTransactionFees),
+            "COIN_ORIGIN_ASYNC_MSG_COINS" => Some(Self::AsyncMsgCoins),
+            "COIN_ORIGIN_ASYNC_MSG_CANCEL" => Some(Self::AsyncMsgCancel),
+            "COIN_ORIGIN_CREATE_SC_STORAGE" => Some(Self::CreateScStorage),
+            "COIN_ORIGIN_DATASTORE_STORAGE" => Some(Self::DatastoreStorage),
+            "COIN_ORIGIN_DEFERRED_CREDIT" => Some(Self::DeferredCredit),
             _ => None,
         }
     }
