@@ -2370,7 +2370,7 @@ pub struct QueryStateRequest {
 pub struct ExecutionQueryRequestItem {
     #[prost(
         oneof = "execution_query_request_item::RequestItem",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26"
     )]
     pub request_item: ::core::option::Option<execution_query_request_item::RequestItem>,
 }
@@ -2449,6 +2449,15 @@ pub mod execution_query_request_item {
         /// Deferred calls by slot
         #[prost(message, tag = "23")]
         DeferredCallsBySlot(super::DeferredCallsBySlot),
+        /// Gets the datastore keys (history) of an address at a specific cycle
+        #[prost(message, tag = "24")]
+        AddressDatastoreKeysHistory(super::AddressDatastoreKeysHistory),
+        /// Gets a datastore value (history) for an address at a specific cycle
+        #[prost(message, tag = "25")]
+        AddressDatastoreEntryHistory(super::AddressDatastoreEntryHistory),
+        /// Gets information about available cycle snapshots
+        #[prost(message, tag = "26")]
+        AvailableSnapshots(super::AvailableSnapshots),
     }
 }
 /// Request to check if address exists (candidate)
@@ -2678,6 +2687,13 @@ pub struct DeferredCallsBySlotResponse {
     #[prost(string, repeated, tag = "2")]
     pub call_ids: ::prost::alloc::vec::Vec<::prost::alloc::string::String>,
 }
+/// Response containing available cycle snapshots
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AvailableSnapshotsResponse {
+    /// List of available cycle snapshots
+    #[prost(message, repeated, tag = "1")]
+    pub snapshots: ::prost::alloc::vec::Vec<super::super::model::v1::CycleSnapshotInfo>,
+}
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct DeferredCallInfoEntry {
     #[prost(string, tag = "1")]
@@ -2698,6 +2714,66 @@ pub struct DeferredCallInfoEntry {
     pub fee: ::core::option::Option<super::super::model::v1::NativeAmount>,
     #[prost(bool, tag = "9")]
     pub cancelled: bool,
+}
+/// Request to get the datastore keys (history) of an address at a specific cycle
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressDatastoreKeysHistory {
+    /// Address for which to query the datastore
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// Cycle to query (must be within retention period)
+    #[prost(uint64, tag = "2")]
+    pub cycle: u64,
+    /// Filter only entries whose key starts with a prefix
+    #[prost(bytes = "vec", tag = "3")]
+    pub prefix: ::prost::alloc::vec::Vec<u8>,
+    /// Key offset for the search
+    #[prost(message, optional, tag = "4")]
+    pub start_key: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
+    /// included start_key
+    #[prost(message, optional, tag = "5")]
+    pub inclusive_start_key: ::core::option::Option<bool>,
+    /// End key for the search
+    #[prost(message, optional, tag = "6")]
+    pub end_key: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
+    /// included end_key
+    #[prost(message, optional, tag = "7")]
+    pub inclusive_end_key: ::core::option::Option<bool>,
+    /// Limit for the number of keys
+    #[prost(message, optional, tag = "8")]
+    pub limit: ::core::option::Option<u32>,
+}
+/// Request to get a datastore value (history) for an address at a specific cycle
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressDatastoreEntryHistory {
+    /// Address for which to query the datastore
+    #[prost(string, tag = "1")]
+    pub address: ::prost::alloc::string::String,
+    /// Key of the entry
+    #[prost(bytes = "vec", tag = "2")]
+    pub key: ::prost::alloc::vec::Vec<u8>,
+    /// Cycle to query (must be within retention period)
+    #[prost(uint64, tag = "3")]
+    pub cycle: u64,
+}
+/// Request to get information about available cycle snapshots
+///
+/// No parameters needed - returns all available snapshots
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct AvailableSnapshots {}
+/// Response for datastore keys history query
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressDatastoreKeysHistoryResponse {
+    /// List of datastore keys
+    #[prost(bytes = "vec", repeated, tag = "1")]
+    pub keys: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
+}
+/// Response for datastore entry history query
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AddressDatastoreEntryHistoryResponse {
+    /// The datastore value (None if not found)
+    #[prost(bytes = "vec", optional, tag = "1")]
+    pub value: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
 }
 /// deferred call quote response
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
@@ -2756,7 +2832,7 @@ pub mod execution_query_response {
 pub struct ExecutionQueryResponseItem {
     #[prost(
         oneof = "execution_query_response_item::ResponseItem",
-        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12"
+        tags = "1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15"
     )]
     pub response_item: ::core::option::Option<
         execution_query_response_item::ResponseItem,
@@ -2802,6 +2878,15 @@ pub mod execution_query_response_item {
         /// Deferred calls by slot
         #[prost(message, tag = "12")]
         DeferredCallsBySlot(super::DeferredCallsBySlotResponse),
+        /// Available cycle snapshots
+        #[prost(message, tag = "13")]
+        AvailableSnapshots(super::AvailableSnapshotsResponse),
+        /// Datastore keys history for an address at a specific cycle
+        #[prost(message, tag = "14")]
+        AddressDatastoreKeysHistory(super::AddressDatastoreKeysHistoryResponse),
+        /// Datastore entry history for an address at a specific cycle
+        #[prost(message, tag = "15")]
+        AddressDatastoreEntryHistory(super::AddressDatastoreEntryHistoryResponse),
     }
 }
 /// Deferred credits entry wrapper

@@ -2032,6 +2032,19 @@ impl ConnectionType {
         }
     }
 }
+/// Information about a cycle snapshot
+#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+pub struct CycleSnapshotInfo {
+    /// The cycle number
+    #[prost(uint64, tag = "1")]
+    pub cycle: u64,
+    /// Timestamp when the cycle started
+    #[prost(message, optional, tag = "2")]
+    pub start_ts: ::core::option::Option<NativeTime>,
+    /// Timestamp when the cycle ends
+    #[prost(message, optional, tag = "3")]
+    pub end_ts: ::core::option::Option<NativeTime>,
+}
 /// StakerEntry
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct StakerEntry {
