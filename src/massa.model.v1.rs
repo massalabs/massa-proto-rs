@@ -2033,7 +2033,7 @@ impl ConnectionType {
     }
 }
 /// Information about a cycle snapshot
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
+#[derive(Clone, PartialEq, ::prost::Message)]
 pub struct CycleSnapshotInfo {
     /// The cycle number
     #[prost(uint64, tag = "1")]
@@ -2044,6 +2044,25 @@ pub struct CycleSnapshotInfo {
     /// Timestamp when the cycle ends
     #[prost(message, optional, tag = "3")]
     pub end_ts: ::core::option::Option<NativeTime>,
+    /// Authenticated snapshot Merkle root for this cycle (absent if not committed)
+    #[prost(bytes = "vec", optional, tag = "4")]
+    pub merkle_root: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
+    /// Signatures over `merkle_root` published for this cycle
+    #[prost(message, repeated, tag = "5")]
+    pub root_signatures: ::prost::alloc::vec::Vec<SnapshotRootSignature>,
+}
+/// Ed25519 signature over a cycle snapshot Merkle root by an authorized signatory.
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SnapshotRootSignature {
+    /// Merkle root that was signed
+    #[prost(bytes = "vec", tag = "1")]
+    pub merkle_root: ::prost::alloc::vec::Vec<u8>,
+    /// Address of the signatory
+    #[prost(string, tag = "2")]
+    pub signer: ::prost::alloc::string::String,
+    /// Ed25519 signature bytes
+    #[prost(bytes = "vec", tag = "3")]
+    pub signature: ::prost::alloc::vec::Vec<u8>,
 }
 /// StakerEntry
 #[derive(Clone, PartialEq, ::prost::Message)]

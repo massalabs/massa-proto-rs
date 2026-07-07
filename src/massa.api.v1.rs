@@ -2742,6 +2742,9 @@ pub struct AddressDatastoreKeysHistory {
     /// Limit for the number of keys
     #[prost(message, optional, tag = "8")]
     pub limit: ::core::option::Option<u32>,
+    /// When true, the response includes a completeness proof for the prefix range
+    #[prost(bool, tag = "9")]
+    pub with_proof: bool,
 }
 /// Request to get a datastore value (history) for an address at a specific cycle
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2755,6 +2758,9 @@ pub struct AddressDatastoreEntryHistory {
     /// Cycle to query (must be within retention period)
     #[prost(uint64, tag = "3")]
     pub cycle: u64,
+    /// When true, the response includes an inclusion/absence proof for the entry
+    #[prost(bool, tag = "4")]
+    pub with_proof: bool,
 }
 /// Request to get information about available cycle snapshots
 ///
@@ -2767,6 +2773,14 @@ pub struct AddressDatastoreKeysHistoryResponse {
     /// List of datastore keys
     #[prost(bytes = "vec", repeated, tag = "1")]
     pub keys: ::prost::alloc::vec::Vec<::prost::alloc::vec::Vec<u8>>,
+    /// Serialized DatastoreHistoryProofBundle (absent when no proof was requested)
+    #[prost(bytes = "vec", optional, tag = "2")]
+    pub proof: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
+    /// Signatures over the snapshot Merkle root for the queried cycle
+    #[prost(message, repeated, tag = "3")]
+    pub root_signatures: ::prost::alloc::vec::Vec<
+        super::super::model::v1::SnapshotRootSignature,
+    >,
 }
 /// Response for datastore entry history query
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2774,6 +2788,14 @@ pub struct AddressDatastoreEntryHistoryResponse {
     /// The datastore value (None if not found)
     #[prost(bytes = "vec", optional, tag = "1")]
     pub value: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
+    /// Serialized DatastoreHistoryProofBundle (absent when no proof was requested)
+    #[prost(bytes = "vec", optional, tag = "2")]
+    pub proof: ::core::option::Option<::prost::alloc::vec::Vec<u8>>,
+    /// Signatures over the snapshot Merkle root for the queried cycle
+    #[prost(message, repeated, tag = "3")]
+    pub root_signatures: ::prost::alloc::vec::Vec<
+        super::super::model::v1::SnapshotRootSignature,
+    >,
 }
 /// deferred call quote response
 #[derive(Clone, Copy, PartialEq, ::prost::Message)]
