@@ -2742,9 +2742,9 @@ pub struct AddressDatastoreKeysHistory {
     /// Limit for the number of keys
     #[prost(message, optional, tag = "8")]
     pub limit: ::core::option::Option<u32>,
-    /// When true, the response includes a completeness proof for the prefix range
-    #[prost(bool, tag = "9")]
-    pub with_proof: bool,
+    /// When true, the response includes a completeness proof for the prefix range. Defaults to false.
+    #[prost(message, optional, tag = "9")]
+    pub with_proof: ::core::option::Option<bool>,
 }
 /// Request to get a datastore value (history) for an address at a specific cycle
 #[derive(Clone, PartialEq, ::prost::Message)]
@@ -2758,9 +2758,9 @@ pub struct AddressDatastoreEntryHistory {
     /// Cycle to query (must be within retention period)
     #[prost(uint64, tag = "3")]
     pub cycle: u64,
-    /// When true, the response includes an inclusion/absence proof for the entry
-    #[prost(bool, tag = "4")]
-    pub with_proof: bool,
+    /// When true, the response includes an inclusion/absence proof for the entry. Defaults to false.
+    #[prost(message, optional, tag = "4")]
+    pub with_proof: ::core::option::Option<bool>,
 }
 /// Request to get information about available cycle snapshots
 ///
