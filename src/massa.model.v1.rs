@@ -2057,9 +2057,9 @@ pub struct SnapshotRootSignature {
     /// Merkle root that was signed
     #[prost(bytes = "vec", tag = "1")]
     pub merkle_root: ::prost::alloc::vec::Vec<u8>,
-    /// Address of the signatory
+    /// Public key of the signatory (P1…)
     #[prost(string, tag = "2")]
-    pub signer: ::prost::alloc::string::String,
+    pub public_key: ::prost::alloc::string::String,
     /// Ed25519 signature bytes
     #[prost(bytes = "vec", tag = "3")]
     pub signature: ::prost::alloc::vec::Vec<u8>,
