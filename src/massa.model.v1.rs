@@ -1998,6 +1998,10 @@ pub struct PublicStatus {
     /// current mip version
     #[prost(uint32, tag = "14")]
     pub current_mip_version: u32,
+    /// Max number of datastore keys returned by a single datastore key query.
+    /// Unset means the node applies no limit.
+    #[prost(uint32, optional, tag = "15")]
+    pub max_datastore_keys_query: ::core::option::Option<u32>,
 }
 /// ConnectionType enum
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
