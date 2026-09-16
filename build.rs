@@ -59,7 +59,7 @@ mod tonic {
             .include_file("_api_includes.rs")
             .file_descriptor_set_path("src/api_public.bin")
             .out_dir("src/")
-            .compile_protos(&vec![public_api_path], &proto_include_paths)
+            .compile_protos(&[public_api_path], &proto_include_paths)
             .map_err(|e| format!("PUBLIC API protobuf compilation error: {:?}", e))?;
 
         // Generate PRIVATE API file descriptor set
@@ -84,7 +84,7 @@ mod tonic {
             .include_file("_api_includes.rs")
             .file_descriptor_set_path("src/api_private.bin")
             .out_dir("src/")
-            .compile_protos(&vec![private_api_path], &proto_include_paths)
+            .compile_protos(&[private_api_path], &proto_include_paths)
             .map_err(|e| format!("PRIVATE API protobuf compilation error: {:?}", e))?;
 
         // Generate API bindings

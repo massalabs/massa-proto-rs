@@ -40,7 +40,7 @@ jobs:
           save-if: ${{ github.ref == 'refs/heads/main' }}
       - uses: actions-rs/toolchain@v1
         with:
-          toolchain: 1.81.0
+          toolchain: 1.91.1
       - run: cargo build --release --all-features
         if: ${{ github.ref == 'refs/heads/main' }}   
       - uses: stefanzweifel/git-auto-commit-action@v4
